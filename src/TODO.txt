@@ -3,3 +3,4 @@ Authentication and authorisation
 - verify email when sign up
 - move 'First name' and 'Last name' fields on top when sign up
 - redirect to previous url when changing customer/supplier
+- fix navbar 
