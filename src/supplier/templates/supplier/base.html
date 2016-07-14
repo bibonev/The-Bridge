@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %} Supplier {% endblock title %}
+
+{% block roledropdown %}
+<!-- when in supplier show this -->
+<div class="role-dropdown">
+    <div class="curr-role">
+        <a href="#" id="supplier">supplier<span class="glyphicon glyphicon-chevron-down"></span></a>
+    </div>
+    <div class="other">
+        <a href="#" id="customer">customer</a>
+    </div>
+</div>
+{% endblock roledropdown %}
