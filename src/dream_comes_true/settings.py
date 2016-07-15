@@ -42,6 +42,9 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth_user',
+    'userprofile',
+    'customer',
+    'supplier',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -60,7 +63,7 @@ ROOT_URLCONF = 'dream_comes_true.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates', 'allauth_user/templates', 'customer/templates', 'supplier/templates', ],
+        'DIRS': ['templates', 'allauth_user/templates', 'userprofile/templates', 'customer/templates', 'supplier/templates', ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -118,7 +121,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
 
@@ -137,17 +139,21 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
 
 # locate the static files (css, js, images)
 STATICFILES_DIRS = [
     # in the console type : python3 manage.py collectstatic and the files from static folder will be transfered into static_cdn folder
     os.path.join(BASE_DIR, 'static'),
+    #os.path.join(BASE_DIR, 'media')
 ]
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # STATIC_ROOT - folder that collects all static files
 STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static_cdn')
 # MEDIA ROOT - folder that collects all media files (files uploaded by the user)
-MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'media_cdn')
+# MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'media_cdn')
 
 ##################
 # Configurations used for AllAuth
