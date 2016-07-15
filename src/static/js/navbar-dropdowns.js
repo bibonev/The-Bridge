@@ -38,3 +38,4 @@ $('.role-dropdown .other #customer').click(function(){
 $('.role-dropdown .other #supplier').click(function(){
     window.location.href = '/supplier/'
 });
+

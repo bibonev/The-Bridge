@@ -416,12 +416,14 @@ body {
 }
 
 /* CSS added for navbar */
+
+/* role dropdown */
 div.role-dropdown .other{
     display:none;
 }
 div.role-dropdown{
   width: 130px;
-  padding: 7px;
+  padding: 8px;
   position: relative;
   display: inline-block;
 }
@@ -447,7 +449,7 @@ div.role-dropdown .curr-role a span{
 div.role-dropdown .other{
   position: absolute;
   background-color: #029acf;
-  min-width: 116px;
+  min-width: 114px;
   border-top: 1px solid #fff;
 }
 div.role-dropdown .other a{
@@ -457,5 +459,60 @@ div.role-dropdown .other a:hover{
   background: rgba(64, 64, 64, 0.8);
   border-radius: 0;
 }
+
+/* profile info dropdown */
+
+div.profile-dropdown{
+  position: relative;
+  display: inline-block;
+}
+div.profile-dropdown .profile-info{
+  display:none;
+  position: absolute;
+  right:0;
+  background-color: #fff;
+  min-width: 160px;
+  margin-top:1px;
+  border-left: 1px solid rgba(34, 34, 34, 0.2);
+}
+div.profile-dropdown:hover .profile-info{
+  display: block;
+}
+div.profile-dropdown #profile-tab{
+  padding: 9px 15px 9px 15px;
+  text-transform: uppercase;
+  font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  display:block;
+  color:#fff;
+}
+div.profile-dropdown .profile-info a{
+  display:block;
+  width:100%;
+  border-bottom: 1px solid rgba(34, 34, 34, 0.2);
+  font-size: 13px;
+  font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+  color: #404040;
+  padding: 10px 0 10px 10px;
+  text-transform: uppercase;
+}
+
+div.profile-dropdown #profile-tab span{
+  display:inline-block;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+div.profile-dropdown #profile-tab div{
+  background: #fff;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  display:inline-block;
+}
+div.profile-dropdown #profile-tab div img{
+  border-radius: 50%;
+}
+
 
 
