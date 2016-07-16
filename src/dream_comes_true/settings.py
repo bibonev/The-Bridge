@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'userprofile',
     'customer',
     'supplier',
+    'imagekit',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -145,15 +146,14 @@ MEDIA_URL = '/media/'
 STATICFILES_DIRS = [
     # in the console type : python3 manage.py collectstatic and the files from static folder will be transfered into static_cdn folder
     os.path.join(BASE_DIR, 'static'),
-    #os.path.join(BASE_DIR, 'media')
 ]
-
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # STATIC_ROOT - folder that collects all static files
 STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static_cdn')
 # MEDIA ROOT - folder that collects all media files (files uploaded by the user)
-# MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'media_cdn')
+#MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'media_cdn')
+# for development it will stay like this
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 ##################
 # Configurations used for AllAuth

@@ -23,7 +23,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.base_page),
     url(r'^', include('allauth.account.urls')),
-    url(r'^profile/', include('userprofile.urls', namespace='profile')),
+    url(r'^profile/', include('userprofile.urls', namespace='profile')), # redirects to the user profile
     url(r'^customer/', include('customer.urls', namespace='customer')), # redirects to customer.urls
     url(r'^supplier/', include('supplier.urls', namespace='supplier')), # redisrects to supplier.urls
 ]
