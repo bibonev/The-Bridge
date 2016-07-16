@@ -7,7 +7,7 @@ html,
 body {
   height: 100%;
   width: 100%;
-  padding-top:20px;
+  padding-top:26px;
 }
 body {
   font-family: 'Merriweather', 'Helvetica Neue', Arial, sans-serif;
@@ -470,13 +470,17 @@ div.profile-dropdown .profile-info{
   display:none;
   position: absolute;
   right:0;
-  background-color: #fff;
   min-width: 160px;
-  margin-top:1px;
-  border-left: 1px solid rgba(34, 34, 34, 0.2);
+  padding-top:1px;
+  background: transparent;
 }
 div.profile-dropdown:hover .profile-info{
   display: block;
+}
+
+div.profile-dropdown .profile-info .profile-info-inner{
+  border-left: 1px solid rgba(34, 34, 34, 0.2);
+  background-color: #fff;
 }
 div.profile-dropdown #profile-tab{
   padding: 9px 15px 9px 15px;
