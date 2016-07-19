@@ -28,4 +28,4 @@ def userprofile(request):
 
     role_path = ''.join([request.session.get('role'), '/base.html'])
 
-    return render_to_response('userprofile/profile.html', {'user_form': user_form, 'user_profile': user_profile, 'user_role_path':role_path}, context_instance=RequestContext(request))
+    return render(request, 'userprofile/profile.html', {'user_form': user_form, 'user_profile': user_profile, 'user_role_path':role_path}, context_instance=RequestContext(request))

@@ -3,4 +3,6 @@ Authentication and authorisation
 - verify email when sign up
 - move 'First name' and 'Last name' fields on top when sign up
 - redirect to previous url when changing customer/supplier
-- fix navbar 
+- fix media_cdn for production
+- swap supplier with developer
+- keep customer/developer like this for now - change in future
