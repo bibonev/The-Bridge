@@ -1,0 +1,14 @@
+{% extends 'developer/base.html' %}
+
+{% block title %} {{form.instance.title|default:"New organisation"}} {% endblock title %}
+
+{% block content%}
+
+{{ form.instance.title|default:"Add new organisation"}} 
+<form action="" method="POST">
+    {% csrf_token %}
+    <!-- you can print the form in the following ways as well: form.as_table, form.as_ul-->
+    {{ form.as_p }}
+    <input type="submit" value="Save"/>
+</form>
+{% endblock content%}

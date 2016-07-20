@@ -3,5 +3,5 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.home_page, name='home'),
-    url(r'organisations/(?P<pk>\d+)/$', views.organisation_details, name='organisation_details')
+    url(r'create_organisation/$', views.create_organisation, name='create_organisation')
 ]

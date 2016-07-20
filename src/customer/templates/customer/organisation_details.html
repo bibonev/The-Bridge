@@ -1,0 +1,10 @@
+{% extends 'customer/base.html' %}
+
+{% block title %} Customer - {{org.title}} {% endblock title %}
+
+{% block content %}
+<h3>{{org.title}}</h3>
+<p>{{org.host.first_name}} {{org.host.last_name}}</p>
+{% endblock content %}
+
+

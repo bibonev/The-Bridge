@@ -36,7 +36,7 @@ $('.role-dropdown #customer').click(function(){
     window.location.href = '/customer/'
 });
 
-$('.role-dropdown #supplier').click(function(){
-    window.location.href = '/supplier/'
+$('.role-dropdown #developer').click(function(){
+    window.location.href = '/developer/'
 });
 

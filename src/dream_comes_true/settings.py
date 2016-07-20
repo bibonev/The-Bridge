@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'allauth_user',
     'userprofile',
     'customer',
-    'supplier',
+    'developer',
     'imagekit',
 ]
 
@@ -64,7 +64,7 @@ ROOT_URLCONF = 'dream_comes_true.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates', 'allauth_user/templates', 'userprofile/templates', 'customer/templates', 'supplier/templates', ],
+        'DIRS': ['templates', 'allauth_user/templates', 'userprofile/templates', 'customer/templates', 'developer/templates', ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

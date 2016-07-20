@@ -487,5 +487,10 @@ div.profile-dropdown #profile-tab div img{
   border-radius: 50%;
 }
 
-
+/* Style footer */
+footer{
+   background: rgba(34, 34, 34, 0.9);
+   height: 100px;
+   width: 100%;
+}
 

@@ -7,8 +7,8 @@ def base_page(request):
     role = request.session.get('role')
     if request.user.is_authenticated():
         if role:
-            if request.session.get('role') == 'supplier':
-                return HttpResponseRedirect(reverse('supplier:home'))
+            if request.session.get('role') == 'developer':
+                return HttpResponseRedirect(reverse('developer:home'))
             elif request.session.get('role') == 'customer':
                 return HttpResponseRedirect(reverse('customer:home'))
         else:
