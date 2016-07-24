@@ -1,10 +1,10 @@
 {% extends 'allauth_user/base.html' %}
 {% load static from staticfiles %}
 
-{% block css %}<link href="{% static 'css/allauth/signup-login.css' %}" rel="stylesheet">{% endblock css %}
+{% block css %}<link href="{% static 'css/forms/form-style.css' %}" rel="stylesheet">{% endblock css %}
 
 {% block content %}
-<div class="auth-form">
+<div class="form">
 <h2 class="title">{% block formtitle %}{% endblock formtitle %}</h2>
 <div class="form-content">
     {% block form %}
