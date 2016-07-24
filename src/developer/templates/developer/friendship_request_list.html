@@ -1,0 +1,13 @@
+{% extends 'developer/base.html' %}
+
+{% block title %} Developer - request from customers {% endblock title %}
+
+{% block content %}
+<ul>
+{% for friendship_request in requests %}
+    <li>{{ friendship_request.from_user }} to {{ friendship_request.to_user }}</li>
+{% empty %}
+</ul>
+<div>no requests :(</div>
+{% endfor %}
+{% endblock content %}

@@ -1,0 +1,90 @@
+.form{
+    width: 400px;
+    margin: 40px auto;
+    border: 1px solid #c4c4c4;
+    border-radius: 6px;
+    padding: 0 15px;
+    background: #fff;
+}
+
+h2.title{
+    color: #383838;
+    display:inline-block;
+    margin: 20px 0px;
+}
+
+.form-content form p input, 
+.form-content form input.submit{
+    width: 100%;
+}
+
+.form-content form p label{
+    font-size: 14px;
+    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+    color: #383838;
+    font-weight: 400;
+}
+
+.form-content form p input {
+    font-size: 14px;
+    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+    padding: 10px;
+    border: 1px solid #c4c4c4;
+    border-radius: 6px;
+    color: #383838;
+}
+
+.form-content form p #id_remember{
+    width:20px;
+}
+
+.form-content form input.submit{
+    font-size: 14px;
+    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+    padding: 10px;
+    background: #029acf;
+    color: #fff;
+    border: 1px solid #029acf;
+    border-radius: 6px;
+}
+
+.form-content form input.submit:hover{
+    color:#029acf;
+    background: #fff;
+}
+
+.form-content form a.secondaryAction{
+    font-size: 12px;
+    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+    color: #383838;
+    margin-top:5px;
+    cursor:pointer;
+    text-decoration: none;
+}
+
+.form-content form a.secondaryAction:hover{
+    color:#029acf;
+}
+
+.login-signup{
+    color: #383838;
+    font-size: 14px;
+    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+}
+
+.login-signup{
+    padding: 30px;
+    text-align: center;
+}
+
+.login-signup a{
+    margin-left:3px;
+    color:#029acf;
+    font-weight: 700;
+}
+
+.login-signup a:hover{
+    color:#383838;
+    text-decoration: none;
+    cursor:pointer;
+}
