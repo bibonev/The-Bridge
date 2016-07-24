@@ -79,11 +79,13 @@
     </nav>
     {% if user.is_authenticated %}
         <div class="secondary-navigation">
-            <div class="container">
+            <div class="container-fluid">
+                <div class="col-md-1"></div>
                 <ul>
                     {% block secondaryNav %}
                     {% endblock secondaryNav %}
                 </ul>
+                <div class="col-md-1"></div>
             </div>
         </div>
     {% endif %}
@@ -289,6 +291,7 @@
 
     <footer>
         <div class="container">
+
         </div>
     </footer>
 
