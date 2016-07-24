@@ -7,7 +7,6 @@
 <h1>Here from customer</h1>
 
 <form action='' method="GET" id="searchForm">
- {% csrf_token %}
 
 <input type="text" name="searchTerm" placeholder="Enter title" value='{{ request.GET.searchTerm }}'/>
 <input value="Search" type="submit" class="btn btn-primary"/>
