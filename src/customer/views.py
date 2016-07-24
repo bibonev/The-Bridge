@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, get_list_or_404
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from developer import models
 # Create your views here.
 
@@ -12,7 +13,12 @@ def home_page(request):
     query = request.GET.get('searchTerm')
 
     if query:
-        organisations = organisations.filter(title__icontains=query)
+        organisations = organisations.filter(
+                                Q(title__icontains=query) |
+                                Q(description__icontains=query) |
+                                Q(host__first_name__icontains=query) |
+                                Q(host__last_name__icontains=query)  
+                                ).distinct()
 
     return render(request, 'customer/home.html', {'organisations':organisations})
 
