@@ -16,29 +16,21 @@
     <link href="{% static 'css/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="{% static 'css/font-awesome/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 
-    <!-- Plugin CSS 
-    <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet"> -->
-
     <!-- Theme CSS -->
-    <link href="{% static 'css/creative.css' %}" rel="stylesheet">
+    <link href="{% static 'css/header.css' %}" rel="stylesheet">
+    <link href="{% static 'css/footer.css' %}" rel="stylesheet">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
     {% block css %}{% endblock css %}
 
 </head>
 
 <body id="page-top">
 
-   <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+<header class="navbar navbar-default navbar-fixed-top">
+   <nav id="mainNav">
         <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -49,19 +41,30 @@
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a class="page-scroll" href="#about">About</a>
-                    </li>
                     {% if user.is_authenticated %}
                         <li>
-                            <a class="page-scroll" href="#portfolio">Profile</a>
-                        </li>
-                        <li>
                             {% block roledropdown %}{% endblock roledropdown %}
-                        </li> 
-                        <li>
-                            <a class="page-scroll" href="{% url 'account_logout' %}">Log out</a>
                         </li>
+                        <li>
+                            <div class="profile-dropdown">
+                                <a class="page-scroll" id="profile-tab" href="">
+                                    <span>{{ user.first_name }}</span>
+                                    <div>
+                                        {% if user.profile.user_picture %}
+                                            <img src="{{ user.profile.user_picture.url }}" width="28" height="28" />
+                                        {% else %}
+                                            <img src="{{ user.profile.default_image }}" width="28" height="28"/>
+                                        {% endif %}
+                                    </div>
+                                </a>
+                                <div class="profile-info">
+                                    <div class="profile-info-inner">
+                                        <a class="page-scroll" href="{% url 'profile:user' %}">Profile</a>
+                                        <a class="page-scroll" href="{% url 'account_logout' %}">Log out</a>
+                                    <div>
+                                </div>
+                            </div>
+                        </li> 
                     {% else %}
                         <li>
                             <a class="page-scroll" href="{% url 'account_signup' %}">Sign up</a>
@@ -74,6 +77,19 @@
             </div>
         </div>
     </nav>
+    {% if user.is_authenticated %}
+        <div class="secondary-navigation">
+            <div class="container-fluid">
+                <div class="col-md-1"></div>
+                <ul>
+                    {% block secondaryNav %}
+                    {% endblock secondaryNav %}
+                </ul>
+                <div class="col-md-1"></div>
+            </div>
+        </div>
+    {% endif %}
+</header>
 
     {% block content %}
     {% endblock content %}
@@ -273,7 +289,11 @@
         </div>
     </section> -->
 
-    <footer></footer>
+    <footer>
+        <div class="container">
+
+        </div>
+    </footer>
 
     <!-- jQuery -->
     <script src="{% static 'js/jquery/jquery.min.js' %}"></script>
@@ -281,15 +301,9 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="{% static 'js/bootstrap/bootstrap.min.js' %}"></script>
 
-    <script src="{% static 'js/role-dropdown.js' %}"></script>
+    <script src="{% static 'js/navbar-dropdowns.js' %}"></script>
 
-    <!-- Plugin JavaScript 
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-    <script src="vendor/scrollreveal/scrollreveal.min.js"></script>
-    <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script> -->
-
-    <!-- Theme JavaScript 
-    <script src="js/creative.min.js"></script> -->
+    <script src="{% static 'js/friend_request.js' %}"></script>
 
 </body> 
 

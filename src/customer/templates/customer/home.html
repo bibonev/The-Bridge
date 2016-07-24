@@ -1,5 +1,22 @@
 {% extends 'customer/base.html' %}
 
+{% block title %} Customer {% endblock title %}
+
 {% block content %}
+
 <h1>Here from customer</h1>
+
+<form action='' method="GET" id="searchForm">
+
+<input type="text" name="searchTerm" placeholder="Enter title" value='{{ request.GET.searchTerm }}'/>
+<input value="Search" type="submit" class="btn btn-primary"/>
+
+</form>
+
+{% for org in organisations %}
+    <h3><a href="{% url 'customer:organisation_details' pk=org.pk %}">{{org.title}}</a></h3>
+    <p>{{org.description}}</p>
+    <p>Author: {{org.host.first_name}} {{org.host.last_name}}</p>
+{% endfor %}
+
 {% endblock content %}

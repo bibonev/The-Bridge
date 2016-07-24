@@ -1,5 +1,10 @@
-Authentication and authorisation
+Missing stuff
 - error messages when log in and sign up - style
 - verify email when sign up
 - move 'First name' and 'Last name' fields on top when sign up
 - redirect to previous url when changing customer/supplier
+- fix media_cdn for production
+- keep customer/developer like this for now - change in future
+- profile image - center based on face - http://cloudinary.com/
+- profile page - style
+- footer style
