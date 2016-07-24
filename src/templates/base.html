@@ -80,7 +80,10 @@
     {% if user.is_authenticated %}
         <div class="secondary-navigation">
             <div class="container">
-                
+                <ul>
+                    {% block secondaryNav %}
+                    {% endblock secondaryNav %}
+                </ul>
             </div>
         </div>
     {% endif %}

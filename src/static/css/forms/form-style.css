@@ -8,7 +8,7 @@
 }
 
 h2.title{
-    color: rgba(34, 34, 34, 1);
+    color: #383838;
     display:inline-block;
     margin: 20px 0px;
 }
@@ -21,7 +21,7 @@ h2.title{
 .form-content form p label{
     font-size: 14px;
     font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
-    color: rgba(34, 34, 34, 1);
+    color: #383838;
     font-weight: 400;
 }
 
@@ -31,7 +31,7 @@ h2.title{
     padding: 10px;
     border: 1px solid #c4c4c4;
     border-radius: 6px;
-    color: rgba(34, 34, 34, 1);
+    color: #383838;
 }
 
 .form-content form p #id_remember{
@@ -56,7 +56,7 @@ h2.title{
 .form-content form a.secondaryAction{
     font-size: 12px;
     font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
-    color: rgba(34, 34, 34, 1);
+    color: #383838;
     margin-top:5px;
     cursor:pointer;
     text-decoration: none;
@@ -67,7 +67,7 @@ h2.title{
 }
 
 .login-signup{
-    color: rgba(34, 34, 34, 1);
+    color: #383838;
     font-size: 14px;
     font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
 }
@@ -84,7 +84,7 @@ h2.title{
 }
 
 .login-signup a:hover{
-    color:rgba(34, 34, 34, 1);
+    color:#383838;
     text-decoration: none;
     cursor:pointer;
 }

@@ -3,6 +3,12 @@
  * Copyright 2013-2016 Start Bootstrap
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
  */
+
+ /* Main colors:
+    #029acf
+    #c4c4c4 
+    #383838 */
+    
 html,
 body {
   height: 100%;
@@ -48,13 +54,13 @@ p {
 }
 .navbar-default .navbar-header .navbar-brand:hover,
 .navbar-default .navbar-header .navbar-brand:focus {
-  color: rgba(34, 34, 34, 1);
+  color: #383838;
   cursor:pointer;
 }
 .navbar-default .navbar-header .navbar-toggle {
   font-weight: 700;
   font-size: 12px;
-  color: #222222;
+  color: #383838;
   text-transform: uppercase;
 }
 .navbar-default .nav > li > a,
@@ -66,7 +72,7 @@ p {
 }
 .navbar-default .nav > li > a:hover,
 .navbar-default .nav > li > a:focus:hover {
-  color: rgba(34, 34, 34, 1);
+  color: #383838;
 }
 .navbar-default .nav > li.active > a,
 .navbar-default .nav > li.active > a:focus {
@@ -222,8 +228,28 @@ header .header-content .header-content-inner p {
   margin-bottom: 50px;
 }
 
+/* Secondary navigation style */
 header .secondary-navigation{
-  min-height: 20px;
-  background: rgba(34, 34, 34, 0.9);
+  min-height: 30px;
+  background: #383838;
 }
+header .secondary-navigation li{
+  display:block;
+  float: left;
+  list-style: none;
+}
+header .secondary-navigation li a{
+  padding: 10px 15px;
+  display:block;
+  color: #fff;
+  font-size: 14px;
+  font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 100;
+}
+header .secondary-navigation li a:hover{
+  color: #029acf;
+  text-decoration: none;
+  cursor:pointer;
+}
+
 
