@@ -105,7 +105,6 @@ div.role-dropdown .other{
   position: absolute;
   display: none;
   min-width: 150px;
-  padding-top:1px;
   background: transparent;
   right:0;
   margin-right:15px;
@@ -136,7 +135,6 @@ div.profile-dropdown .profile-info{
   right:0;
   margin-right:15px;
   min-width: 200px;
-  padding-top:1px;
   background: transparent;
 }
 div.profile-dropdown:hover .profile-info{
@@ -192,16 +190,17 @@ div.profile-dropdown #profile-tab div img{
 
 /* Header style */
 header {
-  position: relative;
+  position: fixed;
   width: 100%;
   min-height: auto;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
   -o-background-size: cover;
-  background-position: center;
-  text-align: center;
-  color: white;
+}
+header nav{
+  margin-bottom: 0 !important;
+  border: 0 !important;
 }
 header .header-content {
   position: relative;
@@ -216,40 +215,15 @@ header .header-content .header-content-inner h1 {
   margin-bottom: 0;
   font-size: 30px;
 }
-header .header-content .header-content-inner hr {
-  margin: 30px auto;
-}
 header .header-content .header-content-inner p {
   font-weight: 300;
   color: rgba(255, 255, 255, 0.7);
   font-size: 16px;
   margin-bottom: 50px;
 }
-@media (min-width: 768px) {
-  header {
-    min-height: 100%;
-  }
-  header .header-content {
-    position: absolute;
-    top: 50%;
-    -webkit-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
-    padding: 0 50px;
-  }
-  header .header-content .header-content-inner {
-    max-width: 1000px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  header .header-content .header-content-inner h1 {
-    font-size: 50px;
-  }
-  header .header-content .header-content-inner p {
-    font-size: 18px;
-    max-width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-  }
+
+header .secondary-navigation{
+  min-height: 20px;
+  background: rgba(34, 34, 34, 0.9);
 }
 
