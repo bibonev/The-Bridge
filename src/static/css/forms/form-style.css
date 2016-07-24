@@ -1,9 +1,10 @@
-.auth-form{
+.form{
     width: 400px;
     margin: 40px auto;
     border: 1px solid #c4c4c4;
     border-radius: 6px;
     padding: 0 15px;
+    background: #fff;
 }
 
 h2.title{
@@ -12,8 +13,8 @@ h2.title{
     margin: 20px 0px;
 }
 
-.form-content form p input,
-.form-content form button{
+.form-content form p input, 
+.form-content form input.submit{
     width: 100%;
 }
 
@@ -37,7 +38,7 @@ h2.title{
     width:20px;
 }
 
-.form-content form button{
+.form-content form input.submit{
     font-size: 14px;
     font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
     padding: 10px;
@@ -47,7 +48,7 @@ h2.title{
     border-radius: 6px;
 }
 
-.form-content form button:hover{
+.form-content form input.submit:hover{
     color:#029acf;
     background: #fff;
 }

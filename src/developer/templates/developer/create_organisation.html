@@ -1,14 +1,21 @@
 {% extends 'developer/base.html' %}
+{% load static from staticfiles %}
 
 {% block title %} {{form.instance.title|default:"New organisation"}} {% endblock title %}
 
+{% block css %}<link href="{% static 'css/forms/form-style.css' %}" rel="stylesheet">{% endblock css %}
+
 {% block content%}
 
-{{ form.instance.title|default:"Add new organisation"}} 
-<form action="" method="POST">
-    {% csrf_token %}
-    <!-- you can print the form in the following ways as well: form.as_table, form.as_ul-->
-    {{ form.as_p }}
-    <input type="submit" value="Save"/>
-</form>
+<div class="form">
+    <h2 class="title">{{ form.instance.title|default:"Add new organisation"}} </h2>
+    <div class="form-content">
+        <form action="" method="POST">
+            {% csrf_token %}
+            <!-- you can print the form in the following ways as well: form.as_table, form.as_ul-->
+            {{ form.as_p }}
+            <input type="submit" class="submit" value="Save"/>
+        </form>
+    </div>
+</div>
 {% endblock content%}
