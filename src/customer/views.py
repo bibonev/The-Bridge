@@ -18,4 +18,10 @@ def organisation_details(request, pk):
 
     return render(request, 'customer/organisation_details.html', {'org':organisation})
 
+@login_required
+def organisation_details_search_by_title(request, title):
+    organisation = get_object_or_404(models.Organisation, title=title)
+
+    return render(request, 'customer/organisation_details.html', {'org':organisation})
+
 

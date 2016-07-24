@@ -4,6 +4,8 @@
 
 {% block content %}
 <h1>Here from customer</h1>
+<input type="text" id="searchField" placeholder="Enter the title of an organisation"/>
+<a href="{% url 'customer:organisation_details_search_by_title' title='Microsoft' %}">Search</a> <!-- hard codded title -->
 {% for org in organisations %}
     <h3><a href="{% url 'customer:organisation_details' pk=org.pk %}">{{org.title}}</a></h3>
     <p>{{org.description}}</p>
