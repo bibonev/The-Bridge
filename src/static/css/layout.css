@@ -1,1 +1,9 @@
 /* Base.html css */
+.wrapper{
+    padding-top:90px;
+    padding-bottom:124px;
+    width:100%;
+}
+.bonus-padding{
+    padding: 0 30px !important;
+}
