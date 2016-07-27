@@ -1,13 +1,11 @@
-from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.http import HttpResponseRedirect, HttpResponse
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
 from friendship.exceptions import AlreadyExistsError
-from partnership.models import Friend, FriendshipRequest
+from partnership.models import Relation, PendingRequest
+from developer.models import Organisation
 from . import forms
-
-get_friendship_context_object_name = lambda: getattr(settings, 'FRIENDSHIP_CONTEXT_OBJECT_NAME', 'user')
-get_friendship_context_object_list_name = lambda: getattr(settings, 'FRIENDSHIP_CONTEXT_OBJECT_LIST_NAME', 'users')
 
 # Create your views here.
 
@@ -32,9 +30,15 @@ def create_organisation(request):
     return render(request, 'developer/create_organisation.html', {'form':form}, context_instance=RequestContext(request))
 
 @login_required
-def friendship_request_list(request):
-    
-    friendship_requests = FriendshipRequest.objects.filter(rejected__isnull=True)
+def friendship_request_list(request, pk):
+
+    friendship_requests = PendingRequest.get_pending_requests_for_organisation(organisation=Organisation.objects.get(pk=pk))
+    if request.method == 'POST':
+        print("in post requst list")
+        f_request = get_object_or_404(PendingRequest, pk=request.POST.get('customer_request'))
+        f_request.approve()
+        print('f_request is send')
+        return HttpResponse('You added a friend')
 
     return render(request, 'developer/friendship_request_list.html', {'requests': friendship_requests})
         

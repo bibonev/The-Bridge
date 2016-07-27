@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth_user',
     'partnership',
-    'friendship',
     'userprofile',
     'customer',
     'developer',
