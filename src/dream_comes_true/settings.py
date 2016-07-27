@@ -42,6 +42,11 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth_user',
+    'partnership',
+    'userprofile',
+    'customer',
+    'developer',
+    'imagekit',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -60,7 +65,7 @@ ROOT_URLCONF = 'dream_comes_true.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates', 'allauth_user/templates', 'customer/templates', 'supplier/templates', ],
+        'DIRS': ['templates', 'allauth_user/templates', 'userprofile/templates', 'customer/templates', 'developer/templates', ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -118,7 +123,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
 
@@ -137,6 +141,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
 
 # locate the static files (css, js, images)
 STATICFILES_DIRS = [
@@ -147,7 +152,9 @@ STATICFILES_DIRS = [
 # STATIC_ROOT - folder that collects all static files
 STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static_cdn')
 # MEDIA ROOT - folder that collects all media files (files uploaded by the user)
-MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'media_cdn')
+#MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'media_cdn')
+# for development it will stay like this
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 ##################
 # Configurations used for AllAuth
@@ -186,38 +193,3 @@ ACCOUNT_FORMS = {
 
 # Add more fields in the sign up form
 #ACCOUNT_SIGNUP_FORM_CLASS = 'allauth_user.forms.SignupForm'
-
-# A sample logging configuration. The only tangible logging
-# performed by this configuration is to send an email to
-# the site admins on every HTTP 500 error.
-# See http://docs.djangoproject.com/en/dev/topics/logging for
-# more details on how to customize your logging configuration.
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'filters': {
-        'require_debug_false': {
-            '()': 'django.utils.log.RequireDebugFalse'
-        }
-    },
-    'handlers': {
-        'mail_admins': {
-            'level': 'ERROR',
-            'filters': ['require_debug_false'],
-            'class': 'django.utils.log.AdminEmailHandler'
-        }
-    },
-    'loggers': {
-        'django.request': {
-            'handlers': ['mail_admins'],
-            'level': 'ERROR',
-            'propagate': True,
-        },
-    }
-}
-
-
-try:
-    from local_settings import *
-except ImportError:
-    pass

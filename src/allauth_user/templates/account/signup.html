@@ -1,24 +1,21 @@
-{% extends 'allauth_user/signup_login.html' %}
-{% load i18n %}
+{% extends 'allauth_user/signup-login.html' %}
 
-{% block title %}{% trans "Sign up" %}{% endblock title %}
+{% block title %} Sign up {% endblock title %}
 
-{% block formtitle %}{% trans "Sign up" %}{% endblock formtitle %}
+{% block formtitle %} Sign up {% endblock formtitle %}
 
 {% block form %}
-<form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+<form id="signup_form" method="POST" action="{% url 'account_signup' %}">
   {% csrf_token %}
   {{ form.as_p }}
   {% if redirect_field_value %}
   <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
   {% endif %}
-  <button type="submit">{% trans "Sign up" %}</button>
+  <input type="submit" class="submit" value="Sign up"/>
 </form>
 {% endblock form %}
 
 {% block link %} 
-{% blocktrans %}
 Have an account? 
 <a href="{{ login_url }}">Log in</a>
-{% endblocktrans %}
 {% endblock link %} 
