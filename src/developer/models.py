@@ -30,12 +30,11 @@ class Organisation(models.Model):
     website = models.URLField(max_length=255)
     
     front_picture = ProcessedImageField(upload_to='organisation/profile',
-                                           processors=[ResizeToFill(50, 50)],
+                                           processors=[ResizeToFill(180, 180)],
                                            format='JPEG',
                                            options={'quality': 60})
     
     cover_picture = ProcessedImageField(upload_to='organisation/cover',
-                                           processors=[ResizeToFill(1000, 200)],
                                            format='JPEG',
                                            options={'quality': 60})
 

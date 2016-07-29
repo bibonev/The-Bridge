@@ -11,7 +11,7 @@ from imagekit.processors import ResizeToFill
 class UserProfile(models.Model):  
     user = models.OneToOneField(User)
     user_picture = ProcessedImageField(upload_to='users/',
-                                           processors=[ResizeToFill(50, 50)],
+                                           processors=[ResizeToFill(180, 180)],
                                            format='JPEG',
                                            options={'quality': 60})
     def default_image(self):
