@@ -2,7 +2,6 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from partnership.models import Relation, PendingRequest
-from developer.models import Organisation
 from . import forms, models
 
 # Create your views here.
@@ -16,7 +15,7 @@ def home_page(request):
 
 @login_required
 def my_organisations(request):
-    my_organisations = Organisation.objects.filter(host=request.user)
+    my_organisations = models.Organisation.objects.filter(host=request.user)
 
     return render(request, 'developer/my_organisations.html', {'my_organisations':my_organisations})
 
@@ -26,6 +25,17 @@ def my_organisation_details(request, pk):
     my_organisation = get_object_or_404(models.Organisation, pk=pk, host=request.user)
 
     return render(request, 'developer/my_organisation_details.html', {'org':my_organisation})
+
+def my_organisation_edit(request, pk):
+    
+    if request.method == 'POST':
+        organisation_form = forms.OrganisationForm(request.POST, request.FILES, instance=get_object_or_404(models.Organisation, pk=pk, host=request.user))
+        if organisation_form.is_valid():
+            organisation_form.save()
+    else:
+        organisation_form = forms.OrganisationForm(instance=get_object_or_404(models.Organisation, pk=pk, host=request.user))
+
+    return render(request, 'developer/my_organisation_edit.html', {'organisation_form': organisation_form})
 
 
 @login_required
@@ -44,7 +54,7 @@ def create_organisation(request):
 @login_required
 def friendship_request_list(request, pk):
 
-    friendship_requests = PendingRequest.get_pending_requests_for_organisation(organisation=Organisation.objects.get(pk=pk, host=request.user))
+    friendship_requests = PendingRequest.get_pending_requests_for_organisation(organisation=models.Organisation.objects.get(pk=pk, host=request.user))
     if request.method == 'POST':
         print("in post requst list")
         f_request = get_object_or_404(PendingRequest, pk=request.POST.get('customer_request'))

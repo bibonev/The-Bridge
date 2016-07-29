@@ -23,7 +23,7 @@ class Organisation(models.Model):
     category = models.CharField(max_length=255, choices=CATEGORY_CHOICES)
 
     phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$')
-    phone_number = models.CharField(max_length=255, validators=[phone_regex], blank=True)
+    phone_number = models.CharField(max_length=255, validators=[phone_regex])
     
     email_organisation = models.EmailField()
     
@@ -32,11 +32,11 @@ class Organisation(models.Model):
     front_picture = ProcessedImageField(upload_to='organisation/profile',
                                            processors=[ResizeToFill(180, 180)],
                                            format='JPEG',
-                                           options={'quality': 60})
+                                           options={'quality': 60}, blank=True)
     
     cover_picture = ProcessedImageField(upload_to='organisation/cover',
                                            format='JPEG',
-                                           options={'quality': 60})
+                                           options={'quality':60}, blank=True)
 
     created_at = models.DateTimeField(auto_now_add = True)
     host = models.ForeignKey(User) #one to many

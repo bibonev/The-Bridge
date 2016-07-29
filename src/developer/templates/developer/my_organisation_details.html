@@ -60,6 +60,7 @@
         <div class="main-col">
             <h3>{{org.title}}</h3>
             <div class="description">{{org.description}}</div>
+            <a href="{% url 'developer:my_organisation_edit' pk=org.pk %}">Edit organisation</a>
         </div>
     </div>
 </div>
