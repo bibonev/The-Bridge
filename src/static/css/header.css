@@ -197,6 +197,7 @@ div.profile-dropdown #profile-tab div img{
 header {
   position: fixed;
   width: 100%;
+  border-bottom:1px solid #2A2A2A !important;
   min-height: auto;
   -webkit-background-size: cover;
   -moz-background-size: cover;

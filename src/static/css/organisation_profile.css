@@ -1,0 +1,70 @@
+.organisation .org-cover-photo{
+    height:250px;
+    width:100%;
+    
+}
+.organisation .org-cover-photo .gradient-bottom{
+    width:100%;
+    height:100%;
+    background: -webkit-linear-gradient(bottom, rgba(0,0,0,0.5), transparent); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(bottom, rgba(0,0,0,0.5), transparent); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(bottom, rgba(0,0,0,0.5), transparent); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to top, rgba(0,0,0,0.5), transparent); 
+    border-bottom:1px solid rgba(0,0,0,0.5);
+}
+.organisation .organisation-content .info-col{
+    width:180px;
+    margin: 0 20px;
+    float:left;
+}
+.organisation .organisation-content .info-col .org-profile-photo{
+    margin-top:-120px;
+    border:4px solid #fff;
+    border-radius: 4px;
+}
+.organisation .organisation-content .info-col .org-contacts span{
+    color: #383838;
+    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 100;
+    font-size: 14px;
+    display:block;
+    margin-bottom: 7px;
+}
+.organisation .organisation-content .info-col .org-contacts .unbreakable{
+   white-space: nowrap; 
+}
+.organisation .organisation-content .info-col .org-contacts span i{
+    font-size: 13px;
+    width: 20px;
+    color:#029acf;
+}
+.organisation .organisation-content .info-col .org-contacts span a{
+    color: #383838;
+}
+.organisation .organisation-content .info-col .org-contacts span a:hover{
+    color:#029acf;
+    text-decoration: none;
+    cursor:pointer;
+}
+.organisation .organisation-content .info-col .org-contacts .category{
+    font-size:16px;
+    font-weight: 400;
+    margin-top:10px;
+    margin-bottom:10px;
+}
+.organisation .organisation-content .main-col{
+    float:left;
+    margin: 0 20px;
+}
+.organisation .organisation-content .main-col h3{
+    color: #383838;
+    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 30px;
+}
+.organisation .organisation-content .main-col .description{
+    color: #383838;
+    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 100;
+    margin: 20px 0;
+}

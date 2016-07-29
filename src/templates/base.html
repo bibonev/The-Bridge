@@ -31,131 +31,133 @@
 
 <body id="page-top">
 
-<header class="navbar navbar-default navbar-fixed-top">
-   <nav id="mainNav">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
-                </button>
-                <a class="navbar-brand page-scroll" href="/">Logo</a>
-            </div>
-
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    {% if user.is_authenticated %}
-                        <li>
-                            {% block roledropdown %}{% endblock roledropdown %}
-                        </li>
-                        <li>
-                            <div class="profile-dropdown">
-                                <a class="page-scroll" id="profile-tab" href="">
-                                    <span>{{ user.first_name }}</span>
-                                    <div>
-                                        {% if user.profile.user_picture %}
-                                            <img src="{{ user.profile.user_picture.url }}" width="28" height="28" />
-                                        {% else %}
-                                            <img src="{{ user.profile.default_image }}" width="28" height="28"/>
-                                        {% endif %}
-                                    </div>
-                                </a>
-                                <div class="profile-info">
-                                    <div class="profile-info-inner">
-                                        <a class="page-scroll" href="{% url 'profile:user' %}">Profile</a>
-                                        <a class="page-scroll" href="{% url 'account_logout' %}">Log out</a>
-                                    <div>
-                                </div>
-                            </div>
-                        </li> 
-                    {% else %}
-                        <li>
-                            <a class="page-scroll" href="{% url 'account_signup' %}">Sign up</a>
-                        </li>
-                        <li>
-                            <a class="page-scroll" href="{% url 'account_login' %}">Log in</a>
-                        </li>
-                    {% endif %}
-                </ul>
-            </div>
-        </div>
-    </nav>
-    {% if user.is_authenticated %}
-        <div class="secondary-navigation">
+<div class="content">
+    <header class="navbar navbar-default navbar-fixed-top">
+    <nav id="mainNav">
             <div class="container-fluid">
-                <div class="col-md-2"></div>
-                <div class="col-md-8">
-                <ul>
-                    {% block secondaryNav %}
-                    {% endblock secondaryNav %}
-                </ul>
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                    </button>
+                    <a class="navbar-brand page-scroll" href="/">Logo</a>
                 </div>
-                <div class="col-md-2"></div>
-            </div>
-        </div>
-    {% endif %}
-</header>
 
-<div class="wrapper">
-    <div class="container-fluid">
-        <div class="col-md-2"></div>
-        <div class="col-md-8 bonus-padding">
-            {% block content %}
-            {% endblock content %}
-        </div>
-        <div class="col-md-2"></div>
-    </div>
-</div>
-    
-<footer>
-    <div class="container-fluid">
-        <div class="col-md-2"></div>
-        <div class="col-md-8 bonus-padding">
-            <div class="footer-logo">
-                <a href="/">LOGO</a>
-            </div>
-            <div class="links-social">
-                <div class="footer-links">
-                    <ul>
-                        <li>
-                            <a href="">Contacts</a>
-                        </li>
-                        <li>
-                            <a href="">About</a>
-                        </li>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        {% if user.is_authenticated %}
+                            <li>
+                                {% block roledropdown %}{% endblock roledropdown %}
+                            </li>
+                            <li>
+                                <div class="profile-dropdown">
+                                    <a class="page-scroll" id="profile-tab" href="">
+                                        <span>{{ user.first_name }}</span>
+                                        <div>
+                                            {% if user.profile.user_picture %}
+                                                <img src="{{ user.profile.user_picture.url }}" width="28" height="28" />
+                                            {% else %}
+                                                <img src="{{ user.profile.default_image }}" width="28" height="28"/>
+                                            {% endif %}
+                                        </div>
+                                    </a>
+                                    <div class="profile-info">
+                                        <div class="profile-info-inner">
+                                            <a class="page-scroll" href="{% url 'profile:user' %}">Profile</a>
+                                            <a class="page-scroll" href="{% url 'account_logout' %}">Log out</a>
+                                        <div>
+                                    </div>
+                                </div>
+                            </li> 
+                        {% else %}
+                            <li>
+                                <a class="page-scroll" href="{% url 'account_signup' %}">Sign up</a>
+                            </li>
+                            <li>
+                                <a class="page-scroll" href="{% url 'account_login' %}">Log in</a>
+                            </li>
+                        {% endif %}
                     </ul>
                 </div>
-                <div class="social-media">
-                    <a class="btn btn-social-icon btn-facebook">
-                        <span class="fa fa-facebook"></span>
-                    </a>
-                    <a class="btn btn-social-icon btn-twitter">
-                        <span class="fa fa-twitter"></span>
-                    </a>
-                    <a class="btn btn-social-icon btn-linkedin">
-                        <span class="fa fa-linkedin"></span>
-                    </a>
-                    <a class="btn btn-social-icon btn-youtube">
-                        <span class="fa fa-youtube"></span>
-                    </a>
-                    <a class="btn btn-social-icon btn-instagram">
-                        <span class="fa fa-instagram"></span>
-                    </a>
+            </div>
+        </nav>
+        {% if user.is_authenticated %}
+            <div class="secondary-navigation">
+                <div class="container-fluid">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8">
+                    <ul>
+                        {% block secondaryNav %}
+                        {% endblock secondaryNav %}
+                    </ul>
+                    </div>
+                    <div class="col-md-2"></div>
                 </div>
             </div>
+        {% endif %}
+    </header>
+
+    <div class="wrapper">
+        <div class="container-fluid">
+            <div class="col-md-2"></div>
+            <div class="col-md-8 bonus-padding">
+                {% block content %}
+                {% endblock content %}
+            </div>
+            <div class="col-md-2"></div>
         </div>
-        <div class="col-md-2"></div>
     </div>
-</footer>
+        
+    <footer>
+        <div class="container-fluid">
+            <div class="col-md-2"></div>
+            <div class="col-md-8 bonus-padding">
+                <div class="footer-logo">
+                    <a href="/">LOGO</a>
+                </div>
+                <div class="links-social">
+                    <div class="footer-links">
+                        <ul>
+                            <li>
+                                <a href="">Contacts</a>
+                            </li>
+                            <li>
+                                <a href="">About</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="social-media">
+                        <a class="btn btn-social-icon btn-facebook">
+                            <span class="fa fa-facebook"></span>
+                        </a>
+                        <a class="btn btn-social-icon btn-twitter">
+                            <span class="fa fa-twitter"></span>
+                        </a>
+                        <a class="btn btn-social-icon btn-linkedin">
+                            <span class="fa fa-linkedin"></span>
+                        </a>
+                        <a class="btn btn-social-icon btn-youtube">
+                            <span class="fa fa-youtube"></span>
+                        </a>
+                        <a class="btn btn-social-icon btn-instagram">
+                            <span class="fa fa-instagram"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </footer>
+</div>
 
-    <!-- jQuery -->
-    <script src="{% static 'js/jquery/jquery.min.js' %}"></script>
+<!-- jQuery -->
+<script src="{% static 'js/jquery/jquery.min.js' %}"></script>
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="{% static 'js/bootstrap/bootstrap.min.js' %}"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="{% static 'js/bootstrap/bootstrap.min.js' %}"></script>
 
-    <script src="{% static 'js/navbar-dropdowns.js' %}"></script>
+<script src="{% static 'js/navbar-dropdowns.js' %}"></script>
 
-    <script src="{% static 'js/friend_request.js' %}"></script>
+<script src="{% static 'js/friend_request.js' %}"></script>
 
 </body> 
 

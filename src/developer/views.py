@@ -20,8 +20,9 @@ def home_page(request):
 def create_organisation(request):
     form = forms.OrganisationForm()
     if request.method == 'POST':
-        form = forms.OrganisationForm(request.POST)
+        form = forms.OrganisationForm(request.POST, request.FILES)
         if form.is_valid():
+            print('organisation saved')
             org = form.save(commit=False)
             org.host = request.user
             org.save()

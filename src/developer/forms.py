@@ -7,5 +7,11 @@ class OrganisationForm(forms.ModelForm):
         fields = [
             'title',
             'description',
-            'number_of_participants',
+            'locations',
+            'category',
+            'phone_number',
+            'email_organisation',
+            'website',
+            'front_picture',
+            'cover_picture',
         ]

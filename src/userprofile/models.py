@@ -3,7 +3,6 @@ import os
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
-from PIL import Image
 from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFill
 

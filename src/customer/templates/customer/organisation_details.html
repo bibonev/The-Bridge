@@ -1,15 +1,73 @@
 {% extends 'customer/base.html' %}
+{% load static from staticfiles %}
 
 {% block title %} Customer - {{org.title}} {% endblock title %}
 
+{% block css %}<link href="{% static 'css/organisation_profile.css' %}" rel="stylesheet">{% endblock css %}
+
 {% block content %}
-<h3>{{org.title}}</h3>
-<p>{{org.host.first_name}} {{org.host.last_name}}</p>
-<form action="" method="POST" id="friend_form">
-    {% csrf_token %}
-    <input type="hidden" value="{{org.id}}" name="hidden_org_id"/>
-    <input type="submit" value="Add friend" name="request_organisation"/>
-</form>
+<div class="organisation">
+    <div class="org-cover-photo">
+        {% if org.cover_picture %}
+            <div style='background: url("{{org.cover_picture.url}}") no-repeat center center; background-size:cover; width:100%; height:100%; '>
+                <div class="gradient-bottom"></div>
+            </div>
+        {% else %}
+            <div style="background: #1082A9; width:100%; height:100% ">
+                <div class="gradient-bottom"></div>
+            </div>
+        {% endif %}
+    </div>
+    <div class="organisation-content">
+        <div class="info-col">
+            {% if org.front_picture %}
+                <img class="org-profile-photo" width="180" height="180" src="{{org.front_picture.url}}"/>
+            {% else %}
+                <img class="org-profile-photo" width="180" height="180" src="{{org.default_image}}"/>
+            {% endif %}
+            <div class="org-contacts">
+                <span class="category">{{org.category}}</span>
+                <span>
+                    <i class="fa fa-map-marker" aria-hidden="true"></i>
+                    {{org.locations}}
+                </span>
+                <span class="unbreakable">
+                    <i class="fa fa-phone" aria-hidden="true"></i>
+                    {{org.phone_number}}
+                </span>
+                <span class="unbreakable">
+                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                    <a href="mailto:{{org.email_organisation}}" target="_top">
+                        {% if org.email_organisation|length <= 22 %}
+                            {{org.email_organisation}}
+                        {% else %}
+                            {{org.email_organisation|truncatechars:22}} 
+                        {% endif %} 
+                        </a>
+                </span>
+                <span class="unbreakable">
+                    <i class="fa fa-link" aria-hidden="true"></i>
+                    <a href="{{org.website}}" target="_blank">
+                        {% if org.website|length <= 22 %}
+                            {{org.website}}
+                        {% else %}
+                            {{org.website|truncatechars:22}} 
+                        {% endif %}  
+                        </a>
+                </span>
+            </div>
+        </div>
+        <div class="main-col">
+            <h3>{{org.title}}</h3>
+            <div class="description">{{org.description}}</div>
+            <form action="" method="POST" id="friend_form">
+                {% csrf_token %}
+                <input type="hidden" value="{{org.id}}" name="hidden_org_id"/>
+                <input type="submit" value="Add friend" name="request_organisation"/>
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock content %}
 
 

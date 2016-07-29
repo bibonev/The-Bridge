@@ -10,7 +10,7 @@
 <div class="form">
     <h2 class="title">{{ form.instance.title|default:"Add new organisation"}} </h2>
     <div class="form-content">
-        <form action="" method="POST">
+        <form action="" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <!-- you can print the form in the following ways as well: form.as_table, form.as_ul-->
             {{ form.as_p }}
