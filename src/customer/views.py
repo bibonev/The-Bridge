@@ -4,7 +4,6 @@ from django.db.models import Q
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from developer.models import Organisation
-from friendship.exceptions import AlreadyExistsError
 from partnership.models import Relation, PendingRequest
 from developer import models
 
@@ -13,6 +12,11 @@ def home_page(request):
     # set the session 'role' to customer
     request.session['role'] = 'customer'
     request.session.modified = True
+
+    return render(request, 'customer/home.html')
+
+@login_required
+def organisations(request):
     organisations = models.Organisation.objects.all()
     query = request.GET.get('searchTerm')
 
@@ -24,7 +28,7 @@ def home_page(request):
                                 Q(host__last_name__icontains=query)  
                                 ).distinct()
 
-    return render(request, 'customer/home.html', {'organisations':organisations})
+    return render(request, 'customer/organisations.html', {'organisations':organisations})
 
 @login_required
 def organisation_details(request, pk):

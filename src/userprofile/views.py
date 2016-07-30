@@ -1,6 +1,5 @@
 from django.shortcuts import render, render_to_response, redirect
 from django.shortcuts import HttpResponseRedirect, Http404, HttpResponse
-from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -28,4 +27,4 @@ def userprofile(request):
 
     role_path = ''.join([request.session.get('role'), '/base.html'])
 
-    return render(request, 'userprofile/profile.html', {'user_form': user_form, 'user_profile': user_profile, 'user_role_path':role_path}, context_instance=RequestContext(request))
+    return render(request, 'userprofile/profile.html', {'user_form': user_form, 'user_profile': user_profile, 'user_role_path':role_path})

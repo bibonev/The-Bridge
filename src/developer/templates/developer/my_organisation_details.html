@@ -1,7 +1,7 @@
-{% extends 'customer/base.html' %}
+{% extends 'developer/base.html' %}
 {% load static from staticfiles %}
 
-{% block title %} Customer - {{org.title}} {% endblock title %}
+{% block title %} Developer - {{org.title}} {% endblock title %}
 
 {% block css %}<link href="{% static 'css/organisation_profile.css' %}" rel="stylesheet">{% endblock css %}
 
@@ -13,7 +13,7 @@
                 <div class="gradient-bottom"></div>
             </div>
         {% else %}
-            <div style="background: #1082A9; width:100%; height:100% ">
+            <div style="background: #1082A9; width:100%; height:100%; ">
                 <div class="gradient-bottom"></div>
             </div>
         {% endif %}
@@ -60,11 +60,7 @@
         <div class="main-col">
             <h3>{{org.title}}</h3>
             <div class="description">{{org.description}}</div>
-            <form action="" method="POST" id="friend_form">
-                {% csrf_token %}
-                <input type="hidden" value="{{org.id}}" name="hidden_org_id"/>
-                <input type="submit" value="Add friend" name="request_organisation"/>
-            </form>
+            <a href="{% url 'developer:my_organisation_edit' pk=org.pk %}">Edit organisation</a>
         </div>
     </div>
 </div>
