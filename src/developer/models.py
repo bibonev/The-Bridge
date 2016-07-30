@@ -8,6 +8,7 @@ from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFill
 
 class Organisation(models.Model):
+    # category is chosen from these options
     CATEGORY_CHOICES = (
         ('Education', 'Education'),
         ('Environment', 'Environment'),
@@ -20,8 +21,10 @@ class Organisation(models.Model):
 
     locations = models.CharField(max_length=255)
 
+    # use choices to restrict the input
     category = models.CharField(max_length=255, choices=CATEGORY_CHOICES)
 
+    # set validator to the phone number which checks if it fits the phone_regex
     phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$')
     phone_number = models.CharField(max_length=255, validators=[phone_regex])
     
@@ -29,6 +32,7 @@ class Organisation(models.Model):
     
     website = models.URLField(max_length=255)
     
+    # image upload configurations, blank = True sets the field not reuqired
     front_picture = ProcessedImageField(upload_to='organisation/profile',
                                            processors=[ResizeToFill(180, 180)],
                                            format='JPEG',
@@ -44,6 +48,7 @@ class Organisation(models.Model):
     def __str__(self):
         return self.title
     
+    # use default image when ehre is no uploaded one
     def default_image(self):
         if not self.front_picture:
             return os.path.join(settings.MEDIA_URL , 'default/no-img.jpg')
