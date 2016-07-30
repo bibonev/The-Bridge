@@ -1,4 +1,8 @@
 /* Base.html css */
+.content{
+    min-height: 100%;
+    position: relative;
+}
 .wrapper{
     padding-top:90px;
     padding-bottom:124px;
