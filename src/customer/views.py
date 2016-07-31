@@ -35,17 +35,19 @@ def organisation_details(request, pk):
     organisation = get_object_or_404(models.Organisation, pk=pk)
 
     # request_state: -1 if the is not relation, 0 if user has send request, 1 if user's request is approved
-    request_state = -1
+    request_state = 0
     if Relation.together(request.user, organisation):
-        request_state = 1
+        request_state = 2
     elif Relation.pending(request.user, organisation):
-        request_state = 0
+        request_state = 1
+    elif Relation.own_organisation(request.user, organisation):
+        request_state = -1
 
     # if a request send button is clicked
     if request.method == 'POST':
         # check whether the post request is on the request form: 'request_organisation' is the name of the submit button
         if "request_organisation" in request.POST:
-            organisation = models.Organisation.objects.get(pk=request.POST.get('hidden_org_id'))
+            organisation = get_object_or_404(models.Organisation, pk=request.POST.get('hidden_org_id'))
             user = request.user
             PendingRequest.send_request(user, organisation)
 

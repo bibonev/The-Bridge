@@ -6,6 +6,9 @@ class Relation(models.Model):
     user = models.ForeignKey(User)
     organisation = models.ForeignKey(Organisation)
 
+    def own_organisation(user, organisation):
+        return user == organisation.host
+
     def pending(user, organisation):
         return PendingRequest.objects.filter(user=user, organisation=organisation).exists()
 
@@ -36,10 +39,11 @@ class PendingRequest(models.Model):
         return PendingRequest.objects.filter(sender=0, organisation=organisation)
 
     def send_request(user, organisation):
-        if not together(user, organisation):
+        if not Relation.together(user, organisation) and not Relation.pending(user, organisation) and Relation.own_organisation(user, organisation):
             return PendingRequest.objects.get_or_create(user=user, organisation=organisation, sender='0')
 
     def approve(self):
         # delete the record from PendingRequest and add it to Relation
-        PendingRequest.objects.filter(user=self.user, organisation=self.organisation).delete()
-        return Relation.objects.get_or_create(user=self.user, organisation=self.organisation)
+        if not Relation.together(self.user, self.organisation) and Relation.pending(self.user, self.organisation) and Relation.own_organisation(self.user, self.organisation):
+            PendingRequest.objects.filter(user=self.user, organisation=self.organisation).delete()
+            return Relation.objects.get_or_create(user=self.user, organisation=self.organisation)

@@ -61,16 +61,17 @@
         <div class="main-col">
             <h3>{{org.title}}</h3>
             <div class="description">{{org.description}}</div>
-            {% if request_state == -1 %}
+            {% if request_state == 0 %}
             <form action="" method="POST" id="request_form">
                 {% csrf_token %}
                 <input type="hidden" value="{{org.id}}" name="hidden_org_id"/>
                 <input type="submit" value="Send request" name="request_organisation" id="request_organisation"/>
             </form>
-            {% elif request_state == 0 %}
-            <button>Pending request</button>
             {% elif request_state == 1 %}
+            <button>Pending request</button>
+            {% elif request_state == 2 %}
             <button>You are in relation!</button>
+            {% elif request_state == -1 %}
             {% endif %}
         </div>
     </div>
