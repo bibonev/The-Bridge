@@ -195,6 +195,6 @@ ACCOUNT_FORMS = {
 WEBPACK_LOADER = {
     'DEFAULT': {
         'BUNDLE_DIR_NAME': 'bundles/local/',  # end with slash
-        'STATS_FILE': os.path.join(BASE_DIR, 'app/webpack-stats-local.json'),
+        'STATS_FILE': os.path.join(BASE_DIR, 'app/webpack-stats.json'),
     }
 }
