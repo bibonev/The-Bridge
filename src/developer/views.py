@@ -63,17 +63,16 @@ def create_organisation(request):
 # display list with all requests
 @login_required
 def requests(request):
+    org_requests = set()
 
-    friendship_requests = set()
     for organisation in models.Organisation.objects.filter(host=request.user):
-        friendship_requests = friendship_requests.union(PendingRequest.get_pending_requests_for_organisation(organisation=organisation))
-    print(friendship_requests)
-    if request.method == 'POST':
-        print("in post requst list")
-        f_request = get_object_or_404(PendingRequest, pk=request.POST.get('customer_request'))
-        f_request.approve()
-        print('f_request is send')
-        return HttpResponse('You added a friend')
+        org_requests = org_requests.union(PendingRequest.get_pending_requests_for_organisation(organisation=organisation))
 
-    return render(request, 'developer/friendship_request_list.html', {'requests': friendship_requests})
+    if request.method == 'POST':
+        if 'accept_request' in request.POST:
+            curr_request = get_object_or_404(PendingRequest, pk=request.POST.get('customer_request'))
+            curr_request.approve()
+            return HttpResponse('You added a friend')
+
+    return render(request, 'developer/requests.html', {'org_requests': org_requests})
         

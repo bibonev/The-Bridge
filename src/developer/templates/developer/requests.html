@@ -1,0 +1,18 @@
+{% extends 'developer/base.html' %}
+
+{% block title %} Developer - request from customers {% endblock title %}
+
+{% block content %}
+<ul>
+{% for request in org_requests %}
+    <li>{{ request.user }} to {{ request.organisation }}</li>
+    <form method="POST" action="" class="accept_form">
+        {% csrf_token %}
+        <input type=hidden value="{{request.id}}" name="customer_request"/>
+        <input type="submit" value="accept" name="accept_request"/>
+    </form>
+{% empty %}
+</ul>
+<div>no requests :(</div>
+{% endfor %}
+{% endblock content %}
