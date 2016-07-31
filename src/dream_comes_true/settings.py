@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'customer',
     'developer',
     'imagekit',
+    'webpack_loader'
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -191,5 +192,9 @@ ACCOUNT_FORMS = {
     'login':'allauth_user.forms.LoginFormOverride'
 }
 
-# Add more fields in the sign up form
-#ACCOUNT_SIGNUP_FORM_CLASS = 'allauth_user.forms.SignupForm'
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'BUNDLE_DIR_NAME': 'bundles/local/',  # end with slash
+        'STATS_FILE': os.path.join(BASE_DIR, 'app/webpack-stats-local.json'),
+    }
+}

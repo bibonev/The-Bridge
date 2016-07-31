@@ -1,4 +1,6 @@
 {% load static from staticfiles %}
+{% load render_bundle from webpack_loader %}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -100,6 +102,11 @@
         <div class="container-fluid">
             <div class="col-md-2"></div>
             <div class="col-md-8 bonus-padding">
+                
+                <div id="example"></div>
+                {% render_bundle 'vendors' %}
+                {% render_bundle 'main' %}
+
                 {% block content %}
                 {% endblock content %}
             </div>
