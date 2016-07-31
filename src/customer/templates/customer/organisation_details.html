@@ -38,20 +38,20 @@
                 <span class="unbreakable">
                     <i class="fa fa-envelope" aria-hidden="true"></i>
                     <a href="mailto:{{org.email_organisation}}" target="_top">
-                        {% if org.email_organisation|length <= 22 %}
+                        {% if org.email_organisation|length <= 20 %}
                             {{org.email_organisation}}
                         {% else %}
-                            {{org.email_organisation|truncatechars:22}} 
+                            {{org.email_organisation|truncatechars:20}} 
                         {% endif %} 
                         </a>
                 </span>
                 <span class="unbreakable">
                     <i class="fa fa-link" aria-hidden="true"></i>
                     <a href="{{org.website}}" target="_blank">
-                        {% if org.website|length <= 22 %}
+                        {% if org.website|length <= 20 %}
                             {{org.website}}
                         {% else %}
-                            {{org.website|truncatechars:22}} 
+                            {{org.website|truncatechars:20}} 
                         {% endif %}  
                         </a>
                 </span>
