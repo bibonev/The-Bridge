@@ -8,6 +8,7 @@
 {% block content %}
 <div class="organisation">
     <div class="org-cover-photo">
+        <!-- render cover phot if exists --> 
         {% if org.cover_picture %}
             <div style='background: url("{{org.cover_picture.url}}") no-repeat center center; background-size:cover; width:100%; height:100%; '>
                 <div class="gradient-bottom"></div>
