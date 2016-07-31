@@ -4,11 +4,11 @@
 <!-- when in customer show this -->
 <div class="role-dropdown">
     <div class="curr-role">
-        <a href="#" id="customer">customer<span class="glyphicon glyphicon-th"></span></a>
+        <a href="{% url 'customer:home' %}" id="customer">customer<span class="glyphicon glyphicon-th"></span></a>
     </div>
     <div class="other">
         <div class="other-inner">
-            <a href="#" id="developer">developer</a>
+            <a href="{% url 'developer:home' %}" id="developer">developer</a>
         </div>
     </div>
 </div>
@@ -22,6 +22,6 @@
     <a href="#">Requests</a>
 </li>
 <li>
-    <a href="#">Organisations</a>
+    <a href="{% url 'customer:organisations' %}">Organisations</a>
 </li>
 {% endblock secondaryNav %}
