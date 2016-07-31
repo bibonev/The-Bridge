@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'customer',
     'developer',
     'imagekit',
+    'webpack_loader'
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -140,13 +141,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = '/app/static/'
 MEDIA_URL = '/media/'
 
 # locate the static files (css, js, images)
 STATICFILES_DIRS = [
     # in the console type : python3 manage.py collectstatic and the files from static folder will be transfered into static_cdn folder
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'app/static'),
 ]
 
 # STATIC_ROOT - folder that collects all static files
@@ -191,5 +192,9 @@ ACCOUNT_FORMS = {
     'login':'allauth_user.forms.LoginFormOverride'
 }
 
-# Add more fields in the sign up form
-#ACCOUNT_SIGNUP_FORM_CLASS = 'allauth_user.forms.SignupForm'
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'BUNDLE_DIR_NAME': 'bundles/local/',  # end with slash
+        'STATS_FILE': os.path.join(BASE_DIR, 'app/webpack-stats.json'),
+    }
+}
