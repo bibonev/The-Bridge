@@ -1,10 +1,14 @@
 $(function() {
-    $("#friend_form").submit(function(event) {
+    $("#request_form").submit(function(event) {
         // Stop form from submitting normally
         event.preventDefault();
-        var friendForm = $(this);
+        var requestForm = $(this);
+        var submitButton = $('#request_organisation');
+        // add submit button to the serialize array for the post request in the views to check
+        var formData = requestForm.serializeArray();
+        formData.push({ name: submitButton.attr('name'), value: submitButton.val() });
         // Send the data using post
-        var posting = $.post( friendForm.attr('action'), friendForm.serialize() );
+        var posting = $.post( requestForm.attr('action'), formData);
         // if success:
         posting.done(function(data) {
             // success actions, maybe change submit button to 'friend added' or whatever

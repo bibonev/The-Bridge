@@ -31,4 +31,5 @@ class PendingRequest(models.Model):
         return PendingRequest.objects.filter(sender=0, organisation=organisation)
 
     def approve(self):
+        PendingRequest.objects.remove(user=self.user, organisation=self.organisation)
         return Relation.objects.create(user=self.user, organisation=self.organisation)

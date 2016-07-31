@@ -61,10 +61,10 @@
         <div class="main-col">
             <h3>{{org.title}}</h3>
             <div class="description">{{org.description}}</div>
-            <form action="" method="POST" id="friend_form">
+            <form action="" method="POST" id="request_form">
                 {% csrf_token %}
                 <input type="hidden" value="{{org.id}}" name="hidden_org_id"/>
-                <input type="submit" value="Add friend" name="request_organisation"/>
+                <input type="submit" value="Send request" name="request_organisation" id="request_organisation"/>
             </form>
         </div>
     </div>
