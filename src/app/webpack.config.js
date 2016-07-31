@@ -1,37 +1,33 @@
 var path = require("path")
 var webpack = require('webpack')
-var BundleTracker = require('webpack-bundle-tracker')
-
 
 module.exports = {
   context: __dirname,
-  entry: [
-      'webpack-dev-server/client?http://localhost:3000',
-      'webpack/hot/only-dev-server',
-      './reactjs/main'
-  ],
 
-  output: {
-      path: path.resolve('./static/bundles/local'),
-      filename: '[name]-[hash].js',
-      publicPath: 'http://localhost:3000/static/bundles/local', // Tell django to use this URL to load packages and not use STATIC_URL + bundle_name
+  entry: {
+    // Add as many entry points as you have container-react-components here
+    main: './reactjs/main',
+    vendors: ['react'],
   },
 
+  output: {
+      path: path.resolve('./static/bundles/local/'),
+      filename: "[name]-[hash].js"
+  },
+
+  externals: [
+  ], // add all vendor libs
+
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(), // don't reload if there is an error
-    new BundleTracker({filename: './webpack-stats.json'}),
-  ],
+    new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.js'),
+  ], // add all common plugins here
 
   module: {
-    loaders: [
-      // we pass the output from babel loader to react-hot loader
-      { test: /\.jsx?$/, exclude: /node_modules/, loaders: ['react-hot', 'babel'], },
-    ],
+    loaders: [] // add all common loaders here
   },
 
   resolve: {
     modulesDirectories: ['node_modules', 'bower_components'],
     extensions: ['', '.js', '.jsx']
-  }
+  },
 }
