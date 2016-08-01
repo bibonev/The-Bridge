@@ -69,6 +69,7 @@ def requests(request):
         org_requests = org_requests.union(PendingRequest.get_pending_requests_for_organisation(organisation=organisation))
 
     if request.method == 'POST':
+         # check whether the post request is on the request form: 'accept_request' is the name of the submit button
         if 'accept_request' in request.POST:
             curr_request = get_object_or_404(PendingRequest, pk=request.POST.get('customer_request'))
             curr_request.approve()
