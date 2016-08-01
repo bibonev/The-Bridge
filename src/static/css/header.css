@@ -108,6 +108,7 @@ div.role-dropdown .curr-role a span{
 }
 div.role-dropdown .other{
   position: absolute;
+  z-index:1000;
   display: none;
   min-width: 150px;
   background: transparent;
@@ -137,6 +138,7 @@ div.profile-dropdown{
 div.profile-dropdown .profile-info{
   display:none;
   position: absolute;
+  z-index:1000;
   right:0;
   margin-right:15px;
   min-width: 200px;

@@ -72,7 +72,6 @@ def requests(request):
         if 'accept_request' in request.POST:
             curr_request = get_object_or_404(PendingRequest, pk=request.POST.get('customer_request'))
             curr_request.approve()
-            return HttpResponse('You added a friend')
 
     return render(request, 'developer/requests.html', {'org_requests': org_requests})
         
