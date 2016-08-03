@@ -15,10 +15,11 @@
 .carousel-control.right{
     background-image:none !important;
 }
+
 header.navbar-default{
     background:transparent;
+    border:0;
     margin:0;
-    border:0 !important;
 }
 .wrapper{
     padding-top: 0 !important;
