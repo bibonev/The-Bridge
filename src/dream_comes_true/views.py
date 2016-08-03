@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.db.models import Q
@@ -28,3 +28,10 @@ def base_page(request):
                                     ).distinct()
 
         return render(request, 'home.html', {'organisations':organisations})
+
+
+def organisation_details_not_auth(request, pk):
+    # view the particular ogranisation
+    organisation = get_object_or_404(models.Organisation, pk=pk)
+
+    return render(request, 'organisation_details_not_auth.html', {'org':organisation})

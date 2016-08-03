@@ -69,7 +69,7 @@
 
     <!-- loop throught all organisations -->
     {% for org in organisations %}
-    <a class="organisation-link" href="{% url 'customer:organisation_details' pk=org.pk %}">
+    <a class="organisation-link" href="{% url 'organisation_details_not_auth' pk=org.pk %}">
         <div class="org-box">
             <div class="gradient-background">
                 <span class="org-box-title">
