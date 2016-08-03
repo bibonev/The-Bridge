@@ -1,0 +1,25 @@
+#slider{
+    width:100%;
+    border-bottom: 1px solid #c4c4c4;
+}
+.carousel-inner > .item{
+    height:100vh;
+}
+.carousel-control{
+    text-shadow: none !important;
+    width:10% !important;
+}
+.carousel-control.left{
+    background-image:none !important;
+}
+.carousel-control.right{
+    background-image:none !important;
+}
+header.navbar-default{
+    background:transparent;
+    margin:0;
+    border:0 !important;
+}
+.wrapper{
+    padding-top: 0 !important;
+}

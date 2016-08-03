@@ -39,7 +39,6 @@ p {
 /* Navbar style */
 .navbar-default {
   background-color: #029acf;
-  border-color: #c4c4c4;
   font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
   -webkit-transition: all 0.35s;
   -moz-transition: all 0.35s;
@@ -199,7 +198,7 @@ div.profile-dropdown #profile-tab div img{
 header {
   position: fixed;
   width: 100%;
-  border-bottom:1px solid #2A2A2A !important;
+  border-bottom:1px solid #2A2A2A;
   min-height: auto;
   -webkit-background-size: cover;
   -moz-background-size: cover;
