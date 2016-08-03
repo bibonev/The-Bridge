@@ -6,15 +6,16 @@ from developer import models
 
 # if the cookie is supplier redirects to supplier, if the cookie is customer redirects to customer 
 def base_page(request):
+    '''Render different pages on '/' url regarding user status'''
     role = request.session.get('role')
     if request.user.is_authenticated():
         if role:
             if request.session.get('role') == 'developer':
-                return HttpResponseRedirect(reverse('developer:home'))
+                return HttpResponseRedirect(reverse('developer:home')) # render to developer page
             elif request.session.get('role') == 'customer':
-                return HttpResponseRedirect(reverse('customer:home'))
+                return HttpResponseRedirect(reverse('customer:home')) # render to customer page
         else:
-            return HttpResponseRedirect(reverse('customer:home'))
+            return HttpResponseRedirect(reverse('customer:home')) # by default render to customer home page
     else:
         organisations = models.Organisation.objects.all()
         query = request.GET.get('searchTerm')
@@ -31,6 +32,7 @@ def base_page(request):
 
 
 def organisation_details_not_auth(request, pk):
+    '''Display organisation details when user not auth'''
     # view the particular ogranisation
     organisation = get_object_or_404(models.Organisation, pk=pk)
 
