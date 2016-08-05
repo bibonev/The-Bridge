@@ -25,7 +25,8 @@ def organisations(request):
                                 Q(title__icontains=query) |
                                 Q(description__icontains=query) |
                                 Q(host__first_name__icontains=query) |
-                                Q(host__last_name__icontains=query)  
+                                Q(host__last_name__icontains=query)  |
+                                Q(locations__icontains=query)
                                 ).distinct()
 
     return render(request, 'customer/organisations.html', {'organisations':organisations})

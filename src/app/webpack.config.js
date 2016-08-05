@@ -12,7 +12,7 @@ module.exports = {
 
   output: {
       path: path.resolve('./static/bundles/local/'),
-      filename: "[name]-[hash].js"
+      filename: "[name].js"
   },
 
   externals: [
