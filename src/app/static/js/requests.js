@@ -1,3 +1,4 @@
+// Ajax post requests prevending reloading page on form submit
 $(function() {
     $("#request_form").submit(function(event) {
         // Stop form from submitting normally

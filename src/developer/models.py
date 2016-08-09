@@ -8,6 +8,8 @@ from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFill
 
 class Organisation(models.Model):
+    '''Organisation model'''
+    
     # category is chosen from these options
     CATEGORY_CHOICES = (
         ('Education', 'Education'),

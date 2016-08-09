@@ -8,6 +8,7 @@ from developer import models
 
 @login_required
 def home_page(request):
+    '''Displays customer home page'''
     # set the session 'role' to customer
     request.session['role'] = 'customer'
     request.session.modified = True
@@ -31,6 +32,7 @@ def organisations(request):
 
 @login_required
 def organisation_details(request, pk):
+    '''Display details of each organisation'''
     # view the particular ogranisation
     organisation = get_object_or_404(models.Organisation, pk=pk)
 

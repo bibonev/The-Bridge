@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from developer.models import Organisation
 
 class Relation(models.Model):
+    '''Model that stores all relations between user and organisation'''
     user = models.ForeignKey(User)
     organisation = models.ForeignKey(Organisation)
 
@@ -23,6 +24,7 @@ class Relation(models.Model):
 
 
 class PendingRequest(models.Model):
+    '''Pending requests model and methods related to it'''
     SENDER_CHOICES = (
       (0, 'user'),
       (1, 'organisation')

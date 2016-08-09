@@ -8,6 +8,7 @@ from . import forms, models
 
 @login_required
 def home_page(request):
+    '''Display developer home page'''
     # set the session 'role' to supplier
     request.session['role'] = 'developer'
     request.session.modified = True
@@ -16,6 +17,7 @@ def home_page(request):
 # display template with all user's organisations'
 @login_required
 def my_organisations(request):
+    '''Display user's organisations'''
     # filter all organisations of the curent user
     my_organisations = models.Organisation.objects.filter(host=request.user)
 
@@ -24,7 +26,7 @@ def my_organisations(request):
 # display template with details of the specific organisation
 @login_required
 def my_organisation_details(request, pk):
-
+    '''Display user's organisations details'''
     # get Organisation object with specific pk
     my_organisation = get_object_or_404(models.Organisation, pk=pk, host=request.user)
 
@@ -32,7 +34,7 @@ def my_organisation_details(request, pk):
 
 # display template which gives ability to edit organisation
 def my_organisation_edit(request, pk):
-    
+    '''Edit user's organisaitons'''
     # submit update form
     if request.method == 'POST':
         # saves instance of the particular organisation object
@@ -47,6 +49,7 @@ def my_organisation_edit(request, pk):
 # display template for organisation creation
 @login_required
 def create_organisation(request):
+    '''Create organisation'''
     form = forms.OrganisationForm()
     # submit creation form
     if request.method == 'POST':
@@ -63,8 +66,11 @@ def create_organisation(request):
 # display list with all requests
 @login_required
 def requests(request):
+    '''Organisations received requests'''
+
     org_requests = set()
 
+    # loop through all users organisaitons to see which have requests
     for organisation in models.Organisation.objects.filter(host=request.user):
         org_requests = org_requests.union(PendingRequest.get_pending_requests_for_organisation(organisation=organisation))
 
