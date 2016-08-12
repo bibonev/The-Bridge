@@ -9,6 +9,7 @@ class OrganisationSerializer(serializers.ModelSerializer):
             'title',
             'description',
             'category',
+            'locations',
             'phone_number',
             'email_organisation',
             'website',
