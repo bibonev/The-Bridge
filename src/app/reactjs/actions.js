@@ -29,22 +29,22 @@ export function loadOrganisations() {
     return (dispatch, getState) => {
         let state = getState();
         let { search } = state.organisations
-        let url = `//localhost:8000/customer/organisations/`;
+        let url = `http://localhost:8000/api/v1/organisations/?search=`;
         if(search) {
-            url+=`?searchTerm=${search}`
+            url+=`${search}`
         }
 
-        const data = [
-            {title: "Microsoft", description: "asd", locations: "London"},
-            {title: "Apple", description: "bgd", locations: "Birmingham"},
-        ];
+        // const data = [
+        //     {title: "Microsoft", description: "asd", locations: "London"},
+        //     {title: "Apple", description: "bgd", locations: "Birmingham"},
+        // ];
 
-        dispatch(showOrganisationsResult(data));
-        /*
+        // dispatch(showOrganisationsResult(data));
+        
         $.get(url, data => {
             setTimeout(() => {
                 dispatch(showOrganisationsResult(data));
             }, 1000);
-        });*/
+        });
     }
 }
