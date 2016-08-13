@@ -2,17 +2,17 @@ import React from 'react';
 
 export default (props) => {
     const data = props.data.map(org =>
-      <a class="organisation-link">
-        <div class="org-box">
-            <div class="gradient-background">
-                <span class="org-box-title">
-                    org.title
+      <a className="organisation-link">
+        <div className="org-box">
+            <div className="gradient-background">
+                <span className="org-box-title">
+                    {org.title}
                 </span>
-                <span class="org-box-category">
-                    org.category
+                <span className="org-box-category">
+                    {org.category}
                 </span>
-                <span class="org-box-locations">
-                   org.locations
+                <span className="org-box-locations">
+                   {org.locations}
                 </span>
             </div>
         </div>
