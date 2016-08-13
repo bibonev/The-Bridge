@@ -11,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>{% block title %} Home {% endblock title %}</title>
+    <title>{% block title %} {% endblock title %}</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="{% static 'css/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
@@ -32,13 +32,24 @@
 
     {% block css %}{% endblock css %}
 
+    {% if not user.is_authenticated %}
+    <style>
+        header{
+            border-bottom: 1px solid #c4c4c4;
+        }
+        .wrapper{
+            padding-top:50px;
+        }
+    </style>
+    {% endif %}
+
 </head>
 
 <body id="page-top">
 
 <div class="content">
     <header class="navbar navbar-default navbar-fixed-top">
-    <nav id="mainNav">
+        <nav id="mainNav">
             <div class="container-fluid">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -101,6 +112,7 @@
         {% endif %}
     </header>
 
+    {% block slider %}{% endblock slider %}
     <div class="wrapper">
         <div class="container-fluid">
             <div class="col-md-2"></div>
@@ -163,7 +175,9 @@
 <!-- Bootstrap Core JavaScript -->
 <script src="{% static 'js/bootstrap/bootstrap.min.js' %}"></script>
 
-<script src="{% static 'js/friend_request.js' %}"></script>
+<script src="{% static 'js/requests.js' %}"></script> 
+
+{% block script %}{% endblock script %}
 
 <script src="{% static 'bundles/local/vendors.js' %}"></script>
 <script src="{% static 'bundles/local/main.js' %}"></script>
