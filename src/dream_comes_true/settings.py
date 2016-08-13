@@ -41,12 +41,15 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'rest_framework',
+    'webpack_loader',
+    'rest_api',
+    'imagekit',
     'allauth_user',
     'partnership',
     'userprofile',
     'customer',
     'developer',
-    'imagekit',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -72,7 +75,7 @@ TEMPLATES = [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
-                'django.core.context_processors.request',
+                'django.template.context_processors.request',
                 #"allauth.account.context_processors.account",
                 #"allauth.socialaccount.context_processors.socialaccount",
                 'django.contrib.messages.context_processors.messages',
@@ -140,13 +143,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = '/app/static/'
 MEDIA_URL = '/media/'
 
 # locate the static files (css, js, images)
 STATICFILES_DIRS = [
     # in the console type : python3 manage.py collectstatic and the files from static folder will be transfered into static_cdn folder
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'app/static'),
 ]
 
 # STATIC_ROOT - folder that collects all static files
@@ -191,5 +194,19 @@ ACCOUNT_FORMS = {
     'login':'allauth_user.forms.LoginFormOverride'
 }
 
-# Add more fields in the sign up form
-#ACCOUNT_SIGNUP_FORM_CLASS = 'allauth_user.forms.SignupForm'
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'BUNDLE_DIR_NAME': 'bundles/local/',  # end with slash
+        'STATS_FILE': os.path.join(BASE_DIR, 'app/webpack-stats.json'),
+    }
+}
+
+# REST API configurations
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES':(
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES':(
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    )
+}

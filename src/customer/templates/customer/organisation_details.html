@@ -1,15 +1,10 @@
 {% extends 'customer/base.html' %}
 
-{% block title %} Customer - {{org.title}} {% endblock title %}
+{% load static from staticfiles %}
+{% block title %} {{org.title}} {% endblock title %}
+
+{% block css %}<link href="{% static 'css/organisation_profile.css' %}" rel="stylesheet">{% endblock css %}
 
 {% block content %}
-<h3>{{org.title}}</h3>
-<p>{{org.host.first_name}} {{org.host.last_name}}</p>
-<form action="" method="POST" id="friend_form">
-    {% csrf_token %}
-    <input type="hidden" value="{{org.id}}" name="hidden_org_id"/>
-    <input type="submit" value="Add friend" name="request_organisation"/>
-</form>
+{% include 'organisation_details_base.html' %}
 {% endblock content %}
-
-

@@ -1,0 +1,51 @@
+{% extends 'customer/base.html' %}
+{% load static from staticfiles %}
+
+{% block title %} Customer - all organisations {% endblock title %}
+
+{% block css %}<link href="{% static 'css/organisations_list.css' %}" rel="stylesheet">{% endblock css %}
+
+{% block content %}
+
+<div class="organisation-list">
+    <form action='' method="GET" id="searchForm">
+        <input class="search-input" type="text" name="searchTerm" placeholder="Enter title, description, locations, etc..." value='{{ request.GET.searchTerm }}'/>
+        <button class="search-button" type="submit" value=""><i class="fa fa-search" aria-hidden="true"></i></button>
+    </form>
+
+    <!-- loop throught all organisations -->
+    {% for org in organisations %}
+    <a class="organisation-link" href="{% url 'customer:organisation_details' pk=org.pk %}">
+        <div class="org-box">
+            <div class="gradient-background">
+                <span class="org-box-title">
+                    <!-- shorten the title if it is more than 20 characters -->
+                    {% if org.title|length <= 20 %}
+                        {{org.title}}
+                    {% else %}
+                        {{org.title|truncatechars:20}} 
+                    {% endif %} 
+                </span>
+                <span class="org-box-category">
+                    <!-- shorten the category if it is more than 20 characters -->
+                    {% if org.category|length <= 40 %}
+                        {{org.category}}
+                    {% else %}
+                        {{org.category|truncatechars:40}} 
+                    {% endif %}
+                </span>
+                <span class="org-box-locations">
+                    <!-- shorten the locations if it is more than 20 characters -->
+                    {% if org.locations|length <= 40 %}
+                        {{org.locations}}
+                    {% else %}
+                        {{org.locations|truncatechars:40}} 
+                    {% endif %}
+                </span>
+            </div>
+        </div>
+    </a>
+    {% endfor %}
+</div>
+
+{% endblock content %}

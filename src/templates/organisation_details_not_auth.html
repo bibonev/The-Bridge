@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% load static from staticfiles %}
+{% block title %} {{org.title}} {% endblock title %}
+
+{% block css %}<link href="{% static 'css/organisation_profile.css' %}" rel="stylesheet">{% endblock css %}
+
+{% block content %}
+{% include 'organisation_details_base.html' %}
+{% endblock content %}
