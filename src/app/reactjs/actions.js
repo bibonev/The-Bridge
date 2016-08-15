@@ -42,9 +42,7 @@ export function loadOrganisations() {
         // dispatch(showOrganisationsResult(data));
         
         $.get(url, data => {
-            setTimeout(() => {
-                dispatch(showOrganisationsResult(data));
-            }, 1000);
+            dispatch(showOrganisationsResult(data));
         });
     }
 }
