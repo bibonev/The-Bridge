@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { loadOrganisations, changeSearchAndLoadOrganisations } from '../actions'
-import OrganisationSearchPanel from './OrganisationSearchPanel'
-import OrganisationRepresentation from './OrganisationRepresentation'
+import OrganisationSearchPanel from '../components/OrganisationSearchPanel'
+import OrganisationRepresentation from '../components/OrganisationRepresentation'
 import { Link } from 'react-router'
 import { bindActionCreators } from 'redux'
 

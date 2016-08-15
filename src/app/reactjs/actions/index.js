@@ -1,6 +1,3 @@
-import { history } from  './store'
-import { formatUrl } from './util/formatters'
-
 export function showOrganisationsResult(jsonResult) {
     return {
         type: "SHOW_ORGANISATIONS",
@@ -12,17 +9,14 @@ export function changeSearch(search) {
     return {
         type: 'CHANGE_SEARCH',
         search
-    }
+    };
 }
 
 export function changeSearchAndLoadOrganisations(search) {
     return (dispatch, getState) => {
-        dispatch(changeSearch(search))
-        history.push( {
-            search: formatUrl(getState().organisations)
-        } )
-        dispatch(loadOrganisations())
-    }
+        dispatch(changeSearch(search));
+        dispatch(loadOrganisations());
+    };
 }
 
 export function loadOrganisations() {
@@ -33,13 +27,6 @@ export function loadOrganisations() {
         if(search) {
             url+=`${search}`
         }
-
-        // const data = [
-        //     {title: "Microsoft", description: "asd", locations: "London"},
-        //     {title: "Apple", description: "bgd", locations: "Birmingham"},
-        // ];
-
-        // dispatch(showOrganisationsResult(data));
         
         $.get(url, data => {
             dispatch(showOrganisationsResult(data));

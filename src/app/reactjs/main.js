@@ -1,22 +1,33 @@
-import React from 'react';
-import { render } from 'react-dom';
-import { Router, Route, IndexRoute, Link } from 'react-router';
+import React, {Component} from "react"
+import { render } from "react-dom"
+import {
+  createStore,
+  compose,
+  applyMiddleware,
+  combineReducers,
+} from "redux"
+import { Provider } from "react-redux"
+import thunk from "redux-thunk"
 
-import { Provider } from 'react-redux';
+import * as reducers from "./reducers"
 
-import store from './store';
-import { history } from './store';
+import OrganisationPanel from './containers/OrganisationPanel';
 
-import OrganisationPanel from './components/OrganisationPanel';
-import App from './components/app';
+let finalCreateStore = compose(
+  applyMiddleware(thunk),
+  window.devToolsExtension ? window.devToolsExtension() : f => f
+)(createStore)
+let reducer = combineReducers(reducers)
+let store = finalCreateStore(reducer)
 
-render((
-    <Provider store={store}>
-        <Router history={history}>
-            <Route path="/" component={OrganisationPanel}>
-                 <Route path="/customer/organisations/" component={App} />
-            </Route>
-        </Router>
-    </Provider>
-  ), document.getElementById('cont')
-);
+class OrganisationSearch extends Component {
+  render() {
+    return (
+      <Provider store={store}>
+        <OrganisationPanel />
+      </Provider>
+    )
+  }
+}
+
+render(<OrganisationSearch/>, document.getElementById('cont'))
