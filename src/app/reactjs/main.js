@@ -30,4 +30,4 @@ class OrganisationSearch extends Component {
   }
 }
 
-render(<OrganisationSearch/>, document.getElementById('cont'))
+render(<OrganisationSearch/>, document.getElementById('organisationPanel'))
