@@ -41,13 +41,15 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'rest_framework',
+    'webpack_loader',
+    'rest_api',
+    'imagekit',
     'allauth_user',
     'partnership',
     'userprofile',
     'customer',
     'developer',
-    'imagekit',
-    'webpack_loader'
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -197,4 +199,14 @@ WEBPACK_LOADER = {
         'BUNDLE_DIR_NAME': 'bundles/local/',  # end with slash
         'STATS_FILE': os.path.join(BASE_DIR, 'app/webpack-stats.json'),
     }
+}
+
+# REST API configurations
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES':(
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES':(
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    )
 }

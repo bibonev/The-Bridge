@@ -27,6 +27,8 @@ urlpatterns = [
     url(r'^profile/', include('userprofile.urls', namespace='profile')), # redirects to the user profile
     url(r'^customer/', include('customer.urls', namespace='customer')), # redirects to customer.urls
     url(r'^developer/', include('developer.urls', namespace='developer')), # redisrects to supplier.urls
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework_auth')), # login as a user in the API
+    url(r'^api/v1/', include('rest_api.urls', namespace='rest_framework')), # use the rest_api app for all data that is neede for the API
 ]
 
 # set the STATIC_ROOT for static files

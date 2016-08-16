@@ -1,5 +1,4 @@
 {% load static from staticfiles %}
-{% load render_bundle from webpack_loader %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -114,11 +113,6 @@
         <div class="container-fluid">
             <div class="col-md-2"></div>
             <div class="col-md-8 bonus-padding">
-                
-                <div id="react-loader"></div>
-                {% render_bundle 'vendors' %}
-                {% render_bundle 'main' %}
-
                 {% block content %}
                 {% endblock content %}
             </div>
@@ -174,7 +168,10 @@
 <!-- Bootstrap Core JavaScript -->
 <script src="{% static 'js/bootstrap/bootstrap.min.js' %}"></script>
 
-<script src="{% static 'js/requests.js' %}"></script> 
+<script src="{% static 'js/requests.js' %}"></script>
+
+<!-- React -->
+<script src="{% static 'bundles/local/vendors.js' %}"></script> 
 
 {% block script %}{% endblock script %}
 
