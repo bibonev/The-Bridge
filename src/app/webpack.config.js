@@ -6,7 +6,7 @@ module.exports = {
 
   entry: {
     // Add as many entry points as you have container-react-components here
-    main: './reactjs/main',
+    organisation_search: './reactjs/modules/OrganisationSearch/index',
     vendors: ['react'],
   },
 
