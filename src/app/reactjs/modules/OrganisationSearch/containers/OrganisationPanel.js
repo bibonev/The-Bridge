@@ -1,23 +1,30 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { loadOrganisations, changeSearchAndLoadOrganisations } from '../actions'
-import OrganisationSearchPanel from '../components/OrganisationSearchPanel'
-import OrganisationRepresentation from '../components/OrganisationRepresentation'
-import { Link } from 'react-router'
-import { bindActionCreators } from 'redux'
+import React, {Component}  from 'react';
+import { connect } from 'react-redux';
+import { loadOrganisations, changeSearchAndLoadOrganisations } from '../actions';
+import { bindActionCreators } from 'redux';
 
+import OrganisationSearchPanel from '../components/OrganisationSearchPanel';
+import OrganisationRepresentation from '../components/OrganisationRepresentation';
 
-const OrganisationPanel = (props) => {
-    console.log("Props", props.organisations);
-    const { rows, count, search } = props.organisations;
-    const { loadOrganisations, changeSearchAndLoadOrganisations  } = props;
+ class OrganisationPanel extends Component {
+    componentWillMount() {
+        const { loadOrganisations } = this.props;
+        loadOrganisations();   
+    }
+
+    render() {
+    const { rows, count, search } = this.props.organisations;
+    const { loadOrganisations, changeSearchAndLoadOrganisations  } = this.props;
     const onSearchChanged = query => changeSearchAndLoadOrganisations(query);
-    return <div className="organisation-list">
-        <OrganisationSearchPanel search={search} onSearchChanged={onSearchChanged} />
-        <OrganisationRepresentation data={rows} />
-    </div>
-}
 
+    return ( 
+        <div className="organisation-list">
+            <OrganisationSearchPanel search={search} onSearchChanged={onSearchChanged} />
+            <OrganisationRepresentation data={rows} />
+        </div>
+        );
+    }
+}
 
 const mapStateToProps = state => ({
 	organisations:state.organisations,
