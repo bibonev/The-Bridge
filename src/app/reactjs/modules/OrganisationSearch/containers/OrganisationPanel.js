@@ -6,32 +6,32 @@ import { bindActionCreators } from 'redux';
 import OrganisationSearchPanel from '../components/OrganisationSearchPanel';
 import OrganisationRepresentation from '../components/OrganisationRepresentation';
 
- class OrganisationPanel extends Component {
+class OrganisationPanel extends Component {
     componentWillMount() {
         const { loadOrganisations } = this.props;
-        loadOrganisations();   
+        loadOrganisations();
     }
 
     render() {
-    const { rows, count, search } = this.props.organisations;
-    const { loadOrganisations, changeSearchAndLoadOrganisations  } = this.props;
-    const onSearchChanged = query => changeSearchAndLoadOrganisations(query);
+        const { rows, count, search } = this.props.organisations;
+        const { loadOrganisations, changeSearchAndLoadOrganisations  } = this.props;
+        const onSearchChanged = query => changeSearchAndLoadOrganisations(query);
 
-    return ( 
-        <div className="organisation-list">
-            <OrganisationSearchPanel search={search} onSearchChanged={onSearchChanged} />
-            <OrganisationRepresentation data={rows} />
-        </div>
+        return (
+            <div className="organisation-list">
+                <OrganisationSearchPanel search={search} onSearchChanged={onSearchChanged} />
+                <OrganisationRepresentation data={rows} />
+            </div>
         );
     }
 }
 
 const mapStateToProps = state => ({
-	organisations:state.organisations,
+    organisations: state.organisations,
 })
 
-const mapDispatchToProps = dispatch => bindActionCreators({ 
-	loadOrganisations, changeSearchAndLoadOrganisations 
+const mapDispatchToProps = dispatch => bindActionCreators({
+    loadOrganisations, changeSearchAndLoadOrganisations
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrganisationPanel);

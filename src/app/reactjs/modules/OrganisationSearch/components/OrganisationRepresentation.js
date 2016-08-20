@@ -1,9 +1,8 @@
 import React from 'react';
 
 export default (props) => {
-    const url = props.url;
     const data = props.data.map(org =>
-      <a className="organisation-link" href={"//localhost:8000/customer/organisations/" + org.id}>
+      <a className="organisation-link" href={"//localhost:8000/organisations/" + org.id}>
         <div className="org-box">
             <div className="gradient-background">
                 <span className="org-box-title">
