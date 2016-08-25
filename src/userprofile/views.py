@@ -1,6 +1,7 @@
 from django.shortcuts import render, render_to_response, redirect
 from django.shortcuts import HttpResponseRedirect, Http404, HttpResponse
 from django.contrib.auth.decorators import login_required
+from django.core.urlresolvers import reverse
 from userprofile.forms import UserForm
 from userprofile.forms import UserProfileForm
 
@@ -13,6 +14,7 @@ def userprofile(request):
         if user_form.is_valid() and user_profile.is_valid():
             user_form.save()
             user_profile.save()
+            return HttpResponseRedirect(reverse('profile:user'))
     else:
         # shows form with user profile's details
         user_form = UserForm(instance=request.user,

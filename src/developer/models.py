@@ -1,4 +1,5 @@
 import os
+import reversion
 from django.conf import settings
 from django.db import models
 from django.core.urlresolvers import reverse
@@ -7,6 +8,7 @@ from django.contrib.auth.models import User
 from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFill
 
+@reversion.register()
 class Organisation(models.Model):
     '''Organisation model'''
     

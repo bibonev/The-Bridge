@@ -1,0 +1,32 @@
+{% extends 'customer/base.html' %}
+
+{% block title %} Customer {% endblock title %}
+
+{% block content %}
+
+<ul>
+{% for post in posts %}
+<li>{{ post.description }}</li>
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ comment_form.as_p }}
+        <input type="hidden" value="{{post.id}}" name="post_id"/>
+        <ul>
+            <li>{{ request.user.first_name }}</li>
+            {% for org in request.user.organisation_set.all %}
+            <li>
+                {{ org.title }}
+            </li>
+            {% endfor %}
+        </ul>
+        <input type="submit" value="Comment" name="comment-on-post-{{post.id}}" />
+    </form>
+    {% for comment in post.comment_set.all %}
+    <p>{{ comment }}</p>
+    {% endfor %}
+{% endfor %}
+</ul>
+
+
+
+{% endblock content %}
