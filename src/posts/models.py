@@ -25,15 +25,26 @@ class Post(models.Model):
         post_on_change_field('category', organisation)
         post_on_change_field('locations', organisation)
 
+class CommentManager(models.Manager):
+    def all(self):
+        qs = super(CommentManager, self).filter(post=None)
+        return qs
+        
+    def filter_by_instance(self, instance):
+        qs = super(CommentManager, self).filter(post=instance)
+        return qs
+
 class Comment(models.Model):
     post = models.ForeignKey(Post)
-    content = models.TextField()
+    text = models.TextField()
 
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, null=True)
     object_id = models.PositiveIntegerField(null=True)
     content_object = GenericForeignKey('content_type', 'object_id')
 
+    objects = CommentManager()
+
     def __str__(self):
-        return self.content
+        return self.text
     
 
