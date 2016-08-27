@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from reversion.models import Version
@@ -27,12 +28,35 @@ class Post(models.Model):
 
 class CommentManager(models.Manager):
     def all(self):
-        qs = super(CommentManager, self).filter(post=None)
+        qs = super(CommentManager, self).all()
         return qs
-        
+
     def filter_by_instance(self, instance):
         qs = super(CommentManager, self).filter(post=instance)
         return qs
+
+    def create_by_model_type(self, model_type, organisation_id, text, post_obj, request):
+        model_qs = ContentType.objects.filter(model=model_type)
+        if model_qs.exists():
+            SomeModel = model_qs.first().model_class()
+            if SomeModel == User:
+                obj_qs = request.user
+                c_t = ContentType.objects.get(model=ContentType.objects.get_for_model(obj_qs.__class__))
+                o_i = obj_qs.id
+            elif SomeModel == developer_models.Organisation and organisation_id:
+                obj_qs = developer_models.Organisation.objects.filter(id=organisation_id, host=request.user)
+                c_t = model_qs.first()
+                o_i = obj_qs.first().id
+            if obj_qs == request.user or (obj_qs.exists() and obj_qs.count() == 1):
+                instance = self.model()
+                instance.text = text
+                instance.post = post_obj
+                instance.content_type = c_t
+                instance.object_id = o_i
+                instance.save()
+                return instance 
+
+        return None
 
 class Comment(models.Model):
     post = models.ForeignKey(Post)

@@ -41,7 +41,15 @@ class CommentListAPIView(generics.ListAPIView):
 
 class CommentCreateAPIView(generics.CreateAPIView):
     queryset = posts_models.Comment.objects.all()
-    serializer_class = serializers.CommentSerializer
     permission_classes = [permissions.IsAuthenticated]
 
+    def get_serializer_class(self):
+        model_type = self.request.GET.get('type')
+        organisation_id = self.request.GET.get('org_id')
+        post_id = self.request.GET.get('post_id')
+        return serializers.create_comment_serializer(
+            model_type=model_type,
+            organisation_id=organisation_id, 
+            post_id=post_id,
+            request=self.request)
 
