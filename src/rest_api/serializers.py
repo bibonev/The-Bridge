@@ -115,7 +115,6 @@ def create_comment_serializer(model_type='user', organisation_id=None, post_id=N
                 self.post_obj = self.post_qs.first()
             else: 
                 raise ValidationError("Unable to create comment for non existing post")
-            print(str(model_type))
             if not model_qs.exists() or model_qs.count() !=1:
                 raise ValidationError("This is not a valid content type")
 
