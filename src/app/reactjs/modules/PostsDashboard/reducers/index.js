@@ -1,3 +1,5 @@
+var update = require('react/lib/update')
+
 function getParameterByName(name) {
     var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.hash);
     return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
@@ -8,6 +10,8 @@ const POSTS_INITIAL = {
     count: 0,
     page: 1,
     posts: {},
+    comments:[],
+    comment:{},
 };
 
 export const posts = (state=POSTS_INITIAL, action) => {
@@ -17,6 +21,33 @@ export const posts = (state=POSTS_INITIAL, action) => {
                 rows: action.posts,
                 count: action.posts.length,
             });
+        default:
+            return state;
+    }
+};
+const postComment = (state, action) => {
+    switch(action.type){
+        case 'ADD_COMMENT':
+            console.log('comments state: ' + JSON.stringify(state) + " action: " + action.comment)
+            return [...state, action.comment]
+        default:
+            return state;
+    }
+}
+
+export const comments = (state={}, action) => {
+    switch (action.type) {
+        case 'SHOW_COMMENTS':
+            console.log(action.id + " " + action.comments)
+            return {
+                    ...state,
+                    [action.id]: action.comments
+            }
+        case 'ADD_COMMENT':
+            return {
+                    ...state, 
+                    [action.id]: postComment(state[action.id], action)
+            }
         default:
             return state;
     }

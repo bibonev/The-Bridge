@@ -5,9 +5,19 @@ export function showPostsResult(jsonResult) {
     };
 }
 
-export function LoadPosts() {
-    return (dispatch, getState) => {
-        dispatch(loadPosts());
+export function showCommentsResult(comments, id) {
+    return {
+        type: "SHOW_COMMENTS",
+        comments,
+        id
+    };
+}
+
+export function addCommentResult(comment, id) {
+    return {
+        type: "ADD_COMMENT",
+        comment,
+        id
     };
 }
 
@@ -19,4 +29,16 @@ export function loadPosts() {
             dispatch(showPostsResult(data));
         });
     }
+}
+
+export function loadComments(comments, id){
+    return (dispatch, getState) => {
+        dispatch(showCommentsResult(comments, id));
+    };
+}
+
+export function addCommentToPost(comment, id) {
+    return (dispatch, getState) => {
+        dispatch(addCommentResult(comment, id));
+    };
 }
