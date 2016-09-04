@@ -7,27 +7,25 @@ import PostRepresentation from '../components/PostRepresentation';
 
 class PostsDashboardPanel extends Component {
     componentWillMount() {
-        const { loadPosts,  } = this.props;
+        const { loadPosts } = this.props;
         loadPosts();
     }
 
     render() {
         const { rows, count } = this.props.posts;
+        const comments = this.props.comments;
         const { loadPosts, loadComments, addCommentToPost } = this.props;
 
-        const addCurrentComment = (comment, id) => addCommentToPost(comment, id);
-        const showCommentsForPost = (comments, id) => loadComments(comments, id);
+        const addCurrentComment = (post_id, comment) => addCommentToPost(post_id, comment);
+        const showCommentsForPost = (post_id) => loadComments(post_id);
 
         return (
             <div className="posts-dashboard-list">
-                <PostRepresentation data={rows} addCurrentComment={addCurrentComment} showCommentsForPost={showCommentsForPost}/>
+                <PostRepresentation data={rows} comments={comments} showCommentsForPost={showCommentsForPost} addCurrentComment={addCurrentComment}/>
             </div>
         );
     }
 }
-//////////////
-// THE ACTION IS NOT DISPATCHED - PROBLEMMMMM!!!!!!!
-////////////////
 
 const mapStateToProps = state => ({
     posts: state.posts,

@@ -16,7 +16,6 @@ class OrganisationPanel extends Component {
         const { rows, count, search } = this.props.organisations;
         const { loadOrganisations, changeSearchAndLoadOrganisations  } = this.props;
         const onSearchChanged = query => changeSearchAndLoadOrganisations(query);
-
         return (
             <div className="organisation-list">
                 <OrganisationSearchPanel search={search} onSearchChanged={onSearchChanged} />

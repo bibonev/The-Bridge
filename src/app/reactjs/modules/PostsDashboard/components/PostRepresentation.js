@@ -6,14 +6,9 @@ export default (props) => {
     const data = props.data.map(post =>
       <div key={post.id} className="posts-dashboard">
         {post.description}
-        {/*<ul>
-          {post.comments.map(comment =>
-          <li key={comment.id}>{comment.text}</li>
-          )}
-        </ul>*/}
-        <CommentRepresentation postId={post.id} showCommentsForPost={props.showCommentsForPost}/>
+        <CommentRepresentation comments={props.comments} postId={post.id} showCommentsForPost={props.showCommentsForPost}/>
         <CommentForm postId={post.id} addCurrentComment={props.addCurrentComment}/>
-   </div>
+      </div>
     )
     return <div>
         {data}
