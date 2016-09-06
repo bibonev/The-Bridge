@@ -14,6 +14,16 @@ class OrganisationListAPIView(generics.ListAPIView):
     filter_backends = (filters.SearchFilter,)
     search_fields = ('title', 'description', 'category', 'locations',)
 
+class OrganisationCurrUserListAPIView(generics.ListAPIView):
+    # permission_classes = (permissions.IsAdminUser,) # gives permissions only to Admin user to view the API view
+    queryset = developer_models.Organisation.objects.all()
+    serializer_class = serializers.OrganisationSerializer
+
+    def get_queryset(self):
+        queryset_list = developer_models.Organisation.objects.filter(host=self.request.user)
+
+        return queryset_list
+
 class PostListAPIView(generics.ListAPIView):
     queryset = posts_models.Post.objects.all()
     serializer_class = serializers.PostListSerializer

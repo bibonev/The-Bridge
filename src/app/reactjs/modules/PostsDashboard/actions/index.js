@@ -21,11 +21,28 @@ export function addCommentResult(comment, id) {
     };
 }
 
+export function showOrganisationsCurrentUser(jsonResult){
+    return {
+        type: "SHOW_ORGANISATIONS_USER",
+        organisations: jsonResult
+    }
+}
+
+export function loadOrganisationsCurrentUser(){
+    return (dispatch, getState) => {
+        let url = `http://localhost:8000/api/v1/organisations/currentUser/`;
+        $.get(url, data => {
+            dispatch(showOrganisationsCurrentUser(data));
+        });
+    }
+}
+
 export function loadPosts() {
     return (dispatch, getState) => {
         let url = `http://localhost:8000/api/v1/posts/`;
         $.get(url, data => {
             dispatch(showPostsResult(data));
+            dispatch(loadOrganisationsCurrentUser());
         });
     }
 }

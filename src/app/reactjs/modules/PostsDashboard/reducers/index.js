@@ -24,6 +24,7 @@ export const posts = (state=POSTS_INITIAL, action) => {
             return state;
     }
 };
+
 const postComment = (state, action) => {
     switch(action.type){
         case 'ADD_COMMENT':
@@ -49,3 +50,20 @@ export const comments = (state={}, action) => {
             return state;
     }
 };
+
+const ORGANISATIONS_USER_INITIAL = {
+    org_u_rows: [],
+    count: 0
+};
+
+export const organisations_user = (state=ORGANISATIONS_USER_INITIAL, action) => {
+    switch (action.type){
+        case "SHOW_ORGANISATIONS_USER":
+            return Object.assign({}, state, {
+                org_u_rows: action.organisations,
+                count: action.organisations.length,
+            });
+        default:
+            return state;
+    }
+}

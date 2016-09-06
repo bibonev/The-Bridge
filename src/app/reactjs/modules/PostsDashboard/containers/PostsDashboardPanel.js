@@ -13,6 +13,7 @@ class PostsDashboardPanel extends Component {
 
     render() {
         const { rows, count } = this.props.posts;
+        const { org_u_rows } = this.props.organisations_user;
         const comments = this.props.comments;
         const { loadPosts, loadComments, addCommentToPost } = this.props;
 
@@ -21,7 +22,7 @@ class PostsDashboardPanel extends Component {
 
         return (
             <div className="posts-dashboard-list">
-                <PostRepresentation data={rows} comments={comments} showCommentsForPost={showCommentsForPost} addCurrentComment={addCurrentComment}/>
+                <PostRepresentation data={rows} comments={comments} org_u_rows={org_u_rows} showCommentsForPost={showCommentsForPost} addCurrentComment={addCurrentComment}/>
             </div>
         );
     }
@@ -30,6 +31,7 @@ class PostsDashboardPanel extends Component {
 const mapStateToProps = state => ({
     posts: state.posts,
     comments: state.comments,
+    organisations_user: state.organisations_user,
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({

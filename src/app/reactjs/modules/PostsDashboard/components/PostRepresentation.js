@@ -7,7 +7,7 @@ export default (props) => {
       <div key={post.id} className="posts-dashboard">
         {post.description}
         <CommentRepresentation comments={props.comments} postId={post.id} showCommentsForPost={props.showCommentsForPost}/>
-        <CommentForm postId={post.id} addCurrentComment={props.addCurrentComment}/>
+        <CommentForm org_u_rows={props.org_u_rows} postId={post.id} addCurrentComment={props.addCurrentComment}/>
       </div>
     )
     return <div>
