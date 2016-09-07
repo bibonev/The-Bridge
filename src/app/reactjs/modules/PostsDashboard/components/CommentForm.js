@@ -27,7 +27,3 @@ export default class CommentForm extends React.Component{
                </form>
     }
 }
-
-// What to do?
-// Pass the list of all ogranisations of the current user
-// Show user details name, etc.. localhost:8000/api/v1/?content_type=4&&object_id=5

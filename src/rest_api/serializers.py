@@ -5,6 +5,17 @@ from rest_framework import serializers
 from developer import models as developer_models
 from posts import models as posts_models
 
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        # add the fields to the api serializer
+        fields = (
+            'id',
+            'first_name',
+            'last_name',
+            'email',
+        )
+        model = User
+
 class OrganisationSerializer(serializers.ModelSerializer):
     class Meta:
         # add the fields to the api serializer
@@ -37,7 +48,7 @@ class PostListSerializer(serializers.ModelSerializer):
     
     def get_comments(self, obj):
         c_qs = posts_models.Comment.objects.filter_by_instance(obj)
-        comments = CommentSerializer(c_qs, many=True).data
+        comments = CommentListSerializer(c_qs, many=True).data
         return comments
 
 def create_post_serializer(organisation_id=None, request=None):
@@ -75,18 +86,6 @@ def create_post_serializer(organisation_id=None, request=None):
 
 
     return PostCreateSerializer
-
-class CommentSerializer(serializers.ModelSerializer):
-    class Meta:
-        # add the fields to the api serializer
-        fields = (
-            'id',
-            'post',
-            'text',
-            'content_type',
-            'object_id',
-        )
-        model = posts_models.Comment
 
 def create_comment_serializer(model_type='user', organisation_id=None, post_id=None, request=None):
     class CommentCreateSerializer(serializers.ModelSerializer):
@@ -146,6 +145,34 @@ def create_comment_serializer(model_type='user', organisation_id=None, post_id=N
     return CommentCreateSerializer
                 
 class CommentListSerializer(serializers.ModelSerializer):
+    author = serializers.SerializerMethodField('which_author')
+
+    def which_author(self, comment):
+        content_object = comment.content_object
+        if content_object.__class__ == User:
+            user_pic = ""
+            if content_object.profile.user_picture:
+                user_pic = content_object.profile.user_picture.url
+            else:
+                user_pic = content_object.profile.default_image
+            return {
+                'id':content_object.pk,
+                'first_name':content_object.first_name,
+                'last_name':content_object.last_name,
+                'email':content_object.email,
+            }
+        elif content_object.__class__ == developer_models.Organisation:
+            return {
+                'id':content_object.pk,
+                'title':content_object.title,
+                'description':content_object.description,
+                'locations':content_object.locations,
+                'category':content_object.category,
+                'phone_number':content_object.phone_number,
+                'email_organisation':content_object.email_organisation,
+                'website':content_object.website,
+            }
+
     class Meta:
         # add the fields to the api serializer
         fields = (
@@ -154,5 +181,6 @@ class CommentListSerializer(serializers.ModelSerializer):
             'text',
             'content_type',
             'object_id',
+            'author'
         )
         model = posts_models.Comment

@@ -1,9 +1,15 @@
 from django.shortcuts import render
 from rest_framework import generics, permissions, filters
+from django.contrib.auth.models import User
 from developer import models as developer_models
 from posts import models as posts_models
 from django.db.models import Q
 from . import serializers
+
+class UserListAPIView(generics.ListAPIView):
+    permission_classes = (permissions.IsAdminUser,) # gives permissions only to Admin user to view the API view
+    queryset = User.objects.all()
+    serializer_class = serializers.UserSerializer
 
 # REST API list all organisations on url: /api/v1/organisations/
 class OrganisationListAPIView(generics.ListAPIView):

@@ -11,6 +11,7 @@ export default class CommentRepresentation extends React.Component{
         const comments = this.props.comments[this.props.postId] || []
         const commentsResult = comments.map(comment =>
                            <li key={comment.id} className="comments-dashboard">
+                               <span>{comment.author.first_name}</span>
                                {comment.text}
                            </li>
                    )
