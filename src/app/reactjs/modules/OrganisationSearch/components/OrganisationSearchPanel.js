@@ -30,7 +30,7 @@ export default class SearchPanel extends React.Component {
         this.setState({
             search: query
         });
-        this.promise = setTimeout(() => this.props.onSearchChanged(query), 400);
+        this.promise = setTimeout(() => this.props.onSearchChanged(query), 0);
     }
     
     onClearSearch() {

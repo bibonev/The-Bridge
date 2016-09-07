@@ -22,9 +22,9 @@ class OrganisationPanel extends Component {
 
         return (
             <div>
-                <LoadingContainer isLoading={isLoading} />
                 <div className="organisation-list">
                     <OrganisationSearchPanel search={search} onSearchChanged={onSearchChanged} />
+                    <LoadingContainer isLoading={isLoading} />
                     <OrganisationRepresentation data={rows} />
                 </div>
             </div>
