@@ -17,7 +17,7 @@ class PostsDashboardPanel extends Component {
         const comments = this.props.comments;
         const { loadPosts, loadComments, addCommentToPost } = this.props;
 
-        const addCurrentComment = (post_id, comment) => addCommentToPost(post_id, comment);
+        const addCurrentComment = (post_id, author_id, comment) => addCommentToPost(post_id, author_id, comment);
         const showCommentsForPost = (post_id) => loadComments(post_id);
 
         return (

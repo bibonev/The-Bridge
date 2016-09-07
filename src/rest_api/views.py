@@ -55,6 +55,12 @@ class CommentListAPIView(generics.ListAPIView):
 
         return queryset_list
 
+class CommentRetrieveAPIView(generics.RetrieveAPIView):
+    queryset = posts_models.Comment.objects.all()
+    serializer_class = serializers.CommentListSerializer
+    #permission_classes = [permissions.IsOwnerOrReadOnly]
+
+
 class CommentCreateAPIView(generics.CreateAPIView):
     queryset = posts_models.Comment.objects.all()
     permission_classes = [permissions.IsAuthenticated]

@@ -56,7 +56,7 @@ export function loadComments(post_id){
     };
 }
 
-export function addCommentToPost(post_id, comment){
+export function addCommentToPost(post_id, author_id, comment){
     function getCookie(name){
         var cookieValue = null;
         if (document.cookie && document.cookie !== '') {
@@ -79,7 +79,14 @@ export function addCommentToPost(post_id, comment){
     }
 
     return (dispatch, getState) => {
-        let url = `http://localhost:8000/api/v1/comments/create/?type=user&post_id=${post_id}`
+        let url='';
+
+        if(author_id == -1){
+            url = `http://localhost:8000/api/v1/comments/create/?type=user&post_id=${post_id}`
+        }else{
+            url = `http://localhost:8000/api/v1/comments/create/?type=organisation&org_id=${author_id}&post_id=${post_id}`
+        }
+        
         let type = 'POST'
         
         $.ajax({
@@ -92,7 +99,11 @@ export function addCommentToPost(post_id, comment){
             },
             data: comment,
             success: (data) => {
-                dispatch(addCommentResult(data, post_id))
+                let comment_id = data.id;
+                let url_get = `http://localhost:8000/api/v1/comments/${comment_id}`
+                $.get(url_get, data_get => {
+                    dispatch(addCommentResult(data_get, post_id));
+                });
             },
             error: (data) => {
                 console.log(data);
