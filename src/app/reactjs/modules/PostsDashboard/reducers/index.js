@@ -67,3 +67,14 @@ export const organisations_user = (state=ORGANISATIONS_USER_INITIAL, action) => 
             return state;
     }
 }
+
+export const comment_author_id = (state={ author_id: -1 }, action) => {
+    switch(action.type){
+        case "UPDATE_COMMENT_AUTHOR_ID":
+            return Object.assign({}, state, {
+                author_id: action.author_id,
+            })
+        default:
+            return state;
+    }
+}

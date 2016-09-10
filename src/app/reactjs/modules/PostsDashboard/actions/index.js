@@ -28,6 +28,13 @@ export function showOrganisationsCurrentUser(jsonResult){
     }
 }
 
+export function updateCurrentAuthorId(author_id){
+    return {
+        type: "UPDATE_COMMENT_AUTHOR_ID",
+        author_id
+    }
+}
+
 export function loadOrganisationsCurrentUser(){
     return (dispatch, getState) => {
         let url = `http://localhost:8000/api/v1/organisations/currentUser/`;
@@ -110,5 +117,11 @@ export function addCommentToPost(post_id, author_id, comment){
             }
         });
     };
+}
+
+export function currentAuthorId(author_id){
+    return (dispatch, getState) => {
+        dispatch(updateCurrentAuthorId(author_id));
+    }
 }
 
