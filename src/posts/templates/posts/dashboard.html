@@ -1,6 +1,10 @@
 {% extends 'customer/base.html' %}
 {% load static from staticfiles %}
 
+{% block css %}
+<link href="{% static 'css/dashboard.css' %}" rel="stylesheet"> 
+{% endblock css %}
+
 {% block title %} Customer {% endblock title %}
 
 {% block content %}
