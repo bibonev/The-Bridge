@@ -21,11 +21,13 @@ export default class CommentRepresentation extends React.Component{
         }
         const commentsResult = comments.map(comment =>
                            <li key={comment.id} className="comments-dashboard">
-                               <span>{userOrOrganisation(comment)} - </span>
-                               {comment.text}
+                               <div>
+                                <a href="#" className="authorCommentLink">{userOrOrganisation(comment)}</a>
+                                {comment.text}
+                               </div>
                            </li>
                    )
-        return <ul>
+        return <ul className="commentsDisplay">
                 {commentsResult}
             </ul>
     }

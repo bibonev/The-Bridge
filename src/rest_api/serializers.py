@@ -36,6 +36,18 @@ class OrganisationSerializer(serializers.ModelSerializer):
 
 class PostListSerializer(serializers.ModelSerializer):
     comments = serializers.SerializerMethodField()
+    organisation = serializers.SerializerMethodField('which_organisation')
+
+    def which_organisation(self, obj):
+        org_obj = developer_models.Organisation.objects.get(pk=obj.organisation.pk)
+        organisation = OrganisationSerializer(org_obj, many=False).data
+        return organisation
+        
+    def get_comments(self, obj):
+        c_qs = posts_models.Comment.objects.filter_by_instance(obj)
+        comments = CommentListSerializer(c_qs, many=True).data
+        return comments
+
     class Meta:
         # add the fields to the api serializer
         fields = (
@@ -45,11 +57,6 @@ class PostListSerializer(serializers.ModelSerializer):
             'comments',
         )
         model = posts_models.Post
-    
-    def get_comments(self, obj):
-        c_qs = posts_models.Comment.objects.filter_by_instance(obj)
-        comments = CommentListSerializer(c_qs, many=True).data
-        return comments
 
 def create_post_serializer(organisation_id=None, request=None):
     class PostCreateSerializer(serializers.ModelSerializer):

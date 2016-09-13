@@ -7,6 +7,7 @@ export default class CommentForm extends React.Component{
         this.onClickAuthorToPost = this.onClickAuthorToPost.bind(this)
         this.authorDisplay = this.authorDisplay.bind(this)
         this.showAuthorOptions = this.showAuthorOptions.bind(this)
+        this.handleKeyPress = this.handleKeyPress.bind(this)
     }
     handleSubmit(e){
         e.preventDefault();
@@ -34,7 +35,14 @@ export default class CommentForm extends React.Component{
         $('.authorOptions').eq(authorOptions.index('.authorDisplay')).toggle();
     }
     onClickAuthorToPost(org_id){
+        $('.authorOptions').hide();
         this.props.updateAuthorId(org_id)
+    }
+    handleKeyPress(e){
+        if (e.keyCode === 13) {
+            var submitButton = $(e.target);
+            $('.commentFormSubmitButton').eq(submitButton.index('.commentFormInput')).click();
+        }
     }
     render(){
         const commentAuthorId = this.props.author_id || -1;
@@ -46,18 +54,18 @@ export default class CommentForm extends React.Component{
             )
         const authorDisplay = this.authorDisplay(commentAuthorId);
         return  <div>
-                    <div>
+                    <form className="commentForm" onSubmit={this.handleSubmit}>
+                        <input type="hidden" ref="authorid" readOnly = "readonly" value={commentAuthorIdStr}/>
+                        <textarea ref="commenttext" placeholder="Write your comment..." className="commentFormInput" onKeyDown={this.handleKeyPress} cols="40" rows="1"></textarea>
+                        <input className="commentFormSubmitButton" type="submit" value="Comment" hidden/> 
+                    </form>
+                    <div className="commentAuthor">
                         <button className="authorDisplay" onClick={this.showAuthorOptions}>{authorDisplay}</button>
                         <div className="authorOptions currentOptionsShow">
                             <button onClick={() => this.onClickAuthorToPost(-1)}>You</button>
                             {currUserOrg}
                         </div>
                     </div>
-                    <form onSubmit={this.handleSubmit}>
-                        <input type="hidden" ref="authorid" readOnly = "readonly" value={commentAuthorIdStr}/>
-                        <input type="text" ref="commenttext" placeholder="Comment"/>
-                        <input type="submit" value="Comment"/> 
-                    </form>
                </div>
     }
 }
