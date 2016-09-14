@@ -24,6 +24,7 @@ export default class CommentRepresentation extends React.Component{
                                <div>
                                 <a href="#" className="authorCommentLink">{userOrOrganisation(comment)}</a>
                                 {comment.text}
+                                <span className="post-comment-dateTime">{comment.timestamp}</span>
                                </div>
                            </li>
                    )

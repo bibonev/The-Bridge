@@ -56,7 +56,8 @@ export default class CommentForm extends React.Component{
         return  <div>
                     <form className="commentForm" onSubmit={this.handleSubmit}>
                         <input type="hidden" ref="authorid" readOnly = "readonly" value={commentAuthorIdStr}/>
-                        <textarea ref="commenttext" placeholder="Write your comment..." className="commentFormInput" onKeyDown={this.handleKeyPress} cols="40" rows="1"></textarea>
+                        {/*<textarea ref="commenttext" placeholder="Write your comment..." className="commentFormInput" onKeyDown={this.handleKeyPress} cols="40"></textarea>*/}
+                        <input type="text" ref="commenttext" placeholder="Write your comment..." className="commentFormInput"/>
                         <input className="commentFormSubmitButton" type="submit" value="Comment" hidden/> 
                     </form>
                     <div className="commentAuthor">

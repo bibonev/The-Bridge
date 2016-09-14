@@ -1,3 +1,4 @@
+from datetime import datetime 
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.fields import GenericForeignKey
@@ -8,6 +9,7 @@ from developer import models as developer_models
 class Post(models.Model):
     description = models.TextField()
     organisation = models.ForeignKey(developer_models.Organisation)
+    timestamp = models.DateTimeField(default=datetime.now)
 
     def __str__(self):
         return self.description
@@ -25,6 +27,9 @@ class Post(models.Model):
     def create_post_org_change(organisation):
         post_on_change_field('category', organisation)
         post_on_change_field('locations', organisation)
+
+    class Meta:
+        ordering = ['-timestamp']
 
 class CommentManager(models.Manager):
     def all(self):
@@ -61,6 +66,7 @@ class CommentManager(models.Manager):
 class Comment(models.Model):
     post = models.ForeignKey(Post)
     text = models.TextField()
+    timestamp = models.DateTimeField(default=datetime.now)
 
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, null=True)
     object_id = models.PositiveIntegerField(null=True)
@@ -70,5 +76,8 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.text
+    
+    class Meta:
+        ordering = ['timestamp']
     
 

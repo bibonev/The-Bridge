@@ -37,6 +37,7 @@ class OrganisationSerializer(serializers.ModelSerializer):
 class PostListSerializer(serializers.ModelSerializer):
     comments = serializers.SerializerMethodField()
     organisation = serializers.SerializerMethodField('which_organisation')
+    timestamp = serializers.DateTimeField(format="%H:%M | %d %B %Y")
 
     def which_organisation(self, obj):
         org_obj = developer_models.Organisation.objects.get(pk=obj.organisation.pk)
@@ -54,6 +55,7 @@ class PostListSerializer(serializers.ModelSerializer):
             'id',
             'description',
             'organisation',
+            'timestamp',
             'comments',
         )
         model = posts_models.Post
@@ -153,6 +155,7 @@ def create_comment_serializer(model_type='user', organisation_id=None, post_id=N
                 
 class CommentListSerializer(serializers.ModelSerializer):
     author = serializers.SerializerMethodField('which_author')
+    timestamp = serializers.DateTimeField(format="%H:%M | %d %B %Y")
 
     def which_author(self, comment):
         content_object = comment.content_object
@@ -186,6 +189,7 @@ class CommentListSerializer(serializers.ModelSerializer):
             'id',
             'post',
             'text',
+            'timestamp',
             'content_type',
             'object_id',
             'author'

@@ -14,6 +14,15 @@
     font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
     font-weight: 700;
     font-size: 15px;
+    display:inline-block;
+    float:left;
+}
+.post-comment-dateTime{
+    color: #999;
+    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 300;
+    font-size: 12px;
+    margin-left: 10px;
 }
 .post-title:hover{
     color: #029acf;
@@ -58,7 +67,7 @@
     border-radius: 2px;
     padding:4px 8px;
     outline:none;
-    resize:none;
+    width:350px;
 }
 .authorOptions{
     display:none;
@@ -99,6 +108,7 @@
 }
 .commentsDisplay{
     padding-left:0;
+    margin-bottom: 15px !important;
 }
 .authorCommentLink{
     font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
