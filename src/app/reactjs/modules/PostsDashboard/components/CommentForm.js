@@ -19,13 +19,15 @@ export default class CommentForm extends React.Component{
     }
     authorDisplay(author_id){
         var text = "";
-        this.props.org_u_rows.map(function(org){
-            if(author_id == -1){
+        if(author_id == -1){
                 text = "You"
-            }else if(author_id == org.id){
-                text = org.title
-            }
-        });
+        }else{
+            this.props.org_u_rows.map(function(org){
+                if(author_id == org.id){
+                    text = org.title
+                }
+            });
+        }
         return text;
     }
     showAuthorOptions(e){
@@ -53,6 +55,19 @@ export default class CommentForm extends React.Component{
                 </button>
             )
         const authorDisplay = this.authorDisplay(commentAuthorId);
+        const haveOrganisations = () => {
+            if(typeof this.props.org_u_rows !== 'undefined' && this.props.org_u_rows.length > 0){
+                return <div className="commentAuthor">
+                        <button className="authorDisplay" onClick={this.showAuthorOptions}>{authorDisplay}</button>
+                        <div className="authorOptions currentOptionsShow">
+                            <button onClick={() => this.onClickAuthorToPost(-1)}>You</button>
+                            {currUserOrg}
+                        </div>
+                    </div>
+            }else{
+                return; 
+            }
+        }
         return  <div>
                     <form className="commentForm" onSubmit={this.handleSubmit}>
                         <input type="hidden" ref="authorid" readOnly = "readonly" value={commentAuthorIdStr}/>
@@ -60,13 +75,7 @@ export default class CommentForm extends React.Component{
                         <input type="text" ref="commenttext" placeholder="Write your comment..." className="commentFormInput"/>
                         <input className="commentFormSubmitButton" type="submit" value="Comment" hidden/> 
                     </form>
-                    <div className="commentAuthor">
-                        <button className="authorDisplay" onClick={this.showAuthorOptions}>{authorDisplay}</button>
-                        <div className="authorOptions currentOptionsShow">
-                            <button onClick={() => this.onClickAuthorToPost(-1)}>You</button>
-                            {currUserOrg}
-                        </div>
-                    </div>
+                    {haveOrganisations()}
                </div>
     }
 }
