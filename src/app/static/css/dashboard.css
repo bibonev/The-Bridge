@@ -98,6 +98,14 @@
     background: #029acf;
     color: #fff;
 }
+.bonusText-authorOptions{
+    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    padding:2px 8px;
+    background: #c4c4c4;
+    color:#fff;
+}
 .comments-dashboard{
     list-style: none;
     font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;

@@ -61,6 +61,7 @@ export default class CommentForm extends React.Component{
                         <button className="authorDisplay" onClick={this.showAuthorOptions}>{authorDisplay}</button>
                         <div className="authorOptions currentOptionsShow">
                             <button onClick={() => this.onClickAuthorToPost(-1)}>You</button>
+                            <div className="bonusText-authorOptions">Your organisation(s)</div>
                             {currUserOrg}
                         </div>
                     </div>
