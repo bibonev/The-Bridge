@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'rest_framework',
+    'reversion',
     'webpack_loader',
     'rest_api',
     'imagekit',
@@ -50,6 +51,7 @@ INSTALLED_APPS = [
     'userprofile',
     'customer',
     'developer',
+    'posts',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -68,7 +70,7 @@ ROOT_URLCONF = 'dream_comes_true.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates', 'allauth_user/templates', 'userprofile/templates', 'customer/templates', 'developer/templates', ],
+        'DIRS': ['templates', 'allauth_user/templates', 'userprofile/templates', 'customer/templates', 'developer/templates', 'posts.templates',],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

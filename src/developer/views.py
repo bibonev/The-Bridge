@@ -1,7 +1,11 @@
+import reversion
+from reversion.models import Version
 from django.http import HttpResponseRedirect, HttpResponse
+from django.core.urlresolvers import reverse
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from partnership.models import Relation, PendingRequest
+from posts.models import Post
 from . import forms, models
 
 # Create your views here.
@@ -33,16 +37,21 @@ def my_organisation_details(request, pk):
     return render(request, 'developer/my_organisation_details.html', {'org':my_organisation})
 
 # display template which gives ability to edit organisation
+@login_required
 def my_organisation_edit(request, pk):
     '''Edit user's organisaitons'''
     # submit update form
+    org_instance = get_object_or_404(models.Organisation, pk=pk, host=request.user)
     if request.method == 'POST':
         # saves instance of the particular organisation object
-        organisation_form = forms.OrganisationForm(request.POST, request.FILES, instance=get_object_or_404(models.Organisation, pk=pk, host=request.user))
+        organisation_form = forms.OrganisationForm(request.POST, request.FILES, instance=org_instance)
         if organisation_form.is_valid():
-            organisation_form.save()
+            with reversion.create_revision():
+                organisation_form.save()
+            Post.create_post_org_change(org_instance)
+            return HttpResponseRedirect(reverse('developer:my_organisation_edit'))
     else:
-        organisation_form = forms.OrganisationForm(instance=get_object_or_404(models.Organisation, pk=pk, host=request.user))
+        organisation_form = forms.OrganisationForm(instance=org_instance)
 
     return render(request, 'developer/my_organisation_edit.html', {'organisation_form': organisation_form})
 
@@ -59,7 +68,7 @@ def create_organisation(request):
             org = form.save(commit=False)
             org.host = request.user
             org.save()
-            return HttpResponseRedirect('/')
+            return HttpResponseRedirect(reverse('developer:create_organisation'))
     
     return render(request, 'developer/create_organisation.html', {'form':form})
 
@@ -79,6 +88,7 @@ def requests(request):
         if 'accept_request' in request.POST:
             curr_request = get_object_or_404(PendingRequest, pk=request.POST.get('customer_request'))
             curr_request.approve()
+            return HttpResponseRedirect(reverse('developer:requests'))
 
     return render(request, 'developer/requests.html', {'org_requests': org_requests})
         

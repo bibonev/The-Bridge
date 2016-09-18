@@ -7,6 +7,8 @@ module.exports = {
   entry: {
     // Add as many entry points as you have container-react-components here
     organisation_search: './reactjs/modules/OrganisationSearch/index',
+    posts_dashboard: './reactjs/modules/PostsDashboard/index',
+    posts_organisation: './reactjs/modules/PostsOrganisation/index',
     vendors: ['react'],
   },
 

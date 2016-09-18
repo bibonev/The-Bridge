@@ -13,9 +13,9 @@ def base_page(request):
             if request.session.get('role') == 'developer':
                 return HttpResponseRedirect(reverse('developer:home')) # render to developer page
             elif request.session.get('role') == 'customer':
-                return HttpResponseRedirect(reverse('customer:home')) # render to customer page
+                return HttpResponseRedirect(reverse('customer:posts:dashboard')) # render to customer page
         else:
-            return HttpResponseRedirect(reverse('customer:home')) # by default render to customer home page
+            return HttpResponseRedirect(reverse('customer:posts:dashboard')) # by default render to customer home page
     else:
         organisations = developer_models.Organisation.objects.all()
         query = request.GET.get('searchTerm')
