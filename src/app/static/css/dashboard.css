@@ -2,12 +2,17 @@
     width: 600px;
     margin:0 auto;
 }
+#posts_organisation{
+    width: 600px;
+    margin: 0 auto;
+}
 .posts-dashboard{
     margin-top:20px;
     background: #fff;
     border: 1px solid #c4c4c4;
     border-radius: 6px;
     padding:10px 15px;
+    width:100%;
 }
 .post-title{
     color: #029acf;
@@ -34,6 +39,35 @@
     font-size: 14px;
     color:#383838;
     margin: 10px 0;
+}
+.postAddForm{
+    text-align:right;
+}
+.addPostField{
+    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    margin-top:20px;
+    background: #fff;
+    border: 1px solid #c4c4c4;
+    border-radius: 6px;
+    padding:10px 15px;
+    width:100%;
+    resize:none;
+    outline:none;
+    height: 100px;
+}
+.addPostButton{
+    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    padding: 5px 10px;
+    color:#fff;
+    background: #029acf;
+    border: 1px solid #029acf;
+    border-radius: 6px;
+    outline:none;
+    margin-top:5px;
 }
 .commentAuthor{
     display:inline-block;

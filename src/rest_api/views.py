@@ -34,6 +34,20 @@ class PostListAPIView(generics.ListAPIView):
     queryset = posts_models.Post.objects.all()
     serializer_class = serializers.PostListSerializer
 
+    def get_queryset(self):
+        queryset_list = posts_models.Post.objects.all()
+        organisation_id = self.request.GET.get('org_id')
+        if organisation_id :
+            org_obj = developer_models.Organisation.objects.get(pk=organisation_id)
+            queryset_list = posts_models.Post.objects.filter(organisation=org_obj)
+
+        return queryset_list
+
+class PostRetrieveAPIView(generics.RetrieveAPIView):
+    queryset = posts_models.Post.objects.all()
+    serializer_class = serializers.PostListSerializer
+    #permission_classes = [permissions.IsOwnerOrReadOnly]
+
 class PostCreateAPIView(generics.CreateAPIView):
     queryset = posts_models.Post.objects.all()
     permission_classes = [permissions.IsAuthenticated]

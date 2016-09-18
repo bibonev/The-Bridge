@@ -3,7 +3,10 @@
 
 {% block title %} Developer - {{org.title}} {% endblock title %}
 
-{% block css %}<link href="{% static 'css/organisation_profile.css' %}" rel="stylesheet">{% endblock css %}
+{% block css %}
+<link href="{% static 'css/organisation_profile.css' %}" rel="stylesheet">
+<link href="{% static 'css/dashboard.css' %}" rel="stylesheet"> 
+{% endblock css %}
 
 {% block content %}
 <div class="organisation">
@@ -61,9 +64,14 @@
             <h3>{{org.title}}</h3>
             <div class="description">{{org.description}}</div>
             <a href="{% url 'developer:my_organisation_edit' pk=org.pk %}">Edit organisation</a>
+            <div id="posts_organisation"></div>
         </div>
     </div>
 </div>
 {% endblock content %}
+
+{% block script %}
+<script src="{% static 'bundles/local/posts_organisation.js' %}"></script>
+{% endblock script %}
 
 
