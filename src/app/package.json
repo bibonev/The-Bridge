@@ -29,6 +29,7 @@
     "react-redux": "^4.4.5",
     "react-router": "^1.0.3",
     "react-router-redux": "^2.1.0",
+    "react-star-rating": "^1.4.2",
     "redux": "^3.5.2",
     "redux-form": "^4.2.2",
     "redux-thunk": "^1.0.3"

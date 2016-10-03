@@ -54,6 +54,7 @@
             <h3>{{org.title}}</h3>
             <div class="description">{{org.description}}</div>
             {% if user.is_authenticated %}
+                <div id="rating_organisation"></div>
                 {% if request_state == 0 %}
                 <form action="" method="POST" id="request_form">
                     {% csrf_token %}

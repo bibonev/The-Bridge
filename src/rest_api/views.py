@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from rest_framework import generics, permissions, filters
 from django.contrib.auth.models import User
 from developer import models as developer_models
@@ -20,15 +20,36 @@ class OrganisationListAPIView(generics.ListAPIView):
     filter_backends = (filters.SearchFilter,)
     search_fields = ('title', 'description', 'category', 'locations',)
 
-class OrganisationCurrUserListAPIView(generics.ListAPIView):
+class OrganisationRetrieveAPIView(generics.RetrieveAPIView):
     # permission_classes = (permissions.IsAdminUser,) # gives permissions only to Admin user to view the API view
     queryset = developer_models.Organisation.objects.all()
+    serializer_class = serializers.OrganisationSerializer
+
+class OrganisationCurrUserListAPIView(generics.ListAPIView):
+    # permission_classes = (permissions.IsAdminUser,) # gives permissions only to Admin user to view the API view
     serializer_class = serializers.OrganisationSerializer
 
     def get_queryset(self):
         queryset_list = developer_models.Organisation.objects.filter(host=self.request.user)
 
         return queryset_list
+
+class ReviewListAPIView(generics.ListAPIView):
+    # permission_classes = (permissions.IsAdminUser,) # gives permissions only to Admin user to view the API view
+    serializer_class = serializers.ReviewListSerializer
+
+    def get_queryset(self):
+        org_obj = get_object_or_404(developer_models.Organisation, pk=self.kwargs['pk'])
+        queryset_list = developer_models.Review.objects.filter(organisation=org_obj)
+        return queryset_list
+
+class ReviewCreateAPIView(generics.CreateAPIView):
+    queryset = developer_models.Review.objects.all()
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_serializer_class(self):
+        organisation_id = self.kwargs['pk']
+        return serializers.create_review_serializer(organisation_id=organisation_id, request=self.request)
 
 class PostListAPIView(generics.ListAPIView):
     queryset = posts_models.Post.objects.all()

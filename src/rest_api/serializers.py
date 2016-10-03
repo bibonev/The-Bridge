@@ -34,6 +34,70 @@ class OrganisationSerializer(serializers.ModelSerializer):
         )
         model = developer_models.Organisation
 
+class ReviewListSerializer(serializers.ModelSerializer):
+    author = serializers.SerializerMethodField('which_author')
+    organisation = serializers.SerializerMethodField('which_organisation')
+
+    def which_author(self, obj):
+        auth_obj = User.objects.get(pk=obj.author.pk)
+        author = UserSerializer(auth_obj, many=False).data
+        return author
+
+    def which_organisation(self, obj):
+        org_obj = developer_models.Organisation.objects.get(pk=obj.organisation.pk)
+        organisation = OrganisationSerializer(org_obj, many=False).data
+        return organisation
+
+    class Meta:
+        # add the fields to the api serializer
+        fields = (
+            'id',
+            'rating',
+            'text',
+            'author',
+            'organisation'
+        )
+        model = developer_models.Review
+
+def create_review_serializer(organisation_id=None, request=None):
+    class ReviewCreateSerializer(serializers.ModelSerializer):
+        class Meta:
+            # add the fields to the api serializer
+            fields = (
+                'id',
+                'rating',
+                'text',
+            )
+            model = developer_models.Review
+        
+        def __init__(self, *args, **kwargs):
+            self.organisation_object = None
+            self.organisation_qs = None
+            if organisation_id:
+                self.organisation_qs = developer_models.Organisation.objects.filter(id=organisation_id)
+
+            return super(ReviewCreateSerializer, self).__init__(*args, **kwargs)
+
+        def validate(self, data):
+            if self.organisation_qs.exists() and self.organisation_qs.count() == 1:
+                self.organisation_object = self.organisation_qs.first()
+            else:
+                raise ValidationError("Unable to create review for non-existing organisation")
+
+            return data
+            
+        def create(self, validated_data):
+            rating = int(validated_data.get('rating'))
+            text = validated_data.get('text')
+            organisation_object = self.organisation_object
+            review = developer_models.Review.objects.create(rating=rating, text=text, author=request.user, organisation=organisation_object)
+
+            return review
+
+
+    return ReviewCreateSerializer
+
+
 class PostListSerializer(serializers.ModelSerializer):
     comments = serializers.SerializerMethodField()
     organisation = serializers.SerializerMethodField('which_organisation')
