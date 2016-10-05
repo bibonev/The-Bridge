@@ -43,6 +43,11 @@ class ReviewListAPIView(generics.ListAPIView):
         queryset_list = developer_models.Review.objects.filter(organisation=org_obj)
         return queryset_list
 
+class ReviewRetrieveAPIView(generics.RetrieveAPIView):
+    queryset = developer_models.Review.objects.all()
+    serializer_class = serializers.ReviewListSerializer
+    #permission_classes = [permissions.IsOwnerOrReadOnly]
+
 class ReviewCreateAPIView(generics.CreateAPIView):
     queryset = developer_models.Review.objects.all()
     permission_classes = [permissions.IsAuthenticated]

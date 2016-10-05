@@ -1,12 +1,28 @@
-export function updateRatingResult(org_id, rating) {
+export function showReviewsResult(jsonResult) {
     return {
-        type: "UPDATE_RATING",
-        org_id,
-        rating
+        type: "SHOW_RATINGS",
+        reviews: jsonResult
     };
 }
 
-export function updateRating(org_id, rating) {
+export function addRatingResult(org_id, jsonResult) {
+    return {
+        type: "ADD_RATING",
+        org_id,
+        review: jsonResult
+    };
+}
+
+export function loadReviews(org_id) {
+    return (dispatch, getState) => {
+        let url = `http://localhost:8000/api/v1/organisations/${org_id}/reviews/`;
+        $.get(url, data => {
+            dispatch(showReviewsResult(data));
+        });
+    }
+}
+
+export function addRating(org_id, rating) {
     function getCookie(name){
         var cookieValue = null;
         if (document.cookie && document.cookie !== '') {
@@ -28,9 +44,8 @@ export function updateRating(org_id, rating) {
         return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
     }
     return (dispatch, getState) => {
-        let url = `http://localhost:8000/api/v1/organsiations/${org_id}/reviews/create/`
+        let url = `http://localhost:8000/api/v1/organisations/${org_id}/reviews/create/`
         let type = 'POST'
-
         $.ajax({
             type,
             url,
@@ -39,10 +54,14 @@ export function updateRating(org_id, rating) {
                     xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
                 }
             },
-            data: post,
+            data: {rating: rating, text:"Example text as a review"},
             success: (data) => {
-                //dispatch(updateRatingResult(org_id, rating))
                 console.log(JSON.stringify(data))
+                let review_id = data.id;
+                let url_get = `http://localhost:8000/api/v1/organisations/reviews/${review_id}`
+                $.get(url_get, data_get => {
+                    dispatch(addRatingResult(org_id, data_get));
+                });
             },
             error: (data) => {
                 console.log(data);

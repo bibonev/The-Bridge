@@ -1,11 +1,12 @@
 import React, {Component}  from 'react';
 import StarRating from 'react-star-rating';
 import { connect } from 'react-redux';
-import { updateRating } from '../actions';
+import { loadReviews, addRating } from '../actions';
 import { bindActionCreators } from 'redux';
 
-class RatingOrganisationPanel extends Component {
-    getCurrentOrganisationId(){
+import ReviewRepresentation from '../components/ReviewRepresentation';
+
+function getCurrentOrganisationId(){
         let curr_url = window.location.href.toString().split("/");
         let org_id = curr_url.pop();
         while(org_id == ""){
@@ -13,16 +14,22 @@ class RatingOrganisationPanel extends Component {
         }
         return org_id;
     }
-    handleRatingClick(e, data){
-        updateRating(this.getCurrentOrganisationId(), data.rating)
+
+class RatingOrganisationPanel extends Component {
+    componentWillMount() {
+        const { loadReviews } = this.props;
+        loadReviews(getCurrentOrganisationId());
     }
     render(){
-        const rating = this.props.ratings[this.getCurrentOrganisationId()] || 0;
-        const { updateRating } = this.props;
+        const { rows, count, rating } = this.props.ratings;
+        const { addRating } = this.props;
+        const handleRatingClick = (e, data) => addRating(getCurrentOrganisationId(), data.rating);
 
         return (
             <div>
-                <StarRating name="handler" caption="Use onClick Handlers!" totalStars={5} onRatingClick={this.handleRatingClick} />
+                <StarRating name="handler" totalStars={5} onRatingClick={handleRatingClick} />
+                <div>{rating} out of 5</div>
+                <ReviewRepresentation data={rows} />
             </div>
         );
     }
@@ -33,7 +40,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-   updateRating
+   loadReviews, addRating
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(RatingOrganisationPanel);
