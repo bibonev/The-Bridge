@@ -1,13 +1,13 @@
 export function showReviewsResult(jsonResult) {
     return {
-        type: "SHOW_RATINGS",
+        type: "SHOW_REVIEWS",
         reviews: jsonResult
     };
 }
 
-export function addRatingResult(org_id, jsonResult) {
+export function addReviewResult(org_id, jsonResult) {
     return {
-        type: "ADD_RATING",
+        type: "ADD_REVIEW",
         org_id,
         review: jsonResult
     };
@@ -22,7 +22,7 @@ export function loadReviews(org_id) {
     }
 }
 
-export function addRating(org_id, rating) {
+export function addReview(org_id, text, rating) {
     function getCookie(name){
         var cookieValue = null;
         if (document.cookie && document.cookie !== '') {
@@ -54,13 +54,13 @@ export function addRating(org_id, rating) {
                     xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
                 }
             },
-            data: {rating: rating, text:"Example text as a review"},
+            data: {rating: rating, text:text},
             success: (data) => {
                 console.log(JSON.stringify(data))
                 let review_id = data.id;
                 let url_get = `http://localhost:8000/api/v1/organisations/reviews/${review_id}`
                 $.get(url_get, data_get => {
-                    dispatch(addRatingResult(org_id, data_get));
+                    dispatch(addReviewResult(org_id, data_get));
                 });
             },
             error: (data) => {

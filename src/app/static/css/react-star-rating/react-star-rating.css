@@ -1,3 +1,31 @@
+.ratingMain{
+  background: #029acf;
+  color:#fff;
+  display:inline-block;
+  border-radius:25px;
+  padding:0 15px;
+}
+.ratingMain p{
+  margin-top:-8px;
+  font-size:37px;
+  font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 400;
+  margin-bottom:0 !important;
+}
+.ratingMain p span{
+  vertical-align:middle;
+}
+.reviewsCount{
+  font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 300;
+  color:#383838;
+  font-size:14px;
+  margin:5px 0 10px 15px;
+}
+.rsr-container{
+  display:block !important;
+  text-align: left;
+}
 .rsr-root {
   vertical-align: middle;
   display: inline-block; }
@@ -9,7 +37,7 @@
   position: relative;
   vertical-align: middle;
   display: inline-block;
-  color: #e3e3e3;
+  color: #c4c4c4;
   overflow: hidden; }
 
 .rsr__stars {
@@ -18,7 +46,7 @@
   top: 0;
   white-space: nowrap;
   overflow: hidden;
-  color: #F5A71B;
+  color: #029acf;
   -webkit-transition: all 0.01s;
   -moz-transition: all 0.01s;
   transition: all 0.01s; }
@@ -30,3 +58,40 @@
 
 .rsr--disabled .rsr-container:hover {
   cursor: not-allowed; }
+
+.reviewAddForm{
+    padding:10px;
+    background: #fff;
+    border: 1px solid #c4c4c4;
+    border-radius: 6px;
+    width:100%;
+    text-align:right;
+}
+.reviewField{
+    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    background: #fff;
+    margin-top:5px;
+    border:0;
+    width:100%;
+    resize:none;
+    outline:none;
+    height: 50px;
+}
+.addReviewButton{
+    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    padding: 5px 10px;
+    color:#fff;
+    background: #029acf;
+    border: 1px solid #029acf;
+    border-radius: 6px;
+    outline:none;
+    margin-top:5px;
+}
+.reviewRating{
+    display:inline-block;
+    margin-left:10px;
+}

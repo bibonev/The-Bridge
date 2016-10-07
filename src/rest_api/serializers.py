@@ -37,6 +37,7 @@ class OrganisationSerializer(serializers.ModelSerializer):
 class ReviewListSerializer(serializers.ModelSerializer):
     author = serializers.SerializerMethodField('which_author')
     organisation = serializers.SerializerMethodField('which_organisation')
+    timestamp = serializers.DateTimeField(format="%H:%M | %d %B %Y")
 
     def which_author(self, obj):
         auth_obj = User.objects.get(pk=obj.author.pk)
@@ -55,7 +56,8 @@ class ReviewListSerializer(serializers.ModelSerializer):
             'rating',
             'text',
             'author',
-            'organisation'
+            'organisation',
+            'timestamp'
         )
         model = developer_models.Review
 

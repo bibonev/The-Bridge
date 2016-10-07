@@ -11,7 +11,7 @@ import thunk from "redux-thunk"
 
 import * as reducers from "./reducers"
 
-import RatingOrganisationPanel from './containers/RatingOrganisationPanel';
+import ReviewOrganisationPanel from './containers/ReviewOrganisationPanel';
 
 let finalCreateStore = compose(
   applyMiddleware(thunk),
@@ -21,14 +21,14 @@ let reducer = combineReducers(reducers)
 let store = finalCreateStore(reducer)
 
 
-class RatingOrganisation extends Component {
+class ReviewOrganisation extends Component {
   render() {
     return (
       <Provider store={store}>
-        <RatingOrganisationPanel />
+        <ReviewOrganisationPanel />
       </Provider>
     )
   }
 }
 
-render(<RatingOrganisation/>, document.getElementById('rating_organisation'))
+render(<ReviewOrganisation/>, document.getElementById('review_organisation'))

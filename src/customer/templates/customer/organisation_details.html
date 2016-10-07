@@ -5,7 +5,8 @@
 
 {% block css %}
 <link href="{% static 'css/organisation_profile.css' %}" rel="stylesheet">
-<link href="{% static 'css/react-star-rating/react-star-rating.min.css' %}" rel="stylesheet">
+<link href="{% static 'css/react-star-rating/react-star-rating.css' %}" rel="stylesheet">
+<link href="{% static 'css/dashboard.css' %}" rel="stylesheet"> 
 {% endblock css %}
 
 {% block content %}
@@ -13,5 +14,5 @@
 {% endblock content %}
 
 {% block script %}
-<script src="{% static 'bundles/local/rating_organisation.js' %}"></script>
+<script src="{% static 'bundles/local/review_organisation.js' %}"></script>
 {% endblock script %}

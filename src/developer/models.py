@@ -1,5 +1,6 @@
 import os
 import reversion
+from datetime import datetime 
 from django.conf import settings
 from django.db import models
 from django.core.urlresolvers import reverse
@@ -67,6 +68,10 @@ class Review(models.Model):
     text = models.TextField()
     author = models.ForeignKey(User)
     organisation = models.ForeignKey(Organisation)
+    timestamp = models.DateTimeField(default=datetime.now)
 
     def __str__(self):
         return self.text
+
+    class Meta:
+        ordering = ['-timestamp']

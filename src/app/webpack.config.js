@@ -9,7 +9,7 @@ module.exports = {
     organisation_search: './reactjs/modules/OrganisationSearch/index',
     posts_dashboard: './reactjs/modules/PostsDashboard/index',
     posts_organisation: './reactjs/modules/PostsOrganisation/index',
-    rating_organisation: './reactjs/modules/RatingOrganisation/index',
+    review_organisation: './reactjs/modules/ReviewOrganisation/index',
     vendors: ['react'],
   },
 

@@ -14,7 +14,7 @@ export default class CommentForm extends React.Component{
     }
     render(){
         return  <div>
-                    <form className="commentForm" onSubmit={this.handleSubmit}>
+                    <form className="commentForm" onSubmit={this.handleSubmit} method="POST">
                         <input type="text" ref="commenttext" placeholder="Write your comment..." className="commentFormInput"/>
                         <input className="commentFormSubmitButton" type="submit" value="Comment" hidden/> 
                     </form>

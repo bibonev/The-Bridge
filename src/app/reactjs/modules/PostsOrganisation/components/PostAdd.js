@@ -14,7 +14,7 @@ export default class PostAdd extends React.Component{
     }
     render(){
         return  <div>
-                    <form className="postAddForm" onSubmit={this.handleSubmit}>
+                    <form className="postAddForm" onSubmit={this.handleSubmit} method="POST">
                         <textarea className="addPostField" type="text" ref="posttext" placeholder="Write your post..."></textarea>
                         <input type="submit" value="Post" className="addPostButton"/> 
                     </form>

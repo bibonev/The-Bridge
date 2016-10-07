@@ -1,4 +1,4 @@
-const RATINGS_INITIAL = {
+const REVIEWS_INITIAL = {
     rows: [],
     count: 0,
     rating: 0
@@ -15,15 +15,15 @@ function calculateRating(reviewList){
     return rating;
 }
 
-export const ratings = (state=RATINGS_INITIAL, action) => {
+export const reviews = (state=REVIEWS_INITIAL, action) => {
     switch (action.type) {
-        case 'SHOW_RATINGS':
+        case 'SHOW_REVIEWS':
             return Object.assign({}, state, {
                 rows: action.reviews,
                 count: action.reviews.length,
                 rating: calculateRating(action.reviews)
             });
-        case 'ADD_RATING':
+        case 'ADD_REVIEW':
             return Object.assign({}, state, {
                 rows: [
                     action.review,
