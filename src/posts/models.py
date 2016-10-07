@@ -17,7 +17,7 @@ class Post(models.Model):
     def post_on_change_field(field, organisation):
         org_versions = Version.objects.get_for_object(organisation)
 
-        if len(versions) > 1:
+        if len(org_versions) > 1:
             v0 = org_versions[0].field_dict[field]
             v1 = org_versions[1].field_dict[field]
             if v0 != v1:
@@ -25,8 +25,8 @@ class Post(models.Model):
                 return Post.objects.create(description=desc, organisation=organisation)
 
     def create_post_org_change(organisation):
-        post_on_change_field('category', organisation)
-        post_on_change_field('locations', organisation)
+        Post.post_on_change_field('category', organisation)
+        Post.post_on_change_field('locations', organisation)
 
     class Meta:
         ordering = ['-timestamp']

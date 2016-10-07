@@ -49,7 +49,7 @@ def my_organisation_edit(request, pk):
             with reversion.create_revision():
                 organisation_form.save()
             Post.create_post_org_change(org_instance)
-            return HttpResponseRedirect(reverse('developer:my_organisation_edit'))
+            return HttpResponseRedirect(reverse('developer:my_organisation_edit', kwargs={'pk':pk}))
     else:
         organisation_form = forms.OrganisationForm(instance=org_instance)
 
