@@ -65,7 +65,7 @@ def validate_rating(rating):
 
 class Review(models.Model):
     rating = models.IntegerField(validators=[validate_rating], default=0)
-    text = models.TextField()
+    text = models.TextField(blank=True)
     author = models.ForeignKey(User)
     organisation = models.ForeignKey(Organisation)
     timestamp = models.DateTimeField(default=datetime.now)

@@ -1,16 +1,21 @@
 const REVIEWS_INITIAL = {
     rows: [],
     count: 0,
-    rating: 0
+    rating: 0.0
 };
+
+function round(value, precision) {
+    var multiplier = Math.pow(10, precision || 0);
+    return Math.round(value * multiplier) / multiplier;
+}
 
 function calculateRating(reviewList){
     var rating = 0;
-    if(reviewList.length != 0){
+    if(reviewList.length > 0){
         for(var i = 0; i < reviewList.length; i++){
             rating+=reviewList[i].rating;
         }
-        rating = Math.round((rating/reviewList.length)*10)/10
+        rating = round((rating/reviewList.length), 1).toFixed(1)
     }
     return rating;
 }
@@ -30,7 +35,7 @@ export const reviews = (state=REVIEWS_INITIAL, action) => {
                     ...state.rows,
                 ], 
                 count: state.count+1,
-                rating: Math.round(((state.rating*state.count+action.review.rating)/(state.count+1))*10)/10
+                rating: round((state.rating*state.count+action.review.rating)/(state.count+1), 1).toFixed(1)
             });
         default:
             return state;

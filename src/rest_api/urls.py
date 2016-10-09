@@ -6,6 +6,7 @@ urlpatterns = [
     url(r'organisations/$', views.OrganisationListAPIView.as_view(), name="organisations_list_api"),
     url(r'organisations/(?P<pk>\d+)/$', views.OrganisationRetrieveAPIView.as_view(), name="organisations_retrieve_api"),
     url(r'organisations/currentUser/$', views.OrganisationCurrUserListAPIView.as_view(), name="organisations_curr_user_api"),
+    url(r'organisations/is_organisation/(?P<pk>\d+)/$', views.OrganisationIsCurrUserAPIView.as_view(), name="organisations_is_curr_user_api"),
     url(r'organisations/(?P<pk>\d+)/reviews/$', views.ReviewListAPIView.as_view(), name="reviews_list_api"),
     url(r'organisations/reviews/(?P<pk>\d+)/$', views.ReviewRetrieveAPIView.as_view(), name="reviews_retrieve_api"),
     url(r'organisations/(?P<pk>\d+)/reviews/create/$', views.ReviewCreateAPIView.as_view(), name="reviews_create_api"),

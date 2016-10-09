@@ -1,0 +1,9 @@
+{% extends 'customer/organisation_details_base.html' %}
+
+{% block left-most-col %}
+<a href="{% url 'customer:organisation_details' pk=org.id %}">Back to posts</a>
+{% endblock left-most-col %}
+
+{% block main-col %}
+<div id="review_organisation"></div>
+{% endblock main-col %}

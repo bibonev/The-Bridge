@@ -10,7 +10,7 @@ const POSTS_INITIAL = {
     count: 0,
     page: 1,
     posts: {},
-
+    ownOrganisation: false
 };
 
 export const posts = (state=POSTS_INITIAL, action) => {
@@ -19,6 +19,7 @@ export const posts = (state=POSTS_INITIAL, action) => {
             return Object.assign({}, state, {
                 rows: action.posts,
                 count: action.posts.length,
+                ownOrganisation: action.ownOrganisation,
             });
         case 'ADD_POST':
             return {

@@ -15,7 +15,7 @@ function updateMyRating(e, data){
 function getCurrentOrganisationId(){
         let curr_url = window.location.href.toString().split("/");
         let org_id = curr_url.pop();
-        while(org_id == ""){
+        while(org_id == "" || isNaN(org_id)){
             org_id = curr_url.pop();
         }
         return org_id;
@@ -37,11 +37,19 @@ class ReviewOrganisationPanel extends Component {
             let starRating = myRating;
             addReview(getCurrentOrganisationId(), reviewText, starRating)
         }
+        const correctSpellReview = (c) => {
+            let c_num = parseInt(c.count)
+            if(c_num==1){
+                return (c.count + " review")
+            }else{
+                return (c.count + " reviews")
+            }
+        }
 
         return (
             <div>
                 <div className="ratingMain"><p>{rating} <span className="glyphicon glyphicon-star" aria-hidden="true"></span></p></div>
-                <div className="reviewsCount">{count} reviews</div>
+                <div className="reviewsCount">{correctSpellReview({count})}</div>
                 <form onSubmit={reviewSubmit} method="POST" className="reviewAddForm">
                     <StarRating name="starrating" totalStars={5} size={30} onRatingClick={updateMyRating}/>
                     <textarea type="text" name="reviewtext" placeholder="Write your review..." className="reviewField"></textarea>

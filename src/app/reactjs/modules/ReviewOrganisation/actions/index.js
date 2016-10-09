@@ -56,7 +56,6 @@ export function addReview(org_id, text, rating) {
             },
             data: {rating: rating, text:text},
             success: (data) => {
-                console.log(JSON.stringify(data))
                 let review_id = data.id;
                 let url_get = `http://localhost:8000/api/v1/organisations/reviews/${review_id}`
                 $.get(url_get, data_get => {

@@ -1,18 +1,12 @@
-{% extends 'customer/base.html' %}
+{% extends 'customer/organisation_details_base.html' %}
 
-{% load static from staticfiles %}
-{% block title %} {{org.title}} {% endblock title %}
+{% block left-most-col %}
+<a href="{% url 'customer:organisation_details_reviews' pk=org.id %}" class="org-rating">
+    <div class="ratingMain"><p><span>{{rating}}</span><span> </span><span class="glyphicon glyphicon-star" aria-hidden="true"></span></p></div>
+    <div class="reviewsCount">{{review_count}} review{{review_count|pluralize}}</div>
+</a>
+{% endblock left-most-col %}
 
-{% block css %}
-<link href="{% static 'css/organisation_profile.css' %}" rel="stylesheet">
-<link href="{% static 'css/react-star-rating/react-star-rating.css' %}" rel="stylesheet">
-<link href="{% static 'css/dashboard.css' %}" rel="stylesheet"> 
-{% endblock css %}
-
-{% block content %}
-{% include 'organisation_details_base.html' %}
-{% endblock content %}
-
-{% block script %}
-<script src="{% static 'bundles/local/review_organisation.js' %}"></script>
-{% endblock script %}
+{% block main-col %}
+<div id="posts_organisation"></div>
+{% endblock main-col %}

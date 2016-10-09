@@ -1,9 +1,11 @@
 from django.shortcuts import render, get_object_or_404
-from rest_framework import generics, permissions, filters
 from django.contrib.auth.models import User
+from django.db.models import Q
+from django.http import HttpResponse
+from rest_framework import generics, permissions, filters, views
+from rest_framework.response import Response
 from developer import models as developer_models
 from posts import models as posts_models
-from django.db.models import Q
 from . import serializers
 
 class UserListAPIView(generics.ListAPIView):
@@ -33,6 +35,16 @@ class OrganisationCurrUserListAPIView(generics.ListAPIView):
         queryset_list = developer_models.Organisation.objects.filter(host=self.request.user)
 
         return queryset_list
+
+class OrganisationIsCurrUserAPIView(views.APIView):
+    permission_classes = []
+
+    def get(self, request, *args, **kwargs):
+        org = developer_models.Organisation.objects.filter(pk=self.kwargs['pk'], host=self.request.user)
+        if len(org) == 1:
+            return Response({"success": True})
+        else:
+            return Response({"success": False})
 
 class ReviewListAPIView(generics.ListAPIView):
     # permission_classes = (permissions.IsAdminUser,) # gives permissions only to Admin user to view the API view

@@ -1,7 +1,8 @@
-export function showPostsResult(jsonResult) {
+export function showPostsResult(jsonResult, ownOrganisation) {
     return {
         type: "SHOW_POSTS",
-        posts: jsonResult
+        posts: jsonResult,
+        ownOrganisation
     };
 }
 
@@ -33,7 +34,10 @@ export function loadPosts(org_id) {
     return (dispatch, getState) => {
         let url = `http://localhost:8000/api/v1/posts/?org_id=${org_id}`;
         $.get(url, data => {
-            dispatch(showPostsResult(data));
+            let urlOwnOrg = `http://localhost:8000/api/v1/organisations/is_organisation/${org_id}/`;
+            $.get(urlOwnOrg, data2 => {
+                dispatch(showPostsResult(data, data2.success));
+            })
         });
     }
 }

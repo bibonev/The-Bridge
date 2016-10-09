@@ -95,14 +95,12 @@
         {% if user.is_authenticated %}
             <div class="secondary-navigation">
                 <div class="container-fluid">
-                    <div class="col-md-2"></div>
-                    <div class="col-md-8">
+                    <div class="inner-wrapper">
                     <ul>
                         {% block secondaryNav %}
                         {% endblock secondaryNav %}
                     </ul>
                     </div>
-                    <div class="col-md-2"></div>
                 </div>
             </div>
         {% endif %}
@@ -111,19 +109,16 @@
     {% block slider %}{% endblock slider %}
     <div class="wrapper">
         <div class="container-fluid">
-            <div class="col-md-2"></div>
-            <div class="col-md-8 bonus-padding">
+            <div class="inner-wrapper bonus-padding">
                 {% block content %}
                 {% endblock content %}
             </div>
-            <div class="col-md-2"></div>
         </div>
     </div>
         
     <footer>
         <div class="container-fluid">
-            <div class="col-md-2"></div>
-            <div class="col-md-8 bonus-padding">
+            <div class="inner-wrapper bonus-padding">
                 <div class="footer-logo">
                     <a href="/">theBridge</a>
                 </div>
@@ -163,7 +158,6 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-2"></div>
         </div>
     </footer>
 </div>
