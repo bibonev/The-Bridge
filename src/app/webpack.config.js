@@ -37,6 +37,9 @@ module.exports = {
   },
 
   resolve: {
+    alias: {
+      'react': path.join(__dirname, 'node_modules', 'react')
+    },
     modulesDirectories: ['node_modules', 'bower_components'],
     extensions: ['', '.js', '.jsx', '.json']
   },
