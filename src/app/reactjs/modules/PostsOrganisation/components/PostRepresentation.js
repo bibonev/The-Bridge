@@ -11,7 +11,7 @@ export default (props) => {
       </div>
         <div className="post-description">{post.description}</div>
         <CommentRepresentation comments={props.comments} postId={post.id} showCommentsForPost={props.showCommentsForPost}/>
-        <CommentForm postId={post.id} addCurrentComment={props.addCurrentComment}/>
+        <CommentForm org_u_rows={props.org_u_rows} postId={post.id} addCurrentComment={props.addCurrentComment} updateAuthorId={props.updateAuthorId} author_id={props.author_id}/>
       </div>
     )
     return <div>

@@ -59,3 +59,31 @@ export const comments = (state={}, action) => {
             return state;
     }
 };
+
+const ORGANISATIONS_USER_INITIAL = {
+    org_u_rows: [],
+    count: 0
+};
+
+export const organisations_user = (state=ORGANISATIONS_USER_INITIAL, action) => {
+    switch (action.type){
+        case "SHOW_ORGANISATIONS_USER":
+            return Object.assign({}, state, {
+                org_u_rows: action.organisations,
+                count: action.organisations.length,
+            });
+        default:
+            return state;
+    }
+}
+
+export const comment_author_id = (state={ author_id: -1 }, action) => {
+    switch(action.type){
+        case "UPDATE_COMMENT_AUTHOR_ID":
+            return Object.assign({}, state, {
+                author_id: action.author_id,
+            })
+        default:
+            return state;
+    }
+}

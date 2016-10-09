@@ -1,6 +1,6 @@
 import React, {Component}  from 'react';
 import { connect } from 'react-redux';
-import { loadPosts, addPost, loadComments, addCommentToPost } from '../actions';
+import { loadPosts, addPost, loadComments, addCommentToPost, currentAuthorId } from '../actions';
 import { bindActionCreators } from 'redux';
 
 import PostAdd from '../components/PostAdd';
@@ -21,13 +21,16 @@ class PostsOrganisationPanel extends Component {
     }
     render(){
         const { rows, count, ownOrganisation } = this.props.posts;
+        const { org_u_rows } = this.props.organisations_user;
+        const { author_id } = this.props.comment_author_id;
         const comments = this.props.comments;
-        const { loadPosts, addPost, loadComments, addCommentToPost } = this.props;
+        const { loadPosts, addPost, loadComments, addCommentToPost, currentAuthorId } = this.props;
 
         const curr_org_id = this.getCurrentOrganisationId();
         const addPostFromCurrOrg = (post) => addPost(curr_org_id, post);
-        const addCurrentComment = (post_id, comment) => addCommentToPost(post_id, curr_org_id, comment);
+        const addCurrentComment = (post_id, author_id, comment) => addCommentToPost(post_id, author_id, comment);
         const showCommentsForPost = (post_id) => loadComments(post_id);
+        const updateAuthorId = (author_id) => currentAuthorId(author_id);
 
         var addPostField;
         if (ownOrganisation) {
@@ -37,7 +40,7 @@ class PostsOrganisationPanel extends Component {
         return (
             <div className="posts-dashboard-list">
                 {addPostField}
-                <PostRepresentation data={rows} comments={comments} showCommentsForPost={showCommentsForPost} addCurrentComment={addCurrentComment}/>
+                <PostRepresentation data={rows} comments={comments} org_u_rows={org_u_rows} showCommentsForPost={showCommentsForPost} addCurrentComment={addCurrentComment} updateAuthorId={updateAuthorId} author_id={author_id}/>
             </div>
         );
     }
@@ -46,10 +49,12 @@ class PostsOrganisationPanel extends Component {
 const mapStateToProps = state => ({
     posts: state.posts,
     comments: state.comments,
+    organisations_user: state.organisations_user,
+    comment_author_id: state.comment_author_id
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-    loadPosts, addPost, loadComments, addCommentToPost,
+    loadPosts, addPost, loadComments, addCommentToPost, currentAuthorId
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostsOrganisationPanel);

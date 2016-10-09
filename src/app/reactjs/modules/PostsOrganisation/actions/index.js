@@ -29,6 +29,28 @@ export function addCommentResult(comment, id) {
     };
 }
 
+export function showOrganisationsCurrentUser(jsonResult){
+    return {
+        type: "SHOW_ORGANISATIONS_USER",
+        organisations: jsonResult
+    }
+}
+
+export function updateCurrentAuthorId(author_id){
+    return {
+        type: "UPDATE_COMMENT_AUTHOR_ID",
+        author_id
+    }
+}
+
+export function loadOrganisationsCurrentUser(){
+    return (dispatch, getState) => {
+        let url = `http://localhost:8000/api/v1/organisations/currentUser/`;
+        $.get(url, data => {
+            dispatch(showOrganisationsCurrentUser(data));
+        });
+    }
+}
 
 export function loadPosts(org_id) {
     return (dispatch, getState) => {
@@ -37,6 +59,7 @@ export function loadPosts(org_id) {
             let urlOwnOrg = `http://localhost:8000/api/v1/organisations/is_organisation/${org_id}/`;
             $.get(urlOwnOrg, data2 => {
                 dispatch(showPostsResult(data, data2.success));
+                dispatch(loadOrganisationsCurrentUser());
             })
         });
     }
@@ -123,7 +146,14 @@ export function addCommentToPost(post_id, author_id, comment){
     }
 
     return (dispatch, getState) => {
-        let url = `http://localhost:8000/api/v1/comments/create/?type=organisation&org_id=${author_id}&post_id=${post_id}`
+        let url='';
+
+        if(author_id == -1){
+            url = `http://localhost:8000/api/v1/comments/create/?type=user&post_id=${post_id}`
+        }else{
+            url = `http://localhost:8000/api/v1/comments/create/?type=organisation&org_id=${author_id}&post_id=${post_id}`
+        }        
+        
         let type = 'POST'
         
         $.ajax({
@@ -149,3 +179,8 @@ export function addCommentToPost(post_id, author_id, comment){
     };
 }
 
+export function currentAuthorId(author_id){
+    return (dispatch, getState) => {
+        dispatch(updateCurrentAuthorId(author_id));
+    }
+}
