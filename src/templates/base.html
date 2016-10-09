@@ -51,7 +51,7 @@
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                         <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
                     </button>
-                    <a class="navbar-brand page-scroll" href="/">Logo</a>
+                    <a class="navbar-brand page-scroll" href="/">theBridge</a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -95,14 +95,12 @@
         {% if user.is_authenticated %}
             <div class="secondary-navigation">
                 <div class="container-fluid">
-                    <div class="col-md-2"></div>
-                    <div class="col-md-8">
+                    <div class="inner-wrapper">
                     <ul>
                         {% block secondaryNav %}
                         {% endblock secondaryNav %}
                     </ul>
                     </div>
-                    <div class="col-md-2"></div>
                 </div>
             </div>
         {% endif %}
@@ -111,21 +109,18 @@
     {% block slider %}{% endblock slider %}
     <div class="wrapper">
         <div class="container-fluid">
-            <div class="col-md-2"></div>
-            <div class="col-md-8 bonus-padding">
+            <div class="inner-wrapper bonus-padding">
                 {% block content %}
                 {% endblock content %}
             </div>
-            <div class="col-md-2"></div>
         </div>
     </div>
         
     <footer>
         <div class="container-fluid">
-            <div class="col-md-2"></div>
-            <div class="col-md-8 bonus-padding">
+            <div class="inner-wrapper bonus-padding">
                 <div class="footer-logo">
-                    <a href="/">LOGO</a>
+                    <a href="/">theBridge</a>
                 </div>
                 <div class="links-social">
                     <div class="footer-links">
@@ -163,7 +158,6 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-2"></div>
         </div>
     </footer>
 </div>

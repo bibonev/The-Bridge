@@ -9,6 +9,7 @@ module.exports = {
     organisation_search: './reactjs/modules/OrganisationSearch/index',
     posts_dashboard: './reactjs/modules/PostsDashboard/index',
     posts_organisation: './reactjs/modules/PostsOrganisation/index',
+    review_organisation: './reactjs/modules/ReviewOrganisation/index',
     vendors: ['react'],
   },
 
@@ -36,6 +37,9 @@ module.exports = {
   },
 
   resolve: {
+    alias: {
+      'react': path.join(__dirname, 'node_modules', 'react')
+    },
     modulesDirectories: ['node_modules', 'bower_components'],
     extensions: ['', '.js', '.jsx', '.json']
   },

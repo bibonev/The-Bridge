@@ -1,9 +1,11 @@
 import os
 import reversion
+from datetime import datetime 
 from django.conf import settings
 from django.db import models
 from django.core.urlresolvers import reverse
 from django.core.validators import RegexValidator
+from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
 from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFill
@@ -56,3 +58,20 @@ class Organisation(models.Model):
     def default_image(self):
         if not self.front_picture:
             return os.path.join(settings.MEDIA_URL , 'default/no-img.jpg')
+
+def validate_rating(rating):
+    if rating < 0 and rating > 5 :  # Your conditions here
+        raise ValidationError('rating out of range' % value)
+
+class Review(models.Model):
+    rating = models.IntegerField(validators=[validate_rating], default=0)
+    text = models.TextField(blank=True)
+    author = models.ForeignKey(User)
+    organisation = models.ForeignKey(Organisation)
+    timestamp = models.DateTimeField(default=datetime.now)
+
+    def __str__(self):
+        return self.text
+
+    class Meta:
+        ordering = ['-timestamp']
