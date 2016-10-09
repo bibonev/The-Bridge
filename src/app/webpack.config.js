@@ -17,6 +17,10 @@ module.exports = {
       path: path.resolve('./static/bundles/local/'),
       filename: "[name].js"
   },
+  
+  node: {
+    fs: "empty"
+  },
 
   externals: [
   ], // add all vendor libs
@@ -26,11 +30,14 @@ module.exports = {
   ], // add all common plugins here
 
   module: {
-    loaders: [] // add all common loaders here
+    loaders: [ 
+      { test: /\.json$/, loader: "json-loader"},
+      { test: /\.js$/, loader: 'babel-loader'}
+    ] // add all common loaders here
   },
 
   resolve: {
     modulesDirectories: ['node_modules', 'bower_components'],
-    extensions: ['', '.js', '.jsx']
+    extensions: ['', '.js', '.jsx', '.json']
   },
 }
