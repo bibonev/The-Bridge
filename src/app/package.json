@@ -38,6 +38,7 @@
     "redux": "^3.5.2",
     "redux-form": "^6.1.0",
     "redux-thunk": "^2.1.0",
-    "react-star-rating": "^1.4.2"
+    "react-star-rating": "^1.4.2",
+    "react-textarea-autosize":"^4.0.5"
   }
 }
