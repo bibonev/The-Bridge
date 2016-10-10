@@ -41,21 +41,24 @@
     margin-top: 10px;
 }
 .postAddForm{
+    padding:10px;
+    background: #fff;
+    border: 1px solid #c4c4c4;
+    border-radius: 6px;
+    width:100%;
     text-align:right;
 }
 .addPostField{
     font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
     font-weight: 400;
     font-size: 14px;
-    margin-top:20px;
     background: #fff;
-    border: 1px solid #c4c4c4;
-    border-radius: 6px;
-    padding:10px 15px;
+    border:0;
     width:100%;
     resize:none;
     outline:none;
-    height: 100px;
+    height: 50px;
+    overflow: auto;
 }
 .addPostButton{
     font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
@@ -69,9 +72,14 @@
     outline:none;
     margin-top:5px;
 }
+.commentSubmit{
+    display: inline-flex;
+}
 .commentAuthor{
     display:inline-block;
     position:relative;
+    width:150px;
+    text-align:right;
 }
 .authorDisplay{
     font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
@@ -87,7 +95,9 @@
     background: url('../img/caret-down.png') no-repeat 4px center;
     background-size: 12px 14px;
     max-width:150px;
-    text-align:left;
+    white-space: nowrap;
+    overflow:hidden !important;
+    text-overflow: ellipsis;
 }
 .commentForm{
     display:inline-block;
@@ -102,6 +112,10 @@
     padding:4px 8px;
     outline:none;
     width:350px;
+    resize:none;
+    min-height:28px;
+    width:408px;
+    overflow: auto;
 }
 .authorOptions{
     display:none;
@@ -110,7 +124,8 @@
     border: 1px solid #c4c4c4;
     border-radius: 2px;
     background:#fff;
-    width:150px;
+    width:100%;
+    text-align: center;
 }
 .authorOptions button{
     font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
@@ -123,7 +138,10 @@
     outline:none;
     padding:4px 8px;
     width:100%;
-    text-align:left;
+    text-align:center;
+    white-space: nowrap;
+    overflow:hidden !important;
+    text-overflow: ellipsis;
 }
 .authorOptions button:last-of-type{
     border-bottom:0;

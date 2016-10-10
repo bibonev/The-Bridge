@@ -46,12 +46,19 @@ def organisation_details(request, pk):
     elif Relation.own_organisation(request.user, organisation):
         request_state = -1
 
+    # visualize rating for particular organisation
     rating = 0
     reviews = models.Review.objects.filter(organisation=organisation)
     if reviews:
         for review in reviews: 
             rating+=review.rating
         rating = round(((rating/len(reviews))*10), 0)/10 
+
+    # ability to edit organisation if the user is the owner
+    owner = False
+    if organisation.host == request.user:
+        owner = True
+    
     # if a request send button is clicked
     if request.method == 'POST':
         # check whether the post request is on the request form: 'request_organisation' is the name of the submit button
@@ -60,7 +67,7 @@ def organisation_details(request, pk):
             user = request.user
             PendingRequest.send_request(user, organisation)
 
-    return render(request, 'customer/organisation_details.html', {'org':organisation, 'request_state': request_state, 'rating':rating, 'review_count':len(reviews)})
+    return render(request, 'customer/organisation_details.html', {'org':organisation, 'request_state': request_state, 'rating':rating, 'review_count':len(reviews), 'owner':owner})
 
 @login_required
 def organisation_details_reviews(request, pk):
@@ -77,6 +84,11 @@ def organisation_details_reviews(request, pk):
     elif Relation.own_organisation(request.user, organisation):
         request_state = -1
 
+    # ability to edit organisation if the user is the owner
+    owner = False
+    if organisation.host == request.user:
+        owner = True
+
     # if a request send button is clicked
     if request.method == 'POST':
         # check whether the post request is on the request form: 'request_organisation' is the name of the submit button
@@ -85,7 +97,7 @@ def organisation_details_reviews(request, pk):
             user = request.user
             PendingRequest.send_request(user, organisation)
 
-    return render(request, 'customer/organisation_details_reviews.html', {'org':organisation, 'request_state': request_state})
+    return render(request, 'customer/organisation_details_reviews.html', {'org':organisation, 'request_state': request_state, 'owner':owner})
 
 
 

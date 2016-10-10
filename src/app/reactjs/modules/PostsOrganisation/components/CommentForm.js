@@ -1,28 +1,5 @@
-/* import React from 'react'
-
-export default class CommentForm extends React.Component{
-    constructor(props){
-        super(props)
-        this.handleSubmit = this.handleSubmit.bind(this)
-    }
-    handleSubmit(e){
-        e.preventDefault();
-        let commentText = this.refs.commenttext.value;
-        this.refs.commenttext.value = '';
-        let values = {text: commentText}
-        this.props.addCurrentComment(this.props.postId, values)
-    }
-    render(){
-        return  <div>
-                    <form className="commentForm" onSubmit={this.handleSubmit} method="POST">
-                        <input type="text" ref="commenttext" placeholder="Write your comment..." className="commentFormInput"/>
-                        <input className="commentFormSubmitButton" type="submit" value="Comment" hidden/> 
-                    </form>
-               </div>
-    }
-} */
-
 import React from 'react'
+import Textarea from 'react-textarea-autosize'
 
 export default class CommentForm extends React.Component{
     constructor(props){
@@ -55,7 +32,7 @@ export default class CommentForm extends React.Component{
         return text;
     }
     showAuthorOptions(e){
-        e.stopPropagation();
+        e.preventDefault();
         var authorOptions = $(e.target);
         $('.currentOptionsShow:visible:not(.authorOptions)').hide();
         $('.authorOptions').eq(authorOptions.index('.authorDisplay')).toggle();
@@ -66,6 +43,7 @@ export default class CommentForm extends React.Component{
     }
     handleKeyPress(e){
         if (e.keyCode === 13) {
+            e.preventDefault();
             var submitButton = $(e.target);
             $('.commentFormSubmitButton').eq(submitButton.index('.commentFormInput')).click();
         }
@@ -93,11 +71,11 @@ export default class CommentForm extends React.Component{
                 return <div>No org</div>; 
             }
         }
-        return  <div>
+        return  <div className="commentSubmit">
                     <form className="commentForm" onSubmit={this.handleSubmit} method="POST">
                         <input type="hidden" ref="authorid" readOnly = "readonly" value={commentAuthorIdStr}/>
-                        {/*<textarea ref="commenttext" placeholder="Write your comment..." className="commentFormInput" onKeyDown={this.handleKeyPress} cols="40"></textarea>*/}
-                        <input type="text" ref="commenttext" placeholder="Write your comment..." className="commentFormInput"/>
+                        <Textarea ref="commenttext" placeholder="Write your comment..." className="commentFormInput" onKeyDown={this.handleKeyPress}></Textarea>
+                        {/*<input type="text" ref="commenttext" placeholder="Write your comment..." className="commentFormInput"/>*/}
                         <input className="commentFormSubmitButton" type="submit" value="Comment" hidden/> 
                     </form>
                     {haveOrganisations()}

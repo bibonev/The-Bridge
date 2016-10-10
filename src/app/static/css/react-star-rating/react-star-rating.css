@@ -1,26 +1,39 @@
+#review_organisation{ 
+    width: 600px;
+    margin: 0 auto;
+}
+.ratingView{
+  margin-bottom:20px;
+}
 .ratingMain{
   background: #029acf;
   color:#fff;
   display:inline-block;
   border-radius:25px;
-  padding:0 15px;
+  padding:0 13px;
 }
-.ratingMain p{
-  margin-top:-8px;
-  font-size:37px;
+.ratingMain span{
+  vertical-align:middle;
+}
+.ratingMain .ratingNum{
+  font-size:35px;
   font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
   font-weight: 400;
-  margin-bottom:0 !important;
+  margin-right:7px;
 }
-.ratingMain p span{
-  vertical-align:middle;
+.ratingMain .ratingStar{
+  font-size: 32px !important;
+}
+.org-rating:hover .ratingMain .glyphicon-star{
+  color:#FFA91B;
 }
 .reviewsCount{
   font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
-  font-weight: 300;
+  font-weight: 700;
   color:#383838;
-  font-size:14px;
+  font-size:15px;
   margin:5px 0 10px 15px;
+  display: inline-block;
 }
 .rsr-container{
   display:block !important;
@@ -81,6 +94,7 @@
     resize:none;
     outline:none;
     height: 50px;
+    overflow: auto;
 }
 .addReviewButton{
     font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
