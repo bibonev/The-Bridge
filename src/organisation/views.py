@@ -12,11 +12,11 @@ from . import forms, models
 
 @login_required
 def home_page(request):
-    '''Display developer home page'''
+    '''Display organisation home page'''
     # set the session 'role' to supplier
-    request.session['role'] = 'developer'
+    request.session['role'] = 'organisation'
     request.session.modified = True
-    return render(request, 'developer/home.html')
+    return render(request, 'organisation/home.html')
 
 # display template with all user's organisations'
 @login_required
@@ -25,7 +25,7 @@ def my_organisations(request):
     # filter all organisations of the curent user
     my_organisations = models.Organisation.objects.filter(host=request.user)
 
-    return render(request, 'developer/my_organisations.html', {'my_organisations':my_organisations})
+    return render(request, 'organisation/my_organisations.html', {'my_organisations':my_organisations})
 
 # display template with details of the specific organisation
 @login_required
@@ -34,7 +34,7 @@ def my_organisation_details(request, pk):
     # get Organisation object with specific pk
     my_organisation = get_object_or_404(models.Organisation, pk=pk, host=request.user)
 
-    return render(request, 'developer/my_organisation_details.html', {'org':my_organisation})
+    return render(request, 'organisation/my_organisation_details.html', {'org':my_organisation})
 
 # display template which gives ability to edit organisation
 @login_required
@@ -49,11 +49,11 @@ def my_organisation_edit(request, pk):
             with reversion.create_revision():
                 organisation_form.save()
             Post.create_post_org_change(org_instance)
-            return HttpResponseRedirect(reverse('developer:my_organisation_edit', kwargs={'pk':pk}))
+            return HttpResponseRedirect(reverse('organisation:my_organisation_edit', kwargs={'pk':pk}))
     else:
         organisation_form = forms.OrganisationForm(instance=org_instance)
 
-    return render(request, 'developer/my_organisation_edit.html', {'organisation_form': organisation_form})
+    return render(request, 'organisation/my_organisation_edit.html', {'organisation_form': organisation_form})
 
 # display template for organisation creation
 @login_required
@@ -68,9 +68,9 @@ def create_organisation(request):
             org = form.save(commit=False)
             org.host = request.user
             org.save()
-            return HttpResponseRedirect(reverse('developer:create_organisation'))
+            return HttpResponseRedirect(reverse('organisation:create_organisation'))
     
-    return render(request, 'developer/create_organisation.html', {'form':form})
+    return render(request, 'organisation/create_organisation.html', {'form':form})
 
 # display list with all requests
 @login_required
@@ -88,7 +88,7 @@ def requests(request):
         if 'accept_request' in request.POST:
             curr_request = get_object_or_404(PendingRequest, pk=request.POST.get('customer_request'))
             curr_request.approve()
-            return HttpResponseRedirect(reverse('developer:requests'))
+            return HttpResponseRedirect(reverse('organisation:requests'))
 
-    return render(request, 'developer/requests.html', {'org_requests': org_requests})
+    return render(request, 'organisation/requests.html', {'org_requests': org_requests})
         

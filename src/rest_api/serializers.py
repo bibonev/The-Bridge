@@ -2,7 +2,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from rest_framework import serializers
-from developer import models as developer_models
+from organisation import models as organisation_models
 from posts import models as posts_models
 
 class UserSerializer(serializers.ModelSerializer):
@@ -32,7 +32,7 @@ class OrganisationSerializer(serializers.ModelSerializer):
             'cover_picture',
             'host',
         )
-        model = developer_models.Organisation
+        model = organisation_models.Organisation
 
 class ReviewListSerializer(serializers.ModelSerializer):
     author = serializers.SerializerMethodField('which_author')
@@ -45,7 +45,7 @@ class ReviewListSerializer(serializers.ModelSerializer):
         return author
 
     def which_organisation(self, obj):
-        org_obj = developer_models.Organisation.objects.get(pk=obj.organisation.pk)
+        org_obj = organisation_models.Organisation.objects.get(pk=obj.organisation.pk)
         organisation = OrganisationSerializer(org_obj, many=False).data
         return organisation
 
@@ -59,7 +59,7 @@ class ReviewListSerializer(serializers.ModelSerializer):
             'organisation',
             'timestamp'
         )
-        model = developer_models.Review
+        model = organisation_models.Review
 
 def create_review_serializer(organisation_id=None, request=None):
     class ReviewCreateSerializer(serializers.ModelSerializer):
@@ -70,13 +70,13 @@ def create_review_serializer(organisation_id=None, request=None):
                 'rating',
                 'text',
             )
-            model = developer_models.Review
+            model = organisation_models.Review
         
         def __init__(self, *args, **kwargs):
             self.organisation_object = None
             self.organisation_qs = None
             if organisation_id:
-                self.organisation_qs = developer_models.Organisation.objects.filter(id=organisation_id)
+                self.organisation_qs = organisation_models.Organisation.objects.filter(id=organisation_id)
 
             return super(ReviewCreateSerializer, self).__init__(*args, **kwargs)
 
@@ -92,7 +92,7 @@ def create_review_serializer(organisation_id=None, request=None):
             rating = int(validated_data.get('rating'))
             text = validated_data.get('text')
             organisation_object = self.organisation_object
-            review = developer_models.Review.objects.create(rating=rating, text=text, author=request.user, organisation=organisation_object)
+            review = organisation_models.Review.objects.create(rating=rating, text=text, author=request.user, organisation=organisation_object)
 
             return review
 
@@ -106,7 +106,7 @@ class PostListSerializer(serializers.ModelSerializer):
     timestamp = serializers.DateTimeField(format="%H:%M | %d %B %Y")
 
     def which_organisation(self, obj):
-        org_obj = developer_models.Organisation.objects.get(pk=obj.organisation.pk)
+        org_obj = organisation_models.Organisation.objects.get(pk=obj.organisation.pk)
         organisation = OrganisationSerializer(org_obj, many=False).data
         return organisation
         
@@ -140,7 +140,7 @@ def create_post_serializer(organisation_id=None, request=None):
             self.organisation_object = None
             self.organisation_qs = None
             if organisation_id:
-                self.organisation_qs = developer_models.Organisation.objects.filter(id=organisation_id, host=request.user)
+                self.organisation_qs = organisation_models.Organisation.objects.filter(id=organisation_id, host=request.user)
 
             return super(PostCreateSerializer, self).__init__(*args, **kwargs)
 
@@ -193,11 +193,11 @@ def create_comment_serializer(model_type='user', organisation_id=None, post_id=N
                 raise ValidationError("This is not a valid content type")
 
             SomeModel = model_qs.first().model_class()
-            if not SomeModel == User and not SomeModel == developer_models.Organisation:
+            if not SomeModel == User and not SomeModel == organisation_models.Organisation:
                 raise ValidationError("Unable to create comment that is not user or organisation")
 
-            if SomeModel == developer_models.Organisation:
-                obj_qs = developer_models.Organisation.objects.filter(id=organisation_id, host=request.user)
+            if SomeModel == organisation_models.Organisation:
+                obj_qs = organisation_models.Organisation.objects.filter(id=organisation_id, host=request.user)
                 if not obj_qs.exists() or obj_qs.count() != 1:
                     raise ValidationError("This is not an id for this organisation")
 
@@ -237,7 +237,7 @@ class CommentListSerializer(serializers.ModelSerializer):
                 'last_name':content_object.last_name,
                 'email':content_object.email,
             }
-        elif content_object.__class__ == developer_models.Organisation:
+        elif content_object.__class__ == organisation_models.Organisation:
             return {
                 'id':content_object.pk,
                 'title':content_object.title,

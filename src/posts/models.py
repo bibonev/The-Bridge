@@ -4,11 +4,11 @@ from django.contrib.auth.models import User
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from reversion.models import Version
-from developer import models as developer_models
+from organisation import models as organisation_models
 
 class Post(models.Model):
     description = models.TextField()
-    organisation = models.ForeignKey(developer_models.Organisation)
+    organisation = models.ForeignKey(organisation_models.Organisation)
     timestamp = models.DateTimeField(default=datetime.now)
 
     def __str__(self):
@@ -48,8 +48,8 @@ class CommentManager(models.Manager):
                 obj_qs = request.user
                 c_t = ContentType.objects.get(model=ContentType.objects.get_for_model(obj_qs.__class__))
                 o_i = obj_qs.id
-            elif SomeModel == developer_models.Organisation and organisation_id:
-                obj_qs = developer_models.Organisation.objects.filter(id=organisation_id, host=request.user)
+            elif SomeModel == organisation_models.Organisation and organisation_id:
+                obj_qs = organisation_models.Organisation.objects.filter(id=organisation_id, host=request.user)
                 c_t = model_qs.first()
                 o_i = obj_qs.first().id
             if obj_qs == request.user or (obj_qs.exists() and obj_qs.count() == 1):
