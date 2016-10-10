@@ -10,10 +10,7 @@ def base_page(request):
     role = request.session.get('role')
     if request.user.is_authenticated():
         if role:
-            if request.session.get('role') == 'developer':
-                return HttpResponseRedirect(reverse('developer:home')) # render to developer page
-            elif request.session.get('role') == 'customer':
-                return HttpResponseRedirect(reverse('customer:posts:dashboard')) # render to customer page
+            return HttpResponseRedirect(reverse('customer:posts:dashboard'))
         else:
             return HttpResponseRedirect(reverse('customer:posts:dashboard')) # by default render to customer home page
     else:
