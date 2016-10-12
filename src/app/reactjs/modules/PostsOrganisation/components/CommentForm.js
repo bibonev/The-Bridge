@@ -68,7 +68,7 @@ export default class CommentForm extends React.Component{
                         </div>
                     </div>
             }else{
-                return <div>No org</div>; 
+                return; 
             }
         }
         return  <div className="commentSubmit">
