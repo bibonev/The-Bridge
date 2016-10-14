@@ -17,6 +17,14 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
 
 class OrganisationSerializer(serializers.ModelSerializer):
+    front_picture = serializers.SerializerMethodField('front_picture_url')
+
+    def front_picture_url(self, obj):
+        if obj.front_picture:
+            return obj.front_picture.url
+        else: 
+            return obj.default_image()
+
     class Meta:
         # add the fields to the api serializer
         fields = (
@@ -33,6 +41,8 @@ class OrganisationSerializer(serializers.ModelSerializer):
             'host',
         )
         model = developer_models.Organisation
+
+    
 
 class ReviewListSerializer(serializers.ModelSerializer):
     author = serializers.SerializerMethodField('which_author')
@@ -223,19 +233,21 @@ class CommentListSerializer(serializers.ModelSerializer):
     author = serializers.SerializerMethodField('which_author')
     timestamp = serializers.DateTimeField(format="%H:%M | %d %B %Y")
 
+    def front_picture_url(self, obj):
+        if obj.front_picture:
+            return obj.front_picture.url
+        else: 
+            return obj.default_image()
+
     def which_author(self, comment):
         content_object = comment.content_object
         if content_object.__class__ == User:
-            user_pic = ""
-            if content_object.profile.user_picture:
-                user_pic = content_object.profile.user_picture.url
-            else:
-                user_pic = content_object.profile.default_image
             return {
                 'id':content_object.pk,
                 'first_name':content_object.first_name,
                 'last_name':content_object.last_name,
                 'email':content_object.email,
+                'front_picture':self.front_picture_url(content_object.profile)
             }
         elif content_object.__class__ == developer_models.Organisation:
             return {
@@ -247,6 +259,7 @@ class CommentListSerializer(serializers.ModelSerializer):
                 'phone_number':content_object.phone_number,
                 'email_organisation':content_object.email_organisation,
                 'website':content_object.website,
+                'front_picture':self.front_picture_url(content_object)
             }
 
     class Meta:

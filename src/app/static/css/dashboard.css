@@ -14,12 +14,19 @@
     padding:10px 15px;
     width:100%;
 }
-.post-title{
+.post-title img{
+    border:1px solid #EAEAEA;
+    margin-right:10px;
+    float:left;
+}
+.post-title span{
+    display:block;
+}
+.post-author{
     color: #029acf;
     font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
     font-weight: 700;
     font-size: 15px;
-    display:inline-block;
 }
 .post-comment-dateTime{
     color: #999;
@@ -29,9 +36,10 @@
     margin-left: 10px;
 }
 .post-title:hover{
-    color: #029acf;
-    text-decoration: underline;
-    cursor:pointer;
+    text-decoration: none !important;
+}
+.post-title:hover .post-author{
+    text-decoration: underline !important;
 }
 .post-description{
     font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
@@ -169,6 +177,26 @@
 .commentsDisplay{
     padding-left:0;
     margin-bottom: 15px !important;
+}
+.authorCommentDetails img{
+    border:1px solid #EAEAEA;
+    margin-right:10px;
+    float:left;
+}
+.authorCommentDetails .comment-author{
+    color: #029acf;
+    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+}
+.authorCommentDetails a:hover{
+    text-decoration: none;
+}
+.authorCommentDetails a:hover .comment-author{
+    text-decoration: underline;
+}
+.authorCommentDetails .post-comment-dateTime{
+    font-size:11px;
 }
 .authorCommentLink{
     font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;

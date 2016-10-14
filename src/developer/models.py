@@ -57,7 +57,7 @@ class Organisation(models.Model):
     # use default image when ehre is no uploaded one
     def default_image(self):
         if not self.front_picture:
-            return os.path.join(settings.MEDIA_URL , 'default/no-img.jpg')
+            return os.path.join(settings.MEDIA_URL , 'default/no-org-img.jpg')
 
 def validate_rating(rating):
     if rating < 0 and rating > 5 :  # Your conditions here

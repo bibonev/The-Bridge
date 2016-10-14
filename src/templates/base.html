@@ -66,7 +66,7 @@
                                         <span>{{ user.first_name }}</span>
                                         <div>
                                             {% if user.profile.user_picture %}
-                                                <img src="{{ user.profile.user_picture.url }}" width="28" height="28" />
+                                                <img src="{{ user.profile.front_picture.url }}" width="28" height="28" />
                                             {% else %}
                                                 <img src="{{ user.profile.default_image }}" width="28" height="28"/>
                                             {% endif %}

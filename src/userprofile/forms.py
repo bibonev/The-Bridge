@@ -14,4 +14,4 @@ class UserProfileForm(forms.ModelForm):
     # form representing user additional fields - profile picture
     class Meta:
         model = UserProfile
-        fields = ('user_picture',)
+        fields = ('front_picture',)
