@@ -6,6 +6,14 @@ from developer import models as developer_models
 from posts import models as posts_models
 
 class UserSerializer(serializers.ModelSerializer):
+    front_picture = serializers.SerializerMethodField('front_picture_url')
+
+    def front_picture_url(self, obj):
+        if obj.profile.front_picture:
+            return obj.profile.front_picture.url
+        else: 
+            return obj.profile.default_image()
+
     class Meta:
         # add the fields to the api serializer
         fields = (
@@ -13,17 +21,22 @@ class UserSerializer(serializers.ModelSerializer):
             'first_name',
             'last_name',
             'email',
+            'front_picture',
         )
         model = User
 
 class OrganisationSerializer(serializers.ModelSerializer):
     front_picture = serializers.SerializerMethodField('front_picture_url')
+    rating = serializers.SerializerMethodField('which_rating')
 
     def front_picture_url(self, obj):
         if obj.front_picture:
             return obj.front_picture.url
         else: 
             return obj.default_image()
+
+    def which_rating(self, obj):
+        return "rating"
 
     class Meta:
         # add the fields to the api serializer
@@ -39,6 +52,7 @@ class OrganisationSerializer(serializers.ModelSerializer):
             'front_picture',
             'cover_picture',
             'host',
+            'rating'
         )
         model = developer_models.Organisation
 

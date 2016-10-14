@@ -22,6 +22,14 @@
 .post-title span{
     display:block;
 }
+.authorReviewDetails img{
+    border:1px solid #EAEAEA;
+    margin-right:10px;
+    float:left;
+}
+.authorReviewDetails .post-comment-dateTime{
+    display:block;
+}
 .post-author{
     color: #029acf;
     font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
