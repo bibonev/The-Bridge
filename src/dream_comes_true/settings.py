@@ -31,6 +31,11 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth_user',
+    'customer',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,20 +43,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
+    'organisation', 
+    'partnership',
+    'posts',
     'rest_framework',
     'reversion',
-    'webpack_loader',
     'rest_api',
     'imagekit',
-    'allauth_user',
-    'partnership',
     'userprofile',
-    'customer',
-    'developer',
-    'posts',
+    'webpack_loader',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -70,7 +70,7 @@ ROOT_URLCONF = 'dream_comes_true.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates', 'allauth_user/templates', 'userprofile/templates', 'customer/templates', 'developer/templates', 'posts/templates',],
+        'DIRS': ['templates', 'allauth_user/templates', 'userprofile/templates', 'customer/templates', 'organisation/templates', 'posts/templates',],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

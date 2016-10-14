@@ -1,7 +1,7 @@
 from django.conf.urls import url
 from . import views
 
-# url patterns of developer/...
+# url patterns of organisation/...
 urlpatterns = [
     url(r'^$', views.home_page, name='home'),
     url(r'my_organisations/$', views.my_organisations, name='my_organisations'),

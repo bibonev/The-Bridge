@@ -4,7 +4,7 @@ from django.db.models import Q
 from django.http import HttpResponse
 from rest_framework import generics, permissions, filters, views
 from rest_framework.response import Response
-from developer import models as developer_models
+from organisation import models as organisation_models
 from posts import models as posts_models
 from . import serializers
 
@@ -16,7 +16,7 @@ class UserListAPIView(generics.ListAPIView):
 # REST API list all organisations on url: /api/v1/organisations/
 class OrganisationListAPIView(generics.ListAPIView):
     # permission_classes = (permissions.IsAdminUser,) # gives permissions only to Admin user to view the API view
-    queryset = developer_models.Organisation.objects.all()
+    queryset = organisation_models.Organisation.objects.all()
     serializer_class = serializers.OrganisationSerializer
 
     filter_backends = (filters.SearchFilter,)
@@ -24,7 +24,7 @@ class OrganisationListAPIView(generics.ListAPIView):
 
 class OrganisationRetrieveAPIView(generics.RetrieveAPIView):
     # permission_classes = (permissions.IsAdminUser,) # gives permissions only to Admin user to view the API view
-    queryset = developer_models.Organisation.objects.all()
+    queryset = organisation_models.Organisation.objects.all()
     serializer_class = serializers.OrganisationSerializer
 
 class OrganisationCurrUserListAPIView(generics.ListAPIView):
@@ -32,7 +32,7 @@ class OrganisationCurrUserListAPIView(generics.ListAPIView):
     serializer_class = serializers.OrganisationSerializer
 
     def get_queryset(self):
-        queryset_list = developer_models.Organisation.objects.filter(host=self.request.user)
+        queryset_list = organisation_models.Organisation.objects.filter(host=self.request.user)
 
         return queryset_list
 
@@ -40,7 +40,7 @@ class OrganisationIsCurrUserAPIView(views.APIView):
     permission_classes = []
 
     def get(self, request, *args, **kwargs):
-        org = developer_models.Organisation.objects.filter(pk=self.kwargs['pk'], host=self.request.user)
+        org = organisation_models.Organisation.objects.filter(pk=self.kwargs['pk'], host=self.request.user)
         if len(org) == 1:
             return Response({"success": True})
         else:
@@ -51,17 +51,17 @@ class ReviewListAPIView(generics.ListAPIView):
     serializer_class = serializers.ReviewListSerializer
 
     def get_queryset(self):
-        org_obj = get_object_or_404(developer_models.Organisation, pk=self.kwargs['pk'])
-        queryset_list = developer_models.Review.objects.filter(organisation=org_obj)
+        org_obj = get_object_or_404(organisation_models.Organisation, pk=self.kwargs['pk'])
+        queryset_list = organisation_models.Review.objects.filter(organisation=org_obj)
         return queryset_list
 
 class ReviewRetrieveAPIView(generics.RetrieveAPIView):
-    queryset = developer_models.Review.objects.all()
+    queryset = organisation_models.Review.objects.all()
     serializer_class = serializers.ReviewListSerializer
     #permission_classes = [permissions.IsOwnerOrReadOnly]
 
 class ReviewCreateAPIView(generics.CreateAPIView):
-    queryset = developer_models.Review.objects.all()
+    queryset = organisation_models.Review.objects.all()
     permission_classes = [permissions.IsAuthenticated]
 
     def get_serializer_class(self):
@@ -76,7 +76,7 @@ class PostListAPIView(generics.ListAPIView):
         queryset_list = posts_models.Post.objects.all()
         organisation_id = self.request.GET.get('org_id')
         if organisation_id :
-            org_obj = developer_models.Organisation.objects.get(pk=organisation_id)
+            org_obj = organisation_models.Organisation.objects.get(pk=organisation_id)
             queryset_list = posts_models.Post.objects.filter(organisation=org_obj)
 
         return queryset_list

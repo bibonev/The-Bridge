@@ -1,7 +1,7 @@
-{% extends 'developer/base.html' %}
+{% extends 'organisation/base.html' %}
 {% load static from staticfiles %}
 
-{% block title %} Developer - {{org.title}} {% endblock title %}
+{% block title %} Organisation - {{org.title}} {% endblock title %}
 
 {% block css %}
 <link href="{% static 'css/organisation_profile.css' %}" rel="stylesheet">
@@ -63,7 +63,7 @@
         <div class="main-col">
             <h3>{{org.title}}</h3>
             <div class="description">{{org.description}}</div>
-            <a href="{% url 'developer:my_organisation_edit' pk=org.pk %}">Edit organisation</a>
+            <a href="{% url 'organisation:my_organisation_edit' pk=org.pk %}">Edit organisation</a>
             <div id="posts_organisation"></div>
         </div>
     </div>

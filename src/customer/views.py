@@ -4,7 +4,7 @@ from django.db.models import Q
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from partnership.models import Relation, PendingRequest
-from developer import models
+from organisation import models
 
 @login_required
 def home_page(request):
