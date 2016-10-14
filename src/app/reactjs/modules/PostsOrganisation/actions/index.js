@@ -99,7 +99,6 @@ export function addPost(org_id, post){
     return (dispatch, getState) => {
         let url = `http://localhost:8000/api/v1/posts/create/?org_id=${org_id}`
         let type = 'POST'
-        
         $.ajax({
             type,
             url,

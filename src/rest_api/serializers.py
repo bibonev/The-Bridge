@@ -1,4 +1,5 @@
 from django.contrib.contenttypes.models import ContentType
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from rest_framework import serializers
@@ -130,9 +131,10 @@ class PostListSerializer(serializers.ModelSerializer):
     timestamp = serializers.DateTimeField(format="%H:%M | %d %B %Y")
 
     def which_organisation(self, obj):
-        org_obj = organisation_models.Organisation.objects.get(pk=obj.organisation.pk)
-        organisation = OrganisationSerializer(org_obj, many=False).data
-        return organisation
+        if obj.organisation:
+            org_obj = get_object_or_404(organisation_models.Organisation, pk=obj.organisation.pk)
+            organisation = OrganisationSerializer(org_obj, many=False).data
+            return organisation
         
     def get_comments(self, obj):
         c_qs = posts_models.Comment.objects.filter_by_instance(obj)

@@ -89,7 +89,6 @@ class PostRetrieveAPIView(generics.RetrieveAPIView):
 class PostCreateAPIView(generics.CreateAPIView):
     queryset = posts_models.Post.objects.all()
     permission_classes = [permissions.IsAuthenticated]
-
     def get_serializer_class(self):
         organisation_id = self.request.GET.get('org_id')
         return serializers.create_post_serializer(organisation_id=organisation_id, request=self.request)
