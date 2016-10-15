@@ -48,7 +48,7 @@ class Organisation(models.Model):
                                            format='JPEG',
                                            options={'quality':60}, blank=True)
 
-    created_at = models.DateTimeField(auto_now_add = True)
+    timestamp = models.DateTimeField(default=datetime.now)
     host = models.ForeignKey(User) #one to many
 
     def __str__(self):
