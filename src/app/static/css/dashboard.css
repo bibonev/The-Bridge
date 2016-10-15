@@ -19,8 +19,28 @@
     margin-right:10px;
     float:left;
 }
-.post-title span{
+.post-title .post-comment-dateTime{
     display:block;
+}
+.rating-org{
+  background: #029acf;
+  color:#fff;
+  display:inline-block;
+  border-radius:25px;
+  padding:0 7px;
+  margin-left: 10px;
+}
+.rating-org span{
+  vertical-align:middle;
+}
+.rating-org .ratingNum{
+  font-size:16px;
+  font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 400;
+  margin-right:4px;
+}
+.rating-org .ratingStar{
+  font-size: 14px !important;
 }
 .authorReviewDetails img{
     border:1px solid #EAEAEA;

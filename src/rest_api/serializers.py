@@ -37,7 +37,14 @@ class OrganisationSerializer(serializers.ModelSerializer):
             return obj.default_image()
 
     def which_rating(self, obj):
-        return "rating"
+        # visualize rating for particular organisation
+        rating = 0
+        reviews = organisation_models.Review.objects.filter(organisation=obj)
+        if reviews:
+            for review in reviews: 
+                rating+=review.rating
+            rating = round(((rating/len(reviews))*10), 0)/10 
+        return str(rating)
 
     class Meta:
         # add the fields to the api serializer

@@ -9,6 +9,7 @@ export default (props) => {
         <a href={"//localhost:8000/customer/organisations/" + post.organisation.id} className="post-title">
           <img src={"//localhost:8000" + post.organisation.front_picture} width="40" height="40" />
           <span className="post-author">{post.organisation.title}</span>
+          <div className="rating-org"><span className="ratingNum">{post.organisation.rating}</span><span className="glyphicon glyphicon-star ratingStar" aria-hidden="true"></span></div>
           <span className="post-comment-dateTime">{post.timestamp}</span>
         </a>
       </div>
