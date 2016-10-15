@@ -79,6 +79,10 @@ p {
 .navbar-default .nav > li.active > a:focus:hover {
   background-color: transparent;
 }
+a.active{
+  border-bottom:3px solid #fff !important;
+  background: rgba(0, 0, 0, 0.2) !important;
+}
 
 /* Role dropdown */
 div.role-dropdown{
@@ -243,7 +247,9 @@ header .secondary-navigation li{
   list-style: none;
 }
 header .secondary-navigation li a{
-  padding: 10px 15px;
+  padding: 7px 15px;
+  border-top:3px solid transparent;
+  border-bottom:3px solid transparent;
   display:block;
   color: #fff;
   font-size: 14px;
@@ -252,7 +258,8 @@ header .secondary-navigation li a{
 }
 header .secondary-navigation li a:hover,
 header .secondary-navigation li a:active{
-  color: #029acf;
+  border-bottom:3px solid #fff;
+  background: rgba(0, 0, 0, 0.2);
   text-decoration: none;
   cursor:pointer;
 }
