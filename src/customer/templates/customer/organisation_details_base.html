@@ -79,7 +79,7 @@
                 </span>
             </div>
             {% if owner %}
-            <a href="">Edit organisation</a>
+            <a href="{% url 'organisation:my_organisation_edit' pk=org.pk %}">Edit organisation</a>
             {% endif %}
         </div>
     </div>
