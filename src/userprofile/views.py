@@ -27,7 +27,5 @@ def userprofile(request):
         profile = user.profile
         user_profile = UserProfileForm(instance=profile)
     
-    # used for the template to extend the correct template
-    role_path = ''.join([request.session.get('role'), '/base.html'])
 
-    return render(request, 'userprofile/profile.html', {'user_form': user_form, 'user_profile': user_profile, 'user_role_path':role_path})
+    return render(request, 'userprofile/profile.html', {'user_form': user_form, 'user_profile': user_profile})

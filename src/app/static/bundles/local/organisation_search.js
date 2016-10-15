@@ -19415,7 +19415,7 @@ webpackJsonp([1],{
 	    var data = props.data.map(function (org) {
 	        return _react2.default.createElement(
 	            "a",
-	            { className: "organisation-link", href: "//localhost:8000/customer/organisations/" + org.id },
+	            { className: "organisation-link", href: "//localhost:8000/organisations/" + org.id },
 	            _react2.default.createElement(
 	                "div",
 	                { className: "org-box" },
