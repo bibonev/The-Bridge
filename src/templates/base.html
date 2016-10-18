@@ -57,6 +57,7 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
                         {% if user.is_authenticated %}
+                            <div id="navbar"></div>
                             <li>
                                 <a href="{% url 'organisation:create_organisation'%}" id="customer">create organisation <span class="glyphicon glyphicon-th"></span></a>
                             </li>
@@ -181,6 +182,7 @@
 
 <!-- React -->
 <script src="{% static 'bundles/local/vendors.js' %}"></script> 
+<script src="{% static 'bundles/local/navbar.js' %}"></script>
 
 {% block script %}{% endblock script %}
 
