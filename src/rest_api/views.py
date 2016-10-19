@@ -54,6 +54,37 @@ class OrganisationIsCurrUserAPIView(views.APIView):
         else:
             return Response({"success": False}) # return False if the current user is not the host
 
+class OrganisationUpdateBookmarkAPIView(generics.UpdateAPIView):
+    '''Retrive a particular organisation'''
+    permission_classes = [permissions.IsAuthenticated] # gives permissions only to Admin user to view the API view
+    queryset = organisation_models.Organisation.objects.all()
+    serializer_class = serializers.OrganisationSerializer
+
+    # update organisation bookmark
+    def update(self, request, *args, **kwargs):
+        instance = self.get_object()
+        if request.user in instance.bookmark.all():
+            instance.bookmark.remove(request.user) # remove relation with user if exists
+        else:
+            instance.bookmark.add(request.user) # add relation with user 
+        instance.save()
+        
+        data = {}
+        serializer = self.get_serializer(instance, data=data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)
+        # return empty serialized data
+        return Response(serializer.validated_data)
+
+class OrganisationCurrUserBookmarkAPIView(generics.ListAPIView):
+    '''List current user's organisations bookmark'''
+    # permission_classes = (permissions.IsAdminUser,) # gives permissions only to Admin user to view the API view
+    serializer_class = serializers.OrganisationSerializer
+    # modify the queryset in order to list only organsiations from the user
+    def get_queryset(self):
+        queryset_list = organisation_models.Organisation.objects.filter(bookmark__in=[self.request.user])
+        return queryset_list
+
 class ReviewListAPIView(generics.ListAPIView):
     '''List all reviews'''
     # permission_classes = (permissions.IsAdminUser,) # gives permissions only to Admin user to view the API view

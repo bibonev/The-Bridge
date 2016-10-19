@@ -66,11 +66,10 @@ class OrganisationSerializer(serializers.ModelSerializer):
             'front_picture',
             'cover_picture',
             'host',
-            'rating'
+            'rating',
+            'bookmark',
         )
-        model = organisation_models.Organisation
-
-    
+        model = organisation_models.Organisation 
 
 class ReviewListSerializer(serializers.ModelSerializer):
     '''Serialize Review's  model'''

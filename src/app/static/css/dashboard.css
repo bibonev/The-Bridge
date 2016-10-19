@@ -50,6 +50,13 @@
 .authorReviewDetails .post-comment-dateTime{
     display:block;
 }
+.post-main-details{
+    min-height: 40px;
+}
+.post-main-details a{
+    float:left;
+    min-width:530px;
+}
 .post-author{
     color: #029acf;
     font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
@@ -69,12 +76,31 @@
 .post-title:hover .post-author{
     text-decoration: underline !important;
 }
+.bookmark-button{
+    float:right;
+    background:transparent;
+    padding:0 !important;
+    border: 0 !important;
+    outline:none;
+}
+.booked-org{
+    font-size: 18px;
+    color:#FFA91B;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #FFA91B;
+}
+.non-booked-org{
+    font-size:18px;
+    color:transparent;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #999;
+}
 .post-description{
     font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
     font-weight: 400;
     font-size: 14px;
     color:#383838;
-    margin-top: 10px;
+    margin-top: 15px;
 }
 .postAddForm{
     padding:10px;

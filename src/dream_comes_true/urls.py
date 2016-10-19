@@ -18,6 +18,7 @@ from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
 from . import views
+from organisation import views as v
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -27,6 +28,7 @@ urlpatterns = [
     url(r'^profile/', include('userprofile.urls', namespace='profile')), # redirects to the user profile
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework_auth')), # login as a user in the API
     url(r'^api/v1/', include('rest_api.urls', namespace='rest_framework')), # use the rest_api app for all data that is neede for the API
+    #url(r'create_organisation/$', v.create_organisation, name='create_organisation'),
 ]
 
 # set the STATIC_ROOT for static files

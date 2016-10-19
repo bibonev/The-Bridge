@@ -49,7 +49,8 @@ class Organisation(models.Model):
                                            options={'quality':60}, blank=True)
 
     timestamp = models.DateTimeField(default=datetime.now)
-    host = models.ForeignKey(User) #one to many
+    host = models.ForeignKey(User, related_name="host") #one to many
+    bookmark = models.ManyToManyField(User, related_name="bookmark", blank=True)
 
     def __str__(self):
         return self.title

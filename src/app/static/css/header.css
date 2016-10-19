@@ -259,7 +259,6 @@ header .secondary-navigation li a{
 header .secondary-navigation li a:hover,
 header .secondary-navigation li a:active{
   border-bottom:3px solid #fff;
-  background: rgba(0, 0, 0, 0.2);
   text-decoration: none;
   cursor:pointer;
 }

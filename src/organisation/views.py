@@ -1,5 +1,7 @@
 import reversion
 from reversion.models import Version
+from datetime import datetime
+from django.utils.formats import get_format
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.shortcuts import render, get_object_or_404
@@ -68,7 +70,10 @@ def create_organisation(request):
             org = form.save(commit=False)
             org.host = request.user
             org.save()
-            return HttpResponseRedirect(reverse('organisation:create_organisation'))
+            # create initial post when an organisation is added
+            description = org.title + " has joined on " + str(datetime.now().strftime("%d %B %Y"))
+            Post.objects.create(description=description, organisation=org)
+            return HttpResponseRedirect(reverse('create_organisation'))
     
     return render(request, 'organisation/create_organisation.html', {'form':form})
 
