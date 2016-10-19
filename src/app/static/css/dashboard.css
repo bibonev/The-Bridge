@@ -88,12 +88,20 @@
     color:#FFA91B;
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: #FFA91B;
+    -moz-text-stroke-width: 1px;
+    -moz-text-stroke-color: #FFA91B;
+    -ms-text-stroke-width: 1px;
+    -ms-text-stroke-color: #FFA91B;
 }
 .non-booked-org{
     font-size:18px;
     color:transparent;
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: #999;
+    -moz-text-stroke-width: 1px;
+    -moz-text-stroke-color: #999;
+    -ms-text-stroke-width: 1px;
+    -ms-text-stroke-color: #999;
 }
 .post-description{
     font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
