@@ -32,3 +32,13 @@ export const organisations = (state=ORGANISATIONS_INITIAL, action) => {
     }
 };
 
+export const ui = (state={}, action) => {
+    switch (action.type) {
+        case 'IS_LOADING':
+            return Object.assign({}, state, {
+                isLoading: action.isLoading
+            });
+        default:
+            return state;
+    }
+}

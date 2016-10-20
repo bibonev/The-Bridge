@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 
 import OrganisationSearchPanel from '../components/OrganisationSearchPanel';
 import OrganisationRepresentation from '../components/OrganisationRepresentation';
+import LoadingContainer from '../../../shared_components/loader'
 
 class OrganisationPanel extends Component {
     componentWillMount() {
@@ -15,6 +16,8 @@ class OrganisationPanel extends Component {
     render() {
         const { rows, count, search } = this.props.organisations;
         const { loadOrganisations, changeSearchAndLoadOrganisations  } = this.props;
+        const { isLoading } = this.props.ui;
+
         const onSearchChanged = query => changeSearchAndLoadOrganisations(query);
 
         let searchTerm = "";
@@ -27,6 +30,7 @@ class OrganisationPanel extends Component {
         return (
             <div className="organisation-list">
                 <OrganisationSearchPanel search={searchTerm} onSearchChanged={onSearchChanged} />
+                <LoadingContainer isLoading={isLoading} />
                 <OrganisationRepresentation data={rows} />
             </div>
         );
@@ -35,6 +39,7 @@ class OrganisationPanel extends Component {
 
 const mapStateToProps = state => ({
     organisations: state.organisations,
+    ui: state.ui,
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({

@@ -1,3 +1,10 @@
+export function loadingChanged(isLoading) {
+    return {
+        type: "IS_LOADING",
+        isLoading
+    }
+}
+
 export function showOrganisationsResult(jsonResult) {
     return {
         type: "SHOW_ORGANISATIONS",
@@ -37,8 +44,10 @@ export function loadOrganisations() {
             url+=`${searchTerm}`
         }
         
+        dispatch(loadingChanged(true));
         $.get(url, data => {
             dispatch(showOrganisationsResult(data));
+            dispatch(loadingChanged(false));
             localStorage.setItem("searchTerm", "");
         });
     }
