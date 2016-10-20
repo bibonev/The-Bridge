@@ -9,9 +9,21 @@ export default (props) => {
         </a>
      </div>
     )
-    return <div className="search-suggestions">
+    const isDataFull = () =>  {
+        if(data.length == 0){
+            console.log(data.length)
+            return;
+        }else{
+            return <div className="search-suggestions">
+                <div className="arrow-up"></div>
+                <div className="arrow-down"></div>
                 {data}
-    </div>
+                </div>
+        }
+    }
+    return <div>
+            {isDataFull()}
+        </div>
 }
 
 
