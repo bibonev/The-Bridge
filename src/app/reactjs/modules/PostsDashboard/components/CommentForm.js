@@ -1,4 +1,5 @@
 import React from 'react'
+import Textarea from 'react-textarea-autosize'
 
 export default class CommentForm extends React.Component{
     constructor(props){
@@ -42,6 +43,7 @@ export default class CommentForm extends React.Component{
     }
     handleKeyPress(e){
         if (e.keyCode === 13) {
+            e.preventDefault();
             var submitButton = $(e.target);
             $('.commentFormSubmitButton').eq(submitButton.index('.commentFormInput')).click();
         }
@@ -69,11 +71,11 @@ export default class CommentForm extends React.Component{
                 return; 
             }
         }
-        return  <div>
+        return  <div className="commentSubmit">
                     <form className="commentForm" onSubmit={this.handleSubmit} method="POST">
                         <input type="hidden" ref="authorid" readOnly = "readonly" value={commentAuthorIdStr}/>
-                        {/*<textarea ref="commenttext" placeholder="Write your comment..." className="commentFormInput" onKeyDown={this.handleKeyPress} cols="40"></textarea>*/}
-                        <input type="text" ref="commenttext" placeholder="Write your comment..." className="commentFormInput"/>
+                        <Textarea ref="commenttext" placeholder="Write your comment..." className="commentFormInput" onKeyDown={this.handleKeyPress}></Textarea>
+                        {/*<input type="text" ref="commenttext" placeholder="Write your comment..." className="commentFormInput"/>*/}
                         <input className="commentFormSubmitButton" type="submit" value="Comment" hidden/> 
                     </form>
                     {haveOrganisations()}

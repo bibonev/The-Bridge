@@ -12,9 +12,19 @@ export default class CommentRepresentation extends React.Component{
         const userOrOrganisation = (comment) => {
             let author = comment.author;
             if(author.first_name){
-                return comment.author.first_name
+                return <div className="authorCommentDetails">
+                            <img src={"//localhost:8000" + author.front_picture} width="32" height="32" />
+                            <span className="comment-author">{author.first_name} {author.last_name}</span>
+                            <span className="post-comment-dateTime">{comment.timestamp}</span>
+                        </div>
             }else if(author.title){
-                return comment.author.title
+                return  <div className="authorCommentDetails">
+                            <a href={"//localhost:8000/organisations/" + author.id}>
+                                <img src={"//localhost:8000" + author.front_picture} width="32" height="32" />
+                                <span className="comment-author">{author.title}</span>
+                                <span className="post-comment-dateTime">{comment.timestamp}</span>
+                            </a>
+                        </div>
             }else{
                 return "No author"
             }
@@ -22,9 +32,8 @@ export default class CommentRepresentation extends React.Component{
         const commentsResult = comments.map(comment =>
                            <li key={comment.id} className="comments-dashboard">
                                <div>
-                                <a href="#" className="authorCommentLink">{userOrOrganisation(comment)}</a>
+                                {userOrOrganisation(comment)}
                                 {comment.text}
-                                <span className="post-comment-dateTime">{comment.timestamp}</span>
                                </div>
                            </li>
                    )

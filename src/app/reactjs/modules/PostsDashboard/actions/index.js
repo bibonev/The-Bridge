@@ -35,6 +35,13 @@ export function updateCurrentAuthorId(author_id){
     }
 }
 
+export function bookmarkOrganisationResult(jsonResult){
+    return {
+        type: "BOOKMARK_ORGANISATION",
+        bookmarks:jsonResult
+    }
+}
+
 export function loadOrganisationsCurrentUser(){
     return (dispatch, getState) => {
         let url = `http://localhost:8000/api/v1/organisations/currentUser/`;
@@ -50,6 +57,10 @@ export function loadPosts() {
         $.get(url, data => {
             dispatch(showPostsResult(data));
             dispatch(loadOrganisationsCurrentUser());
+            let url_get = `http://localhost:8000/api/v1/organisations/currentUserBookmarks/`
+                $.get(url_get, data_get => {
+                    dispatch(bookmarkOrganisationResult(data_get));
+                });
         });
     }
 }
@@ -123,5 +134,54 @@ export function currentAuthorId(author_id){
     return (dispatch, getState) => {
         dispatch(updateCurrentAuthorId(author_id));
     }
+}
+
+
+export function bookmarkOrganisation(org_id){
+    function getCookie(name){
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                let cookie = jQuery.trim(cookies[i]);
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+    function csrfSafeMethod(method){
+        // these HTTP methods do not require CSRF protection
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+
+    return (dispatch, getState) => {
+        let url=`http://localhost:8000/api/v1/organisations/${org_id}/edit_bookmark/`;
+        let type = 'PUT'
+        
+        $.ajax({
+            type,
+            url,
+            beforeSend: function(xhr, settings) {
+                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+                }
+            },
+            data: {},
+            success: (data) => {
+                let url_get = `http://localhost:8000/api/v1/organisations/currentUserBookmarks/`
+                $.get(url_get, data_get => {
+                    dispatch(bookmarkOrganisationResult(data_get));
+                });
+            },
+            error: (data) => {
+                console.log(data);
+            }
+        });
+    };
 }
 

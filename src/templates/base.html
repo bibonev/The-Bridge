@@ -51,14 +51,15 @@
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                         <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
                     </button>
-                    <a class="navbar-brand page-scroll" href="/">theBridge</a>
+                    <a class="navbar-brand page-scroll" href="/">TheBridge</a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
                         {% if user.is_authenticated %}
+                            <li id="navbar-search"></li>
                             <li>
-                                {% block roledropdown %}{% endblock roledropdown %}
+                                <a href="{% url 'organisation:create_organisation'%}" id="customer">create organisation <span class="glyphicon glyphicon-th"></span></a>
                             </li>
                             <li>
                                 <div class="profile-dropdown">
@@ -66,7 +67,7 @@
                                         <span>{{ user.first_name }}</span>
                                         <div>
                                             {% if user.profile.user_picture %}
-                                                <img src="{{ user.profile.user_picture.url }}" width="28" height="28" />
+                                                <img src="{{ user.profile.front_picture.url }}" width="28" height="28" />
                                             {% else %}
                                                 <img src="{{ user.profile.default_image }}" width="28" height="28"/>
                                             {% endif %}
@@ -98,6 +99,15 @@
                     <div class="inner-wrapper">
                     <ul>
                         {% block secondaryNav %}
+                            <li>
+                                <a href="{% url 'customer:posts:dashboard' %}">Dashboard</a>
+                            </li>
+                            <li>
+                                <a href="#">Requests</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'customer:organisations' %}">Organisations</a>
+                            </li>
                         {% endblock secondaryNav %}
                     </ul>
                     </div>
@@ -120,7 +130,7 @@
         <div class="container-fluid">
             <div class="inner-wrapper bonus-padding">
                 <div class="footer-logo">
-                    <a href="/">theBridge</a>
+                    <a href="/">TheBridge</a>
                 </div>
                 <div class="links-social">
                     <div class="footer-links">
@@ -170,8 +180,11 @@
 
 <script src="{% static 'js/requests.js' %}"></script>
 
+<script src="{% static 'js/extraJSFuncs.js' %}"></script>
+
 <!-- React -->
 <script src="{% static 'bundles/local/vendors.js' %}"></script> 
+<script src="{% static 'bundles/local/navbar.js' %}"></script>
 
 {% block script %}{% endblock script %}
 

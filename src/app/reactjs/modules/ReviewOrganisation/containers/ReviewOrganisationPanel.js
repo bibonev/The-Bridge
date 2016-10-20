@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { loadReviews, addReview } from '../actions';
 import { bindActionCreators } from 'redux';
 
+import Textarea from 'react-textarea-autosize'
 import ReviewRepresentation from '../components/ReviewRepresentation';
 
 let myRating = 0;
@@ -48,11 +49,13 @@ class ReviewOrganisationPanel extends Component {
 
         return (
             <div>
-                <div className="ratingMain"><p>{rating} <span className="glyphicon glyphicon-star" aria-hidden="true"></span></p></div>
-                <div className="reviewsCount">{correctSpellReview({count})}</div>
+                <div className="ratingView">
+                    <div className="ratingMain"><span className="ratingNum">{rating}</span><span className="glyphicon glyphicon-star ratingStar" aria-hidden="true"></span></div>
+                    <div className="reviewsCount">{correctSpellReview({count})}</div>
+                </div>
                 <form onSubmit={reviewSubmit} method="POST" className="reviewAddForm">
                     <StarRating name="starrating" totalStars={5} size={30} onRatingClick={updateMyRating}/>
-                    <textarea type="text" name="reviewtext" placeholder="Write your review..." className="reviewField"></textarea>
+                    <Textarea type="text" name="reviewtext" placeholder="Write your review..." className="reviewField"></Textarea>
                     <input type="submit" value="Add review" className="addReviewButton"/>
                 </form>
                 <ReviewRepresentation data={rows} />

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %} My organisations {% endblock title %}
+
+{% block content %}
+
+{% for my_org in my_organisations %}
+    <h3><a href="{% url 'organisation:my_organisation_details' pk=my_org.pk %}">{{my_org.title}}</a></h3>
+    <p>{{my_org.description}}</p>
+    <p>Author: {{my_org.host.first_name}} {{my_org.host.last_name}}</p>
+{% endfor %}
+<a href="{% url 'organisation:create_organisation' %}">Create new ogranisation</a>
+
+{% endblock content %}

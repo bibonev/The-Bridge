@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Boyan Bonev",
+  "author": "Simeon Kostadinov and Boyan Bonev",
   "license": "ISC",
   "devDependencies": {
     "babel": "^6.5.2",
@@ -20,6 +20,7 @@
     "babelify": "^7.3.0",
     "browserify": "^13.0.1",
     "json-loader": "^0.5.4",
+    "react-textarea-autosize": "^4.0.5",
     "uglify": "^0.1.5",
     "uglifyjs": "^2.4.10",
     "watchify": "^3.7.0",
@@ -37,6 +38,7 @@
     "redux": "^3.5.2",
     "redux-form": "^6.1.0",
     "redux-thunk": "^2.1.0",
-    "react-star-rating": "^1.4.2"
+    "react-star-rating": "^1.4.2",
+    "react-textarea-autosize":"^4.0.5"
   }
 }

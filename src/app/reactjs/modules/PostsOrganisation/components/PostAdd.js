@@ -1,4 +1,5 @@
 import React from 'react'
+import Textarea from 'react-textarea-autosize'
 
 export default class PostAdd extends React.Component{
     constructor(props){
@@ -15,7 +16,7 @@ export default class PostAdd extends React.Component{
     render(){
         return  <div>
                     <form className="postAddForm" onSubmit={this.handleSubmit} method="POST">
-                        <textarea className="addPostField" type="text" ref="posttext" placeholder="Write your post..."></textarea>
+                        <Textarea className="addPostField" type="text" ref="posttext" placeholder="Write your post..."></Textarea>
                         <input type="submit" value="Post" className="addPostButton"/> 
                     </form>
                </div>
