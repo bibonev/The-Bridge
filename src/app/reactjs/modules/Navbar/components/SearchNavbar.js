@@ -7,13 +7,22 @@ export default class SearchNavbar extends React.Component {
         super()
         this.onSearchChange = this.onSearchChange.bind(this)
         this.onClick = this.onClick.bind(this)
+        this.showHideSearchInput = this.showHideSearchInput.bind(this)
         this.state = {}
     }
-    
+    showHideSearchInput(e){
+        e.preventDefault();
+        if($('header .nav-search-input').width() == 0){
+            $('header .nav-search-input').css({'width' : '150px'});
+        }else{
+            $('header .nav-search-input').css({'width' : '0'});
+        }
+    }
     render() {
         return (
-            <div>
-                <input className='search-input' ref='search' name='searchTerm' type='text' onChange={this.onSearchChange } onKeyDown={this.onClick} />
+            <div className="search-input-button">
+                <button className="nav-search-button" onClick={this.showHideSearchInput}><i className="fa fa-search" aria-hidden="true"></i></button>
+                <input className="nav-search-input" placeholder="Search The Bridge" ref='search' name='searchTerm' type='text' onChange={this.onSearchChange } onKeyDown={this.onClick} />
             </div>
         )
     }

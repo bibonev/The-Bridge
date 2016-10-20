@@ -20,7 +20,7 @@ export function loadSuggestions(search) {
             $.get(url, data => {
                 let suggestions = [];
                 data.forEach(function(element) {
-                    suggestions.push(element.title);
+                    suggestions.push(element);
                 }, this);
                 dispatch(showSuggestions(suggestions));
             });

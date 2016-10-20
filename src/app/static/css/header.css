@@ -256,5 +256,90 @@ header .secondary-navigation li a:active{
   text-decoration: none;
   cursor:pointer;
 }
+header .search-input-button{
+  padding-top:14px;
+  padding-bottom:14px;
+}
+header #navbar-search{
+  position:relative;
+}
+header #navbar-search .search-suggestions{
+  position:absolute;
+  width:230px;
+}
+header #navbar-search .suggestion-info{
+  background:#fff;
+  padding:10px;
+  border:1px solid #c4c4c4;
+  border-bottom:0;
+  border-top:0;
+  font-size: 13px;
+  font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 100;
+  white-space: nowrap;
+  overflow:hidden !important;
+  text-overflow: ellipsis;
+}
+header #navbar-search .suggestion-info:first-of-type{
+  border-top:1px solid #c4c4c4;
+  border-top-left-radius:4px;
+  border-top-right-radius:4px;
+}
+header #navbar-search .suggestion-info:last-of-type{
+  border-bottom:1px solid #c4c4c4;
+  border-bottom-left-radius:4px;
+  border-bottom-right-radius:4px;
+}
+header #navbar-search .suggestion-info a{
+  color:#2A2A2A !important;
+}
+header #navbar-search .suggestion-info img{
+  border-radius:50%;
+  margin-right: 10px;
+}
+header .search-input-button .nav-search-input{
+  border:0;
+  font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 100;
+  font-size:14px;
+  outline:0;
+  color:#fff;
+  background:transparent;
+  margin-left:10px;
+  width:0;
+  transition-duration: 0.5s;
+}
+header .show-nav-search-field{
+  width:100px !important;
+  transition:20s;
+}
+header .hide-nav-search-field{
+  width:0;
+  transition:20s;
+}
+header .search-input-button .nav-search-input::-webkit-input-placeholder {
+   color: rgba(255, 255, 255, 0.8);
+}
 
+header .search-input-button .nav-search-input:-moz-placeholder { /* Firefox 18- */
+   color: rgba(255, 255, 255, 0.8); 
+}
 
+header .search-input-button .nav-search-input::-moz-placeholder {  /* Firefox 19+ */
+   color: rgba(255, 255, 255, 0.8); 
+}
+
+header .search-input-button .nav-search-input:-ms-input-placeholder {  
+   color: rgba(255, 255, 255, 0.8);
+}
+
+header .nav-search-button{
+  padding:0 !important;
+  background:transparent;
+  border:0;
+  outline:0;
+}
+header .nav-search-button i{
+  font-size:17px;
+  color: #fff;
+}

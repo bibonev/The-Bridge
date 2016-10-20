@@ -30,4 +30,4 @@ class Navbar extends Component {
   }
 }
 
-render(<Navbar/>, document.getElementById('navbar'))
+render(<Navbar/>, document.getElementById('navbar-search'))
