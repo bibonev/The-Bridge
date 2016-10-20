@@ -1,0 +1,114 @@
+#review_organisation{ 
+    width: 600px;
+    margin: 0 auto;
+}
+.ratingView{
+  margin-bottom:20px;
+}
+.ratingMain{
+  background: #029acf;
+  color:#fff;
+  display:inline-block;
+  border-radius:25px;
+  padding:0 13px;
+}
+.ratingMain span{
+  vertical-align:middle;
+}
+.ratingMain .ratingNum{
+  font-size:35px;
+  font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 400;
+  margin-right:7px;
+}
+.ratingMain .ratingStar{
+  font-size: 32px !important;
+}
+.org-rating:hover .ratingMain .glyphicon-star{
+  color:#FFA91B;
+}
+.reviewsCount{
+  font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 700;
+  color:#383838;
+  font-size:15px;
+  margin:5px 0 10px 15px;
+  display: inline-block;
+}
+.rsr-container{
+  display:block !important;
+  text-align: left;
+}
+.rsr-root {
+  vertical-align: middle;
+  display: inline-block; }
+
+.rsr--editing:hover {
+  cursor: pointer; }
+
+.rsr {
+  position: relative;
+  vertical-align: middle;
+  display: inline-block;
+  color: #c4c4c4;
+  overflow: hidden; }
+  
+.rsr input{
+  display:none;
+}
+.rsr__stars {
+  position: absolute;
+  left: 0;
+  top: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  color: #029acf;
+  -webkit-transition: all 0.01s;
+  -moz-transition: all 0.01s;
+  transition: all 0.01s; }
+
+.rsr__caption {
+  font-size: 1.25em;
+  vertical-align: middle;
+  margin-right: 0.5em; }
+
+.rsr--disabled .rsr-container:hover {
+  cursor: not-allowed; }
+
+.reviewAddForm{
+    padding:10px;
+    background: #fff;
+    border: 1px solid #c4c4c4;
+    border-radius: 6px;
+    width:100%;
+    text-align:right;
+}
+.reviewField{
+    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    background: #fff;
+    margin-top:5px;
+    border:0;
+    width:100%;
+    resize:none;
+    outline:none;
+    height: 50px;
+    overflow: auto;
+}
+.addReviewButton{
+    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    padding: 5px 10px;
+    color:#fff;
+    background: #029acf;
+    border: 1px solid #029acf;
+    border-radius: 6px;
+    outline:none;
+    margin-top:5px;
+}
+.reviewRating{
+    display:inline-block;
+    margin-left:10px;
+}

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+
+{% block css %}
+<link href="{% static 'css/dashboard.css' %}" rel="stylesheet"> 
+{% endblock css %}
+
+{% block title %} Dashboard {% endblock title %}
+
+{% block content %}
+<div id="posts_content"></div>
+{% endblock content %}
+
+{% block script %}
+<script src="{% static 'bundles/local/posts_dashboard.js' %}"></script>
+{% endblock script %}

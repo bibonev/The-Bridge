@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from developer.models import Organisation
+from organisation.models import Organisation
 
 class Relation(models.Model):
     '''Model that stores all relations between user and organisation'''

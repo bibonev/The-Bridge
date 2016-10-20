@@ -1,5 +1,4 @@
 {% load static from staticfiles %}
-{% load render_bundle from webpack_loader %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -26,6 +25,7 @@
     <link href="{% static 'css/header.css' %}" rel="stylesheet">
     <link href="{% static 'css/layout.css' %}" rel="stylesheet">
     <link href="{% static 'css/footer.css' %}" rel="stylesheet">
+    <link href="{% static 'css/cssloader.css' %}" rel="stylesheet">
 
     {% block css %}{% endblock css %}
 
@@ -52,14 +52,15 @@
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                         <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
                     </button>
-                    <a class="navbar-brand page-scroll" href="/">Logo</a>
+                    <a class="navbar-brand page-scroll" href="/">TheBridge</a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
                         {% if user.is_authenticated %}
+                            <li id="navbar-search"></li>
                             <li>
-                                {% block roledropdown %}{% endblock roledropdown %}
+                                <a href="{% url 'organisation:create_organisation'%}" id="customer">create organisation <span class="glyphicon glyphicon-th"></span></a>
                             </li>
                             <li>
                                 <div class="profile-dropdown">
@@ -67,7 +68,7 @@
                                         <span>{{ user.first_name }}</span>
                                         <div>
                                             {% if user.profile.user_picture %}
-                                                <img src="{{ user.profile.user_picture.url }}" width="28" height="28" />
+                                                <img src="{{ user.profile.front_picture.url }}" width="28" height="28" />
                                             {% else %}
                                                 <img src="{{ user.profile.default_image }}" width="28" height="28"/>
                                             {% endif %}
@@ -96,14 +97,21 @@
         {% if user.is_authenticated %}
             <div class="secondary-navigation">
                 <div class="container-fluid">
-                    <div class="col-md-2"></div>
-                    <div class="col-md-8">
+                    <div class="inner-wrapper">
                     <ul>
                         {% block secondaryNav %}
+                            <li>
+                                <a href="{% url 'customer:posts:dashboard' %}" name='dashboard'>Dashboard</a>
+                            </li>
+                            <li>
+                                <a href="#">Requests</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'customer:organisations' %}">Organisations</a>
+                            </li>
                         {% endblock secondaryNav %}
                     </ul>
                     </div>
-                    <div class="col-md-2"></div>
                 </div>
             </div>
         {% endif %}
@@ -112,26 +120,18 @@
     {% block slider %}{% endblock slider %}
     <div class="wrapper">
         <div class="container-fluid">
-            <div class="col-md-2"></div>
-            <div class="col-md-8 bonus-padding">
-                
-                <div id="react-loader"></div>
-                {% render_bundle 'vendors' %}
-                {% render_bundle 'main' %}
-
+            <div class="inner-wrapper bonus-padding">
                 {% block content %}
                 {% endblock content %}
             </div>
-            <div class="col-md-2"></div>
         </div>
     </div>
         
     <footer>
         <div class="container-fluid">
-            <div class="col-md-2"></div>
-            <div class="col-md-8 bonus-padding">
+            <div class="inner-wrapper bonus-padding">
                 <div class="footer-logo">
-                    <a href="/">LOGO</a>
+                    <a href="/">TheBridge</a>
                 </div>
                 <div class="links-social">
                     <div class="footer-links">
@@ -148,22 +148,27 @@
                         <a class="btn btn-social-icon btn-facebook">
                             <span class="fa fa-facebook"></span>
                         </a>
+                        <a class="btn btn-social-icon btn-pinterest">
+                            <span class="fa fa-pinterest"></span>
+                        </a>
                         <a class="btn btn-social-icon btn-twitter">
                             <span class="fa fa-twitter"></span>
-                        </a>
-                        <a class="btn btn-social-icon btn-linkedin">
-                            <span class="fa fa-linkedin"></span>
-                        </a>
-                        <a class="btn btn-social-icon btn-youtube">
-                            <span class="fa fa-youtube"></span>
                         </a>
                         <a class="btn btn-social-icon btn-instagram">
                             <span class="fa fa-instagram"></span>
                         </a>
+                        <a class="btn btn-social-icon btn-snapchat">
+                            <span class="fa fa-snapchat"></span>
+                        </a>
+                        <a class="btn btn-social-icon btn-youtube">
+                            <span class="fa fa-youtube"></span>
+                        </a>
+                        <a class="btn btn-social-icon btn-linkedin">
+                            <span class="fa fa-linkedin"></span>
+                        </a>
                     </div>
                 </div>
             </div>
-            <div class="col-md-2"></div>
         </div>
     </footer>
 </div>
@@ -174,7 +179,13 @@
 <!-- Bootstrap Core JavaScript -->
 <script src="{% static 'js/bootstrap/bootstrap.min.js' %}"></script>
 
-<script src="{% static 'js/requests.js' %}"></script> 
+<script src="{% static 'js/requests.js' %}"></script>
+
+<script src="{% static 'js/extraJSFuncs.js' %}"></script>
+
+<!-- React -->
+<script src="{% static 'bundles/local/vendors.js' %}"></script> 
+<script src="{% static 'bundles/local/navbar.js' %}"></script>
 
 {% block script %}{% endblock script %}
 

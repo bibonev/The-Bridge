@@ -48,7 +48,6 @@ p {
   color: #fff;
   font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
   font-weight: 700;
-  text-transform: uppercase;
 }
 .navbar-default .navbar-header .navbar-brand:hover,
 .navbar-default .navbar-header .navbar-brand:focus {
@@ -79,6 +78,10 @@ p {
 .navbar-default .nav > li.active > a:hover,
 .navbar-default .nav > li.active > a:focus:hover {
   background-color: transparent;
+}
+a.active{
+  border-bottom:3px solid #fff !important;
+  background: rgba(0, 0, 0, 0.2) !important;
 }
 
 /* Role dropdown */
@@ -244,7 +247,9 @@ header .secondary-navigation li{
   list-style: none;
 }
 header .secondary-navigation li a{
-  padding: 10px 15px;
+  padding: 7px 15px;
+  border-top:3px solid transparent;
+  border-bottom:3px solid transparent;
   display:block;
   color: #fff;
   font-size: 14px;
@@ -253,9 +258,110 @@ header .secondary-navigation li a{
 }
 header .secondary-navigation li a:hover,
 header .secondary-navigation li a:active{
-  color: #029acf;
+  border-bottom:3px solid #fff;
   text-decoration: none;
   cursor:pointer;
 }
+header .search-input-button{
+  padding-top:14px;
+  padding-bottom:14px;
+}
+header #navbar-search{
+  position:relative;
+}
+header #navbar-search .search-suggestions{
+  position:absolute;
+  width:230px;
+  border:1px solid #c4c4c4;
+  border-radius: 4px;
+}
+header #navbar-search .arrow-up {
+  width: 0; 
+  height: 0; 
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  
+  border-bottom: 10px solid #fff;
 
+  position : absolute;
+  top      : -10px;
+  left     : 70px;
+  z-index  : 100;
+}
+header #navbar-search .arrow-down {
+  width: 0; 
+  height: 0; 
+  border-left: 11px solid transparent;
+  border-right: 11px solid transparent;
+  
+  border-bottom: 11px solid #c4c4c4;
 
+  position : absolute;
+  z-index  : 99;
+  top:-11px;
+  left:69px;
+}
+header #navbar-search .suggestion-info{
+  background:#fff;
+  padding:10px;
+  border-top:0;
+  font-size: 13px;
+  font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 100;
+  white-space: nowrap;
+  overflow:hidden !important;
+  text-overflow: ellipsis;
+}
+header #navbar-search .suggestion-info a{
+  color:#2A2A2A !important;
+}
+header #navbar-search .suggestion-info img{
+  border-radius:50%;
+  margin-right: 10px;
+}
+header .search-input-button .nav-search-input{
+  border:0;
+  font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 100;
+  font-size:14px;
+  outline:0;
+  color:#fff;
+  background:transparent;
+  margin-left:10px;
+  width:0;
+  transition-duration: 0.5s;
+}
+header .show-nav-search-field{
+  width:100px !important;
+  transition:20s;
+}
+header .hide-nav-search-field{
+  width:0;
+  transition:20s;
+}
+header .search-input-button .nav-search-input::-webkit-input-placeholder {
+   color: rgba(255, 255, 255, 0.8);
+}
+
+header .search-input-button .nav-search-input:-moz-placeholder { /* Firefox 18- */
+   color: rgba(255, 255, 255, 0.8); 
+}
+
+header .search-input-button .nav-search-input::-moz-placeholder {  /* Firefox 19+ */
+   color: rgba(255, 255, 255, 0.8); 
+}
+
+header .search-input-button .nav-search-input:-ms-input-placeholder {  
+   color: rgba(255, 255, 255, 0.8);
+}
+
+header .nav-search-button{
+  padding:0 !important;
+  background:transparent;
+  border:0;
+  outline:0;
+}
+header .nav-search-button i{
+  font-size:17px;
+  color: #fff;
+}

@@ -1,10 +1,12 @@
-{% extends 'customer/base.html' %}
+{% extends 'customer/organisation_details_base.html' %}
 
-{% load static from staticfiles %}
-{% block title %} {{org.title}} {% endblock title %}
+{% block left-most-col %}
+<a href="{% url 'customer:organisation_details_reviews' pk=org.id %}" class="org-rating">
+    <div class="ratingMain"><span class="ratingNum">{{rating}}</span><span class="glyphicon glyphicon-star ratingStar" aria-hidden="true"></span></div>
+    <!-- <div class="reviewsCount">{{review_count}} review{{review_count|pluralize}}</div> -->
+</a>
+{% endblock left-most-col %}
 
-{% block css %}<link href="{% static 'css/organisation_profile.css' %}" rel="stylesheet">{% endblock css %}
-
-{% block content %}
-{% include 'organisation_details_base.html' %}
-{% endblock content %}
+{% block main-col %}
+<div id="posts_organisation"></div>
+{% endblock main-col %}

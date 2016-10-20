@@ -6,13 +6,21 @@ module.exports = {
 
   entry: {
     // Add as many entry points as you have container-react-components here
-    main: './reactjs/main',
+    organisation_search: './reactjs/modules/OrganisationSearch/index',
+    posts_dashboard: './reactjs/modules/PostsDashboard/index',
+    posts_organisation: './reactjs/modules/PostsOrganisation/index',
+    review_organisation: './reactjs/modules/ReviewOrganisation/index',
+    navbar: './reactjs/modules/Navbar/index',
     vendors: ['react'],
   },
 
   output: {
       path: path.resolve('./static/bundles/local/'),
-      filename: "[name]-[hash].js"
+      filename: "[name].js"
+  },
+  
+  node: {
+    fs: "empty"
   },
 
   externals: [
@@ -23,11 +31,17 @@ module.exports = {
   ], // add all common plugins here
 
   module: {
-    loaders: [] // add all common loaders here
+    loaders: [ 
+      { test: /\.json$/, loader: "json-loader"},
+      { test: /\.js$/, loader: 'babel-loader'}
+    ] // add all common loaders here
   },
 
   resolve: {
+    alias: {
+      'react': path.join(__dirname, 'node_modules', 'react')
+    },
     modulesDirectories: ['node_modules', 'bower_components'],
-    extensions: ['', '.js', '.jsx']
+    extensions: ['', '.js', '.jsx', '.json']
   },
 }

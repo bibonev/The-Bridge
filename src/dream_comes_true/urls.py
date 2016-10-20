@@ -14,21 +14,22 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf import settings
-from django.conf.urls import include, url, patterns
+from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
 from . import views
+from organisation import views as v
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.base_page),
     url(r'^', include('allauth.account.urls')),
-    url(r'^organisations/(?P<pk>\d+)/$', views.organisation_details_not_auth, name='organisation_details_not_auth'),
+    url(r'^', include('customer.urls', namespace='customer')), # redirects to customer.urls
+    url(r'^', include('organisation.urls', namespace='organisation')), # redirects to customer.urls
     url(r'^profile/', include('userprofile.urls', namespace='profile')), # redirects to the user profile
-    url(r'^customer/', include('customer.urls', namespace='customer')), # redirects to customer.urls
-    url(r'^developer/', include('developer.urls', namespace='developer')), # redisrects to supplier.urls
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework_auth')), # login as a user in the API
     url(r'^api/v1/', include('rest_api.urls', namespace='rest_framework')), # use the rest_api app for all data that is neede for the API
+    #url(r'create_organisation/$', v.create_organisation, name='create_organisation'),
 ]
 
 # set the STATIC_ROOT for static files
