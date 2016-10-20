@@ -57,8 +57,9 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
                         {% if user.is_authenticated %}
+                            <li id="navbar-search"></li>
                             <li>
-                                <a href="#" id="customer">create organisation <span class="glyphicon glyphicon-th"></span></a>
+                                <a href="{% url 'organisation:create_organisation'%}" id="customer">create organisation <span class="glyphicon glyphicon-th"></span></a>
                             </li>
                             <li>
                                 <div class="profile-dropdown">
@@ -98,6 +99,15 @@
                     <div class="inner-wrapper">
                     <ul>
                         {% block secondaryNav %}
+                            <li>
+                                <a href="{% url 'customer:posts:dashboard' %}">Dashboard</a>
+                            </li>
+                            <li>
+                                <a href="#">Requests</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'customer:organisations' %}">Organisations</a>
+                            </li>
                         {% endblock secondaryNav %}
                     </ul>
                     </div>
@@ -174,6 +184,7 @@
 
 <!-- React -->
 <script src="{% static 'bundles/local/vendors.js' %}"></script> 
+<script src="{% static 'bundles/local/navbar.js' %}"></script>
 
 {% block script %}{% endblock script %}
 

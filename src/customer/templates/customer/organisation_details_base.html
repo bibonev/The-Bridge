@@ -1,4 +1,4 @@
-{% extends 'customer/base.html' %}
+{% extends 'base.html' %}
 
 {% load static from staticfiles %}
 {% block title %} {{org.title}} {% endblock title %}
@@ -79,7 +79,7 @@
                 </span>
             </div>
             {% if owner %}
-            <a href="">Edit organisation</a>
+            <a href="{% url 'organisation:my_organisation_edit' pk=org.pk %}">Edit organisation</a>
             {% endif %}
         </div>
     </div>

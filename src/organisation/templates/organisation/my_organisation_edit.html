@@ -1,14 +1,19 @@
 {% extends 'base.html' %}
 {% load static from staticfiles %}
 
-{% block title %} Create organisation {% endblock title %}
+{% block title %} Edit organisation {% endblock title %}
 
 {% block css %}<link href="{% static 'css/forms/form-style.css' %}" rel="stylesheet">{% endblock css %}
+
+{% for field in form %}
+    {{ field.error }}
+
+{% endfor %}
 
 {% block content%}
 
 <div class="form-organisation">
-    <h2 class="title">Create organisation</h2>
+    <h2 class="title">Edit organisation</h2>
     <div class="form-content-org">
         <form action="" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
@@ -16,36 +21,44 @@
             <div class="half-col">
                 <div class="form-input">
                     <span>Title</span>
-                    {{ form.title }}
+                    {{ organisation_form.title }}
                 </div>
                 <div class="form-input">
                     <span>Description</span>
-                    {{ form.description }}
+                    {{ organisation_form.description }}
                 </div>
                 <div class="form-input">
                     <span>Locations</span>
-                    {{ form.locations }}
+                    {{ organisation_form.locations }}
+                </div>
+                <div class="form-input">
+                    <span>Front picture</span>
+                    {{ organisation_form.front_picture }}
                 </div>
             </div>
             <div class="half-col">
                 <div class="form-input">
                     <span>Category</span>
-                    {{ form.category }}
+                    {{ organisation_form.category }}
                 </div>
                 <div class="form-input">
                     <span>Organisation's email</span>
-                    {{ form.email_organisation }}
+                    {{ organisation_form.email_organisation }}
                 </div>
                 <div class="form-input">
                     <span>Organisation's phone number</span>
-                    {{ form.phone_number }}
+                    {{ organisation_form.phone_number }}
                 </div>
                 <div class="form-input">
                     <span>Website</span>
-                    {{ form.website }}
+                    {{ organisation_form.website }}
+                </div>
+                <div class="form-input">
+                    <span>Cover picture</span>
+                    {{ organisation_form.cover_picture }}
                 </div>
             </div>
-            <input type="submit" class="submit" value="Save"/>
+            <input type="submit" class="submit" value="Update"/>
         </form>
     </div>
 </div>

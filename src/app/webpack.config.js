@@ -10,6 +10,7 @@ module.exports = {
     posts_dashboard: './reactjs/modules/PostsDashboard/index',
     posts_organisation: './reactjs/modules/PostsOrganisation/index',
     review_organisation: './reactjs/modules/ReviewOrganisation/index',
+    navbar: './reactjs/modules/Navbar/index',
     vendors: ['react'],
   },
 
