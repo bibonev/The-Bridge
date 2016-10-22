@@ -13,16 +13,7 @@
     color: #383838;
     vertical-align:middle;
     margin: 50px 0 40px 0;
-}
-.search-button{
-    font-size: 25px;
-    color:#fff;
-    background: #029acf;
-    border:1px solid #029acf;
-    border-radius: 4px;
-    padding: 5px 10px;
-    vertical-align:middle;
-    margin: 50px 0 40px 0;
+    text-align: center;
 }
 .organisation-link{
     display:inline-block;
@@ -34,32 +25,68 @@
     text-align: center;
     border-radius: 4px;
 }
-.org-box span{
+.org-box .org-box-title{
     display:block;
+    font-size: 24px;
+    font-weight: 400;
+    line-height:40px;
+    margin-bottom: 10px;
     color: #fff;
     font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
     font-weight: 100;
-    font-size: 14px;
-    margin-bottom: 10px;
+    white-space: nowrap;
+    overflow:hidden !important;
+    text-overflow: ellipsis;
 }
-
-.org-box .org-box-title{
-    font-size: 24px;
-    font-weight: 400;
-    line-height:70px;
+.rating-org{
+  background: #FFA91B;
+  color:#fff;
+  display:inline-block;
+  border-radius:25px;
+  padding:0 7px;
+  margin-bottom:15px;
+}
+.rating-org span{
+  vertical-align:middle;
+}
+.rating-org .ratingNum{
+  font-size:16px;
+  font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 400;
+  margin-right:4px;
+}
+.rating-org .ratingStar{
+  font-size: 14px !important;
 }
 .org-box .org-box-category{
+    display:block;
     font-weight: 400;
+    margin-bottom: 10px;
+    color: #fff;
+    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+    white-space: nowrap;
+    overflow:hidden !important;
+    text-overflow: ellipsis;
+}
+.org-box .org-box-locations{
+    display:block;
+    font-weight: 100;
+    margin-bottom: 10px;
+    color: #fff;
+    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+    white-space: nowrap;
+    overflow:hidden !important;
+    text-overflow: ellipsis;
 }
 .org-box .gradient-background{
     width:100%;
     height:100%;
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.5);
     padding:20px;
     border-radius: 4px;
 }
 .organisation-link:hover .gradient-background{
-    background: transparent;
+    background: rgba(0, 0, 0, 0.3);
     
 }
 .organisation-link:hover{

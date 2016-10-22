@@ -13,11 +13,7 @@ export default class SearchPanel extends React.Component {
     render() {
         return (
             <div>
-                <input className='search-input' ref='search' name='searchTerm' type='text' defaultValue={this.props.search} value={this.state.search} onChange={this.onSearchChange } />
-                <button className="search-button" value="" onClick={this.onSearchChange}>
-                    <i className="fa fa-search" aria-hidden="true">
-                    </i>
-                </button>
+                <input className='search-input' ref='search' name='searchTerm' type='text' placeholder="Search organisations" defaultValue={this.props.search} value={this.state.search} onChange={this.onSearchChange } />
             </div>
         )
     }

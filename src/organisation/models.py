@@ -55,9 +55,14 @@ class Organisation(models.Model):
     def __str__(self):
         return self.title
     
-    # use default image when ehre is no uploaded one
+    # use default image when there is no uploaded one
     def default_image(self):
         if not self.front_picture:
+            return os.path.join(settings.MEDIA_URL , 'default/no-org-img.jpg')
+
+    # use default image when there is no uploaded one
+    def default_image_cover(self):
+        if not self.cover_picture:
             return os.path.join(settings.MEDIA_URL , 'default/no-org-img.jpg')
 
 def validate_rating(rating):
