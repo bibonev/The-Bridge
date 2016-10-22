@@ -51,7 +51,7 @@ def my_organisation_edit(request, pk):
             with reversion.create_revision():
                 organisation_form.save()
             Post.create_post_org_change(org_instance)
-            return HttpResponseRedirect(reverse('organisation:my_organisation_edit', kwargs={'pk':pk}))
+            return HttpResponseRedirect(reverse('customer:organisation_details', kwargs={'pk':pk}))
     else:
         organisation_form = forms.OrganisationForm(instance=org_instance)
 
@@ -73,7 +73,7 @@ def create_organisation(request):
             # create initial post when an organisation is added
             description = org.title + " has joined on " + str(datetime.now().strftime("%d %B %Y"))
             Post.objects.create(description=description, organisation=org)
-            return HttpResponseRedirect(reverse('create_organisation'))
+            return HttpResponseRedirect(reverse('customer:organisation_details', kwargs={'pk': org.pk}))
     
     return render(request, 'organisation/create_organisation.html', {'form':form})
 
