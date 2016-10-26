@@ -59,8 +59,8 @@
                     <ul class="nav navbar-nav navbar-right">
                         {% if user.is_authenticated %}
                             <li id="navbar-search"></li>
-                            <li>
-                                <a href="{% url 'organisation:create_organisation'%}" id="customer">create organisation <span class="glyphicon glyphicon-th"></span></a>
+                            <li class="create-org-button">
+                                <a href="{% url 'organisation:create_organisation'%}">Create organisation</a>
                             </li>
                             <li>
                                 <div class="profile-dropdown">
@@ -104,7 +104,7 @@
                                 <a href="{% url 'customer:posts:dashboard' %}" name='dashboard'>Dashboard</a>
                             </li>
                             <li>
-                                <a href="#">Requests</a>
+                                <a href="{% url 'customer:requests' %}">Requests</a>
                             </li>
                             <li>
                                 <a href="{% url 'customer:organisations' %}">Organisations</a>

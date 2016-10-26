@@ -5,6 +5,12 @@ from partnership.models import Relation, PendingRequest
 from organisation import models as organisation_models
 
 @login_required
+def customer_requests(request):
+    '''Dispaly cusotmer requests and bookmarks'''
+    bookmarked_organisations = organisation_models.Organisation.objects.filter(bookmark__in=[request.user])
+    return render(request, 'customer/requests.html', {'bookmarked_organisations': bookmarked_organisations})
+
+@login_required
 def organisations(request):
     '''Display all organisations'''
     organisations = organisation_models.Organisation.objects.all()
@@ -37,14 +43,6 @@ def organisation_details(request, pk):
     elif Relation.own_organisation(request.user, organisation):
         request_state = -1
 
-    # visualize rating for particular organisation
-    rating = 0
-    reviews = organisation_models.Review.objects.filter(organisation=organisation)
-    if reviews:
-        for review in reviews: 
-            rating+=review.rating
-        rating = round(((rating/len(reviews))*10), 0)/10 
-
     # ability to edit organisation if the user is the owner
     owner = False
     if organisation.host == request.user:
@@ -58,7 +56,7 @@ def organisation_details(request, pk):
             user = request.user
             PendingRequest.send_request(user, organisation)
 
-    return render(request, 'customer/organisation_details.html', {'org':organisation, 'request_state': request_state, 'rating':rating, 'owner':owner})
+    return render(request, 'customer/organisation_details.html', {'org':organisation, 'request_state': request_state,'owner':owner})
 
 @login_required
 def organisation_details_reviews(request, pk):

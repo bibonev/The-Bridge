@@ -34,7 +34,6 @@ class OrganisationSerializer(serializers.ModelSerializer):
     # customize organisation's front_picture field and create a rating field
     front_picture = serializers.SerializerMethodField('front_picture_url')
     cover_picture = serializers.SerializerMethodField('cover_picture_url')
-    rating = serializers.SerializerMethodField('which_rating')
 
     # return the front_picture url or the defaul_image method
     def front_picture_url(self, obj):
@@ -49,16 +48,6 @@ class OrganisationSerializer(serializers.ModelSerializer):
             return obj.cover_picture.url
         else: 
             return None
-
-    def which_rating(self, obj):
-        # visualize rating for particular organisation
-        rating = 0
-        reviews = organisation_models.Review.objects.filter(organisation=obj)
-        if reviews:
-            for review in reviews: 
-                rating+=review.rating
-            rating = round(((rating/len(reviews))*10), 0)/10 # round the rating to the first symbol after the comma
-        return str(rating) # return string of the rating
 
     class Meta:
         # add the fields to the api serializer
