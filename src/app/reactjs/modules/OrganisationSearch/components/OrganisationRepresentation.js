@@ -20,7 +20,7 @@ export default (props) => {
                 <span className="org-box-title">
                     {org.title}
                 </span>
-                <div className="rating-org"><span className="ratingNum">{org.rating}</span><span className="glyphicon glyphicon-star ratingStar" aria-hidden="true"></span></div>
+                <div className="rating-org"><span className="ratingNum">{parseFloat(org.rating).toFixed(1)}</span><span className="glyphicon glyphicon-star ratingStar" aria-hidden="true"></span></div>
                 <span className="org-box-category">
                     {org.category}
                 </span>

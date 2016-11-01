@@ -20,13 +20,40 @@ class UserListAPIView(generics.ListAPIView):
 
 class OrganisationListAPIView(generics.ListAPIView):
     '''List all organisations'''
-    # permission_classes = (permissions.IsAdminUser,) # gives permissions only to Admin user to view the API view
-    queryset = organisation_models.Organisation.objects.all()
     serializer_class = serializers.OrganisationSerializer
 
     # filter organisations based on search_fields
-    filter_backends = (filters.SearchFilter,)
-    search_fields = ('title', 'description', 'category', 'locations',)
+    search_fields = ('title', 'description',)
+
+     # modify serializer class to return the method for creating a comment using passed 'type', 'org_id', 'post_id' values as get request
+    def get_queryset(self):
+        queryset = organisation_models.Organisation.objects.all()
+        
+        options = {
+            'locations' : self.request.GET.get('locations'),
+            'review1' : self.request.GET.get('rating1'),
+            'review2' : self.request.GET.get('rating2'),
+            'category' : self.request.GET.get('category'),
+            'search' : self.request.GET.get('search')
+        }
+
+        arguments = {}
+
+        for k, v in options.items():
+            if v:
+                if k == 'search':
+                    queryset = organisation_models.Organisation.objects.filter(Q(title__contains=v) | Q(description__contains=v))
+                elif k == 'review1':
+                    queryset = organisation_models.Organisation.objects.filter(review__gte=v).distinct()
+                elif k == 'review2':
+                    queryset = organisation_models.Organisation.objects.filter(review__lte=v).distinct()
+                else:
+                    arguments[k] = v
+                
+        if (arguments != {}):
+            queryset = organisation_models.Organisation.objects.filter(**arguments)
+
+        return queryset
 
 class OrganisationRetrieveAPIView(generics.RetrieveAPIView):
     '''Retrive a particular organisation'''
