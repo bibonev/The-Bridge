@@ -1,0 +1,107 @@
+.studio-info{
+    width:200px;
+    float:left;
+}
+.organisationChooseBox{
+    display:inline-block;
+    position:relative;
+    width:150px;
+    text-align:right;
+}
+.organisationDisplay{
+    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+    color: #029acf;
+    border: 1px solid #c4c4c4;
+    border-radius: 2px;
+    outline: none;
+    display:inline-block;
+    padding:4px 8px 4px 22px;
+    background: url('../img/caret-down.png') no-repeat 4px center #fff;
+    background-size: 12px 14px;
+    width:100%;
+    white-space: nowrap;
+    overflow:hidden !important;
+    text-overflow: ellipsis;
+}
+.organisationOptions{
+    display:none;
+    position: absolute;
+    z-index: 1000;
+    border: 1px solid #c4c4c4;
+    border-radius: 2px;
+    background:#fff;
+    width:100%;
+    text-align: center;
+}
+.organisationOptions button{
+    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+    color: #029acf;
+    background:#fff;
+    border:none;
+    border-bottom:1px solid #c4c4c4;
+    outline:none;
+    padding:4px 8px;
+    width:100%;
+    text-align:center;
+    white-space: nowrap;
+    overflow:hidden !important;
+    text-overflow: ellipsis;
+}
+.organisationOptions button:last-of-type{
+    border-bottom:0;
+}
+.organisationOptions button:hover{
+    background: #029acf;
+    color: #fff;
+}
+.bonus-text-all-requests{
+    background:#c4c4c4;
+    width:100%;
+    color:#fff;
+    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+    white-space: nowrap;
+    overflow:hidden !important;
+    text-overflow: ellipsis;
+    padding:5px 10px;
+    margin-top:10px;
+}
+.all-requests{
+    width:200px;
+    text-align:right;
+    padding:0;
+    list-style: none;
+}
+.requestButton{
+    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+    color: #383838;
+    background:#fff;
+    border:none;
+    border:1px solid #c4c4c4;
+    border-bottom:0;
+    outline:none;
+    padding:16px;
+    width:100%;
+    text-align:left;
+    white-space: nowrap;
+    overflow:hidden !important;
+    text-overflow: ellipsis;
+}
+.requestButton:hover{
+    text-decoration: underline;
+}
+.requestDisplay:last-of-type .requestButton{
+    border-bottom:1px solid #c4c4c4;
+}
+.studio-main{
+    float:left;
+    width:980px;
+    background:#fff;
+}
