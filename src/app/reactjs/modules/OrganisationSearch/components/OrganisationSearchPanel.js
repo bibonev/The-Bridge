@@ -4,9 +4,9 @@ import ReactDOM from 'react-dom';
 export default class SearchPanel extends React.Component {
     constructor() {
         super()
-        this.onSearchChange = this.onSearchChange.bind(this)
-        this.onClearSearch = this.onClearSearch.bind(this)
-        this.state = {}
+        this.onSearchChange = this.onSearchChange.bind(this);
+        this.onClearSearch = this.onClearSearch.bind(this);
+        this.state = {};
     }
 
     render() {
@@ -24,11 +24,11 @@ export default class SearchPanel extends React.Component {
                                             <div className="col-md-6">
                                                 <div className="form-group">
                                                     <label htmlFor="filter">Rating</label> <br />
-                                                    <input type="checkbox" /> 0.0 - 1.0 <br/>
-                                                    <input type="checkbox" /> 1.0 - 2.0 <br/>
-                                                    <input type="checkbox" /> 2.0 - 3.0 <br/>
-                                                    <input type="checkbox" /> 3.0 - 4.0 <br/>
-                                                    <input type="checkbox" /> 4.0 - 5.0 <br/>
+                                                    <input type="checkbox" ref='rating01' onChange={this.onSearchChange}/> 0.0 - 1.0 <br/>
+                                                    <input type="checkbox" ref='rating12' onChange={this.onSearchChange}/> 1.0 - 2.0 <br/>
+                                                    <input type="checkbox" ref='rating23' onChange={this.onSearchChange}/> 2.0 - 3.0 <br/>
+                                                    <input type="checkbox" ref='rating34' onChange={this.onSearchChange}/> 3.0 - 4.0 <br/>
+                                                    <input type="checkbox" ref='rating45' onChange={this.onSearchChange}/> 4.0 - 5.0 <br/>
                                                 </div>
                                             </div>
                                             <div className="col-md-6">
@@ -73,13 +73,40 @@ export default class SearchPanel extends React.Component {
 
     onSearchChange() {
         let query = ReactDOM.findDOMNode(this.refs.search).value;
+
+        let ratings = [];
+
+        let r1 = {'isChecked': ReactDOM.findDOMNode(this.refs.rating01).checked, 'valueFrom': 0, 'valueTo': 1};
+        let r2 = {'isChecked': ReactDOM.findDOMNode(this.refs.rating12).checked, 'valueFrom': 1, 'valueTo': 2};
+        let r3 = {'isChecked': ReactDOM.findDOMNode(this.refs.rating23).checked, 'valueFrom': 2, 'valueTo': 3};
+        let r4 = {'isChecked': ReactDOM.findDOMNode(this.refs.rating34).checked, 'valueFrom': 3, 'valueTo': 4};
+        let r5 = {'isChecked': ReactDOM.findDOMNode(this.refs.rating45).checked, 'valueFrom': 4, 'valueTo': 5};
+
+        ratings.push(r1, r2, r3, r4, r5);
+
+        function filterByChecks(rating) {
+            if (rating.isChecked) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        let queryRatings = ratings.filter(filterByChecks);
+
+        this.setState({
+            ratings: queryRatings
+        });
+
         if (this.promise) {
             clearInterval(this.promise)
         }
+
         this.setState({
             search: query
         });
-        this.promise = setTimeout(() => this.props.onSearchChanged(query), 400);
+
+        this.promise = setTimeout(() => this.props.onSearchChanged(query, queryRatings), 400);
     }
 
     onClearSearch() {
@@ -87,7 +114,6 @@ export default class SearchPanel extends React.Component {
             search: ''
         });
         this.props.onSearchChanged(undefined)
-
     }
 }
 
