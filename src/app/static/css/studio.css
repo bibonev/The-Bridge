@@ -51,7 +51,7 @@
     overflow:hidden !important;
     text-overflow: ellipsis;
 }
-.organisationOptions button:last-of-type{
+.organisationOptions a:last-of-type button{
     border-bottom:0;
 }
 .organisationOptions button:hover{
@@ -78,6 +78,7 @@
     list-style: none;
 }
 .requestButton{
+    display:block;
     font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
     font-weight: 400;
     font-size: 13px;
@@ -99,6 +100,9 @@
 }
 .requestDisplay:last-of-type .requestButton{
     border-bottom:1px solid #c4c4c4;
+}
+.active-request{
+    background:#000;
 }
 .studio-main{
     float:left;
