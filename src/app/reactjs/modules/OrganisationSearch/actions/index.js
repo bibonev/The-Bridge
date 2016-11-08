@@ -22,9 +22,9 @@ export function changeSearch(search, ratings, location, category) {
     };
 }
 
-export function changeSearchAndLoadOrganisations(search, ratings) {
+export function changeSearchAndLoadOrganisations(search, ratings, location, category) {
     return (dispatch, getState) => {
-        dispatch(changeSearch(search, ratings));
+        dispatch(changeSearch(search, ratings, location, category));
         dispatch(loadOrganisations());
     };
 }
@@ -32,8 +32,12 @@ export function changeSearchAndLoadOrganisations(search, ratings) {
 export function loadOrganisations() {
     return (dispatch, getState) => {
         let state = getState();
+
         let { search, ratings, location, category } = state.organisations;
+
         let organisations = [];
+
+        console.log(state);
 
         //Search term
         let searchTerm = "";
@@ -52,7 +56,6 @@ export function loadOrganisations() {
         }
 
         //Ratings
-        console.log(ratings);
         if(ratings.length == 2 && !isNaN(ratings[0]) && !isNaN(ratings[1])) {
             url += "rating1=" + `${ratings[0]}` + "&rating2=" + `${ratings[1]}` + "&";
         }

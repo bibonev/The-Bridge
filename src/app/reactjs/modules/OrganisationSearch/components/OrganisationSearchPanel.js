@@ -42,7 +42,7 @@ export default class SearchPanel extends React.Component {
                                         <div className="form-group">
                                             <label htmlFor="filter">Location</label>
                                             <select ref='locationSelection' className="form-control" onChange={this.onSearchChange}>
-                                                <option value="0" placeholder="All"></option>
+                                                <option value="0"></option>
                                                 <option value="1">London</option>
                                                 <option value="2">Birmingham</option>
                                                 <option value="3">New Yourk</option>
@@ -53,9 +53,9 @@ export default class SearchPanel extends React.Component {
                                          <div className="form-group">
                                             <label htmlFor="filter">Category</label>
                                             <select ref='categorySelection' className="form-control" onChange={this.onSearchChange}>
-                                                <option value="0" placeholder="All"></option>
+                                                <option value="0"></option>
                                                 <option value="1">Education</option>
-                                                <option value="2">Public services</option>
+                                                <option value="2">Public Services</option>
                                                 <option value="3">Environment</option>
                                                 <option value="4">Healthcare</option>
                                             </select>

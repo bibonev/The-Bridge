@@ -18,7 +18,8 @@ class OrganisationPanel extends Component {
         const { loadOrganisations, changeSearchAndLoadOrganisations  } = this.props;
         const { isLoading } = this.props.ui;
 
-        const onSearchChanged = (query, queryRatings) => changeSearchAndLoadOrganisations(query, queryRatings);
+        const onSearchChanged = (query, queryRatings, queryLocation, queryCategory) => 
+            changeSearchAndLoadOrganisations(query, queryRatings, queryLocation, queryCategory);
 
         let searchTerm = "";
         if(localStorage.getItem("searchTerm") != "") {
