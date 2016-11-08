@@ -61,12 +61,12 @@ export function loadOrganisations() {
         }
 
         //Locations
-        if(location !== undefined) {
+        if(location !== undefined && location.length !== 0) {
             url += "locations=" + `${location}` + "&";
         }
 
         //Categories
-        if(category !== undefined) {
+        if(category !== undefined && category.length !== 0) {
             url += "category=" + `${category}`;
         }
 

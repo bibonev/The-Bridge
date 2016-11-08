@@ -30,28 +30,44 @@ class OrganisationListAPIView(generics.ListAPIView):
         queryset = organisation_models.Organisation.objects.all()
         
         options = {
+            'search' : self.request.GET.get('search'),
             'locations' : self.request.GET.get('locations'),
             'review1' : self.request.GET.get('rating1'),
             'review2' : self.request.GET.get('rating2'),
-            'category' : self.request.GET.get('category'),
-            'search' : self.request.GET.get('search')
+            'category' : self.request.GET.get('category')
         }
 
         arguments = {}
+        querysetSearch = organisation_models.Organisation.objects.all()
+        querysetRating = organisation_models.Organisation.objects.all()
 
         for k, v in options.items():
             if v:
                 if k == 'search':
-                    queryset = organisation_models.Organisation.objects.filter(Q(title__contains=v) | Q(description__contains=v))
+                    querysetSearch = querysetSearch.filter(Q(title__contains=v) | Q(description__contains=v))
                 elif k == 'review1':
-                    queryset = organisation_models.Organisation.objects.filter(review__gte=v).distinct()
+                    if(list(querysetSearch) != list(queryset)):
+                        querysetSearch = querysetSearch.filter(review__gte=float(v)).distinct()
+                    else:
+                        querysetRating = querysetRating.filter(review__gte=float(v)).distinct()
                 elif k == 'review2':
-                    queryset = organisation_models.Organisation.objects.filter(review__lte=v).distinct()
+                    if(list(querysetSearch) != list(queryset)):
+                        querysetSearch = querysetSearch.filter(review__lte=float(v)).distinct()
+                    else:
+                        querysetRating = querysetRating.filter(review__lte=float(v)).distinct()
                 else:
                     arguments[k] = v
                 
-        if (arguments != {}):
-            queryset = organisation_models.Organisation.objects.filter(**arguments)
+        if (arguments != {} and list(querysetSearch) == list(queryset) and list(querysetRating) == list(queryset)):
+            return organisation_models.Organisation.objects.filter(**arguments)
+        elif (arguments != {} and list(querysetSearch) != list(queryset)):
+            return querysetSearch.filter(**arguments)
+        elif (arguments != {} and list(querysetRating) != list(queryset)):
+            return querysetRating.filter(**arguments)
+        elif (list(querysetSearch) != list(queryset)):
+            return querysetSearch
+        elif (list(querysetRating) != list(queryset)):
+            return querysetRating
 
         return queryset
 
@@ -201,4 +217,5 @@ class CommentCreateAPIView(generics.CreateAPIView):
             organisation_id=organisation_id, 
             post_id=post_id,
             request=self.request)
+
 
