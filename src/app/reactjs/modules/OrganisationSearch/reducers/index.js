@@ -9,6 +9,8 @@ const ORGANISATIONS_INITIAL = {
     count: 0,
     page: 1,
     ratings: [],
+    location: "",
+    category: "",
     search: getParameterByName('search'),
     organisations: {},
 };
@@ -27,7 +29,9 @@ export const organisations = (state=ORGANISATIONS_INITIAL, action) => {
         case 'CHANGE_SEARCH':
             return Object.assign({}, state, {
                 search: action.search,
-                ratings: action.ratings
+                ratings: action.ratings,
+                location: action.location,
+                category: action.category
             });
         default:
             return state;

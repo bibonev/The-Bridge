@@ -23,12 +23,9 @@ export default class SearchPanel extends React.Component {
                                         <div className="row">
                                             <div className="col-md-6">
                                                 <div className="form-group">
-                                                    <label htmlFor="filter">Rating</label> <br />
-                                                    <input type="checkbox" ref='rating01' onChange={this.onSearchChange}/> 0.0 - 1.0 <br/>
-                                                    <input type="checkbox" ref='rating12' onChange={this.onSearchChange}/> 1.0 - 2.0 <br/>
-                                                    <input type="checkbox" ref='rating23' onChange={this.onSearchChange}/> 2.0 - 3.0 <br/>
-                                                    <input type="checkbox" ref='rating34' onChange={this.onSearchChange}/> 3.0 - 4.0 <br/>
-                                                    <input type="checkbox" ref='rating45' onChange={this.onSearchChange}/> 4.0 - 5.0 <br/>
+                                                    <label htmlFor="filter">Rating (0.0 - 5.0)</label> <br />
+                                                    <input type="text" ref='rating1' onChange={this.onSearchChange} placeholder='From'/> <br />
+                                                    <input type="text" ref='rating2' onChange={this.onSearchChange} placeholder='To'/>
                                                 </div>
                                             </div>
                                             <div className="col-md-6">
@@ -44,21 +41,23 @@ export default class SearchPanel extends React.Component {
                                         </div>
                                         <div className="form-group">
                                             <label htmlFor="filter">Location</label>
-                                            <select className="form-control">
-                                                <option value="0">London</option>
-                                                <option value="1">Birmingham</option>
-                                                <option value="2">New Yourk</option>
-                                                <option value="3">Los Angeles</option>
-                                                <option value="4">Paris</option>
+                                            <select ref='locationSelection' className="form-control" onChange={this.onSearchChange}>
+                                                <option value="0" placeholder="All"></option>
+                                                <option value="1">London</option>
+                                                <option value="2">Birmingham</option>
+                                                <option value="3">New Yourk</option>
+                                                <option value="4">Los Angeles</option>
+                                                <option value="5">Paris</option>
                                             </select>
                                         </div>
                                          <div className="form-group">
                                             <label htmlFor="filter">Category</label>
-                                            <select className="form-control">
-                                                <option value="0">Education</option>
-                                                <option value="1">Public services</option>
-                                                <option value="2">Environment</option>
-                                                <option value="3">Healthcare</option>
+                                            <select ref='categorySelection' className="form-control" onChange={this.onSearchChange}>
+                                                <option value="0" placeholder="All"></option>
+                                                <option value="1">Education</option>
+                                                <option value="2">Public services</option>
+                                                <option value="3">Environment</option>
+                                                <option value="4">Healthcare</option>
                                             </select>
                                         </div>
                                     </form>
@@ -74,39 +73,54 @@ export default class SearchPanel extends React.Component {
     onSearchChange() {
         let query = ReactDOM.findDOMNode(this.refs.search).value;
 
-        let ratings = [];
+        let queryRatings = [];
+        let r1 =  ReactDOM.findDOMNode(this.refs.rating1).value;
+        let r2 =  ReactDOM.findDOMNode(this.refs.rating2).value;
 
-        let r1 = {'isChecked': ReactDOM.findDOMNode(this.refs.rating01).checked, 'valueFrom': 0, 'valueTo': 1};
-        let r2 = {'isChecked': ReactDOM.findDOMNode(this.refs.rating12).checked, 'valueFrom': 1, 'valueTo': 2};
-        let r3 = {'isChecked': ReactDOM.findDOMNode(this.refs.rating23).checked, 'valueFrom': 2, 'valueTo': 3};
-        let r4 = {'isChecked': ReactDOM.findDOMNode(this.refs.rating34).checked, 'valueFrom': 3, 'valueTo': 4};
-        let r5 = {'isChecked': ReactDOM.findDOMNode(this.refs.rating45).checked, 'valueFrom': 4, 'valueTo': 5};
+        function validation(r1, r2) {
+            var t1 =  parseFloat(r1).toFixed(1);
+            var t2 =  parseFloat(r2).toFixed(1);
 
-        ratings.push(r1, r2, r3, r4, r5);
-
-        function filterByChecks(rating) {
-            if (rating.isChecked) {
+            if(t1 >= 0.0 && t1 <= 5.0 && t2 >= 0.0 && t2 <= 5.0) {
                 return true;
-            } else {
-                return false;
             }
+
+            return false;
         }
 
-        let queryRatings = ratings.filter(filterByChecks);
+        if(r1 != "From" && r2 != "To" && validation(r1, r2)) {
+            queryRatings.push(r1, r2);
+        }
 
-        this.setState({
-            ratings: queryRatings
-        });
+        let queryLocation = "";
+        let locations = ReactDOM.findDOMNode(this.refs.locationSelection).childNodes;
+        locations.forEach(function(element) {
+            if (element.selected) {
+                queryLocation = element.text;
+            }
+        }, this);
+
+        let queryCategory = "";
+        let categories = ReactDOM.findDOMNode(this.refs.categorySelection).childNodes;
+        categories.forEach(function(element) {
+            if (element.selected) {
+                queryCategory = element.text;
+            }
+        }, this);
+
 
         if (this.promise) {
             clearInterval(this.promise)
         }
 
         this.setState({
-            search: query
+            search: query,
+            ratings: queryRatings,
+            location: queryLocation,
+            category: queryCategory
         });
 
-        this.promise = setTimeout(() => this.props.onSearchChanged(query, queryRatings), 400);
+        this.promise = setTimeout(() => this.props.onSearchChanged(query, queryRatings, queryLocation, queryCategory), 400);
     }
 
     onClearSearch() {
@@ -116,6 +130,7 @@ export default class SearchPanel extends React.Component {
         this.props.onSearchChanged(undefined)
     }
 }
+
 
 
 

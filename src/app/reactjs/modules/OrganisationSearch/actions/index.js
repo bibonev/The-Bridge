@@ -12,11 +12,13 @@ export function showOrganisationsResult(jsonResult) {
     };
 }
 
-export function changeSearch(search, ratings) {
+export function changeSearch(search, ratings, location, category) {
     return {
         type: 'CHANGE_SEARCH',
         search,
-        ratings
+        ratings,
+        location,
+        category
     };
 }
 
@@ -30,7 +32,7 @@ export function changeSearchAndLoadOrganisations(search, ratings) {
 export function loadOrganisations() {
     return (dispatch, getState) => {
         let state = getState();
-        let { search, ratings } = state.organisations;
+        let { search, ratings, location, category } = state.organisations;
         let organisations = [];
 
         //Search term
@@ -42,42 +44,32 @@ export function loadOrganisations() {
             searchTerm = search;
         }
 
-        let url = `http://localhost:8000/api/v1/organisations/?search=`;
+        //Initial url
+        let url = `http://localhost:8000/api/v1/organisations/?`;
+        
         if(searchTerm) {
-            url += `${searchTerm}`;
+            url += "search=" + `${searchTerm}` + "&";
         }
 
         //Ratings
-        dispatch(loadingChanged(true));
-        
-        if (ratings.length > 0) {
-            ratings.forEach(function(rating) {
-                url += url + "&review1=" + `${rating.valueFrom}` + "&review2=" + `${rating.valueTo}`;
-                $.get(url, data => {
-                    organisations = organisations.concat(data);
-                });
-            }, this);
-        } else {
-            $.get(url, data => {
-                console.log("da: ", data);
-                organisations = data.slice();
-                console.log("org0: ", organisations);
-                dispatch(showOrganisationsResult(organisations));
-            });
+        console.log(ratings);
+        if(ratings.length == 2 && !isNaN(ratings[0]) && !isNaN(ratings[1])) {
+            url += "rating1=" + `${ratings[0]}` + "&rating2=" + `${ratings[1]}` + "&";
         }
 
-        //Remove duplicates
-        // for(let i = 0; i < organisations.length - 1; i++) {
-        //     for(let j = i+1; j < organisations.length; j++) {
-        //         if(organisations[i].id == organisations[j].id) {
-        //             organisations.splice(i, 1);
-        //         }
-        //     } 
-        // }
-        organisations = Array.from(new Set(organisations));
+        //Locations
+        if(location !== undefined) {
+            url += "locations=" + `${location}` + "&";
+        }
 
-        //dispatch(showOrganisationsResult(organisations));
-        //  dispatch(loadingChanged(false));
-        localStorage.setItem("searchTerm", "");
+        //Categories
+        if(category !== undefined) {
+            url += "category=" + `${category}`;
+        }
+
+        $.get(url, data => {
+            dispatch(showOrganisationsResult(data));
+            dispatch(loadingChanged(false));
+        });
     }
 }
