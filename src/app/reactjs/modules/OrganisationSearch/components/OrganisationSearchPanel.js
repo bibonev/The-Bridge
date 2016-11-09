@@ -6,62 +6,55 @@ export default class SearchPanel extends React.Component {
         super()
         this.onSearchChange = this.onSearchChange.bind(this);
         this.onClearSearch = this.onClearSearch.bind(this);
+        this.showFilterDropdown = this.showFilterDropdown.bind(this);
         this.state = {};
     }
 
     render() {
         return (
             <div>
-                <div className="input-group" id="adv-search">
-                    <input type="text" className="form-control" ref='search' name='searchTerm'  placeholder="Search organisations" defaultValue={this.props.search} value={this.state.search} onChange={this.onSearchChange } />
-                    <div className="input-group-btn">
-                        <div className="btn-group" role="group">
-                            <div className="dropdown dropdown-lg">
-                                <button type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span className="caret"></span></button>
-                                <div className="dropdown-menu dropdown-menu-right" role="menu">
-                                    <form className="form-horizontal" role="form">
-                                        <div className="row">
-                                            <div className="col-md-6">
-                                                <div className="form-group">
-                                                    <label htmlFor="filter">Rating (0.0 - 5.0)</label> <br />
-                                                    <input type="text" ref='rating1' onChange={this.onSearchChange} placeholder='From'/> <br />
-                                                    <input type="text" ref='rating2' onChange={this.onSearchChange} placeholder='To'/>
-                                                </div>
-                                            </div>
-                                            <div className="col-md-6">
-                                                <div className="form-group">
-                                                    <label htmlFor="filter">Payment</label> <br />
-                                                    <input type="checkbox" /> 0,000 - 5,000 <br/>
-                                                    <input type="checkbox" /> 5,000 - 15,000 <br/>
-                                                    <input type="checkbox" /> 15,000 - 25,000 <br/>
-                                                    <input type="checkbox" /> 25,000 - 35,000 <br/>
-                                                    <input type="checkbox" /> 35,000 +  <br/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="form-group">
-                                            <label htmlFor="filter">Location</label>
-                                            <select ref='locationSelection' className="form-control" onChange={this.onSearchChange}>
-                                                <option value="0"></option>
-                                                <option value="1">London</option>
-                                                <option value="2">Birmingham</option>
-                                                <option value="3">New Yourk</option>
-                                                <option value="4">Los Angeles</option>
-                                                <option value="5">Paris</option>
-                                            </select>
-                                        </div>
-                                         <div className="form-group">
-                                            <label htmlFor="filter">Category</label>
-                                            <select ref='categorySelection' className="form-control" onChange={this.onSearchChange}>
-                                                <option value="0"></option>
-                                                <option value="1">Education</option>
-                                                <option value="2">Public Services</option>
-                                                <option value="3">Environment</option>
-                                                <option value="4">Healthcare</option>
-                                            </select>
-                                        </div>
-                                    </form>
+                <div id="adv-search">
+                    <input type="text" className="search-input" ref='search' name='searchTerm'  placeholder="Search organisations" defaultValue={this.props.search} value={this.state.search} onChange={this.onSearchChange } />
+                    <button type="button" className="search-filter-button" onClick={this.showFilterDropdown}><i className="fa fa-caret-down" aria-hidden="true"></i></button>
+                    <div className="filters-menu">
+                        <div className="left-filter-group">
+                            <div className="group-rating">
+                                <label>Rating (0.0 - 5.0)</label> <br />
+                                <input type="text" ref='rating1' onChange={this.onSearchChange} placeholder='From'/>
+                                <input type="text" ref='rating2' onChange={this.onSearchChange} placeholder='To'/>
+                            </div>
+                        </div>
+                            {/*<div className="col-md-6">
+                                <div className="form-group">
+                                    <label htmlFor="filter">Payment</label> <br />
+                                    <input type="checkbox" /> 0,000 - 5,000 <br/>
+                                    <input type="checkbox" /> 5,000 - 15,000 <br/>
+                                    <input type="checkbox" /> 15,000 - 25,000 <br/>
+                                    <input type="checkbox" /> 25,000 - 35,000 <br/>
+                                    <input type="checkbox" /> 35,000 +  <br/>
                                 </div>
+                            </div>*/}
+                        <div className="right-filter-group">
+                            <div className="group-dropdown">
+                                <label>Location</label> <br />
+                                <select ref='locationSelection' onChange={this.onSearchChange}>
+                                    <option value="0"></option>
+                                    <option value="1">London</option>
+                                    <option value="2">Birmingham</option>
+                                    <option value="3">New Yourk</option>
+                                    <option value="4">Los Angeles</option>
+                                    <option value="5">Paris</option>
+                                </select>
+                            </div>
+                            <div className="group-dropdown">
+                                <label>Category</label> <br />
+                                <select ref='categorySelection' onChange={this.onSearchChange}>
+                                    <option value="0"></option>
+                                    <option value="1">Education</option>
+                                    <option value="2">Public Services</option>
+                                    <option value="3">Environment</option>
+                                    <option value="4">Healthcare</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -70,6 +63,9 @@ export default class SearchPanel extends React.Component {
         )
     }
 
+    showFilterDropdown(e){
+        $('.filters-menu').toggle()
+    }
     onSearchChange() {
         let query = ReactDOM.findDOMNode(this.refs.search).value;
 
@@ -88,8 +84,12 @@ export default class SearchPanel extends React.Component {
             return false;
         }
 
-        if(r1 != "From" && r2 != "To" && validation(r1, r2)) {
+        if(r1 != "" && r2 != "" && validation(r1, r2)) {
             queryRatings.push(r1, r2);
+        }else if(r1 != "" && validation(r1, "5.0")){
+            queryRatings.push(r1, "5.0");
+        }else if(r2 != "" && validation("0.0", r2)){
+            queryRatings.push("0.0", r2);
         }
 
         let queryLocation = "";
