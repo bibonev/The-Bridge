@@ -27,13 +27,25 @@ export default class MainStudioRepresentation extends React.Component{
     render(){
         const request = this.requestObject(this.props.curr_request_id);
         const organisation = this.organisationObject(this.props.curr_organisation_id);
-        const organisationDisplay = <div>
-                                        <p>Request name: {request.name}</p>
-                                        <p>Organisation name: {organisation.title}</p>
-                                    </div>
+        const organisationDisplay = () => {
+            if(typeof organisation == 'undefined' || jQuery.isEmptyObject(organisation)){
+                return <div>
+                            <h3>Does not exist organisation. </h3>
+                        </div> 
+            }else if(typeof request !== 'undefined' && !jQuery.isEmptyObject(request)  ){
+                return <div>
+                            <p>Request name: {request.name}</p>
+                            <p>Organisation name: {organisation.title}</p>
+                        </div>
+            }else{
+                return <div>
+                            <h3>No requests selected</h3>
+                        </div> 
+            }
+        }
         
         return <div className="studio-main">
-                    {organisationDisplay}
+                    {organisationDisplay()}
                 </div>
     }
 }

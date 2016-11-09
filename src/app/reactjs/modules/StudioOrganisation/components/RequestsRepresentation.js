@@ -6,6 +6,7 @@ export default class RequestsRepresentation extends React.Component{
         super(props)
         this.onClickOrganisationChange = this.onClickOrganisationChange.bind(this)
         this.showOrganisationOptions = this.showOrganisationOptions.bind(this)
+        this.organisationDisplay = this.organisationDisplay.bind(this)
     }
     onClickOrganisationChange(org_id){
         $('.organisationOptions').hide();
@@ -17,13 +18,13 @@ export default class RequestsRepresentation extends React.Component{
         $('.organisationOptions').toggle();
     }
     organisationDisplay(org_id){
-        var text = "";
+        var org_object = {}
         this.props.org_u_rows.map(function(org){
                 if(org_id == org.id){
-                    text = org.title
+                    org_object = org
                 }
-        });
-        return text;
+            });
+        return org_object;
     }
     render(){
         const requests = this.props.requests || [] // delete [] and see if it is working
@@ -36,18 +37,6 @@ export default class RequestsRepresentation extends React.Component{
                 </Link>
             )
         const organisationDisplay = this.organisationDisplay(currentOrganisationId);
-        const haveOrganisations = () => {
-            if(typeof this.props.org_u_rows !== 'undefined' && this.props.org_u_rows.length > 0){
-                return <div className="organisationChooseBox">
-                        <button className="organisationDisplay" onClick={this.showOrganisationOptions}>{organisationDisplay}</button>
-                        <div className="organisationOptions currentOptionsShow">
-                            {currUserOrg}
-                        </div>
-                    </div>
-            }else{
-                return; 
-            }
-        }
         const requestsResult = requests.map(request =>
                            <li key={request.id} className="requestDisplay">
                                <Link to={`/${currentOrganisationId}/${request.id}/`} activeClassName="active-request" className="requestButton">
@@ -55,12 +44,26 @@ export default class RequestsRepresentation extends React.Component{
                                </Link>
                            </li>
                    )
+        const haveOrganisations = () => {
+            if(typeof this.props.org_u_rows !== 'undefined' && this.props.org_u_rows.length > 0 && !jQuery.isEmptyObject(organisationDisplay)){
+                return <div>
+                        <div className="organisationChooseBox">
+                            <button className="organisationDisplay" onClick={this.showOrganisationOptions}>{organisationDisplay.title}</button>
+                            <div className="organisationOptions currentOptionsShow">
+                                {currUserOrg}
+                            </div>
+                        </div>
+                        <div className="bonus-text-all-requests">All requests for {organisationDisplay.title}</div>
+                        <ul className="all-requests">
+                            {requestsResult}
+                        </ul>
+                    </div>
+            }else{
+                return <p>Does not exist organisation</p>; 
+            }
+        }
         return <div className="studio-info">
                     {haveOrganisations()}
-                    <div className="bonus-text-all-requests">All requests for {organisationDisplay}</div>
-                    <ul className="all-requests">
-                        {requestsResult}
-                    </ul>
                 </div>
     }
 }

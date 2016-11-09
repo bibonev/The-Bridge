@@ -35,7 +35,7 @@ class StudioOrganisation extends Component {
         <Router history={appHistory}>
           <Route path="/" component={StudioOrganisationPanel}>
             <IndexRoute component={StudioOrganisationPanel}/>
-            {/* HARDCORE default path - Definitely change */}
+            {/* HARDCODE default path - Definitely change */}
             <IndexRedirect to="/2" component={StudioOrganisationPanel}/> 
             <Route path=":orgId" component={StudioOrganisationPanel}/>
             <Route path=":orgId/:requestId" component={StudioOrganisationPanel}/>

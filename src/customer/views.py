@@ -52,7 +52,7 @@ def organisation_details(request, pk):
     if request.method == 'POST':
         # check whether the post request is on the request form: 'request_organisation' is the name of the submit button
         if "request_organisation" in request.POST:
-            organisation = get_object_or_404(models.Organisation, pk=request.POST.get('hidden_org_id'))
+            organisation = get_object_or_404(organisation_models.Organisation, pk=request.POST.get('hidden_org_id'))
             user = request.user
             PendingRequest.send_request(user, organisation)
 
