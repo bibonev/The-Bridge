@@ -109,9 +109,9 @@ export default class SearchPanel extends React.Component {
         }, this);
 
 
-        if (this.promise) {
-            clearInterval(this.promise)
-        }
+        //if (this.promise) {
+        //    clearInterval(this.promise)
+        //}
 
         this.setState({
             search: query,
