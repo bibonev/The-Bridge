@@ -25,36 +25,50 @@ class OrganisationListAPIView(generics.ListAPIView):
     # filter organisations based on search_fields
     search_fields = ('title', 'description',)
 
+    # calculates each organisation rating
+    def rating_filter(self, set, rating, compare):
+        if compare == 'gte':
+            for org in set:
+                if org.current_rating() < rating:
+                    set = set.exclude(pk=org.pk)
+        elif compare == 'lte':
+            for org in set:
+                if org.current_rating() > rating:
+                    set = set.exclude(pk=org.pk)
+                    
+        return set
+                
+
      # modify serializer class to return the method for creating a comment using passed 'type', 'org_id', 'post_id' values as get request
     def get_queryset(self):
         queryset = organisation_models.Organisation.objects.all()
         
-        options = {
-            'search' : self.request.GET.get('search'),
-            'locations' : self.request.GET.get('locations'),
-            'review1' : self.request.GET.get('rating1'),
-            'review2' : self.request.GET.get('rating2'),
-            'category' : self.request.GET.get('category')
-        }
+        options = [
+            ('search', self.request.GET.get('search')),
+            ('locations', self.request.GET.get('locations')),
+            ('rating1', self.request.GET.get('rating1')),
+            ('rating2', self.request.GET.get('rating2')),
+            ('category', self.request.GET.get('category'))
+        ]
 
         arguments = {}
         querysetSearch = organisation_models.Organisation.objects.all()
         querysetRating = organisation_models.Organisation.objects.all()
 
-        for k, v in options.items():
+        for (k, v) in options:
             if v:
                 if k == 'search':
                     querysetSearch = querysetSearch.filter(Q(title__contains=v) | Q(description__contains=v))
-                elif k == 'review1':
+                elif k == 'rating1':
                     if(list(querysetSearch) != list(queryset)):
-                        querysetSearch = querysetSearch.filter(review__gte=float(v)).distinct()
+                        querysetSearch = self.rating_filter(querysetSearch, float(v), 'gte')
                     else:
-                        querysetRating = querysetRating.filter(review__gte=float(v)).distinct()
-                elif k == 'review2':
+                        querysetRating = self.rating_filter(querysetRating, float(v), 'gte')
+                elif k == 'rating2':
                     if(list(querysetSearch) != list(queryset)):
-                        querysetSearch = querysetSearch.filter(review__lte=float(v)).distinct()
+                        querysetSearch = self.rating_filter(querysetSearch, float(v), 'lte')
                     else:
-                        querysetRating = querysetRating.filter(review__lte=float(v)).distinct()
+                        querysetRating = self.rating_filter(querysetRating, float(v), 'lte')
                 else:
                     arguments[k] = v
                 
