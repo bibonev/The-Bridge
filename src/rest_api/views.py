@@ -58,7 +58,7 @@ class OrganisationListAPIView(generics.ListAPIView):
         for (k, v) in options:
             if v:
                 if k == 'search':
-                    querysetSearch = querysetSearch.filter(Q(title__contains=v) | Q(description__contains=v))
+                    querysetSearch = querysetSearch.filter(Q(title__icontains=v) | Q(description__icontains=v))
                 elif k == 'rating1':
                     if(list(querysetSearch) != list(queryset)):
                         querysetSearch = self.rating_filter(querysetSearch, float(v), 'gte')
@@ -71,7 +71,8 @@ class OrganisationListAPIView(generics.ListAPIView):
                         querysetRating = self.rating_filter(querysetRating, float(v), 'lte')
                 else:
                     arguments[k] = v
-                
+
+        # change arguments to check by every location    
         if (arguments != {} and list(querysetSearch) == list(queryset) and list(querysetRating) == list(queryset)):
             return organisation_models.Organisation.objects.filter(**arguments)
         elif (arguments != {} and list(querysetSearch) != list(queryset)):
