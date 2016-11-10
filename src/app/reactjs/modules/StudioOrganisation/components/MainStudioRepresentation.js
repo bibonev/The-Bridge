@@ -34,7 +34,7 @@ export default class MainStudioRepresentation extends React.Component{
                         </div> 
             }else if(typeof request !== 'undefined' && !jQuery.isEmptyObject(request)  ){
                 return <div>
-                            <p>Request name: {request.name}</p>
+                            <p>Request name: {request.user.first_name} {request.user.last_name}</p>
                             <p>Organisation name: {organisation.title}</p>
                         </div>
             }else{

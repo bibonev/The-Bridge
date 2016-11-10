@@ -40,7 +40,7 @@ export default class RequestsRepresentation extends React.Component{
         const requestsResult = requests.map(request =>
                            <li key={request.id} className="requestDisplay">
                                <Link to={`/${currentOrganisationId}/${request.id}/`} activeClassName="active-request" className="requestButton">
-                                    {request.name}
+                                    {request.user.first_name} {request.user.last_name}
                                </Link>
                            </li>
                    )

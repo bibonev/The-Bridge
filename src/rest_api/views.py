@@ -6,6 +6,7 @@ from rest_framework import generics, permissions, filters, views
 from rest_framework.response import Response
 from organisation import models as organisation_models
 from posts import models as posts_models
+from partnership import models as partnership_models
 from . import serializers
 
 ##########
@@ -174,4 +175,18 @@ class CommentCreateAPIView(generics.CreateAPIView):
             organisation_id=organisation_id, 
             post_id=post_id,
             request=self.request)
+
+class PendingRequestListAPIView(generics.ListAPIView):
+    '''List pending request for particular organisation'''
+    queryset = partnership_models.PendingRequest.objects.all()
+    serializer_class = serializers.PendingRequestListSerializer
+    # modify queryset when '?org_id=...' is passed to return posts only for the particular organisation
+    def get_queryset(self):
+        queryset_list = set()
+        organisation_id = self.request.GET.get('org_id') # get the 'org_id' passed as get request
+        if organisation_id :
+            org_obj = organisation_models.Organisation.objects.get(pk=organisation_id)
+            queryset_list = queryset_list.union(partnership_models.PendingRequest.get_pending_requests_for_organisation(organisation=org_obj))
+
+        return queryset_list
 

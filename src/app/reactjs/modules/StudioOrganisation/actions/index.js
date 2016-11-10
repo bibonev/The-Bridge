@@ -12,25 +12,13 @@ export function showOrganisationsCurrentUser(jsonResult){
     }
 }
 
-const data1 = [
-    {'id':'0', 'name': 'Simeon Kostadinov'},
-    {'id':'1', 'name': 'Martin Kostadinov'},
-]
-const data2 = [
-    {'id':'2', 'name': 'Boyan Bonev'},
-    {'id':'3', 'name': 'Mitio Pishtova'},
-]
-
 export function loadRequests(org_id) {
     return (dispatch, getState) => {
-            var d = {};
-            if(org_id == 2){
-                d = data1;
-            }else{
-                d = data2;
-            }
-            dispatch(showRequestsResult(d));
+        let url = `http://localhost:8000/api/v1/pending_requests/?org_id=${org_id}`;
+        $.get(url, data => {
+            dispatch(showRequestsResult(data));
             dispatch(loadOrganisationsCurrentUser());
+        });
     }
 }
 
