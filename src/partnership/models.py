@@ -19,6 +19,11 @@ class Relation(models.Model):
     def together(user, organisation):
         return Relation.objects.filter(user=user, organisation=organisation).exists()
 
+    # get pending requests for organisation
+    @staticmethod
+    def get_relations_for_organisation(organisation):
+        return Relation.objects.filter(organisation=organisation)
+
     class Meta:
         unique_together = ('user', 'organisation')
 

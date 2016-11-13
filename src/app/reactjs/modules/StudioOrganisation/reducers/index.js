@@ -1,5 +1,6 @@
 const STUDIO_INITIAL = {
-    requests: [],
+    pending_requests: [],
+    relations: [],
     org_u_rows: [],
 };
 
@@ -8,7 +9,8 @@ export const studio = (state=STUDIO_INITIAL, action) => {
     switch (action.type) {
         case 'SHOW_REQUESTS':
             return Object.assign({}, state, {
-                requests: action.requests,
+                pending_requests: action.pending_requests,
+                relations: action.relations,
             });
         case 'ORGANISATION_CHOICE':
             return Object.assign({}, state, {

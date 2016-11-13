@@ -39,6 +39,7 @@ class StudioOrganisation extends Component {
             <IndexRedirect to="/2" component={StudioOrganisationPanel}/> 
             <Route path=":orgId" component={StudioOrganisationPanel}/>
             <Route path=":orgId/:requestId" component={StudioOrganisationPanel}/>
+            <Route path=":orgId/pending/:pendingId" component={StudioOrganisationPanel}/>
           </Route>
         </Router>
       </Provider>
