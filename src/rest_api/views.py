@@ -204,7 +204,7 @@ class PendingRequestResultListAPIView(generics.ListAPIView):
             if result == 'approve':
                 pr_obj.approve()
             elif result == 'reject':
-                pass
+                pr_obj.reject()
             queryset_list = queryset_list.union(partnership_models.PendingRequest.get_pending_requests_for_organisation(organisation=org_obj))
 
         return queryset_list

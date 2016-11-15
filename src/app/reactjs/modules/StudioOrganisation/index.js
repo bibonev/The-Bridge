@@ -27,6 +27,8 @@ let store = finalCreateStore(reducer)
 /////////////////
 // IN PRODUCTION USE browserHistory instead of appHistory: https://github.com/ReactTraining/react-router/blob/master/docs/guides/Histories.md
 ////////////////
+// Fix the routers to work when changing manually the url to refresh!!! http://localhost:8000/studio/#/2 to http://localhost:8000/studio/#/11 manually
+////////////////
 
 class StudioOrganisation extends Component {
   render() {

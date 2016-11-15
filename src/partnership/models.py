@@ -55,7 +55,7 @@ class PendingRequest(models.Model):
     def send_request(user, organisation):
         # checks if a relation exists or if it is pending or if it is sent to own organisation
         if not Relation.together(user, organisation) and not Relation.pending(user, organisation) and not Relation.own_organisation(user, organisation):
-            return PendingRequest.objects.get_or_create(user=user, organisation=organisation, sender='0')
+            PendingRequest.objects.get_or_create(user=user, organisation=organisation, sender='0')
 
     # organisation approves request from user
     def approve(self):
@@ -63,4 +63,11 @@ class PendingRequest(models.Model):
         if not Relation.together(self.user, self.organisation) and Relation.pending(self.user, self.organisation) and not Relation.own_organisation(self.user, self.organisation):
             # delete the record from PendingRequest and add it to Relation
             PendingRequest.objects.filter(user=self.user, organisation=self.organisation).delete()
-            return Relation.objects.get_or_create(user=self.user, organisation=self.organisation)
+            Relation.objects.get_or_create(user=self.user, organisation=self.organisation)
+    
+    # organisation rejects request from user
+    def reject(self):
+        # checks if a relation exists or if it is pending or if it is sent to own organisation
+        if not Relation.together(self.user, self.organisation) and Relation.pending(self.user, self.organisation) and not Relation.own_organisation(self.user, self.organisation):
+            # delete the record from PendingRequest and add it to Relation
+            PendingRequest.objects.filter(user=self.user, organisation=self.organisation).delete()

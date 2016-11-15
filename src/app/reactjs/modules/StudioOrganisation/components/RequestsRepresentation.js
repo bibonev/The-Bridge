@@ -42,44 +42,57 @@ export default class RequestsRepresentation extends React.Component{
                 </Link>
             )
         const organisationDisplay = this.organisationDisplay(currentOrganisationId);
-        const requestsResult = relations.map(request =>
+        const requestsResult = () => {
+            if(relations.length == 0){
+                return <div className="empty-requests-list">No requests in progress</div>
+            }else{
+                return relations.map(request =>
                            <li key={request.id} className="requestDisplay">
-                               <Link to={`/${currentOrganisationId}/${request.id}/`} activeClassName="active-request" className="requestButton">
+                               <Link to={`/${currentOrganisationId}/${request.id}/`} activeClassName="active-request" className="requestButton requestButton-relation">
                                     <img src={"//localhost:8000" + request.user.front_picture} width="32" height="32" />
                                     <span className="request-title">{request.user.first_name} {request.user.last_name}</span>
                                </Link>
                            </li>
-                   )
-        const pendingRequestsResult = pending_requests.map(request =>
+                   )}
+        }
+        const pendingRequestsResult = () => {
+                if(pending_requests.length == 0){
+                    return <div className="empty-requests-list">No pending requests</div>
+                }else{
+                    return pending_requests.map(request =>
                            <li key={request.id} className="requestDisplay">
-                               <Link to={`/${currentOrganisationId}/pending/${request.id}/`} activeClassName="active-request" className="requestButton">
+                               <Link to={`/${currentOrganisationId}/pending/${request.id}/`} activeClassName="active-request" className="requestButton requestButton-pending">
                                     <img src={"//localhost:8000" + request.user.front_picture} width="32" height="32" />
                                     <span className="request-title">{request.user.first_name} {request.user.last_name}</span>
                                </Link>
                                <button className="approve" onClick={() => this.onClickRequestResult(currentOrganisationId, request.id, 'approve')}><i className="fa fa-check" aria-hidden="true"></i></button>
                                <button className="reject" onClick={() => this.onClickRequestResult(currentOrganisationId, request.id, 'reject')}><i className="fa fa-times" aria-hidden="true"></i></button>
                            </li>
-                   )
+                    )}
+            }
         const haveOrganisations = () => {
             if(typeof this.props.org_u_rows !== 'undefined' && this.props.org_u_rows.length > 0 && !jQuery.isEmptyObject(organisationDisplay)){
                 return <div>
-                        <div className="organisationChooseBox">
-                            <button className="organisationDisplay" onClick={this.showOrganisationOptions}>{organisationDisplay.title}</button>
-                            <div className="organisationOptions currentOptionsShow">
-                                {currUserOrg}
+                        <div>
+                            <div className="organisationChooseBox">
+                                <button className="organisationDisplay" onClick={this.showOrganisationOptions}>{organisationDisplay.title}</button>
+                                <div className="organisationOptions currentOptionsShow">
+                                    {currUserOrg}
+                                </div>
                             </div>
+                            <a href={"//localhost:8000/organisations/" + currentOrganisationId} className="link-to-organisation"><i className="fa fa-external-link" aria-hidden="true"></i></a>
                         </div>
                         <div className="bonus-text-all-requests">Pending requests for {organisationDisplay.title}</div>
                         <ul className="all-requests">
-                            {pendingRequestsResult}
+                            {pendingRequestsResult()}
                         </ul>
                         <div className="bonus-text-all-requests">All requests for {organisationDisplay.title}</div>
                         <ul className="all-requests">
-                            {requestsResult}
+                            {requestsResult()}
                         </ul>
                     </div>
             }else{
-                return <p>Does not exist organisation</p>; 
+                return; 
             }
         }
         return <div className="studio-info">

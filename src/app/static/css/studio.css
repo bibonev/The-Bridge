@@ -58,6 +58,12 @@
     background: #029acf;
     color: #fff;
 }
+.link-to-organisation{
+    font-size:18px;
+    margin-left:15px;
+    color:#029acf;
+    vertical-align:middle;
+}
 .bonus-text-all-requests{
     background:#c4c4c4;
     width:100%;
@@ -80,7 +86,7 @@
 .requestDisplay{
     display:block;
     font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
-    font-weight: 100;
+    font-weight: 400;
     font-size: 13px;
     color: #383838;
     background:#fff;
@@ -88,9 +94,14 @@
     border:1px solid #c4c4c4;
     border-bottom:0;
     outline:none;
-    width:100%;
     min-height:64px;
     text-align:left;
+}
+.requestButton-pending{
+    display:inline-block !important;
+}
+.requestButton-relation{
+    width:100% !important;
 }
 .requestDisplay:hover .requestButton{
     text-decoration: underline;
@@ -103,9 +114,9 @@
     font-size:22px;
     background:transparent;
     border:0;
-    float:left;
-    padding:16px 0;
+    padding:14px 0;
     outline:0;
+    float:left;
 }
 .requestDisplay .approve{
     margin-left:15px;
@@ -116,7 +127,7 @@
     color:#e15258;
 }
 .requestButton{
-    padding:16px 0 16px 16px;
+    padding:15px 0 15px 15px;
     float:left;
     white-space: nowrap;
     overflow:hidden !important;
@@ -129,9 +140,17 @@
   border-radius:50%;
   margin-right: 10px;
 }
-.active-request{
-    background:transparent;
-    font-weight: 700;
+.empty-requests-list{
+    border:1px solid #c4c4c4;
+    color:#c4c4c4;
+    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+    text-align:center;
+    padding:10px 0;
+}
+.active-request span{
+    color:#029acf !important;
 }
 .studio-main{
     float:left;

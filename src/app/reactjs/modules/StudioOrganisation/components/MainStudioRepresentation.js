@@ -57,11 +57,9 @@ export default class MainStudioRepresentation extends React.Component{
         }
         const organisationDisplay = () => {
             if(typeof organisation == 'undefined' || jQuery.isEmptyObject(organisation)){
-                return <div>
-                            <h3>Does not exist organisation. </h3>
-                        </div> 
-                 }else{
-                    return checkPendingAndRelationExistence(relation, pending_request)
+                return; 
+            }else{
+                return checkPendingAndRelationExistence(relation, pending_request)
              }
         }
         return <div className="studio-main">

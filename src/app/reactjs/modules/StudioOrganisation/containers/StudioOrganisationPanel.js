@@ -17,6 +17,7 @@ class StudioOrganisationPanel extends Component {
         const { loadRequests, requestResult, params } = this.props;
         const showRequests = (org_id) => loadRequests(org_id);
         const submitRequestResult = (org_id, pr_id, result) => requestResult(org_id, pr_id, result);
+        
         return (
             <div>
                 <RequestsRepresentation relations={relations} pending_requests={pending_requests} org_u_rows={org_u_rows} curr_organisation_id={params.orgId} showRequests={showRequests} submitRequestResult={submitRequestResult}/>
