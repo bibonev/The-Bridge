@@ -349,6 +349,7 @@ class PendingRequestListSerializer(serializers.ModelSerializer):
             'id',
             'user',
             'organisation',
+            'text'
         )
         model = partnership_models.PendingRequest
 
@@ -378,5 +379,6 @@ class RelationListSerializer(serializers.ModelSerializer):
             'id',
             'user',
             'organisation',
+            'text'
         )
         model = partnership_models.Relation

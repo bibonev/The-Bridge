@@ -41,6 +41,7 @@ export default class MainStudioRepresentation extends React.Component{
         const mainStudio = (object) => {
             return <div>
                         <p>Request name: {object.user.first_name} {object.user.last_name}</p>
+                        <p>Message: {object.text} </p>
                         <p>Organisation name: {organisation.title}</p>
                     </div>
         }

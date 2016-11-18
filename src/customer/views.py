@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404, get_list_or_404
+from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
+from django.http import HttpResponseRedirect
 from partnership.models import Relation, PendingRequest
 from organisation import models as organisation_models
 
@@ -53,8 +55,10 @@ def organisation_details(request, pk):
         # check whether the post request is on the request form: 'request_organisation' is the name of the submit button
         if "request_organisation" in request.POST:
             organisation = get_object_or_404(organisation_models.Organisation, pk=request.POST.get('hidden_org_id'))
+            request_text = request.POST.get('request_text')
             user = request.user
-            PendingRequest.send_request(user, organisation)
+            PendingRequest.send_request(user, organisation, request_text)
+            return HttpResponseRedirect(reverse('customer:organisation_details', kwargs={'pk':pk}))
 
     return render(request, 'customer/organisation_details.html', {'org':organisation, 'request_state': request_state,'owner':owner})
 
@@ -83,8 +87,10 @@ def organisation_details_reviews(request, pk):
         # check whether the post request is on the request form: 'request_organisation' is the name of the submit button
         if "request_organisation" in request.POST:
             organisation = get_object_or_404(organisation_models.Organisation, pk=request.POST.get('hidden_org_id'))
+            request_text = request.POST.get('request_text')
             user = request.user
-            PendingRequest.send_request(user, organisation)
+            PendingRequest.send_request(user, organisation, request_text)
+            return HttpResponseRedirect(reverse('customer:organisation_details_reviews', kwargs={'pk':pk}))
 
     return render(request, 'customer/organisation_details_reviews.html', {'org':organisation, 'request_state': request_state, 'owner':owner})
 

@@ -1,6 +1,7 @@
 import React, {Component} from "react"
 import { render } from "react-dom"
-import { Router, Route, IndexRoute, IndexRedirect, useRouterHistory, browserHistory } from 'react-router'
+import { Router, Route, IndexRoute, IndexRedirect, useRouterHistory, hashHistory, browserHistory } from 'react-router'
+import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux'
 import { createHashHistory } from 'react-router/node_modules/history'
 const appHistory = useRouterHistory(createHashHistory)({ queryKey: false })
 
@@ -21,8 +22,17 @@ let finalCreateStore = compose(
   applyMiddleware(thunk),
   window.devToolsExtension ? window.devToolsExtension() : f => f
 )(createStore)
-let reducer = combineReducers(reducers)
-let store = finalCreateStore(reducer)
+
+//let middlewares = [thunk];
+// function configureStore(routerMiddleware, initialState) {
+//   const store = compose(applyMiddleware(...middlewares, routerMiddleware))(createStore)(reducers, initialState);
+//   return store;
+// }
+//const middleware = routerMiddleware(hashHistory);
+const reducer = combineReducers(reducers)
+const store = finalCreateStore(reducer)
+//const store = configureStore(middleware);
+//const history = syncHistoryWithStore(hashHistory, store);
 
 /////////////////
 // IN PRODUCTION USE browserHistory instead of appHistory: https://github.com/ReactTraining/react-router/blob/master/docs/guides/Histories.md
@@ -30,6 +40,7 @@ let store = finalCreateStore(reducer)
 // Fix the routers to work when changing manually the url to refresh!!! http://localhost:8000/studio/#/2 to http://localhost:8000/studio/#/11 manually
 ////////////////
 
+// Change different components for each Route
 class StudioOrganisation extends Component {
   render() {
     return (

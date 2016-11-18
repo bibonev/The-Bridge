@@ -8,7 +8,7 @@ import RequestsRepresentation from '../components/RequestsRepresentation';
 import MainStudioRepresentation from '../components/MainStudioRepresentation';
 
 class StudioOrganisationPanel extends Component {
-    componentWillMount() {
+    componentDidMount() {
         const { loadRequests, params } = this.props;
         loadRequests(params.orgId);
     }

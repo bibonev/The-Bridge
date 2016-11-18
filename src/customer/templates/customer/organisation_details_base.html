@@ -25,15 +25,38 @@
         {% endif %}
         {% if user.is_authenticated %}
             {% if request_state == 0 %}
-            <form action="" method="POST" id="request_form">
-                {% csrf_token %}
-                <input type="hidden" value="{{org.id}}" name="hidden_org_id"/>
-                <input type="submit" value="Send request" name="request_organisation" id="request_organisation"/>
-            </form>
+            <button type="button" class="request-btn" data-toggle="modal" data-target="#requestPopUp">Make a request</button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="requestPopUp" role="dialog">
+                <div class="modal-dialog">
+                
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Make your request to {{org.title}}</h4>
+                        </div>
+                        <div class="modal-body">
+                        <form action="" method="POST" id="request_form">
+                            {% csrf_token %}
+                            <input type="hidden" value="{{org.id}}" name="hidden_org_id"/>
+                            <div class="modal-body">
+                                <textarea class="request-text" name="request_text"></textarea>
+                            </div>
+                            <div class="modal-footer">
+                                <input type="submit" value="Send" name="request_organisation" class="send-request"/>
+                            </div>
+                        </form>
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
             {% elif request_state == 1 %}
-            <button>Pending request</button>
+            <button class="request-btn">Pending request</button>
             {% elif request_state == 2 %}
-            <button>You are in relation!</button>
+            <button class="request-btn">You are in relation!</button>
             {% elif request_state == -1 %}
             {% endif %}
         {% endif %}
@@ -84,8 +107,7 @@
         </div>
     </div>
 </div>
-
-
+  
 {% endblock content %}
 
 {% block script %}

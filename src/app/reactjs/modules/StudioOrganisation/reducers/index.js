@@ -1,3 +1,6 @@
+//import { routerReducer } from 'react-router-redux';
+//import { combineReducers } from "redux"
+
 const STUDIO_INITIAL = {
     pending_requests: [],
     relations: [],
@@ -20,3 +23,8 @@ export const studio = (state=STUDIO_INITIAL, action) => {
             return state;
     }
 };
+
+// export const reducers = combineReducers({
+//   studio: studio,
+//   routing: routerReducer
+// });

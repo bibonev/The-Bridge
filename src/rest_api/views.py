@@ -201,11 +201,12 @@ class PendingRequestResultListAPIView(generics.ListAPIView):
         if pending_request_id and organisation_id:
             org_obj = organisation_models.Organisation.objects.get(pk=organisation_id)
             pr_obj = partnership_models.PendingRequest.objects.get(pk=pending_request_id, organisation=org_obj)
-            if result == 'approve':
-                pr_obj.approve()
-            elif result == 'reject':
-                pr_obj.reject()
-            queryset_list = queryset_list.union(partnership_models.PendingRequest.get_pending_requests_for_organisation(organisation=org_obj))
+            if org_obj and pr_obj:
+                if result == 'approve':
+                    pr_obj.approve()
+                elif result == 'reject':
+                    pr_obj.reject()
+                queryset_list = queryset_list.union(partnership_models.PendingRequest.get_pending_requests_for_organisation(organisation=org_obj))
 
         return queryset_list
 
