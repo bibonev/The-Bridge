@@ -127,6 +127,7 @@
     color:#e15258;
 }
 .requestButton{
+    width:125px;
     padding:15px 0 15px 15px;
     float:left;
     white-space: nowrap;

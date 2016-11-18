@@ -6,8 +6,30 @@ header{
     width:100%;
     position:relative;
 }
-#request_form{
-    
+.request-title{
+    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif !important;
+    font-weight: 400;
+    margin:0;
+}
+#request_form .request-text{
+    width:100%;
+    outline:none;
+    border:0;
+    resize: none;
+    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+}
+#request_form .send-request{
+    color:#fff;
+    background: #029acf;
+    border: 2px solid #029acf;
+    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    border-radius: 6px;
+    padding: 5px 15px;
+    outline:none;
 }
 .request-btn{
     position:absolute;
