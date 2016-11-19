@@ -8,27 +8,27 @@ config.entry = {
     'webpack-dev-server/client?http://localhost:3000',
     'webpack/hot/only-dev-server',
     './reactjs/modules/Navbar/index',
-  ]
-  // organisation_search: [
-  //   'webpack-dev-server/client?http://localhost:3000',
-  //   'webpack/hot/only-dev-server',
-  //   './reactjs/modules/OrganisationSearch/index',
-  // ]
-  // posts_dashboard: [
-  //   'webpack-dev-server/client?http://localhost:3000',
-  //   'webpack/hot/only-dev-server',
-  //   './reactjs/modules/PostsDashboard/index',
-  // ],
-  // posts_organisation: [
-  //   'webpack-dev-server/client?http://localhost:3000',
-  //   'webpack/hot/only-dev-server',
-  //   './reactjs/modules/PostsOrganisation/index',
-  // ],
-  // review_organisation: [
-  //   'webpack-dev-server/client?http://localhost:3000',
-  //   'webpack/hot/only-dev-server',
-  //   './reactjs/modules/ReviewOrganisation/index',
-  // ]
+  ],
+  organisation_search: [
+    'webpack-dev-server/client?http://localhost:3000',
+    'webpack/hot/only-dev-server',
+    './reactjs/modules/OrganisationSearch/index',
+  ],
+  posts_dashboard: [
+    'webpack-dev-server/client?http://localhost:3000',
+    'webpack/hot/only-dev-server',
+    './reactjs/modules/PostsDashboard/index',
+  ],
+  posts_organisation: [
+    'webpack-dev-server/client?http://localhost:3000',
+    'webpack/hot/only-dev-server',
+    './reactjs/modules/PostsOrganisation/index',
+  ],
+  review_organisation: [
+    'webpack-dev-server/client?http://localhost:3000',
+    'webpack/hot/only-dev-server',
+    './reactjs/modules/ReviewOrganisation/index',
+  ],
 }
 config.output.publicPath = 'http://localhost:3000' + '/assets/bundles/'
 config.plugins = config.plugins.concat([

@@ -23,6 +23,8 @@
     "eslint": "^3.2.0",
     "react": "^15.3.0",
     "react-hot-loader": "^3.0.0-beta.6",
+    "react-star-rating": "^1.4.2",
+    "react-textarea-autosize": "^4.0.5",
     "redux": "^3.5.2",
     "redux-devtools": "^3.3.1",
     "url": "^0.11.0",

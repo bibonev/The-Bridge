@@ -6,10 +6,10 @@ module.exports = {
 
   entry: {
     // Add as many entry points as you have container-react-components here
-    //organisation_search: './reactjs/modules/OrganisationSearch/index',
-    // posts_dashboard: './reactjs/modules/PostsDashboard/index',
-    // posts_organisation: './reactjs/modules/PostsOrganisation/index',
-    // review_organisation: './reactjs/modules/ReviewOrganisation/index',
+    organisation_search: './reactjs/modules/OrganisationSearch/index',
+    posts_dashboard: './reactjs/modules/PostsDashboard/index',
+    posts_organisation: './reactjs/modules/PostsOrganisation/index',
+    review_organisation: './reactjs/modules/ReviewOrganisation/index',
     navbar: './reactjs/modules/Navbar/index',
     vendors: ['react']
   },
@@ -26,10 +26,7 @@ module.exports = {
   ], // add all common plugins here
 
   module: {
-    loaders: [
-      //  { test: /\.json$/, loader: "json-loader"},
-      //  { test: /\.js$/, loader: 'babel-loader'}
-    ] // add all common loaders here
+    loaders: [] // add all common loaders here
   },
 
   resolve: {
