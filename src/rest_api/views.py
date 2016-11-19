@@ -210,6 +210,16 @@ class PendingRequestResultListAPIView(generics.ListAPIView):
 
         return queryset_list
 
+class PendingRequestCurrUserListAPIView(generics.ListAPIView):
+    '''List pending request of the current logged user'''
+    serializer_class = serializers.PendingRequestListSerializer
+    # modify queryset to show pending requests only for the current user
+    def get_queryset(self):
+        print(self.request.user)
+        queryset_list = partnership_models.PendingRequest.get_pending_requests_for_user(user=self.request.user)
+        print(queryset_list)
+        return queryset_list
+
 class RelationListAPIView(generics.ListAPIView):
     '''List relation for particular organisation'''
     serializer_class = serializers.RelationListSerializer
@@ -221,5 +231,13 @@ class RelationListAPIView(generics.ListAPIView):
             org_obj = organisation_models.Organisation.objects.get(pk=organisation_id)
             queryset_list = queryset_list.union(partnership_models.Relation.get_relations_for_organisation(organisation=org_obj))
 
+        return queryset_list
+
+class RelationCurrUserListAPIView(generics.ListAPIView):
+    '''List pending request of the current logged user'''
+    serializer_class = serializers.RelationListSerializer
+    # modify queryset to show pending requests only for the current user
+    def get_queryset(self):
+        queryset_list = partnership_models.Relation.get_relations_for_user(user=self.request.user)
         return queryset_list
 

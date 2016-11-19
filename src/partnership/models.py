@@ -25,6 +25,10 @@ class Relation(models.Model):
     def get_relations_for_organisation(organisation):
         return Relation.objects.filter(organisation=organisation)
 
+    @staticmethod
+    def get_relations_for_user(user):
+        return Relation.objects.filter(user=user)
+
     class Meta:
         unique_together = ('user', 'organisation')
 
@@ -46,7 +50,7 @@ class PendingRequest(models.Model):
     # get pending request for user
     @staticmethod
     def get_pending_requests_for_user(user):
-        return PendingRequest.objects.filter(sender=1, user=user)
+        return PendingRequest.objects.filter(sender=0, user=user)
 
     # get pending requests for organisation
     @staticmethod

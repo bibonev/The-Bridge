@@ -20,6 +20,8 @@ urlpatterns = [
     url(r'^comments/create/$', views.CommentCreateAPIView.as_view(), name="comments_create_api"),
     url(r'^pending_requests/$', views.PendingRequestListAPIView.as_view(), name="pending_requests_list_api"),
     url(r'^pending_requests/result/$', views.PendingRequestResultListAPIView.as_view(), name="result_pending_requests_list_api"),
+    url(r'^pending_requests/currentUser/$', views.PendingRequestCurrUserListAPIView.as_view(), name="pending_requests_current_user_list_api"),
     url(r'^relations/$', views.RelationListAPIView.as_view(), name="relations_list_api"),
+    url(r'^relations/currentUser/$', views.RelationCurrUserListAPIView.as_view(), name="relations_current_user_list_api"),
 
 ]

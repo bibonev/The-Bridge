@@ -17,6 +17,20 @@ export default class PostRepresentation extends React.Component{
           return <i className="fa fa-bookmark non-booked-org" aria-hidden="true"></i>
         }
 
+        const request_status = (org) => {
+          for(var pending_request of this.props.pending_requests){
+            if(pending_request.organisation.id == org.id){
+              return <i className="fa fa-clock-o request-status pending-status-icon" aria-hidden="true"></i>
+            }
+          }
+          for(var relation of this.props.relations){
+            if(relation.organisation.id == org.id){
+              return <i className="fa fa-users request-status relation-status-icon" aria-hidden="true"></i>
+            }
+          }
+          return <button onClick={() => bookmarkOrganisation(org.id)} className="bookmark-button">{buttonDisplay(org.id)}</button>
+        }
+
         const data = this.props.data.map(post =>
           <div key={post.id} className="posts-dashboard">
           <div className="post-main-details">
@@ -26,7 +40,7 @@ export default class PostRepresentation extends React.Component{
               <div className="rating-org"><span className="ratingNum">{post.organisation.rating}</span><span className="glyphicon glyphicon-star ratingStar" aria-hidden="true"></span></div>
               <span className="post-comment-dateTime">{post.timestamp}</span>
             </a>
-            <button onClick={() => bookmarkOrganisation(post.organisation.id)} className="bookmark-button">{buttonDisplay(post.organisation.id)}</button>
+            {request_status(post.organisation)}
           </div>
             <div className="post-description">{post.description}</div>
             <CommentRepresentation comments={this.props.comments} postId={post.id} showCommentsForPost={this.props.showCommentsForPost}/>
