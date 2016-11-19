@@ -65,6 +65,16 @@ class Organisation(models.Model):
         if not self.cover_picture:
             return os.path.join(settings.MEDIA_URL , 'default/no-org-img.jpg')
 
+    def current_rating(self):
+        # visualize rating for particular organisation
+        rating = 0.0
+        reviews = Review.objects.filter(organisation=self)
+        if reviews:
+            for review in reviews: 
+                rating+=review.rating
+            rating = round(((rating/len(reviews))*10), 0)/10 # round the rating to the first symbol after the comma
+        return rating
+
 def validate_rating(rating):
     if rating < 0 and rating > 5 :  # Your conditions here
         raise ValidationError('rating out of range' % value)
