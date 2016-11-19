@@ -6,12 +6,12 @@ module.exports = {
 
   entry: {
     // Add as many entry points as you have container-react-components here
-    organisation_search: './reactjs/modules/OrganisationSearch/index',
+    //organisation_search: './reactjs/modules/OrganisationSearch/index',
     // posts_dashboard: './reactjs/modules/PostsDashboard/index',
     // posts_organisation: './reactjs/modules/PostsOrganisation/index',
     // review_organisation: './reactjs/modules/ReviewOrganisation/index',
-    // navbar: './reactjs/modules/Navbar/index',
-    vendors: ['react'],
+    navbar: './reactjs/modules/Navbar/index',
+    vendors: ['react']
   },
 
   output: {
@@ -34,6 +34,6 @@ module.exports = {
 
   resolve: {
     modulesDirectories: ['node_modules', 'bower_components'],
-    extensions: ['', '.js', '.jsx', '.json']
+    extensions: ['', '.js', '.jsx']
   },
 }

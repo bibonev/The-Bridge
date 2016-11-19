@@ -4,16 +4,16 @@ var BundleTracker = require('webpack-bundle-tracker')
 var config = require('./webpack.config.js')
 config.devtool = "#eval-source-map"
 config.entry = {
-  // navbar: [
-  //   'webpack-dev-server/client?http://localhost:3000',
-  //   'webpack/hot/only-dev-server',
-  //   './reactjs/modules/Navbar/index',
-  // ],
-  organisation_search: [
+  navbar: [
     'webpack-dev-server/client?http://localhost:3000',
     'webpack/hot/only-dev-server',
-    './reactjs/modules/OrganisationSearch/index',
+    './reactjs/modules/Navbar/index',
   ]
+  // organisation_search: [
+  //   'webpack-dev-server/client?http://localhost:3000',
+  //   'webpack/hot/only-dev-server',
+  //   './reactjs/modules/OrganisationSearch/index',
+  // ]
   // posts_dashboard: [
   //   'webpack-dev-server/client?http://localhost:3000',
   //   'webpack/hot/only-dev-server',
@@ -37,6 +37,6 @@ config.plugins = config.plugins.concat([
   new BundleTracker({filename: './webpack-stats.json'}),
 ])
 config.module.loaders.push(
-  { test: /\.jsx?$/, exclude: /node_modules/, loaders: ['react-hot', 'babel'] }
+  { test: /\.jsx?$/, exclude: /node_modules/, loaders: ['babel'] }
 )
 module.exports = config
