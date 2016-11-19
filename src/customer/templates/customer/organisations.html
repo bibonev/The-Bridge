@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load render_bundle from webpack_loader %}
 {% load static from staticfiles %}
 
 {% block title %} All organisations {% endblock title %}
@@ -12,5 +13,6 @@
 {% endblock content %}
 
 {% block script %}
-<script src="{% static 'bundles/local/organisation_search.js' %}"></script>
+{% render_bundle 'vendors' %}
+{% render_bundle 'organisation_search' %}
 {% endblock script %}
