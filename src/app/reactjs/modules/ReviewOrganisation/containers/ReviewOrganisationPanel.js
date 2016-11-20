@@ -1,5 +1,5 @@
 import React, {Component}  from 'react';
-import StarRating from 'react-star-rating';
+import Rating from 'react-rating';
 import { connect } from 'react-redux';
 import { loadReviews, addReview } from '../actions';
 import { bindActionCreators } from 'redux';
@@ -9,8 +9,8 @@ import ReviewRepresentation from '../components/ReviewRepresentation';
 
 let myRating = 0;
 
-function updateMyRating(e, data){
-    myRating = data.rating;
+function updateMyRating(rate, event){
+    myRating = rate;
 }
 
 function getCurrentOrganisationId(){
@@ -54,7 +54,14 @@ class ReviewOrganisationPanel extends Component {
                     <div className="reviewsCount">{correctSpellReview({count})}</div>
                 </div>
                 <form onSubmit={reviewSubmit} method="POST" className="reviewAddForm">
-                    <StarRating name="starrating" totalStars={5} size={30} onRatingClick={updateMyRating}/>
+                    <Rating 
+                        name="starratingform" 
+                        start={0}
+                        stop={5}
+                        empty="glyphicon glyphicon-star-empty"
+                        full="glyphicon glyphicon-star"
+                        onClick={updateMyRating}
+                    />
                     <Textarea type="text" name="reviewtext" placeholder="Write your review..." className="reviewField"></Textarea>
                     <input type="submit" value="Add review" className="addReviewButton"/>
                 </form>

@@ -1,4 +1,6 @@
-{% extends 'customer/base.html' %}
+{% extends 'base.html' %}
+{% load render_bundle from webpack_loader %}
+
 {% load static from staticfiles %}
 
 {% block css %}
@@ -12,5 +14,5 @@
 {% endblock content %}
 
 {% block script %}
-<script src="{% static 'bundles/local/posts_dashboard.js' %}"></script>
+{% render_bundle 'posts_dashboard' %}
 {% endblock script %}

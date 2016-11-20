@@ -1,4 +1,5 @@
 {% load static from staticfiles %}
+{% load render_bundle from webpack_loader %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -26,6 +27,7 @@
     <link href="{% static 'css/layout.css' %}" rel="stylesheet">
     <link href="{% static 'css/footer.css' %}" rel="stylesheet">
     <link href="{% static 'css/cssloader.css' %}" rel="stylesheet">
+    <link href="{% static 'css/search_panel.css' %}" rel="stylesheet">
 
     {% block css %}{% endblock css %}
 
@@ -164,8 +166,8 @@
 <script src="{% static 'js/extraJSFuncs.js' %}"></script>
 
 <!-- React -->
-<script src="{% static 'bundles/local/vendors.js' %}"></script> 
-<script src="{% static 'bundles/local/navbar.js' %}"></script>
+{% render_bundle 'vendors' %}
+{% render_bundle 'navbar' %}
 
 {% block script %}{% endblock script %}
 

@@ -2,8 +2,11 @@
 .organisation-list{
     text-align:center;
 }
+#adv-search{
+    margin:30px auto 20px auto;
+}
 .search-input{
-    width:60%;
+    width:450px;
     font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
     font-weight: 100;
     font-size: 18px;
@@ -11,9 +14,68 @@
     border: 1px solid #c4c4c4;
     border-radius: 4px;
     color: #383838;
-    vertical-align:middle;
-    margin: 50px 0 40px 0;
     text-align: center;
+    float:left;
+    outline:none;
+}
+.search-filter-button{
+    padding: 5px 12px;
+    background:#029acf;
+    font-size:25px;
+    color:#fff;
+    border: 1px solid #029acf;
+    border-radius: 4px;
+    outline:none;
+}
+.filters-menu{
+    display: none;
+    padding-top:20px;
+}
+.left-filter-group{
+    float:left;
+    text-align:center;
+}
+.group-rating label{
+    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    color: #383838; 
+}
+.group-rating input{
+    width:50px;
+    margin:0 10px;
+    border:1px solid #c4c4c4;
+    border-radius: 4px;
+    outline:0;
+    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    padding:0 3px;
+}
+.right-filter-group{
+    display:inline-block;
+    text-align: center;
+}
+.right-filter-group .group-dropdown{
+    display:inline-block;
+    margin:0 5px;
+}
+.group-dropdown label{
+    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    color: #383838; 
+}
+
+.group-dropdown select{
+    margin-bottom: 10px;
+    outline:0;
+    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    width:150px;
+    background:#fff;
+    border:1px solid #c4c4c4;
 }
 .organisation-link{
     display:inline-block;

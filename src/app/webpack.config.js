@@ -12,37 +12,26 @@ module.exports = {
     review_organisation: './reactjs/modules/ReviewOrganisation/index',
     studio_organisation: './reactjs/modules/StudioOrganisation/index',
     navbar: './reactjs/modules/Navbar/index',
-    vendors: ['react'],
+    vendors: ['react']
   },
 
   output: {
       path: path.resolve('./static/bundles/local/'),
-      filename: "[name].js"
-  },
-  
-  node: {
-    fs: "empty"
+      filename: "[name]-[hash].js"
   },
 
-  externals: [
-  ], // add all vendor libs
+  externals: [], // add all vendor libs
 
   plugins: [
     new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.js'),
   ], // add all common plugins here
 
   module: {
-    loaders: [ 
-      { test: /\.json$/, loader: "json-loader"},
-      { test: /\.js$/, loader: 'babel-loader'}
-    ] // add all common loaders here
+    loaders: [] // add all common loaders here
   },
 
   resolve: {
-    alias: {
-      'react': path.join(__dirname, 'node_modules', 'react')
-    },
     modulesDirectories: ['node_modules', 'bower_components'],
-    extensions: ['', '.js', '.jsx', '.json']
+    extensions: ['', '.js', '.jsx']
   },
 }
