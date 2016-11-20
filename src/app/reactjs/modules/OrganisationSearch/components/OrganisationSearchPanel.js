@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 export default class SearchPanel extends React.Component {
     constructor() {
-        super()
+        super();
         this.onSearchChange = this.onSearchChange.bind(this);
         this.onClearSearch = this.onClearSearch.bind(this);
         this.showFilterDropdown = this.showFilterDropdown.bind(this);
