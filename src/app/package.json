@@ -42,10 +42,7 @@
     "react-redux": "^4.4.5",
     "react-router": "^2.8.1",
     "react-router-redux": "^4.0.6",
-    "react-star-rating": "^1.4.2",
-    "react-textarea-autosize": "^4.0.5",
     "redux": "^3.5.2",
-    "redux-form": "^6.1.0",
     "redux-thunk": "^2.1.0"
   }
 }

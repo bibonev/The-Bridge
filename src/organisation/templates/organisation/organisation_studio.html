@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+
+{% load render_bundle from webpack_loader %}
 {% load static from staticfiles %}
 
 {% block title %} Studio {% endblock title %}
@@ -17,5 +19,5 @@
 {% endblock content%}
 
 {% block script %}
-<script src="{% static 'bundles/local/studio_organisation.js' %}"></script>
+{% render_bundle 'studio_organisation' %}
 {% endblock script %}
