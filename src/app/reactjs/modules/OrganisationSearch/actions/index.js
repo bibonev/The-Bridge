@@ -37,12 +37,11 @@ export function loadOrganisations() {
 
         let organisations = [];
 
-        console.log(state);
-
         //Search term
         let searchTerm = "";
 
-        if(localStorage.getItem("searchTerm") != ""){
+        if(localStorage.getItem("searchTerm") !== null && 
+            localStorage.getItem("searchTerm") !== "" ) {
             searchTerm = localStorage.getItem("searchTerm");
         } else {
             searchTerm = search;
@@ -69,7 +68,7 @@ export function loadOrganisations() {
         if(category !== undefined && category.length !== 0) {
             url += "category=" + `${category}`;
         }
-
+        
         $.get(url, data => {
             dispatch(showOrganisationsResult(data));
             dispatch(loadingChanged(false));

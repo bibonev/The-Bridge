@@ -1,11 +1,13 @@
 {% extends 'base.html' %}
 
 {% load static from staticfiles %}
+{% load render_bundle from webpack_loader %}
+
 {% block title %} {{org.title}} {% endblock title %}
 
 {% block css %}
 <link href="{% static 'css/organisation_profile.css' %}" rel="stylesheet">
-<link href="{% static 'css/react-star-rating/react-star-rating.css' %}" rel="stylesheet">
+<link href="{% static 'css/react-star-rating/react-star-rating.css' %}" rel="stylesheet"> 
 <link href="{% static 'css/dashboard.css' %}" rel="stylesheet"> 
 {% endblock css %}
 
@@ -89,6 +91,6 @@
 {% endblock content %}
 
 {% block script %}
-<script src="{% static 'bundles/local/posts_organisation.js' %}"></script>
-<script src="{% static 'bundles/local/review_organisation.js' %}"></script>
+{% render_bundle 'posts_organisation' %}
+{% render_bundle 'review_organisation' %}
 {% endblock script %}
