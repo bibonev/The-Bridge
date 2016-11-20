@@ -42,6 +42,14 @@ export function bookmarkOrganisationResult(jsonResult){
     }
 }
 
+export function savePendingsAndRelationsResult(pending, relations){
+    return {
+        type: "REQUEST_STATUS",
+        pending_requests: pending,
+        relations
+    }
+}
+
 export function loadOrganisationsCurrentUser(){
     return (dispatch, getState) => {
         let url = `http://localhost:8000/api/v1/organisations/currentUser/`;
@@ -57,6 +65,7 @@ export function loadPosts() {
         $.get(url, data => {
             dispatch(showPostsResult(data));
             dispatch(loadOrganisationsCurrentUser());
+            dispatch(loadPendingsAndRelationsCurrUser());
             let url_get = `http://localhost:8000/api/v1/organisations/currentUserBookmarks/`
                 $.get(url_get, data_get => {
                     dispatch(bookmarkOrganisationResult(data_get));
@@ -183,5 +192,17 @@ export function bookmarkOrganisation(org_id){
             }
         });
     };
+}
+
+export function loadPendingsAndRelationsCurrUser(){
+    return (dispatch, getState) => {
+        let url_pending = `http://localhost:8000/api/v1/pending_requests/currentUser/`
+        $.get(url_pending, data_pending => {
+            let url_relation = `http://localhost:8000/api/v1/relations/currentUser/`
+            $.get(url_relation, data_relation => {
+                dispatch(savePendingsAndRelationsResult(data_pending, data_relation));
+            });
+        });
+    }
 }
 

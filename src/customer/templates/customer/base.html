@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+
+{% block secondary_navigation %}
+    {% if user.is_authenticated %}
+        <div class="secondary-navigation">
+            <div class="container-fluid">
+                <div class="inner-wrapper">
+                <ul>
+                    {% block secondaryNav %}
+                        <li>
+                            <a href="{% url 'customer:posts:dashboard' %}" name='dashboard'>Dashboard</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'customer:requests' %}">Requests</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'customer:organisations' %}">Organisations</a>
+                        </li>
+                    {% endblock secondaryNav %}
+                </ul>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock secondary_navigation %}

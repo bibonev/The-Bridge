@@ -5,6 +5,7 @@ from django.core.exceptions import ValidationError
 from rest_framework import serializers
 from organisation import models as organisation_models
 from posts import models as posts_models
+from partnership import models as partnership_models
 
 class UserSerializer(serializers.ModelSerializer):
     '''Serialize User's  model'''
@@ -34,7 +35,6 @@ class OrganisationSerializer(serializers.ModelSerializer):
     # customize organisation's front_picture field and create a rating field
     front_picture = serializers.SerializerMethodField('front_picture_url')
     cover_picture = serializers.SerializerMethodField('cover_picture_url')
-    rating = serializers.SerializerMethodField('which_rating')
 
     # return the front_picture url or the defaul_image method
     def front_picture_url(self, obj):
@@ -332,3 +332,63 @@ def create_comment_serializer(model_type='user', organisation_id=None, post_id=N
             return comment
 
     return CommentCreateSerializer
+
+class PendingRequestListSerializer(serializers.ModelSerializer):
+    '''Serialize PendingRequest's  model'''
+
+    user = serializers.SerializerMethodField('which_user')
+    organisation = serializers.SerializerMethodField('which_organisation')
+
+    # organisation field returns serialized Organsiation object
+    def which_organisation(self, obj):
+        if obj.organisation:
+            org_obj = get_object_or_404(organisation_models.Organisation, pk=obj.organisation.pk)
+            organisation = OrganisationSerializer(org_obj, many=False).data
+            return organisation
+
+    # user field returns serialized User object
+    def which_user(self, obj):
+        if obj.user:
+            user_obj = get_object_or_404(User, pk=obj.user.pk)
+            user = UserSerializer(user_obj, many=False).data
+            return user
+
+    class Meta:
+        # add the fields to the api serializer
+        fields = (
+            'id',
+            'user',
+            'organisation',
+            'text'
+        )
+        model = partnership_models.PendingRequest
+
+class RelationListSerializer(serializers.ModelSerializer):
+    '''Serialize Relation's  model'''
+
+    user = serializers.SerializerMethodField('which_user')
+    organisation = serializers.SerializerMethodField('which_organisation')
+
+    # organisation field returns serialized Organsiation object
+    def which_organisation(self, obj):
+        if obj.organisation:
+            org_obj = get_object_or_404(organisation_models.Organisation, pk=obj.organisation.pk)
+            organisation = OrganisationSerializer(org_obj, many=False).data
+            return organisation
+
+    # user field returns serialized User object
+    def which_user(self, obj):
+        if obj.user:
+            user_obj = get_object_or_404(User, pk=obj.user.pk)
+            user = UserSerializer(user_obj, many=False).data
+            return user
+
+    class Meta:
+        # add the fields to the api serializer
+        fields = (
+            'id',
+            'user',
+            'organisation',
+            'text'
+        )
+        model = partnership_models.Relation

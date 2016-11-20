@@ -52,6 +52,18 @@ class Organisation(models.Model):
     host = models.ForeignKey(User, related_name="host") #one to many
     bookmark = models.ManyToManyField(User, related_name="bookmark", blank=True)
 
+    # calculate organisation rating
+    @property
+    def rating(self):
+        rating = 0
+        reviews = Review.objects.filter(organisation=Organisation.objects.get(pk=self.pk))
+        if reviews:
+            for review in reviews: 
+                rating+=review.rating
+            rating = round(((rating/len(reviews))*10), 0)/10 
+
+        return str(rating)
+
     def __str__(self):
         return self.title
     

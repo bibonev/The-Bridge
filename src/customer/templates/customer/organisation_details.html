@@ -2,7 +2,7 @@
 
 {% block left-most-col %}
 <a href="{% url 'customer:organisation_details_reviews' pk=org.id %}" class="org-rating">
-    <div class="ratingMain"><span class="ratingNum">{{rating}}</span><span class="glyphicon glyphicon-star ratingStar" aria-hidden="true"></span></div>
+    <div class="ratingMain"><span class="ratingNum">{{org.rating}}</span><span class="glyphicon glyphicon-star ratingStar" aria-hidden="true"></span></div>
     <!-- <div class="reviewsCount">{{review_count}} review{{review_count|pluralize}}</div> -->
 </a>
 {% endblock left-most-col %}

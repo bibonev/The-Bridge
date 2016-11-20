@@ -1,8 +1,16 @@
 from django.shortcuts import render, get_object_or_404, get_list_or_404
+from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
+from django.http import HttpResponseRedirect
 from partnership.models import Relation, PendingRequest
 from organisation import models as organisation_models
+
+@login_required
+def customer_requests(request):
+    '''Dispaly cusotmer requests and bookmarks'''
+    bookmarked_organisations = organisation_models.Organisation.objects.filter(bookmark__in=[request.user])
+    return render(request, 'customer/requests.html', {'bookmarked_organisations': bookmarked_organisations})
 
 @login_required
 def organisations(request):
@@ -37,14 +45,6 @@ def organisation_details(request, pk):
     elif Relation.own_organisation(request.user, organisation):
         request_state = -1
 
-    # visualize rating for particular organisation
-    rating = 0
-    reviews = organisation_models.Review.objects.filter(organisation=organisation)
-    if reviews:
-        for review in reviews: 
-            rating+=review.rating
-        rating = round(((rating/len(reviews))*10), 0)/10 
-
     # ability to edit organisation if the user is the owner
     owner = False
     if organisation.host == request.user:
@@ -54,11 +54,13 @@ def organisation_details(request, pk):
     if request.method == 'POST':
         # check whether the post request is on the request form: 'request_organisation' is the name of the submit button
         if "request_organisation" in request.POST:
-            organisation = get_object_or_404(models.Organisation, pk=request.POST.get('hidden_org_id'))
+            organisation = get_object_or_404(organisation_models.Organisation, pk=request.POST.get('hidden_org_id'))
+            request_text = request.POST.get('request_text')
             user = request.user
-            PendingRequest.send_request(user, organisation)
+            PendingRequest.send_request(user, organisation, request_text)
+            return HttpResponseRedirect(reverse('customer:organisation_details', kwargs={'pk':pk}))
 
-    return render(request, 'customer/organisation_details.html', {'org':organisation, 'request_state': request_state, 'rating':rating, 'owner':owner})
+    return render(request, 'customer/organisation_details.html', {'org':organisation, 'request_state': request_state,'owner':owner})
 
 @login_required
 def organisation_details_reviews(request, pk):
@@ -85,8 +87,10 @@ def organisation_details_reviews(request, pk):
         # check whether the post request is on the request form: 'request_organisation' is the name of the submit button
         if "request_organisation" in request.POST:
             organisation = get_object_or_404(organisation_models.Organisation, pk=request.POST.get('hidden_org_id'))
+            request_text = request.POST.get('request_text')
             user = request.user
-            PendingRequest.send_request(user, organisation)
+            PendingRequest.send_request(user, organisation, request_text)
+            return HttpResponseRedirect(reverse('customer:organisation_details_reviews', kwargs={'pk':pk}))
 
     return render(request, 'customer/organisation_details_reviews.html', {'org':organisation, 'request_state': request_state, 'owner':owner})
 

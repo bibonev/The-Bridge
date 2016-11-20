@@ -83,6 +83,22 @@
     border: 0 !important;
     outline:none;
 }
+.request-status{
+    float: right;
+    font-size:18px;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: transparent;
+    -moz-text-stroke-width: 1px;
+    -moz-text-stroke-color: transparent;
+    -ms-text-stroke-width: 1px;
+    -ms-text-stroke-color: transparent;
+}
+.pending-status-icon{
+    color:#9e4d83
+}
+.relation-status-icon{
+    color:#5cb860;
+}
 .booked-org{
     font-size: 18px;
     color:#FFA91B;

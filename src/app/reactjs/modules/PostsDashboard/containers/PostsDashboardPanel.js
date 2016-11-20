@@ -13,7 +13,7 @@ class PostsDashboardPanel extends Component {
 
     render() {
         const { rows, count } = this.props.posts;
-        const { org_u_rows, bookmark_orgs } = this.props.organisations_user;
+        const { org_u_rows, bookmark_orgs, pending_requests, relations } = this.props.organisations_user;
         const { author_id } = this.props.comment_author_id
         const comments = this.props.comments;
         const { loadPosts, loadComments, addCommentToPost, currentAuthorId, bookmarkOrganisation } = this.props;
@@ -22,11 +22,11 @@ class PostsDashboardPanel extends Component {
         const showCommentsForPost = (post_id) => loadComments(post_id);
         const updateAuthorId = (author_id) => currentAuthorId(author_id);
         const bookmarkCurrentOrganisation = (org_id) => bookmarkOrganisation(org_id);
-
         return (
             <div className="posts-dashboard-list">
                 <PostRepresentation data={rows} comments={comments} org_u_rows={org_u_rows} showCommentsForPost={showCommentsForPost} addCurrentComment={addCurrentComment} 
-                updateAuthorId={updateAuthorId} author_id={author_id} bookmarkCurrentOrganisation={bookmarkCurrentOrganisation} bookmark_orgs={bookmark_orgs}/>
+                updateAuthorId={updateAuthorId} author_id={author_id} bookmarkCurrentOrganisation={bookmarkCurrentOrganisation} bookmark_orgs={bookmark_orgs}
+                pending_requests={pending_requests} relations={relations}/>
             </div>
         );
     }

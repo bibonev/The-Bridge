@@ -54,7 +54,9 @@ export const comments = (state={}, action) => {
 const ORGANISATIONS_USER_INITIAL = {
     org_u_rows: [],
     bookmark_orgs:[],
-    count: 0
+    count: 0,
+    pending_requests: [],
+    relations: []
 };
 
 export const organisations_user = (state=ORGANISATIONS_USER_INITIAL, action) => {
@@ -67,6 +69,11 @@ export const organisations_user = (state=ORGANISATIONS_USER_INITIAL, action) => 
         case "BOOKMARK_ORGANISATION":
             return Object.assign({}, state, {
                 bookmark_orgs:action.bookmarks
+            });
+        case "REQUEST_STATUS":
+            return Object.assign({}, state, {
+                pending_requests:action.pending_requests,
+                relations:action.relations
             });
         default:
             return state;

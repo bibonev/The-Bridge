@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% load render_bundle from webpack_loader %}
+{% load static from staticfiles %}
+
+{% block title %} Studio {% endblock title %}
+
+{% block css %}
+<link href="{% static 'css/studio.css' %}" rel="stylesheet">
+{% endblock css %}
+
+{% block content%}
+
+{% if have_organisations %}
+<div id="studio_organisation"></div>
+{% else %}
+<h1>No organisations</h1>
+{% endif %}
+{% endblock content%}
+
+{% block script %}
+{% render_bundle 'studio_organisation' %}
+{% endblock script %}

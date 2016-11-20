@@ -231,6 +231,19 @@ header .header-content .header-content-inner p {
   font-size: 16px;
   margin-bottom: 50px;
 }
+header .create-org-button{
+  margin-top:9px;
+  margin-bottom:9px;
+}
+header .create-org-button a{
+  padding-top:5px;
+  padding-bottom:5px;
+  border:1px solid #fff;
+  border-radius: 4px;
+}
+header .create-org-button a:hover{
+  border-color:#383838;
+}
 
 /* Secondary navigation style */
 header .secondary-navigation{
@@ -263,8 +276,7 @@ header .secondary-navigation li a:active{
   cursor:pointer;
 }
 header .search-input-button{
-  padding-top:14px;
-  padding-bottom:14px;
+  padding:14px 15px;
 }
 header #navbar-search{
   position:relative;

@@ -1,0 +1,160 @@
+.studio-info{
+    width:200px;
+    float:left;
+}
+.organisationChooseBox{
+    display:inline-block;
+    position:relative;
+    width:150px;
+    text-align:right;
+}
+.organisationDisplay{
+    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+    color: #029acf;
+    border: 1px solid #c4c4c4;
+    border-radius: 2px;
+    outline: none;
+    display:inline-block;
+    padding:4px 8px 4px 22px;
+    background: url('../img/caret-down.png') no-repeat 4px center #fff;
+    background-size: 12px 14px;
+    width:100%;
+    white-space: nowrap;
+    overflow:hidden !important;
+    text-overflow: ellipsis;
+}
+.organisationOptions{
+    display:none;
+    position: absolute;
+    z-index: 1000;
+    border: 1px solid #c4c4c4;
+    border-radius: 2px;
+    background:#fff;
+    width:100%;
+    text-align: center;
+}
+.organisationOptions button{
+    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+    color: #029acf;
+    background:#fff;
+    border:none;
+    border-bottom:1px solid #c4c4c4;
+    outline:none;
+    padding:4px 8px;
+    width:100%;
+    text-align:center;
+    white-space: nowrap;
+    overflow:hidden !important;
+    text-overflow: ellipsis;
+}
+.organisationOptions a:last-of-type button{
+    border-bottom:0;
+}
+.organisationOptions button:hover{
+    background: #029acf;
+    color: #fff;
+}
+.link-to-organisation{
+    font-size:18px;
+    margin-left:15px;
+    color:#029acf;
+    vertical-align:middle;
+}
+.bonus-text-all-requests{
+    background:#c4c4c4;
+    width:100%;
+    color:#fff;
+    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+    white-space: nowrap;
+    overflow:hidden !important;
+    text-overflow: ellipsis;
+    padding:5px 10px;
+    margin-top:10px;
+}
+.all-requests{
+    width:200px;
+    text-align:right;
+    padding:0;
+    list-style: none;
+}
+.requestDisplay{
+    display:block;
+    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+    color: #383838;
+    background:#fff;
+    border:none;
+    border:1px solid #c4c4c4;
+    border-bottom:0;
+    outline:none;
+    min-height:64px;
+    text-align:left;
+}
+.requestButton-pending{
+    display:inline-block !important;
+}
+.requestButton-relation{
+    width:100% !important;
+}
+.requestDisplay:hover .requestButton{
+    text-decoration: underline;
+    color:#2A2A2A;
+}
+.requestDisplay:last-of-type{
+    border-bottom:1px solid #c4c4c4;
+}
+.requestDisplay button{
+    font-size:22px;
+    background:transparent;
+    border:0;
+    padding:14px 0;
+    outline:0;
+    float:left;
+}
+.requestDisplay .approve{
+    margin-left:15px;
+    color:#5cb860;
+}
+.requestDisplay .reject{
+    margin-left:10px;
+    color:#e15258;
+}
+.requestButton{
+    width:125px;
+    padding:15px 0 15px 15px;
+    float:left;
+    white-space: nowrap;
+    overflow:hidden !important;
+    text-overflow: ellipsis;
+}
+.requestButton span{
+  color:#2A2A2A !important;
+}
+.requestButton img{
+  border-radius:50%;
+  margin-right: 10px;
+}
+.empty-requests-list{
+    border:1px solid #c4c4c4;
+    color:#c4c4c4;
+    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+    text-align:center;
+    padding:10px 0;
+}
+.active-request span{
+    color:#029acf !important;
+}
+.studio-main{
+    float:left;
+    width:980px;
+    background:#fff;
+}

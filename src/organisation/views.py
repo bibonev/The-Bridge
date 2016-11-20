@@ -96,4 +96,14 @@ def requests(request):
             return HttpResponseRedirect(reverse('organisation:requests'))
 
     return render(request, 'organisation/requests.html', {'org_requests': org_requests})
+
+@login_required
+def organisation_studio(request):
+    '''Current organisation studio'''
+
+    have_organisations = False
+    if models.Organisation.objects.filter(host=request.user):
+       have_organisations = True
+
+    return render(request, 'organisation/organisation_studio.html', {'have_organisations':have_organisations})
         

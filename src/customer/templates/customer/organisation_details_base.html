@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'customer/base.html' %}
 
 {% load static from staticfiles %}
 {% load render_bundle from webpack_loader %}
@@ -27,15 +27,38 @@
         {% endif %}
         {% if user.is_authenticated %}
             {% if request_state == 0 %}
-            <form action="" method="POST" id="request_form">
-                {% csrf_token %}
-                <input type="hidden" value="{{org.id}}" name="hidden_org_id"/>
-                <input type="submit" value="Send request" name="request_organisation" id="request_organisation"/>
-            </form>
+            <button type="button" class="request-btn" data-toggle="modal" data-target="#requestPopUp">Make a request</button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="requestPopUp" role="dialog">
+                <div class="modal-dialog">
+                
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="request-title">Make your request to <b>{{org.title}}</b></h4>
+                        </div>
+                        <div>
+                        <form action="" method="POST" id="request_form">
+                            {% csrf_token %}
+                            <input type="hidden" value="{{org.id}}" name="hidden_org_id"/>
+                            <div class="modal-body">
+                                <textarea class="request-text autoExpand" name="request_text" rows="6" data-min-rows='6' placeholder="Type your request..."></textarea>
+                            </div>
+                            <div class="modal-footer">
+                                <input type="submit" value="Send" name="request_organisation" class="send-request"/>
+                            </div>
+                        </form>
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
             {% elif request_state == 1 %}
-            <button>Pending request</button>
+            <button class="request-btn">Pending request</button>
             {% elif request_state == 2 %}
-            <button>You are in relation!</button>
+            <button class="request-btn">You are in relation!</button>
             {% elif request_state == -1 %}
             {% endif %}
         {% endif %}
@@ -86,8 +109,7 @@
         </div>
     </div>
 </div>
-
-
+  
 {% endblock content %}
 
 {% block script %}
