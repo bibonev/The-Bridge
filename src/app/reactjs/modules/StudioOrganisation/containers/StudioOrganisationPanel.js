@@ -10,6 +10,7 @@ class StudioOrganisationPanel extends Component {
     componentDidMount() {
         const { loadRequests, params } = this.props;
         loadRequests(params.orgId);
+        console.log("DID ID: ", params.orgId)
     }
     render(){
         const { relations, pending_requests, org_u_rows } = this.props.studio;

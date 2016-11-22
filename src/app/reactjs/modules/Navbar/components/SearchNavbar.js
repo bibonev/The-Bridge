@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { changeSearchAndLoadOrganisations } from '../../OrganisationSearch/actions/index'
 
 
 export default class SearchNavbar extends React.Component {

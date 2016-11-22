@@ -1,5 +1,5 @@
 import React from 'react';
-import CommentForm from '../components/CommentForm';
+import CommentForm from '../../../shared_components/commentForm'
 import CommentRepresentation from '../components/CommentRepresentation';
 
 export default class PostRepresentation extends React.Component{

@@ -46,13 +46,15 @@ class StudioOrganisation extends Component {
     return (
       <Provider store={store}>
         <Router history={appHistory}>
-          <Route path="/" component={StudioOrganisationPanel}>
-            <IndexRoute component={StudioOrganisationPanel}/>
-            {/* HARDCODE default path - Definitely change */}
-            <IndexRedirect to="/2" component={StudioOrganisationPanel}/> 
-            <Route path=":orgId" component={StudioOrganisationPanel}/>
-            <Route path=":orgId/:requestId" component={StudioOrganisationPanel}/>
-            <Route path=":orgId/pending/:pendingId" component={StudioOrganisationPanel}/>
+          <Route path="/">
+            {/*<IndexRoute component={StudioOrganisationPanel}/>
+            HARDCODE default path - Definitely change 
+            <IndexRedirect to="/2" component={StudioOrganisationPanel}/> */}
+            <Route path=":orgId" component={StudioOrganisationPanel} name="Organisation Requests"/>
+              {/*<IndexRoute component={StudioOrganisationPanel}/>
+              <Route name="Current Request" path=":requestId" component={StudioOrganisationPanel}/>
+              <Route name="Current Pending Request" path="pending/:pendingId" component={StudioOrganisationPanel}/>
+           </Route>*/}
           </Route>
         </Router>
       </Provider>

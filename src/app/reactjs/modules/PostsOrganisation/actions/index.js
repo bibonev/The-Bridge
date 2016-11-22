@@ -146,7 +146,6 @@ export function addCommentToPost(post_id, author_id, comment){
 
     return (dispatch, getState) => {
         let url='';
-
         if(author_id == -1){
             url = `http://localhost:8000/api/v1/comments/create/?type=user&post_id=${post_id}`
         }else{
