@@ -22,7 +22,7 @@ function getCurrentOrganisationId(){
         return org_id;
     }
 
-class ReviewOrganisationPanel extends Component {
+class ReviewsOrganisationPanel extends Component {
     componentWillMount() {
         const { loadReviews } = this.props;
         loadReviews(getCurrentOrganisationId());
@@ -79,4 +79,4 @@ const mapDispatchToProps = dispatch => bindActionCreators({
    loadReviews, addReview
 }, dispatch)
 
-export default connect(mapStateToProps, mapDispatchToProps)(ReviewOrganisationPanel);
+export default connect(mapStateToProps, mapDispatchToProps)(ReviewsOrganisationPanel);

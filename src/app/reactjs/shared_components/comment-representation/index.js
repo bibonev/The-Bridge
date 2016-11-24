@@ -4,7 +4,7 @@ export default class CommentRepresentation extends React.Component{
     constructor(props){
         super(props)
     }
-    componentWillMount() {
+    componentDidMount() {
         this.props.showCommentsForPost(this.props.postId);
     }
     render(){

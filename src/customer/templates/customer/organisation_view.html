@@ -76,8 +76,7 @@
         <div class="main-col">
             <h3>{{org.title}}</h3>
             <div class="description">{{org.description}}</div>
-            {% block main-col %}
-            {% endblock main-col %}
+            <div id="organisation_view"></div>
         </div>
         <div class="info-col">
             <div class="org-contacts">
@@ -113,6 +112,5 @@
 {% endblock content %}
 
 {% block script %}
-{% render_bundle 'posts_organisation' %}
-{% render_bundle 'review_organisation' %}
+{% render_bundle 'organisation_view' %}
 {% endblock script %}

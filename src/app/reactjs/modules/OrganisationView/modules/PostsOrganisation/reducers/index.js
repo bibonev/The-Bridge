@@ -14,6 +14,7 @@ const POSTS_INITIAL = {
 };
 
 export const posts = (state=POSTS_INITIAL, action) => {
+    console.log("reducer posts")
     switch (action.type) {
         case 'SHOW_POSTS':
             return Object.assign({}, state, {

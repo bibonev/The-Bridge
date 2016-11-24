@@ -31,7 +31,7 @@ def organisations(request):
     return render(request, 'customer/organisations.html', {'organisations':organisations})
 
 @login_required
-def organisation_details(request, pk):
+def organisation_view(request, pk):
     '''Display details of each organisation'''
     # view the particular ogranisation
     organisation = get_object_or_404(organisation_models.Organisation, pk=pk)
@@ -60,39 +60,39 @@ def organisation_details(request, pk):
             PendingRequest.send_request(user, organisation, request_text)
             return HttpResponseRedirect(reverse('customer:organisation_details', kwargs={'pk':pk}))
 
-    return render(request, 'customer/organisation_details.html', {'org':organisation, 'request_state': request_state,'owner':owner})
+    return render(request, 'customer/organisation_view.html', {'org':organisation, 'request_state': request_state,'owner':owner})
 
-@login_required
-def organisation_details_reviews(request, pk):
-    '''Display details of each organisation showing reviews'''
-    # view the particular ogranisation
-    organisation = get_object_or_404(organisation_models.Organisation, pk=pk)
+# @login_required
+# def organisation_details_reviews(request, pk):
+#     '''Display details of each organisation showing reviews'''
+#     # view the particular ogranisation
+#     organisation = get_object_or_404(organisation_models.Organisation, pk=pk)
 
-    # request_state: -1 if the is not relation, 0 if user has send request, 1 if user's request is approved
-    request_state = 0
-    if Relation.together(request.user, organisation):
-        request_state = 2
-    elif Relation.pending(request.user, organisation):
-        request_state = 1
-    elif Relation.own_organisation(request.user, organisation):
-        request_state = -1
+#     # request_state: -1 if the is not relation, 0 if user has send request, 1 if user's request is approved
+#     request_state = 0
+#     if Relation.together(request.user, organisation):
+#         request_state = 2
+#     elif Relation.pending(request.user, organisation):
+#         request_state = 1
+#     elif Relation.own_organisation(request.user, organisation):
+#         request_state = -1
 
-    # ability to edit organisation if the user is the owner
-    owner = False
-    if organisation.host == request.user:
-        owner = True
+#     # ability to edit organisation if the user is the owner
+#     owner = False
+#     if organisation.host == request.user:
+#         owner = True
 
-    # if a request send button is clicked
-    if request.method == 'POST':
-        # check whether the post request is on the request form: 'request_organisation' is the name of the submit button
-        if "request_organisation" in request.POST:
-            organisation = get_object_or_404(organisation_models.Organisation, pk=request.POST.get('hidden_org_id'))
-            request_text = request.POST.get('request_text')
-            user = request.user
-            PendingRequest.send_request(user, organisation, request_text)
-            return HttpResponseRedirect(reverse('customer:organisation_details_reviews', kwargs={'pk':pk}))
+#     # if a request send button is clicked
+#     if request.method == 'POST':
+#         # check whether the post request is on the request form: 'request_organisation' is the name of the submit button
+#         if "request_organisation" in request.POST:
+#             organisation = get_object_or_404(organisation_models.Organisation, pk=request.POST.get('hidden_org_id'))
+#             request_text = request.POST.get('request_text')
+#             user = request.user
+#             PendingRequest.send_request(user, organisation, request_text)
+#             return HttpResponseRedirect(reverse('customer:organisation_details_reviews', kwargs={'pk':pk}))
 
-    return render(request, 'customer/organisation_details_reviews.html', {'org':organisation, 'request_state': request_state, 'owner':owner})
+#     return render(request, 'customer/organisation_details_reviews.html', {'org':organisation, 'request_state': request_state, 'owner':owner})
 
 
 

@@ -218,7 +218,6 @@ class CommentRetrieveAPIView(generics.RetrieveAPIView):
     serializer_class = serializers.CommentListSerializer
     #permission_classes = [permissions.IsOwnerOrReadOnly]
 
-
 class CommentCreateAPIView(generics.CreateAPIView):
     '''Create comment'''
     queryset = posts_models.Comment.objects.all()
