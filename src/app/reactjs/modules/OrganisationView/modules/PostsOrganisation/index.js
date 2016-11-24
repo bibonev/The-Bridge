@@ -32,9 +32,8 @@
 // }
 
 // render(<PostsOrganisation/>, document.getElementById('posts_organisation'))
-import * as reducer from "./reducers"
 
 export {default as PostsOrganisationPanel} from './containers/PostsOrganisationPanel';
-export {reducer as reducer};
+export {default as reducer} from './reducers';
 
 console.log(reducer)

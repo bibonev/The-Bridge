@@ -8,7 +8,6 @@ class Root extends Component {
 
   render() {
     const { store, history, debug, routes } = this.props;
-    console.log("RoutesRoot: ", routes)
     return (
       <Provider store={store}>
         <div>
