@@ -1,4 +1,4 @@
-import React, {Component, PropTypes}  from 'react';
+import React, {Component}  from 'react';
 import { connect } from 'react-redux';
 import { loadPosts, addPost, loadComments, addCommentToPost, currentAuthorId } from '../actions';
 import { bindActionCreators } from 'redux';
@@ -7,13 +7,6 @@ import PostAdd from '../components/PostAdd';
 import PostRepresentation from '../components/PostRepresentation';
 
 class PostsOrganisationPanel extends Component {
-    constructor(props){
-        super(props)
-        this.getCurrentOrganisationId = this.getCurrentOrganisationId.bind(this)
-        const { loadPosts } = this.props;
-        loadPosts(this.getCurrentOrganisationId());
-        console.log("In constructor", this.getCurrentOrganisationId())
-    }
     getCurrentOrganisationId(){
         let curr_url = window.location.href.toString().split("/");
         let org_id = curr_url.pop();
@@ -27,11 +20,11 @@ class PostsOrganisationPanel extends Component {
         loadPosts(this.getCurrentOrganisationId());
     }
     render(){
-        console.log("State: ",this.state)
-        const { rows, count, ownOrganisation } = this.props.posts;
-        const { org_u_rows } = this.props.organisations_user;
-        const { author_id } = this.props.comment_author_id;
-        const comments = this.props.comments;
+        const props = this.props.posts;
+        const { rows, count, ownOrganisation } = props.posts;
+        const { org_u_rows } = props.organisations_user;
+        const { author_id } = props.comment_author_id;
+        const comments = props.comments;
         const { loadPosts, addPost, loadComments, addCommentToPost, currentAuthorId } = this.props;
 
         const curr_org_id = this.getCurrentOrganisationId();
@@ -64,9 +57,5 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => bindActionCreators({
     loadPosts, addPost, loadComments, addCommentToPost, currentAuthorId
 }, dispatch)
-
-PostsOrganisationPanel.propTypes = {
-  loadPosts: PropTypes.func.isRequired
-};
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostsOrganisationPanel);

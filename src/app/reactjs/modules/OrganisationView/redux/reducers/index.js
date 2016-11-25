@@ -9,5 +9,4 @@ const rootReducer = combineReducers({
   reviews
 });
 
-console.log("Root reducer from reducers: ",rootReducer)
 export default rootReducer;

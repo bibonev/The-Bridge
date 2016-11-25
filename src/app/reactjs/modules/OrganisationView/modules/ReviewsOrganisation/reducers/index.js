@@ -1,3 +1,5 @@
+import { combineReducers } from 'redux';
+
 const REVIEWS_INITIAL = {
     rows: [],
     count: 0,
@@ -41,3 +43,7 @@ export const reviews = (state=REVIEWS_INITIAL, action) => {
             return state;
     }
 };
+
+export default combineReducers({
+    reviews,
+});

@@ -17,8 +17,6 @@ let middlewares = [thunk];
   //middlewares.push(window.devToolsExtension ? window.devToolsExtension() : f => f)
 // }
 
-console.log("Combine: ",rootReducer)
-
 export default function configureStore(routerMiddleware, initialState) {
   const store = compose(applyMiddleware(...middlewares, routerMiddleware))(createStore)(rootReducer, initialState);
   return store;

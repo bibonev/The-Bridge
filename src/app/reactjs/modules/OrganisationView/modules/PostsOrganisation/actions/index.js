@@ -1,5 +1,4 @@
 export function showPostsResult(jsonResult, ownOrganisation) {
-    console.log("showing posts results")
     return {
         type: "SHOW_POSTS",
         posts: jsonResult,
@@ -54,7 +53,6 @@ export function loadOrganisationsCurrentUser(){
 }
 
 export function loadPosts(org_id) {
-    console.log("loading posts")
     return (dispatch, getState) => {
         let url = `http://localhost:8000/api/v1/posts/?org_id=${org_id}`;
         $.get(url, data => {

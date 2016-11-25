@@ -23,12 +23,13 @@ function getCurrentOrganisationId(){
     }
 
 class ReviewsOrganisationPanel extends Component {
-    componentWillMount() {
+    componentDidMount() {
         const { loadReviews } = this.props;
         loadReviews(getCurrentOrganisationId());
     }
     render(){
-        const { rows, count, rating } = this.props.reviews;
+        const props = this.props.reviews;
+        const { rows, count, rating } = props.reviews;
         const { addReview } = this.props;
 
         const reviewSubmit = (e) => {

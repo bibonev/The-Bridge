@@ -105,7 +105,7 @@ DATABASES = {
         'USER': 'dreamprojectadminuser',
         'PASSWORD': 'dreamprojectpass',
         'HOST': 'localhost',
-        'PORT': '',
+        'PORT': '5432',
     }
 }
 
