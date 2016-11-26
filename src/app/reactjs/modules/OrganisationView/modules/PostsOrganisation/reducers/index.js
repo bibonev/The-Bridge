@@ -2,27 +2,23 @@ import { combineReducers } from 'redux';
 var update = require('react/lib/update')
 
 const POSTS_INITIAL = {
-    rows: [],
-    count: 0,
-    page: 1,
-    posts: {},
+    posts: [],
     ownOrganisation: false
 };
 
-export const posts = (state=POSTS_INITIAL, action) => {
+const posts = (state=POSTS_INITIAL, action) => {
     switch (action.type) {
         case 'SHOW_POSTS':
             return Object.assign({}, state, {
-                rows: action.posts,
-                count: action.posts.length,
+                posts: action.posts,
                 ownOrganisation: action.ownOrganisation,
             });
         case 'ADD_POST':
             return {
                 ...state,
-                rows: [
+                posts: [
                     action.post,
-                    ...state.rows,
+                    ...state.posts,
                 ]
             }
         default:
@@ -30,16 +26,16 @@ export const posts = (state=POSTS_INITIAL, action) => {
     }
 };
 
-const postComment = (state, action) => {
+function postComment(state, action){
     switch(action.type){
         case 'ADD_COMMENT':
             return [...state, action.comment]
         default:
             return state;
     }
-}
+};
 
-export const comments = (state={}, action) => {
+const comments = (state={}, action) => {
     switch (action.type) {
         case 'SHOW_COMMENTS':
             return {
@@ -61,7 +57,7 @@ const ORGANISATIONS_USER_INITIAL = {
     count: 0
 };
 
-export const organisations_user = (state=ORGANISATIONS_USER_INITIAL, action) => {
+const organisations_user = (state=ORGANISATIONS_USER_INITIAL, action) => {
     switch (action.type){
         case "SHOW_ORGANISATIONS_USER":
             return Object.assign({}, state, {
@@ -73,7 +69,7 @@ export const organisations_user = (state=ORGANISATIONS_USER_INITIAL, action) => 
     }
 }
 
-export const comment_author_id = (state={ author_id: -1 }, action) => {
+const comment_author_id = (state={ author_id: -1 }, action) => {
     switch(action.type){
         case "UPDATE_COMMENT_AUTHOR_ID":
             return Object.assign({}, state, {

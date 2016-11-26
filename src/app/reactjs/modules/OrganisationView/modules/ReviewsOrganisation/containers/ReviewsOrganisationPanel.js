@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { loadReviews, addReview } from '../actions';
 import { bindActionCreators } from 'redux';
 
+import OrganisationMainView from '../../../../../shared_components/organisation-main-view'
 import Textarea from 'react-textarea-autosize'
 import ReviewRepresentation from '../components/ReviewRepresentation';
 

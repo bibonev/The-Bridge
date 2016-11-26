@@ -22,7 +22,7 @@ function calculateRating(reviewList){
     return rating;
 }
 
-export const reviews = (state=REVIEWS_INITIAL, action) => {
+const reviews = (state=REVIEWS_INITIAL, action) => {
     switch (action.type) {
         case 'SHOW_REVIEWS':
             return Object.assign({}, state, {
