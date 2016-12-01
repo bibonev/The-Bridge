@@ -39,6 +39,11 @@ config.entry = {
     'webpack/hot/only-dev-server',
     './reactjs/modules/StudioOrganisation/index',
   ],
+  requests_user: [
+    'webpack-dev-server/client?http://localhost:3000',
+    'webpack/hot/only-dev-server',
+    './reactjs/modules/RequestsUser/index',
+  ],
 }
 config.output.publicPath = 'http://localhost:3000' + '/assets/bundles/'
 config.plugins = config.plugins.concat([

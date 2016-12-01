@@ -3,20 +3,20 @@ import { connect } from 'react-redux';
 import { loadRequests, requestResult } from '../actions';
 import { bindActionCreators } from 'redux';
 
-import RequestsRepresentation from '../components/RequestsRepresentation';
+//import RequestsRepresentation from '../components/RequestsRepresentation';
+import RequestsRepresentation from '../../../shared_components/studio-view/requests-representation';
 import MainStudioRepresentation from '../components/MainStudioRepresentation';
 
 class StudioOrganisationPanel extends Component {
     componentDidMount() {
         const { loadRequests, params } = this.props;
         loadRequests(params.orgId);
-        console.log("DID ID: ", params.orgId)
     }
     render(){
         const { relations, pending_requests, org_u_rows } = this.props.studio;
         const { loadRequests, requestResult, params } = this.props;
         const showRequests = (org_id) => loadRequests(org_id);
-        const submitRequestResult = (org_id, pr_id, result) => requestResult(org_id, pr_id, result);
+        const submitRequestResult = (pr_id, result) => requestResult(params.orgId, pr_id, result);
         
         return (
             <div>

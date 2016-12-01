@@ -272,9 +272,7 @@ class PendingRequestCurrUserListAPIView(generics.ListAPIView):
     serializer_class = serializers.PendingRequestListSerializer
     # modify queryset to show pending requests only for the current user
     def get_queryset(self):
-        print(self.request.user)
         queryset_list = partnership_models.PendingRequest.get_pending_requests_for_user(user=self.request.user)
-        print(queryset_list)
         return queryset_list
 
 class RelationListAPIView(generics.ListAPIView):

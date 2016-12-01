@@ -14,8 +14,6 @@ const middleware = routerMiddleware(hashHistory);
 const store = configureStore(middleware);
 const history = syncHistoryWithStore(appHistory, store)
 
-// console.log("Store: ", store)
-
 render(
     <Root history={history} store={store} routes={routes} debug={false} />,
     document.getElementById('organisation_view') 

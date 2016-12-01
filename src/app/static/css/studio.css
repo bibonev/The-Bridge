@@ -1,5 +1,5 @@
 .studio-info{
-    width:200px;
+    width:250px;
     float:left;
 }
 .organisationChooseBox{
@@ -84,18 +84,7 @@
     list-style: none;
 }
 .requestDisplay{
-    display:block;
-    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
-    font-weight: 400;
-    font-size: 13px;
-    color: #383838;
-    background:#fff;
-    border:none;
-    border:1px solid #c4c4c4;
-    border-bottom:0;
-    outline:none;
-    min-height:64px;
-    text-align:left;
+    border-bottom: 2px solid #fff;
 }
 .requestButton-pending{
     display:inline-block !important;
@@ -108,7 +97,7 @@
     color:#2A2A2A;
 }
 .requestDisplay:last-of-type{
-    border-bottom:1px solid #c4c4c4;
+    border-bottom:0;
 }
 .requestDisplay button{
     font-size:22px;

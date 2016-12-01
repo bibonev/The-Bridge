@@ -12,6 +12,7 @@ module.exports = {
     // review_organisation: './reactjs/modules/ReviewOrganisation/index',
     organisation_view: './reactjs/modules/OrganisationView/root',
     studio_organisation: './reactjs/modules/StudioOrganisation/index',
+    requests_user: './reactjs/modules/RequestsUser/index',
     navbar: './reactjs/modules/Navbar/index',
     vendors: ['react']
   },

@@ -5,21 +5,18 @@
     list-style: none;
 }
 .bookmark-container{
-    width: 500px;
-    position:relative;
-    height: 160px;
-    margin: 20px 0;
-    border:1px solid #fff;
+    width:100%;
+    display: inline-block;
 }
 .bookmark-container .gradient-background{
     background: rgba(0, 0, 0, 0.3);
-    padding: 20px;
-    height:158px;
+    height:80px;
+    padding:10px;
 }
 .bookmark-container .org-profile-photo{
-    border:4px solid #fff;
+    border:2px solid #fff;
     border-radius: 4px;
-    margin-right: 10px;
+    margin-right: 15px;
     float:left;
 }
 .ratingMain{
@@ -27,26 +24,26 @@
   color:#fff;
   display:inline-block;
   border-radius:25px;
-  padding:0 7px;
-  margin-top:10px;
+  padding:0 5px;
+  margin-top:5px;
 }
 .ratingMain span{
   vertical-align:middle;
 }
 .ratingMain .ratingNum{
-  font-size:18px;
+  font-size:15px;
   font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
   font-weight: 400;
-  margin-right:5px;
+  margin-right:3px;
 }
 .ratingMain .ratingStar{
-  font-size: 15px !important;
+  font-size: 12px !important;
 }
 .bookmark-container .bookmark-title{
     display:block;
     color:#fff;
-    margin-top:10px;
-    font-size: 18px;
+    margin-top: 5px;
+    font-size: 15px;
     font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
     font-weight: 700;
     white-space: nowrap;
@@ -55,7 +52,7 @@
 }
 .bookmark-container .bookmark-cat{
     color:#fff;
-    font-size: 14px;
+    font-size: 12px;
     font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
     font-weight: 400;
 }

@@ -1,14 +1,17 @@
 {% extends 'customer/base.html' %}
+
+{% load render_bundle from webpack_loader %}
 {% load static from staticfiles %}
 
 {% block title %} Requests {% endblock title %}
 
 {% block css %}
 <link href="{% static 'css/requests.css' %}" rel="stylesheet">
+<link href="{% static 'css/studio.css' %}" rel="stylesheet">
 {% endblock css %}
 
 {% block content %}
-<div>
+<!-- <div>
     <ul class="bookmark-list">
         {% for bookmark_org in bookmarked_organisations %}
         <li>
@@ -25,16 +28,19 @@
                 <img class="org-profile-photo" width="120" height="120" src="{{bookmark_org.default_image}}"/>
             {% endif %}
             <div class="ratingMain"><span class="ratingNum">{{bookmark_org.rating}}</span><span class="glyphicon glyphicon-star ratingStar" aria-hidden="true"></span></div>
-            <a class="bookmark-title" href="{% url 'customer:organisation_details' pk=bookmark_org.pk %}">{{bookmark_org.title}}</a>
+            <a class="bookmark-title" href="{% url 'customer:organisation_view' pk=bookmark_org.pk %}">{{bookmark_org.title}}</a>
             <span class="bookmark-cat">{{bookmark_org.category}}</span>
             </div>
             </div>
         </li>
         {% endfor %}
     </ul>
-</div>
+</div> -->
+
+<div id="requests_user"></div>
 {% endblock content %}
 
-{% block script %}
 
+{% block script %}
+{% render_bundle 'requests_user' %}
 {% endblock script %}
