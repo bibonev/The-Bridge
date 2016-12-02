@@ -29,38 +29,44 @@ export default class RequestsRepresentation extends React.Component{
                 let decisionButtons;
                 if(type == 'relation'){
                    url = `/${request.id}/`
+                   return <Link to={url} activeClassName="active-request" className="requests-container relation-style-box">
+                            <i className="fa fa-users request-status-r relation-status-icon-r" aria-hidden="true"></i>
+                            <img className="request-profile-photo" src={"//localhost:8000" + request.user.front_picture} width="60" height="60" />
+                            <span className="requests-author-title relation-style bonus-margin-title">{request.user.first_name} {request.user.last_name}</span>
+                        </Link>
                 }else{
                    url = `/pending/${request.id}/`
-                   decisionButtons = <div className="yes-no-box">
+                   return <Link to={url} activeClassName="active-request" className="requests-container pending-style-box">
+                            <i className="fa fa-clock-o request-status-r pending-status-icon-r" aria-hidden="true"></i>
+                            <img className="request-profile-photo" src={"//localhost:8000" + request.user.front_picture} width="60" height="60" />
+                            <div className="pending-title-box">
+                                <span className="pending-title requests-author-title pending-style">{request.user.first_name} {request.user.last_name}</span>
+                                <div className="yes-no-box">
                                     <button className="approve" onClick={() => this.onClickRequestResult(request.id, 'approve')}><i className="fa fa-check" aria-hidden="true"></i></button>
                                     <button className="reject" onClick={() => this.onClickRequestResult(request.id, 'reject')}><i className="fa fa-times" aria-hidden="true"></i></button>
                                 </div>
-                }
-                return <div>
-                        <Link to={url} activeClassName="active-request" className="bookmark-container">
-                            <div className="gradient-background">
-                                <img className="org-profile-photo" src={"//localhost:8000" + request.user.front_picture} width="60" height="60" />
-                                <div className="pending-title-box">
-                                    <span className="pending-title bookmark-title">{request.user.first_name} {request.user.last_name}</span>
-                                    {decisionButtons}
-                                </div>
                             </div>
                         </Link>
-                    </div>
+                }
             }else{
                 let url = ''
                 if(type == 'relation'){
                    url = `/${request.id}/`
+                   return <Link to={url} activeClassName="active-request" className="requests-container relation-style-box">
+                            <i className="fa fa-users request-status-r relation-status-icon-r" aria-hidden="true"></i>
+                            <img className="request-profile-photo" src={"//localhost:8000" + request.organisation.front_picture} width="60" height="60" />
+                            <div className="ratingMain"><span className="ratingNum">{request.organisation.rating}</span><span className="glyphicon glyphicon-star ratingStar" aria-hidden="true"></span></div>
+                            <span className="requests-author-title relation-style">{request.organisation.title}</span>
+                    </Link>
                 }else{
                    url = `/pending/${request.id}/`
-                }
-                return <Link to={url} activeClassName="active-request" className="bookmark-container">
-                        <div className="gradient-background">
-                            <img className="org-profile-photo" src={"//localhost:8000" + request.organisation.front_picture} width="60" height="60" />
+                   return <Link to={url} activeClassName="active-request" className="requests-container pending-style-box">
+                            <i className="fa fa-clock-o request-status-r pending-status-icon-r" aria-hidden="true"></i>
+                            <img className="request-profile-photo" src={"//localhost:8000" + request.organisation.front_picture} width="60" height="60" />
                             <div className="ratingMain"><span className="ratingNum">{request.organisation.rating}</span><span className="glyphicon glyphicon-star ratingStar" aria-hidden="true"></span></div>
-                            <span className="bookmark-title">{request.organisation.title}</span>
-                        </div>
+                            <span className="requests-author-title pending-style">{request.organisation.title}</span>
                     </Link>
+                }
             }
         }
         const requestsResult = () => {
@@ -68,7 +74,7 @@ export default class RequestsRepresentation extends React.Component{
                 return <div className="empty-requests-list">No requests in progress</div>
             }else{
                 return relations.map(request =>
-                        <li key={request.id} className="requestDisplay">
+                        <li key={request.id} className="request-item">
                            {requestsType(request, 'relation')}
                         </li>
                    )}
@@ -78,19 +84,15 @@ export default class RequestsRepresentation extends React.Component{
                     return <div className="empty-requests-list">No pending requests</div>
                 }else{
                     return pending_requests.map(request =>
-                           <li key={request.id} className="requestDisplay">
+                           <li key={request.id} className="request-item">
                                {requestsType(request, 'pending')}
                            </li>
                     )}
             }
         return <div className="studio-info">
                     {organisationsList()}
-                    <div className="bonus-text-all-requests">Pending requests</div>
                     <ul className="bookmark-list">
                         {pendingRequestsResult()}
-                    </ul>
-                    <div className="bonus-text-all-requests">All requests</div>
-                    <ul className="bookmark-list">
                         {requestsResult()}
                     </ul>
                 </div>

@@ -1,25 +1,27 @@
 .studio-info{
     width:250px;
     float:left;
+    max-height: 600px;
+    overflow-y: scroll;
 }
 .organisationChooseBox{
     display:inline-block;
     position:relative;
-    width:150px;
-    text-align:right;
+    width:180px;
+    text-align:center;
+    margin-bottom:12px;
 }
 .organisationDisplay{
     font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
     font-weight: 400;
-    font-size: 13px;
+    font-size: 14px;
     color: #029acf;
     border: 1px solid #c4c4c4;
-    border-radius: 2px;
+    border-radius: 8px;
     outline: none;
     display:inline-block;
-    padding:4px 8px 4px 22px;
-    background: url('../img/caret-down.png') no-repeat 4px center #fff;
-    background-size: 12px 14px;
+    padding:8px 12px;
+    background: #fff;
     width:100%;
     white-space: nowrap;
     overflow:hidden !important;
@@ -30,21 +32,22 @@
     position: absolute;
     z-index: 1000;
     border: 1px solid #c4c4c4;
-    border-radius: 2px;
+    border-radius: 8px;
     background:#fff;
     width:100%;
     text-align: center;
+    margin-top:5px;
 }
 .organisationOptions button{
     font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
     font-weight: 400;
-    font-size: 13px;
+    font-size: 14px;
     color: #029acf;
     background:#fff;
     border:none;
     border-bottom:1px solid #c4c4c4;
     outline:none;
-    padding:4px 8px;
+    padding:8px 12px;;
     width:100%;
     text-align:center;
     white-space: nowrap;
@@ -58,23 +61,19 @@
     background: #029acf;
     color: #fff;
 }
+.organisationOptions a:first-of-type button{
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+.organisationOptions a:last-of-type button{
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
 .link-to-organisation{
     font-size:18px;
     margin-left:15px;
     color:#029acf;
     vertical-align:middle;
-}
-.bonus-text-all-requests{
-    background:#c4c4c4;
-    width:100%;
-    color:#fff;
-    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
-    font-weight: 400;
-    font-size: 13px;
-    white-space: nowrap;
-    overflow:hidden !important;
-    text-overflow: ellipsis;
-    padding:5px 10px;
 }
 .all-requests{
     width:200px;
@@ -82,34 +81,24 @@
     padding:0;
     list-style: none;
 }
-.requestDisplay{
-    border-bottom: 2px solid #fff;
-}
 .requestButton-pending{
     display:inline-block !important;
 }
 .requestButton-relation{
     width:100% !important;
 }
-.requestDisplay:hover .requestButton{
-    text-decoration: underline;
-    color:#2A2A2A;
-}
-.requestDisplay:last-of-type{
-    border-bottom:0;
-}
-.requestDisplay button{
+.request-item button{
     font-size:22px;
     background:transparent;
     border:0;
     outline:0;
 }
-.requestDisplay .approve{
+.approve{
     color:#5cb860;
     padding:0 !important;
-    margin-left:7px;
+    margin-left:6px;
 }
-.requestDisplay .reject{
+.reject{
     color:#e15258;
     padding:0 !important;
     margin-left:7px;
@@ -137,9 +126,16 @@
     font-size: 13px;
     text-align:center;
     padding:10px 0;
+    margin-bottom:12px;
 }
-.active-request span{
-    color:#029acf !important;
+.active-request{
+    background: #029acf !important;
+}
+.active-request .requests-author-title{
+    color:#fff !important;
+}
+.active-request .request-status-r{
+    color:#fff !important;
 }
 .studio-main{
     float:left;
@@ -155,20 +151,68 @@
 .bookmark-list li{
     list-style: none;
 }
-.bookmark-container{
+.requests-container{
+    position:relative;
     width:100%;
-    display: inline-block;
-}
-.bookmark-container .gradient-background{
-    background: rgba(0, 0, 0, 0.3);
+    display: block;
     height:80px;
     padding:10px;
+    background: #fff;
+    border-radius: 8px;
+    margin-bottom: 12px;
 }
-.bookmark-container .org-profile-photo{
-    border:2px solid #fff;
-    border-radius: 4px;
+.pending-style-box:hover{
+    background:#029acf;
+}
+.pending-style-box:hover .pending-style{
+    color:#fff;
+}
+.pending-style-box:hover .pending-status-icon-r{
+    color:#fff;
+}
+.relation-style-box:hover{
+    background:#029acf;
+}
+.relation-style-box:hover .relation-style{
+    color:#fff;
+}
+.relation-style-box:hover .relation-status-icon-r{
+    color:#fff;
+}
+.requests-container .request-profile-photo{
+    border-radius: 8px;
     margin-right: 15px;
     float:left;
+}
+.pending-style-box{
+    border:1px solid #c4c4c4;
+}
+.pending-style{
+    color: #9e4d83;
+}
+.relation-style-box{
+    border:1px solid #c4c4c4;
+}
+.relation-style{
+    color:#5cb860;
+}
+.request-status-r{
+    position:absolute;
+    right:7px;
+    top:7px;
+}
+.relation-status-icon-r{
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: transparent;
+    color:#5cb860;
+}
+.bonus-margin-title{
+    margin-top:20px !important;
+}
+.pending-status-icon-r{
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: transparent;
+    color:#9e4d83;
 }
 .ratingMain{
   background: #FFA91B;
@@ -190,9 +234,8 @@
 .ratingMain .ratingStar{
   font-size: 12px !important;
 }
-.bookmark-container .bookmark-title{
+.requests-author-title{
     display:block;
-    color:#fff;
     margin-top: 5px;
     font-size: 15px;
     font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
@@ -200,20 +243,6 @@
     white-space: nowrap;
     overflow:hidden !important;
     text-overflow: ellipsis;
-}
-.bookmark-container .bookmark-cat{
-    color:#fff;
-    font-size: 12px;
-    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
-    font-weight: 400;
-}
-.bookmark-container:hover .bookmark-title{
-    color:#029acf;
-    text-align: none;
-}
-.bookmark-container:active .bookmark-title{
-    color:#029acf;
-    text-align: none;
 }
 .pending-title-box{
     float:left;
