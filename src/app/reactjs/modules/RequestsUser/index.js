@@ -52,9 +52,9 @@ class RequestsUser extends Component {
             <IndexRedirect to="/2" component={StudioOrganisationPanel}/> */}
             <IndexRoute component={RequestsUserPanel} />
             <Route path=":requestId" component={RequestsUserPanel} name="User Requests"/>
+            <Route path="pending/:pendingId" component={RequestsUserPanel} name="User Pending Request"/>
               {/*<IndexRoute component={StudioOrganisationPanel}/>
               <Route name="Current Request" path=":requestId" component={StudioOrganisationPanel}/>
-              <Route name="Current Pending Request" path="pending/:pendingId" component={StudioOrganisationPanel}/>
            </Route>*/}
           </Route>
         </Router>

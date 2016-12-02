@@ -32,11 +32,11 @@ export default class OrganisationsList extends React.Component{
         const organisationDisplay = this.organisationDisplay(currentOrganisationId);
 
         const currUserOrg = this.props.org_u_rows.map(org => 
-                <Link to={`/${org.id}/`} key={org.id}>
+                <a href={"//localhost:8000/studio/" + org.id} key={org.id}>
                     <button onClick={() => this.onClickOrganisationChange(org.id)} key={org.id}>
                         {org.title}
                     </button>
-                </Link>
+                </a>
             )
         const haveOrganisations = () => {
             if(typeof org_u_rows !== 'undefined' && org_u_rows.length > 0 && !jQuery.isEmptyObject(organisationDisplay)){

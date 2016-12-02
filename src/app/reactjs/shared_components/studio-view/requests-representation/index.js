@@ -28,10 +28,10 @@ export default class RequestsRepresentation extends React.Component{
                 let url = ''
                 let decisionButtons;
                 if(type == 'relation'){
-                   url = `/${currentOrganisationId}/${request.id}/`
+                   url = `/${request.id}/`
                 }else{
-                   url = `/${currentOrganisationId}/pending/${request.id}/`
-                   decisionButtons = <div>
+                   url = `/pending/${request.id}/`
+                   decisionButtons = <div className="yes-no-box">
                                     <button className="approve" onClick={() => this.onClickRequestResult(request.id, 'approve')}><i className="fa fa-check" aria-hidden="true"></i></button>
                                     <button className="reject" onClick={() => this.onClickRequestResult(request.id, 'reject')}><i className="fa fa-times" aria-hidden="true"></i></button>
                                 </div>
@@ -40,10 +40,12 @@ export default class RequestsRepresentation extends React.Component{
                         <Link to={url} activeClassName="active-request" className="bookmark-container">
                             <div className="gradient-background">
                                 <img className="org-profile-photo" src={"//localhost:8000" + request.user.front_picture} width="60" height="60" />
-                                <span className="bookmark-title">{request.user.first_name} {request.user.last_name}</span>
+                                <div className="pending-title-box">
+                                    <span className="pending-title bookmark-title">{request.user.first_name} {request.user.last_name}</span>
+                                    {decisionButtons}
+                                </div>
                             </div>
                         </Link>
-                        {decisionButtons}
                     </div>
             }else{
                 let url = ''

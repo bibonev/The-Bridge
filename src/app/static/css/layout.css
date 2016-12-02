@@ -15,3 +15,6 @@
 .bonus-padding{
     padding: 0 15px !important; 
 }
+a, a:hover, a:active, a:visited{
+    text-decoration: none ;
+}

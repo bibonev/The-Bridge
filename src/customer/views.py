@@ -58,7 +58,7 @@ def organisation_view(request, pk):
             request_text = request.POST.get('request_text')
             user = request.user
             PendingRequest.send_request(user, organisation, request_text)
-            return HttpResponseRedirect(reverse('customer:organisation_details', kwargs={'pk':pk}))
+            return HttpResponseRedirect('http://localhost:8000/organisations/' + str(pk))
 
     return render(request, 'customer/organisation_view.html', {'org':organisation, 'request_state': request_state,'owner':owner})
 
