@@ -6,7 +6,7 @@
 {% block title %} Studio {% endblock title %}
 
 {% block css %}
-<link href="{% static 'css/studio.css' %}" rel="stylesheet">
+<link href="{% static 'css/studio-requests-layout.css' %}" rel="stylesheet">
 {% endblock css %}
 
 {% block content%}
@@ -19,5 +19,9 @@
 {% endblock content%}
 
 {% block script %}
+<script>
+// pass a global variable with the organisation id to the React components
+ var organisationId = '{{ pk }}';
+</script>
 {% render_bundle 'studio_organisation' %}
 {% endblock script %}

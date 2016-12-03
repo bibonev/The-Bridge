@@ -10,34 +10,6 @@ from partnership.models import Relation, PendingRequest
 from posts.models import Post
 from . import forms, models
 
-# Create your views here.
-
-@login_required
-def home_page(request):
-    '''Display organisation home page'''
-    # set the session 'role' to supplier
-    request.session['role'] = 'organisation'
-    request.session.modified = True
-    return render(request, 'organisation/home.html')
-
-# display template with all user's organisations'
-@login_required
-def my_organisations(request):
-    '''Display user's organisations'''
-    # filter all organisations of the curent user
-    my_organisations = models.Organisation.objects.filter(host=request.user)
-
-    return render(request, 'organisation/my_organisations.html', {'my_organisations':my_organisations})
-
-# display template with details of the specific organisation
-@login_required
-def my_organisation_details(request, pk):
-    '''Display user's organisations details'''
-    # get Organisation object with specific pk
-    my_organisation = get_object_or_404(models.Organisation, pk=pk, host=request.user)
-
-    return render(request, 'organisation/my_organisation_details.html', {'org':my_organisation})
-
 # display template which gives ability to edit organisation
 @login_required
 def my_organisation_edit(request, pk):
@@ -51,7 +23,7 @@ def my_organisation_edit(request, pk):
             with reversion.create_revision():
                 organisation_form.save()
             Post.create_post_org_change(org_instance)
-            return HttpResponseRedirect(reverse('customer:organisation_details', kwargs={'pk':pk}))
+            return HttpResponseRedirect('http://localhost:8000/organisations/' + str(pk))
     else:
         organisation_form = forms.OrganisationForm(instance=org_instance)
 
@@ -61,6 +33,10 @@ def my_organisation_edit(request, pk):
 @login_required
 def create_organisation(request):
     '''Create organisation'''
+    # set the organisaiton_id session to the latest created by the user
+    request.session['organisation_id'] = pk
+    request.session.modified = True
+
     form = forms.OrganisationForm()
     # submit creation form
     if request.method == 'POST':
@@ -73,37 +49,21 @@ def create_organisation(request):
             # create initial post when an organisation is added
             description = org.title + " has joined on " + str(datetime.now().strftime("%d %B %Y"))
             Post.objects.create(description=description, organisation=org)
-            return HttpResponseRedirect(reverse('customer:organisation_details', kwargs={'pk': org.pk}))
+            return HttpResponseRedirect('http://localhost:8000/organisations/' + str(org.pk))
     
     return render(request, 'organisation/create_organisation.html', {'form':form})
 
-# display list with all requests
 @login_required
-def requests(request):
-    '''Organisations received requests'''
-
-    org_requests = set()
-
-    # loop through all users organisaitons to see which have requests
-    for organisation in models.Organisation.objects.filter(host=request.user):
-        org_requests = org_requests.union(PendingRequest.get_pending_requests_for_organisation(organisation=organisation))
-
-    if request.method == 'POST':
-         # check whether the post request is on the request form: 'accept_request' is the name of the submit button
-        if 'accept_request' in request.POST:
-            curr_request = get_object_or_404(PendingRequest, pk=request.POST.get('customer_request'))
-            curr_request.approve()
-            return HttpResponseRedirect(reverse('organisation:requests'))
-
-    return render(request, 'organisation/requests.html', {'org_requests': org_requests})
-
-@login_required
-def organisation_studio(request):
+def organisation_studio(request, pk):
     '''Current organisation studio'''
+
+    # update organisation_id session to the latest the user used
+    request.session['organisation_id'] = pk
+    request.session.modified = True
 
     have_organisations = False
     if models.Organisation.objects.filter(host=request.user):
        have_organisations = True
 
-    return render(request, 'organisation/organisation_studio.html', {'have_organisations':have_organisations})
+    return render(request, 'organisation/organisation_studio.html', {'have_organisations':have_organisations, 'pk':pk})
         

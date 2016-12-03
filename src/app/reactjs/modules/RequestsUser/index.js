@@ -16,7 +16,7 @@ import thunk from "redux-thunk"
 
 import * as reducers from "./reducers"
 
-import StudioOrganisationPanel from './containers/StudioOrganisationPanel';
+import RequestsUserPanel from './containers/RequestsUserPanel';
 
 let finalCreateStore = compose(
   applyMiddleware(thunk),
@@ -41,15 +41,21 @@ const store = finalCreateStore(reducer)
 ////////////////
 
 // Change different components for each Route
-class StudioOrganisation extends Component {
+class RequestsUser extends Component {
   render() {
     return (
       <Provider store={store}>
         <Router history={appHistory}>
           <Route path="/">
-            <IndexRoute component={StudioOrganisationPanel}/>
-            <Route path=":requestId" component={StudioOrganisationPanel}/>
-            <Route path="pending/:pendingId" component={StudioOrganisationPanel}/>
+            {/*<IndexRoute component={StudioOrganisationPanel}/>
+            HARDCODE default path - Definitely change 
+            <IndexRedirect to="/2" component={StudioOrganisationPanel}/> */}
+            <IndexRoute component={RequestsUserPanel} />
+            <Route path=":requestId" component={RequestsUserPanel} name="User Requests"/>
+            <Route path="pending/:pendingId" component={RequestsUserPanel} name="User Pending Request"/>
+              {/*<IndexRoute component={StudioOrganisationPanel}/>
+              <Route name="Current Request" path=":requestId" component={StudioOrganisationPanel}/>
+           </Route>*/}
           </Route>
         </Router>
       </Provider>
@@ -57,4 +63,4 @@ class StudioOrganisation extends Component {
   }
 }
 
-render(<StudioOrganisation/>, document.getElementById('studio_organisation'))
+render(<RequestsUser/>, document.getElementById('requests_user'))

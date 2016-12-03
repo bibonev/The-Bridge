@@ -8,9 +8,11 @@ module.exports = {
     // Add as many entry points as you have container-react-components here
     organisation_search: './reactjs/modules/OrganisationSearch/index',
     posts_dashboard: './reactjs/modules/PostsDashboard/index',
-    posts_organisation: './reactjs/modules/PostsOrganisation/index',
-    review_organisation: './reactjs/modules/ReviewOrganisation/index',
+    // posts_organisation: './reactjs/modules/PostsOrganisation/index',
+    // review_organisation: './reactjs/modules/ReviewOrganisation/index',
+    organisation_view: './reactjs/modules/OrganisationView/root',
     studio_organisation: './reactjs/modules/StudioOrganisation/index',
+    requests_user: './reactjs/modules/RequestsUser/index',
     navbar: './reactjs/modules/Navbar/index',
     vendors: ['react']
   },
