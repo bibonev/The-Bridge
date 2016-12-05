@@ -72,7 +72,7 @@ ROOT_URLCONF = 'dream_comes_true.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates', 'allauth_user/templates', 'userprofile/templates', 'customer/templates', 'organisation/templates', 'posts/templates',],
+        'DIRS': ['templates', 'allauth_user/templates', 'userprofile/templates', 'customer/templates', 'organisation/templates', 'posts/templates', 'chat/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
