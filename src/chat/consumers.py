@@ -1,23 +1,82 @@
+import re
+import json
+import logging
+
 from channels import Group
 from channels.sessions import channel_session
 from .models import Conversation
 
+log = logging.getLogger(__name__)
+
 @channel_session
 def ws_connect(message):
-    prefix, label = message['path'].strip('/').split('/')
+    print(message)
+    # Extract the room from the message. This expects message.path to be of the
+    # form /chat/{label}/, and finds a Room if the message path is applicable,
+    # and if the Room exists. Otherwise, bails (meaning this is a some othersort
+    # of websocket). So, this is effectively a version of _get_object_or_404.
+    #try:
+    prefix = message['path'].split('/')
+    label = prefix[3]
+    print(prefix)
+    if prefix[1] != 'chat':
+        log.debug('invalid ws path=%s', message['path'])
+        return
     conversation = Conversation.objects.get(label=label)
-    Group('chat-' + label).add(message.reply_channel)
+    # except ValueError:
+    #     log.debug('invalid ws path=%s', message['path'])
+    #     return
+    # except Conversation.DoesNotExist:
+    #     log.debug('ws conversation does not exist label=%s', label)
+    #     return
+
+    log.debug('chat connect conversation=%s client=%s:%s', 
+        conversation.label, message['client'][0], message['client'][1])
+    
+    # Need to be explicit about the channel layer so that testability works
+    # This may be a FIXME?
+    Group('chat-'+label, channel_layer=message.channel_layer).add(message.reply_channel)
+
     message.channel_session['conversation'] = conversation.label
 
 @channel_session
 def ws_receive(message):
-    label = message.channel_session['conversation']
-    conversation = Conversation.objects.get(label=label)
-    data = json.loads(message['text'])
-    m = conversation.messages.create(handle=data['handle'], message=data['message'])
-    Group('chat-'+label).send({'text': json.dumps(m.as_dict())})
+    # Look up the room from the channel session, bailing if it doesn't exist
+    try:
+        label = message.channel_session['conversation']
+        conversation = Conversation.objects.get(label=label)
+    except KeyError:
+        log.debug('no conversation in channel_session')
+        return
+    except conversation.DoesNotExist:
+        log.debug('recieved message, buy conversation does not exist label=%s', label)
+        return
+
+    # Parse out a chat message from the content text, bailing if it doesn't
+    # conform to the expected message format.
+    try:
+        data = json.loads(message['text'])
+    except ValueError:
+        log.debug("ws message isn't json text=%s", text)
+        return
+    
+    if set(data.keys()) != set(('handle', 'message')):
+        log.debug("ws message unexpected format data=%s", data)
+        return
+
+    if data:
+        log.debug('chat message conversation=%s handle=%s message=%s', 
+            conversation.label, data['handle'], data['message'])
+        m = conversation.messages.create(**data)
+
+        # See above for the note about Group
+        Group('chat-'+label, channel_layer=message.channel_layer).send({'text': json.dumps(m.as_dict())})
 
 @channel_session
 def ws_disconnect(message):
-    label = message.channel_session['room']
-    Group('chat-'+label).discard(message.reply_channel)
+    try:
+        label = message.channel_session['conversation']
+        conversation = Conversation.objects.get(label=label)
+        Group('chat-'+label, channel_layer=message.channel_layer).discard(message.reply_channel)
+    except (KeyError, Conversation.DoesNotExist):
+        pass
