@@ -218,7 +218,6 @@ class CommentRetrieveAPIView(generics.RetrieveAPIView):
     serializer_class = serializers.CommentListSerializer
     #permission_classes = [permissions.IsOwnerOrReadOnly]
 
-
 class CommentCreateAPIView(generics.CreateAPIView):
     '''Create comment'''
     queryset = posts_models.Comment.objects.all()
@@ -257,7 +256,7 @@ class PendingRequestResultListAPIView(generics.ListAPIView):
         pending_request_id = self.request.GET.get('pending_request_id') # get the 'pending_request_id' passed as get request
         result = self.request.GET.get('result') # get the 'result' passed as get request
         if pending_request_id and organisation_id:
-            org_obj = organisation_models.Organisation.objects.get(pk=organisation_id)
+            org_obj = organisation_models.Organisation.objects.get(pk=organisation_id, host=self.request.user)
             pr_obj = partnership_models.PendingRequest.objects.get(pk=pending_request_id, organisation=org_obj)
             if org_obj and pr_obj:
                 if result == 'approve':
@@ -273,9 +272,7 @@ class PendingRequestCurrUserListAPIView(generics.ListAPIView):
     serializer_class = serializers.PendingRequestListSerializer
     # modify queryset to show pending requests only for the current user
     def get_queryset(self):
-        print(self.request.user)
         queryset_list = partnership_models.PendingRequest.get_pending_requests_for_user(user=self.request.user)
-        print(queryset_list)
         return queryset_list
 
 class RelationListAPIView(generics.ListAPIView):
@@ -286,7 +283,7 @@ class RelationListAPIView(generics.ListAPIView):
         queryset_list = set()
         organisation_id = self.request.GET.get('org_id') # get the 'org_id' passed as get request
         if organisation_id :
-            org_obj = organisation_models.Organisation.objects.get(pk=organisation_id)
+            org_obj = organisation_models.Organisation.objects.get(pk=organisation_id, host=self.request.user)
             queryset_list = queryset_list.union(partnership_models.Relation.get_relations_for_organisation(organisation=org_obj))
 
         return queryset_list

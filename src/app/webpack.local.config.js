@@ -19,20 +19,30 @@ config.entry = {
     'webpack/hot/only-dev-server',
     './reactjs/modules/PostsDashboard/index',
   ],
-  posts_organisation: [
+  // posts_organisation: [
+  //   'webpack-dev-server/client?http://localhost:3000',
+  //   'webpack/hot/only-dev-server',
+  //   './reactjs/modules/PostsOrganisation/index',
+  // ],
+  // review_organisation: [
+  //   'webpack-dev-server/client?http://localhost:3000',
+  //   'webpack/hot/only-dev-server',
+  //   './reactjs/modules/ReviewOrganisation/index',
+  // ],
+  organisation_view: [
     'webpack-dev-server/client?http://localhost:3000',
     'webpack/hot/only-dev-server',
-    './reactjs/modules/PostsOrganisation/index',
-  ],
-  review_organisation: [
-    'webpack-dev-server/client?http://localhost:3000',
-    'webpack/hot/only-dev-server',
-    './reactjs/modules/ReviewOrganisation/index',
+    './reactjs/modules/OrganisationView/root',
   ],
   studio_organisation: [
     'webpack-dev-server/client?http://localhost:3000',
     'webpack/hot/only-dev-server',
     './reactjs/modules/StudioOrganisation/index',
+  ],
+  requests_user: [
+    'webpack-dev-server/client?http://localhost:3000',
+    'webpack/hot/only-dev-server',
+    './reactjs/modules/RequestsUser/index',
   ],
 }
 config.output.publicPath = 'http://localhost:3000' + '/assets/bundles/'
