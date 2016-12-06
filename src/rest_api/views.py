@@ -1,16 +1,21 @@
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.models import User
 from django.db.models import Q
+from django.utils.crypto import get_random_string
 from django.http import HttpResponse
-from rest_framework import generics, permissions, filters, views
+from rest_framework import generics, permissions, filters, views, viewsets
 from rest_framework.response import Response
 from organisation import models as organisation_models
 from posts import models as posts_models
 from partnership import models as partnership_models
+from chat import models as chat_models
 from . import serializers
 
 ##########
 # PERMISSIONS are not added when dev
+##########
+##########
+# Add @login_required
 ##########
 
 class UserListAPIView(generics.ListAPIView):
@@ -296,3 +301,19 @@ class RelationCurrUserListAPIView(generics.ListAPIView):
         queryset_list = partnership_models.Relation.get_relations_for_user(user=self.request.user)
         return queryset_list
 
+class MessagesCurrUserOrganisationListAPIView(generics.ListAPIView):
+    '''List messages with particular organisation'''
+    serializer_class = serializers.MessageListSerializer
+
+    def get_queryset(self):
+        queryset_list = set()
+        organisation_id = self.request.GET.get('org_id') # get the 'org_id' passed as get request
+        if organisation_id :
+            org_obj = organisation_models.Organisation.objects.get(pk=organisation_id)
+            if org_obj.host != self.request.user:
+                conversation = chat_models.Conversation.objects.get(user=self.request.user, organisation=org_obj)
+                messages = reversed(conversation.messages.order_by('-timestamp'))
+                queryset_list = set(messages)
+
+        return queryset_list
+        

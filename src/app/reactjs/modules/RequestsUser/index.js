@@ -1,6 +1,6 @@
 import React, {Component} from "react"
 import { render } from "react-dom"
-import { Router, Route, IndexRoute, IndexRedirect, useRouterHistory, hashHistory, browserHistory } from 'react-router'
+import { Router, Route, IndexRoute, IndexRedirect, NotFoundRoute, useRouterHistory, hashHistory, browserHistory } from 'react-router'
 import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux'
 import { createHashHistory } from 'history'
 const appHistory = useRouterHistory(createHashHistory)({ queryKey: false })

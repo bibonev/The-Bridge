@@ -12,9 +12,20 @@ class RequestsUserPanel extends Component {
         const { loadRequests } = this.props;
         loadRequests();
     }
+    componentWillReceiveProps(newProps){
+        const { loadRequests, loadRequestObject } = this.props;
+        rId = newProps.params.requestId
+        pId = newProps.params.pendingId
+        if(rId !== 'undefined'){
+            loadRequestObject(rId, 'relation')
+        }else if(pId !== 'undefined'){
+            loadRequestObject(rId, 'pending')
+        }
+    }
     render(){
         const { relations, pending_requests } = this.props.requests_user;
-        const { loadRequests, requestResult, params } = this.props;
+        const { messages } = this.props.chat;
+        const { loadRequests, requestResult, sendMessage, params } = this.props;
         
         return (
             <div>

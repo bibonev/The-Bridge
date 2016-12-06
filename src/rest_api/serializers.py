@@ -6,6 +6,7 @@ from rest_framework import serializers
 from organisation import models as organisation_models
 from posts import models as posts_models
 from partnership import models as partnership_models
+from chat import models as chat_models
 
 class UserSerializer(serializers.ModelSerializer):
     '''Serialize User's  model'''
@@ -392,3 +393,55 @@ class RelationListSerializer(serializers.ModelSerializer):
             'text'
         )
         model = partnership_models.Relation
+
+class ConversationListSerializer(serializers.ModelSerializer):
+    
+    user = serializers.SerializerMethodField('which_user')
+    organisation = serializers.SerializerMethodField('which_organisation')
+
+    # organisation field returns serialized Organsiation object
+    def which_organisation(self, obj):
+        if obj.organisation:
+            org_obj = get_object_or_404(organisation_models.Organisation, pk=obj.organisation.pk)
+            organisation = OrganisationSerializer(org_obj, many=False).data
+            return organisation
+
+    # user field returns serialized User object
+    def which_user(self, obj):
+        if obj.user:
+            user_obj = get_object_or_404(User, pk=obj.user.pk)
+            user = UserSerializer(user_obj, many=False).data
+            return user
+
+    class Meta:
+        # add the fields to the api serializer
+        fields = (
+            'id',
+            'user',
+            'organisation',
+            'label'
+        )
+        model = chat_models.Conversation
+
+class MessageListSerializer(serializers.ModelSerializer):
+    
+    conversation = serializers.SerializerMethodField('which_conversation')
+    timestamp = serializers.DateTimeField(format="%H:%M | %d %B %Y")
+
+    # organisation field returns serialized Organsiation object
+    def which_conversation(self, obj):
+        if obj.conversation:
+            con_obj = get_object_or_404(chat_models.Conversation, pk=obj.conversation.pk)
+            conversation = ConversationListSerializer(con_obj, many=False).data
+            return conversation
+
+    class Meta:
+        # add the fields to the api serializer
+        fields = (
+            'id',
+            'conversation',
+            'handle',
+            'message',
+            'timestamp'
+        )
+        model = chat_models.Message

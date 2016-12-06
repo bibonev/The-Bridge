@@ -8,6 +8,9 @@ class Conversation(models.Model):
     user = models.ForeignKey(User)
     organisation = models.ForeignKey(Organisation)
     label = models.SlugField(unique=True)
+    
+    class Meta:
+        unique_together = ('user', 'organisation')
 
 class Message(models.Model):
     conversation = models.ForeignKey(Conversation, related_name='messages')

@@ -6,6 +6,9 @@ export default class MainStudioRepresentation extends React.Component{
         this.requestObject = this.requestObject.bind(this)
         this.pendingObject = this.pendingObject.bind(this)
     }
+    componentDidMount(){
+        console.log("In compnent did mounnt")
+    }
     requestObject(request_id){
         var request_object = {}
         this.props.relations.map(function(request){

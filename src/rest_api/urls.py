@@ -23,5 +23,5 @@ urlpatterns = [
     url(r'^pending_requests/currentUser/$', views.PendingRequestCurrUserListAPIView.as_view(), name="pending_requests_current_user_list_api"),
     url(r'^relations/$', views.RelationListAPIView.as_view(), name="relations_list_api"),
     url(r'^relations/currentUser/$', views.RelationCurrUserListAPIView.as_view(), name="relations_current_user_list_api"),
-
+    url(r'^messages/currentUserWithOrganisationList/$', views.MessagesCurrUserOrganisationListAPIView.as_view(), name="messages_current_user_organisation_api"),
 ]
