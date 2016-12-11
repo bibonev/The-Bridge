@@ -15,3 +15,19 @@ export const requests_user = (state=REQUESTS_USER_INITIAL, action) => {
             return state;
     }
 };
+
+const CHAT_INITIAL = {
+    messages: []
+};
+
+export const chat = (state=CHAT_INITIAL, action) => {
+    switch (action.type) {
+        case 'SHOW_CHAT_MESSAGES':
+            return Object.assign({}, state, {
+                messages: action.messages
+            });
+        default:
+            return state;
+    }
+};
+

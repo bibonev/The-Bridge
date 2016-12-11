@@ -1,13 +1,11 @@
 import React from 'react'
+import Textarea from 'react-textarea-autosize'
 
 export default class MainStudioRepresentation extends React.Component{
     constructor(props){
         super(props)
         this.requestObject = this.requestObject.bind(this)
         this.pendingObject = this.pendingObject.bind(this)
-    }
-    componentDidMount(){
-        console.log("In compnent did mounnt")
     }
     requestObject(request_id){
         var request_object = {}
@@ -30,6 +28,7 @@ export default class MainStudioRepresentation extends React.Component{
     render(){
         const relation = this.requestObject(this.props.curr_request_id);
         const pending_request = this.pendingObject(this.props.curr_pending_id);
+        const messages = this.props.messages;
         const mainStudio = (object) => {
             return <div>
                         <p>Request name: {object.organisation.title}</p>
@@ -50,8 +49,24 @@ export default class MainStudioRepresentation extends React.Component{
         const requestDisplay = () => {
             return checkPendingAndRelationExistence(relation, pending_request)
         }
+        const chat = messages.map(m => 
+            <div><span>{m.timestamp} {m.handle} :</span>{m.message}</div>
+        )
+
+        const handleKeyPress = (e) => {
+            if (e.keyCode === 13) {
+                e.preventDefault();
+                var messageText = $(e.target).val();
+                $(e.target).val('');
+                this.props.addCurrentMessage(messageText)
+            }
+        }
         return <div className="studio-main">
                     {requestDisplay()}
+                    {chat}
+                    <div>
+                        <Textarea placeholder="Write your message..." onKeyDown={handleKeyPress}></Textarea>
+                    </div>
                 </div>
     }
 }

@@ -6,6 +6,13 @@ export function showRequestsResult(pending, relations) {
     };
 }
 
+export function showMessagesResult(messages) {
+    return {
+        type: "SHOW_CHAT_MESSAGES",
+        messages
+    };
+}
+
 export function loadRequests() {
     return (dispatch, getState) => {
         let url = `http://localhost:8000/api/v1/pending_requests/currentUser/`;
@@ -15,6 +22,27 @@ export function loadRequests() {
                 dispatch(showRequestsResult(data_pending, data_relation));
             });
         });
+    }
+}
+
+export function loadRequestObject(requestId, type){
+    return (dispatch, getState) => {
+        let url = `http://localhost:8000/api/v1/messages/currentUserWithOrganisationList/?request_id=${requestId}&request_type=${type}`;
+        $.get(url, data => {
+            dispatch(showMessagesResult(data));
+        });
+    }
+}
+
+export function sendMessage(message, chatsock){
+    return (dispatch, getState) => {
+
+        var send_message = {
+            handle: "Simeon",
+            message: message,
+        }
+        chatsock.send(JSON.stringify(send_message));
+        
     }
 }
 

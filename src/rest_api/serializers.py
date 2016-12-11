@@ -398,13 +398,7 @@ class ConversationListSerializer(serializers.ModelSerializer):
     
     user = serializers.SerializerMethodField('which_user')
     organisation = serializers.SerializerMethodField('which_organisation')
-
-    # organisation field returns serialized Organsiation object
-    def which_organisation(self, obj):
-        if obj.organisation:
-            org_obj = get_object_or_404(organisation_models.Organisation, pk=obj.organisation.pk)
-            organisation = OrganisationSerializer(org_obj, many=False).data
-            return organisation
+    messages = serializers.SerializerMethodField()
 
     # user field returns serialized User object
     def which_user(self, obj):
@@ -413,13 +407,27 @@ class ConversationListSerializer(serializers.ModelSerializer):
             user = UserSerializer(user_obj, many=False).data
             return user
 
+    # organisation field returns serialized Organsiation object
+    def which_organisation(self, obj):
+        if obj.organisation:
+            org_obj = get_object_or_404(organisation_models.Organisation, pk=obj.organisation.pk)
+            organisation = OrganisationSerializer(org_obj, many=False).data
+            return organisation
+        
+    # comments field returns customized list of all comments for this post
+    def get_messages(self, obj):
+        c_qs = reversed(obj.messages.order_by('-timestamp'))
+        messages = MessageListSerializer(c_qs, many=True).data
+        return messages
+
     class Meta:
         # add the fields to the api serializer
         fields = (
             'id',
             'user',
             'organisation',
-            'label'
+            'label',
+            'messages',
         )
         model = chat_models.Conversation
 
