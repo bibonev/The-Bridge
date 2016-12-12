@@ -301,8 +301,8 @@ class RelationCurrUserListAPIView(generics.ListAPIView):
         queryset_list = partnership_models.Relation.get_relations_for_user(user=self.request.user)
         return queryset_list
 
-class MessagesCurrUserOrganisationListAPIView(views.APIView):
-    '''List messages with particular organisation'''
+class ConversationCurrUserOrganisationAPIView(views.APIView):
+    '''Conversation with particular organisation'''
 
     def get(self, request, *args, **kwargs):
         request_id = self.request.GET.get('request_id') # get the 'request_id' passed as get request

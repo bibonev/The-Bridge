@@ -17,14 +17,23 @@ export const requests_user = (state=REQUESTS_USER_INITIAL, action) => {
 };
 
 const CHAT_INITIAL = {
+    conversation: {},
     messages: []
 };
 
 export const chat = (state=CHAT_INITIAL, action) => {
     switch (action.type) {
-        case 'SHOW_CHAT_MESSAGES':
+        case 'SHOW_CONVERSATION':
             return Object.assign({}, state, {
+                conversation: action.conversation,
                 messages: action.messages
+            });
+        case 'SHOW_MESSAGE':
+            return Object.assign({}, state, {
+                messages: [
+                    ...state.messages,
+                    action.message,
+                ]
             });
         default:
             return state;

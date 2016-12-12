@@ -418,6 +418,7 @@ class ConversationListSerializer(serializers.ModelSerializer):
     def get_messages(self, obj):
         c_qs = reversed(obj.messages.order_by('-timestamp'))
         messages = MessageListSerializer(c_qs, many=True).data
+        print(messages)
         return messages
 
     class Meta:
@@ -432,22 +433,12 @@ class ConversationListSerializer(serializers.ModelSerializer):
         model = chat_models.Conversation
 
 class MessageListSerializer(serializers.ModelSerializer):
-    
-    conversation = serializers.SerializerMethodField('which_conversation')
     timestamp = serializers.DateTimeField(format="%H:%M | %d %B %Y")
-
-    # organisation field returns serialized Organsiation object
-    def which_conversation(self, obj):
-        if obj.conversation:
-            con_obj = get_object_or_404(chat_models.Conversation, pk=obj.conversation.pk)
-            conversation = ConversationListSerializer(con_obj, many=False).data
-            return conversation
 
     class Meta:
         # add the fields to the api serializer
         fields = (
             'id',
-            'conversation',
             'handle',
             'message',
             'timestamp'

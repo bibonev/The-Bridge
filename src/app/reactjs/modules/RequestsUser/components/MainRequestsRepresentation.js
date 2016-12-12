@@ -28,6 +28,7 @@ export default class MainStudioRepresentation extends React.Component{
     render(){
         const relation = this.requestObject(this.props.curr_request_id);
         const pending_request = this.pendingObject(this.props.curr_pending_id);
+        const conversation = this.props.conversation;
         const messages = this.props.messages;
         const mainStudio = (object) => {
             return <div>
@@ -50,15 +51,15 @@ export default class MainStudioRepresentation extends React.Component{
             return checkPendingAndRelationExistence(relation, pending_request)
         }
         const chat = messages.map(m => 
-            <div><span>{m.timestamp} {m.handle} :</span>{m.message}</div>
+           <div key={m.id}><span>{m.timestamp} {m.handle} :</span>{m.message}</div>
         )
-
         const handleKeyPress = (e) => {
             if (e.keyCode === 13) {
                 e.preventDefault();
                 var messageText = $(e.target).val();
                 $(e.target).val('');
-                this.props.addCurrentMessage(messageText)
+                var handler = conversation.user.first_name + " " + conversation.user.last_name
+                this.props.addCurrentMessage(handler, messageText)
             }
         }
         return <div className="studio-main">

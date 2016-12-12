@@ -1,6 +1,6 @@
 import React, {Component}  from 'react';
 import { connect } from 'react-redux';
-import { loadRequests, requestResult, loadRequestObject, sendMessage } from '../actions';
+import { loadRequests, requestResult, loadRequestObject, sendMessage, showMessage } from '../actions';
 import { bindActionCreators } from 'redux';
 
 //import RequestsRepresentation from '../components/RequestsRepresentation';
@@ -24,9 +24,9 @@ class RequestsUserPanel extends Component {
         }
     }
     componentWillReceiveProps(newProps){
-        const { loadRequests, loadRequestObject } = this.props;
+        const { loadRequests, loadRequestObject, params } = this.props;
         // calling chat api when the request id is changed
-        if(newProps.params.requestId != this.props.params.requestId || newProps.params.pendingId != this.props.params.pendingId){
+        if(newProps.params.requestId != params.requestId || newProps.params.pendingId != params.pendingId){
             let ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
 
             if(typeof newProps.params.requestId !== 'undefined'){
@@ -40,13 +40,18 @@ class RequestsUserPanel extends Component {
     }
     render(){
         const { relations, pending_requests } = this.props.requests_user;
-        const { messages } = this.props.chat;
-        const { loadRequests, requestResult, sendMessage, params } = this.props;
-        const addCurrentMessage = (message) => sendMessage(message, chatsock);
+        const { conversation, messages } = this.props.chat;
+        const { loadRequests, requestResult, sendMessage, showMessage, params } = this.props;
+        const addCurrentMessage = (handler, message) => sendMessage(handler, message, chatsock);
+        if(typeof chatsock !== 'undefined'){
+            chatsock.onmessage = function(message) {
+                showMessage(JSON.parse(message.data))
+            };
+        }
         return (
             <div>
                 <RequestsRepresentation relations={relations} pending_requests={pending_requests} />
-                <MainRequestsRepresentation relations={relations} pending_requests={pending_requests} curr_request_id={params.requestId} curr_pending_id={params.pendingId} messages={messages} addCurrentMessage={addCurrentMessage}/>
+                <MainRequestsRepresentation relations={relations} pending_requests={pending_requests} curr_request_id={params.requestId} curr_pending_id={params.pendingId} conversation={conversation} messages={messages} addCurrentMessage={addCurrentMessage}/>
             </div>
         );
     }
@@ -58,7 +63,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-   loadRequests, requestResult, loadRequestObject, sendMessage
+   loadRequests, requestResult, loadRequestObject, sendMessage, showMessage
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(RequestsUserPanel);
