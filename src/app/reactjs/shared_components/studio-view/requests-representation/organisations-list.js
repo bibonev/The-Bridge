@@ -32,7 +32,7 @@ export default class OrganisationsList extends React.Component{
         const organisationDisplay = this.organisationDisplay(currentOrganisationId);
 
         const currUserOrg = this.props.org_u_rows.map(org => 
-                <a href={"//localhost:8000/studio/" + org.id} key={org.id}>
+                <a href={`//localhost:${port}/studio/` + org.id} key={org.id}>
                     <button onClick={() => this.onClickOrganisationChange(org.id)} key={org.id}>
                         {org.title}
                     </button>
@@ -47,7 +47,7 @@ export default class OrganisationsList extends React.Component{
                                     {currUserOrg}
                                 </div>
                             </div>
-                            <a href={"//localhost:8000/organisations/" + currentOrganisationId} className="link-to-organisation"><i className="fa fa-external-link" aria-hidden="true"></i></a>
+                            <a href={`//localhost:${port}/organisations/` + currentOrganisationId} className="link-to-organisation"><i className="fa fa-external-link" aria-hidden="true"></i></a>
                         </div>
             }else{
                 return; 

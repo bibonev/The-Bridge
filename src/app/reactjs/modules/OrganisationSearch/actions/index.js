@@ -48,7 +48,7 @@ export function loadOrganisations() {
         }
 
         //Initial url
-        let url = `http://localhost:8000/api/v1/organisations/?`;
+        let url = `http://localhost:${port}/api/v1/organisations/?`;
         
         if(searchTerm) {
             url += "search=" + `${searchTerm}` + "&";

@@ -54,11 +54,12 @@ def organisation_view(request, pk):
     if request.method == 'POST':
         # check whether the post request is on the request form: 'request_organisation' is the name of the submit button
         if "request_organisation" in request.POST:
+            port = request.META['SERVER_PORT']
             organisation = get_object_or_404(organisation_models.Organisation, pk=request.POST.get('hidden_org_id'))
             request_text = request.POST.get('request_text')
             user = request.user
             PendingRequest.send_request(user, organisation, request_text)
-            return HttpResponseRedirect('http://localhost:8000/organisations/' + str(pk))
+            return HttpResponseRedirect('http://localhost:' + port + '/organisations/' + str(pk))
 
     return render(request, 'customer/organisation_view.html', {'org':organisation, 'request_state': request_state,'owner':owner})
 

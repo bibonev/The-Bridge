@@ -52,7 +52,7 @@ export function savePendingsAndRelationsResult(pending, relations){
 
 export function loadOrganisationsCurrentUser(){
     return (dispatch, getState) => {
-        let url = `http://localhost:8000/api/v1/organisations/currentUser/`;
+        let url = `http://localhost:${port}/api/v1/organisations/currentUser/`;
         $.get(url, data => {
             dispatch(showOrganisationsCurrentUser(data));
         });
@@ -61,12 +61,12 @@ export function loadOrganisationsCurrentUser(){
 
 export function loadPosts() {
     return (dispatch, getState) => {
-        let url = `http://localhost:8000/api/v1/posts/`;
+        let url = `http://localhost:${port}/api/v1/posts/`;
         $.get(url, data => {
             dispatch(showPostsResult(data));
             dispatch(loadOrganisationsCurrentUser());
             dispatch(loadPendingsAndRelationsCurrUser());
-            let url_get = `http://localhost:8000/api/v1/organisations/currentUserBookmarks/`
+            let url_get = `http://localhost:${port}/api/v1/organisations/currentUserBookmarks/`
                 $.get(url_get, data_get => {
                     dispatch(bookmarkOrganisationResult(data_get));
                 });
@@ -76,7 +76,7 @@ export function loadPosts() {
 
 export function loadComments(post_id){
     return (dispatch, getState) => {
-        let url = `http://localhost:8000/api/v1/comments/?post=${post_id}`
+        let url = `http://localhost:${port}/api/v1/comments/?post=${post_id}`
         $.get(url, data => {
             dispatch(showCommentsResult(data, post_id));
         });
@@ -109,9 +109,9 @@ export function addCommentToPost(post_id, author_id, comment){
         let url='';
 
         if(author_id == -1){
-            url = `http://localhost:8000/api/v1/comments/create/?type=user&post_id=${post_id}`
+            url = `http://localhost:${port}/api/v1/comments/create/?type=user&post_id=${post_id}`
         }else{
-            url = `http://localhost:8000/api/v1/comments/create/?type=organisation&org_id=${author_id}&post_id=${post_id}`
+            url = `http://localhost:${port}/api/v1/comments/create/?type=organisation&org_id=${author_id}&post_id=${post_id}`
         }
         
         let type = 'POST'
@@ -127,7 +127,7 @@ export function addCommentToPost(post_id, author_id, comment){
             data: comment,
             success: (data) => {
                 let comment_id = data.id;
-                let url_get = `http://localhost:8000/api/v1/comments/${comment_id}`
+                let url_get = `http://localhost:${port}/api/v1/comments/${comment_id}`
                 $.get(url_get, data_get => {
                     dispatch(addCommentResult(data_get, post_id));
                 });
@@ -169,7 +169,7 @@ export function bookmarkOrganisation(org_id){
     }
 
     return (dispatch, getState) => {
-        let url=`http://localhost:8000/api/v1/organisations/${org_id}/edit_bookmark/`;
+        let url=`http://localhost:${port}/api/v1/organisations/${org_id}/edit_bookmark/`;
         let type = 'PUT'
         
         $.ajax({
@@ -182,7 +182,7 @@ export function bookmarkOrganisation(org_id){
             },
             data: {},
             success: (data) => {
-                let url_get = `http://localhost:8000/api/v1/organisations/currentUserBookmarks/`
+                let url_get = `http://localhost:${port}/api/v1/organisations/currentUserBookmarks/`
                 $.get(url_get, data_get => {
                     dispatch(bookmarkOrganisationResult(data_get));
                 });
@@ -196,9 +196,9 @@ export function bookmarkOrganisation(org_id){
 
 export function loadPendingsAndRelationsCurrUser(){
     return (dispatch, getState) => {
-        let url_pending = `http://localhost:8000/api/v1/pending_requests/currentUser/`
+        let url_pending = `http://localhost:${port}/api/v1/pending_requests/currentUser/`
         $.get(url_pending, data_pending => {
-            let url_relation = `http://localhost:8000/api/v1/relations/currentUser/`
+            let url_relation = `http://localhost:${port}/api/v1/relations/currentUser/`
             $.get(url_relation, data_relation => {
                 dispatch(savePendingsAndRelationsResult(data_pending, data_relation));
             });

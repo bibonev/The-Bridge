@@ -15,7 +15,7 @@ export function addReviewResult(org_id, jsonResult) {
 
 export function loadReviews(org_id) {
     return (dispatch, getState) => {
-        let url = `http://localhost:8000/api/v1/organisations/${org_id}/reviews/`;
+        let url = `http://localhost:${port}/api/v1/organisations/${org_id}/reviews/`;
         $.get(url, data => {
             dispatch(showReviewsResult(data));
         });
@@ -44,7 +44,7 @@ export function addReview(org_id, text, rating) {
         return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
     }
     return (dispatch, getState) => {
-        let url = `http://localhost:8000/api/v1/organisations/${org_id}/reviews/create/`
+        let url = `http://localhost:${port}/api/v1/organisations/${org_id}/reviews/create/`
         let type = 'POST'
         $.ajax({
             type,
@@ -57,7 +57,7 @@ export function addReview(org_id, text, rating) {
             data: {rating: rating, text:text},
             success: (data) => {
                 let review_id = data.id;
-                let url_get = `http://localhost:8000/api/v1/organisations/reviews/${review_id}`
+                let url_get = `http://localhost:${port}/api/v1/organisations/reviews/${review_id}`
                 $.get(url_get, data_get => {
                     dispatch(addReviewResult(org_id, data_get));
                 });

@@ -301,12 +301,13 @@ class RelationCurrUserListAPIView(generics.ListAPIView):
         queryset_list = partnership_models.Relation.get_relations_for_user(user=self.request.user)
         return queryset_list
 
-class ConversationCurrUserOrganisationAPIView(views.APIView):
+class ConversationUserOrganisationAPIView(views.APIView):
     '''Conversation with particular organisation'''
 
     def get(self, request, *args, **kwargs):
         request_id = self.request.GET.get('request_id') # get the 'request_id' passed as get request
         request_type = self.request.GET.get('request_type') # get the 'request_type' passed as get request
+        user_type = self.request.GET.get('user_type')
         if request_id and request_type:
             request_obj = set()
             if request_type == 'pending':
@@ -314,12 +315,23 @@ class ConversationCurrUserOrganisationAPIView(views.APIView):
             elif request_type == 'relation':
                 request_obj = partnership_models.Relation.objects.get(pk=request_id)
 
-            if request_obj:
+        if request_obj:
+            if user_type == 'user':
                 org_obj = request_obj.organisation
                 if org_obj.host != self.request.user:
                     conversation = chat_models.Conversation.objects.get(user=self.request.user, organisation=org_obj)
                     serializer = serializers.ConversationListSerializer(conversation)
                     return Response(serializer.data)
+
+            elif user_type == 'organisation':
+                user_obj = request_obj.user
+                org_obj = request_obj.organisation
+
+                if org_obj.host == self.request.user:
+                    conversation = chat_models.Conversation.objects.get(user=user_obj, organisation=org_obj)
+                    serializer = serializers.ConversationListSerializer(conversation)
+                    return Response(serializer.data)
+                
 
         return Response({})
         

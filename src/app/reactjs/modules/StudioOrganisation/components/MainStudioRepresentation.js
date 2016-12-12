@@ -1,4 +1,5 @@
 import React from 'react'
+import Textarea from 'react-textarea-autosize'
 
 export default class MainStudioRepresentation extends React.Component{
     constructor(props){
@@ -38,6 +39,9 @@ export default class MainStudioRepresentation extends React.Component{
         const relation = this.requestObject(this.props.curr_request_id);
         const pending_request = this.pendingObject(this.props.curr_pending_id);
         const organisation = this.organisationObject(this.props.curr_organisation_id);
+        const conversation = this.props.conversation;
+        const messages = this.props.messages;
+
         const mainStudio = (object) => {
             return <div>
                         <p>Request name: {object.user.first_name} {object.user.last_name}</p>
@@ -63,8 +67,33 @@ export default class MainStudioRepresentation extends React.Component{
                 return checkPendingAndRelationExistence(relation, pending_request)
              }
         }
+
+        const all_messages = messages.map(m => 
+            <div key={m.id}><span>{m.timestamp} {m.handle} :</span>{m.message}</div>
+        )
+        const chat = () => {
+            if(typeof this.props.curr_request_id !== 'undefined' || typeof this.props.curr_pending_id !== 'undefined'){
+                return <div>
+                    {all_messages}
+                    <div>
+                        <Textarea placeholder="Write your message..." onKeyDown={handleKeyPress}></Textarea>
+                    </div>
+                </div>
+            }
+        }
+        const handleKeyPress = (e) => {
+            if (e.keyCode === 13) {
+                e.preventDefault();
+                var messageText = $(e.target).val();
+                $(e.target).val('');
+                var handler = conversation.organisation.title
+                this.props.addCurrentMessage(handler, messageText)
+            }
+        }
+
         return <div className="studio-main">
                     {organisationDisplay()}
+                    {chat()}
                 </div>
     }
 }

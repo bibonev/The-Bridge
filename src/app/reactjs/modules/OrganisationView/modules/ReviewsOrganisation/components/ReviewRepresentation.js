@@ -5,7 +5,7 @@ export default (props) => {
     const data = props.data.map(review =>
         <div key={review.id} className="posts-dashboard">
             <div className="authorReviewDetails">
-                <img src={"//localhost:8000" + review.author.front_picture} width="40" height="40" />
+                <img src={`//localhost:${port}` + review.author.front_picture} width="40" height="40" />
                 <span className="post-author">{review.author.first_name} {review.author.last_name}</span>
                 <span className="reviewRating">
                     <Rating 

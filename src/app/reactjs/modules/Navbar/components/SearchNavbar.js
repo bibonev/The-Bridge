@@ -42,7 +42,7 @@ export default class SearchNavbar extends React.Component {
         if (event.keyCode === 13) {
             let searchQuery = ReactDOM.findDOMNode(this.refs.search).value;
             localStorage.setItem("searchTerm", searchQuery);
-            window.location.replace("http://localhost:8000/organisations/");
+            window.location.replace(`http://localhost:${port}/organisations/`);
         }
     }
 }

@@ -13,7 +13,7 @@ export function clearSuggestions() {
 
 export function loadSuggestions(search) {
     return (dispatch, getState) => {
-        let url = `http://localhost:8000/api/v1/organisations/?search=`;
+        let url = `http://localhost:${port}/api/v1/organisations/?search=`;
         if(search && search != "") {
             url+=`${search}`;
             

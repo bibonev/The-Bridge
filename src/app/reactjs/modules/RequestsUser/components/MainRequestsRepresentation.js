@@ -50,9 +50,19 @@ export default class MainStudioRepresentation extends React.Component{
         const requestDisplay = () => {
             return checkPendingAndRelationExistence(relation, pending_request)
         }
-        const chat = messages.map(m => 
-           <div key={m.id}><span>{m.timestamp} {m.handle} :</span>{m.message}</div>
+        const all_messages = messages.map(m => 
+            <div key={m.id}><span>{m.timestamp} {m.handle} :</span>{m.message}</div>
         )
+        const chat = () => {
+            if(typeof this.props.curr_request_id !== 'undefined' || typeof this.props.curr_pending_id !== 'undefined'){
+                return <div>
+                    {all_messages}
+                    <div>
+                        <Textarea placeholder="Write your message..." onKeyDown={handleKeyPress}></Textarea>
+                    </div>
+                </div>
+            }
+        }
         const handleKeyPress = (e) => {
             if (e.keyCode === 13) {
                 e.preventDefault();
@@ -64,10 +74,7 @@ export default class MainStudioRepresentation extends React.Component{
         }
         return <div className="studio-main">
                     {requestDisplay()}
-                    {chat}
-                    <div>
-                        <Textarea placeholder="Write your message..." onKeyDown={handleKeyPress}></Textarea>
-                    </div>
+                    {chat()}
                 </div>
     }
 }
