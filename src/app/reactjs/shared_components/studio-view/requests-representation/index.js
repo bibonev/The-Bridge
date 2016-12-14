@@ -8,6 +8,7 @@ export default class RequestsRepresentation extends React.Component{
         this.onClickRequestResult = this.onClickRequestResult.bind(this)
     }
     onClickRequestResult(pending_request_id, result){
+        console.log("PR: ",pending_request_id)
         this.props.submitRequestResult(pending_request_id, result);
     }
     render(){

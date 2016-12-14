@@ -3,6 +3,7 @@ import { render } from "react-dom"
 import { Router, Route, IndexRoute, IndexRedirect, useRouterHistory, hashHistory, browserHistory } from 'react-router'
 import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux'
 import { createHashHistory } from 'history'
+import { ChatAPI } from './utils/ChatAPI'
 const appHistory = useRouterHistory(createHashHistory)({ queryKey: false })
 
 import {
@@ -15,6 +16,7 @@ import { Provider } from "react-redux"
 import thunk from "redux-thunk"
 
 import * as reducers from "./reducers"
+import { showMessage } from "./actions"
 
 import StudioOrganisationPanel from './containers/StudioOrganisationPanel';
 
@@ -40,16 +42,17 @@ const store = finalCreateStore(reducer)
 // Fix the routers to work when changing manually the url to refresh!!! http://localhost:8000/studio/#/2 to http://localhost:8000/studio/#/11 manually
 ////////////////
 
+
 // Change different components for each Route
-class StudioOrganisation extends Component {
+class StudioOrganisation extends Component{
   render() {
     return (
       <Provider store={store}>
         <Router history={appHistory}>
           <Route path="/">
             <IndexRoute component={StudioOrganisationPanel}/>
-            <Route path=":requestId" component={StudioOrganisationPanel}/>
-            <Route path="pending/:pendingId" component={StudioOrganisationPanel}/>
+            <Route path="/:requestId" component={StudioOrganisationPanel}/>
+            <Route path="/pending/:pendingId" component={StudioOrganisationPanel}/>
           </Route>
         </Router>
       </Provider>

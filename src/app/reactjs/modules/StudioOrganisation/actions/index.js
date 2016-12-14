@@ -22,6 +22,7 @@ export function showConversationResult(conversation, messages) {
 }
 
 export function showMessageResult(message) {
+    console.log("M: ",message)
     return {
         type: "SHOW_MESSAGE",
         message
@@ -52,6 +53,7 @@ export function loadOrganisationsCurrentUser(){
 
 export function requestResult(org_id, pending_request_id, result){
     return (dispatch, getState) => {
+        console.log("PRActions: ",pending_request_id)
         let url = `http://localhost:${port}/api/v1/pending_requests/result/?org_id=${org_id}&pending_request_id=${pending_request_id}&result=${result}`;
         $.get(url, data_pending => {
             let url_relation = `http://localhost:${port}/api/v1/relations/?org_id=${org_id}`;
@@ -77,18 +79,6 @@ export function loadRequestObject(requestId, type){
             console.log(data)
             dispatch(showConversationResult(conversation_info, messages));
         });
-    }
-}
-
-export function sendMessage(handler, message, chatsock){
-    return (dispatch, getState) => {
-
-        let send_message = {
-            handle: handler,
-            message: message,
-        }
-        chatsock.send(JSON.stringify(send_message));
-        
     }
 }
 

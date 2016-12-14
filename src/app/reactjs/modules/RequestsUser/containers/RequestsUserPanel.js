@@ -2,6 +2,7 @@ import React, {Component}  from 'react';
 import { connect } from 'react-redux';
 import { loadRequests, requestResult, loadRequestObject, sendMessage, showMessage } from '../actions';
 import { bindActionCreators } from 'redux';
+import { ChatAPI } from '../utils/ChatAPI'
 
 //import RequestsRepresentation from '../components/RequestsRepresentation';
 import RequestsRepresentation from '../../../shared_components/studio-view/requests-representation';
@@ -16,10 +17,12 @@ class RequestsUserPanel extends Component {
         loadRequests();
         // calling the chat api when the component is initially called
         if(typeof params.requestId !== 'undefined'){
-            chatsock = new ReconnectingWebSocket(ws_scheme + '://' + window.location.host + "/chat" + window.location.pathname + '/' + params.requestId);
+            ChatAPI.connect(params.requestId);
+            ChatAPI.listen(this.context.store);
             loadRequestObject(params.requestId, 'relation')
         }else if(typeof params.pendingId !== 'undefined'){
-            chatsock = new ReconnectingWebSocket(ws_scheme + '://' + window.location.host + "/chat" + window.location.pathname + 'pending/' + params.pendingId);
+            cChatAPI.connect(params.pendingId);
+            ChatAPI.listen(this.context.store);
             loadRequestObject(params.pendingId, 'pending')
         }
     }
@@ -27,13 +30,14 @@ class RequestsUserPanel extends Component {
         const { loadRequests, loadRequestObject, params } = this.props;
         // calling chat api when the request id is changed
         if(newProps.params.requestId != params.requestId || newProps.params.pendingId != params.pendingId){
-            let ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
 
             if(typeof newProps.params.requestId !== 'undefined'){
-                chatsock = new ReconnectingWebSocket(ws_scheme + '://' + window.location.host + "/chat" + window.location.pathname + '/' + params.requestId);
+                ChatAPI.connect(newProps.params.requestId);
+                ChatAPI.listen(this.context.store);
                 loadRequestObject(newProps.params.requestId, 'relation')
             }else if(typeof newProps.params.pendingId !== 'undefined'){
-                chatsock = new ReconnectingWebSocket(ws_scheme + '://' + window.location.host + "/chat" + window.location.pathname + 'pending/' + params.pendingId);
+                ChatAPI.connect(newProps.params.pendingId);
+                ChatAPI.listen(this.context.store);
                 loadRequestObject(newProps.params.pendingId, 'pending')
             }
         }
@@ -42,12 +46,8 @@ class RequestsUserPanel extends Component {
         const { relations, pending_requests } = this.props.requests_user;
         const { conversation, messages } = this.props.chat;
         const { loadRequests, requestResult, sendMessage, showMessage, params } = this.props;
-        const addCurrentMessage = (handler, message) => sendMessage(handler, message, chatsock);
-        if(typeof chatsock !== 'undefined'){
-            chatsock.onmessage = function(message) {
-                showMessage(JSON.parse(message.data))
-            };
-        }
+        const addCurrentMessage = (handler, message) => ChatAPI.send(handler, message);
+
         return (
             <div>
                 <RequestsRepresentation relations={relations} pending_requests={pending_requests} />
@@ -65,5 +65,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => bindActionCreators({
    loadRequests, requestResult, loadRequestObject, sendMessage, showMessage
 }, dispatch)
+
+RequestsUserPanel.contextTypes = {
+  store: React.PropTypes.object.isRequired
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(RequestsUserPanel);

@@ -28,6 +28,7 @@ def ws_connect(message):
     request_object = set()
     conversation = set()
 
+    print("Request type: ",request_type)
     if request_type == 'pending':
         request_object = partnership_models.PendingRequest.objects.get(pk=request_id)
     else:
