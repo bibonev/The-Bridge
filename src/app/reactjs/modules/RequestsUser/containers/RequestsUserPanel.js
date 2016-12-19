@@ -13,7 +13,6 @@ let chatsock;
 class RequestsUserPanel extends Component {
     componentDidMount() {
         const { loadRequests, loadRequestObject, params } = this.props;
-        let ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
         loadRequests();
         // calling the chat api when the component is initially called
         if(typeof params.requestId !== 'undefined'){
@@ -21,7 +20,7 @@ class RequestsUserPanel extends Component {
             ChatAPI.listen(this.context.store);
             loadRequestObject(params.requestId, 'relation')
         }else if(typeof params.pendingId !== 'undefined'){
-            cChatAPI.connect(params.pendingId);
+            ChatAPI.connect('/pending/' + params.pendingId);
             ChatAPI.listen(this.context.store);
             loadRequestObject(params.pendingId, 'pending')
         }
@@ -36,7 +35,7 @@ class RequestsUserPanel extends Component {
                 ChatAPI.listen(this.context.store);
                 loadRequestObject(newProps.params.requestId, 'relation')
             }else if(typeof newProps.params.pendingId !== 'undefined'){
-                ChatAPI.connect(newProps.params.pendingId);
+                ChatAPI.connect('/pending/' + newProps.params.pendingId);
                 ChatAPI.listen(this.context.store);
                 loadRequestObject(newProps.params.pendingId, 'pending')
             }

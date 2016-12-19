@@ -18,6 +18,7 @@ def ws_connect(message):
     # of websocket). So, this is effectively a version of _get_object_or_404.
     #try:
     prefix = message['path'].split('/')
+    print(prefix)
     request_id = prefix[-1] # last element
     request_type = prefix[-2] # before last element
     if prefix[1] != 'chat':

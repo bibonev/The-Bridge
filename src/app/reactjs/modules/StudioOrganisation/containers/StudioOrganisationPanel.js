@@ -18,7 +18,7 @@ class StudioOrganisationPanel extends Component {
             ChatAPI.listen(this.context.store);
             loadRequestObject(params.requestId, 'relation')
         }else if(typeof params.pendingId !== 'undefined'){
-            ChatAPI.connect(params.pendingId);
+            ChatAPI.connect('/pending/' + params.pendingId);
             ChatAPI.listen(this.context.store);
             loadRequestObject(params.pendingId, 'pending')
         }
@@ -34,7 +34,7 @@ class StudioOrganisationPanel extends Component {
                 ChatAPI.listen(this.context.store);
                 loadRequestObject(newProps.params.requestId, 'relation')
             }else if(typeof newProps.params.pendingId !== 'undefined'){
-                ChatAPI.connect(newProps.params.pendingId);
+                ChatAPI.connect('/pending/' + newProps.params.pendingId);
                 ChatAPI.listen(this.context.store);
                 loadRequestObject(newProps.params.pendingId, 'pending')
             }
