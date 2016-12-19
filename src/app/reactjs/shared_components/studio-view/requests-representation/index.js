@@ -92,7 +92,7 @@ export default class RequestsRepresentation extends React.Component{
             }
         return <div className="studio-info">
                     {organisationsList()}
-                    <ul className="bookmark-list">
+                    <ul className="requests-list">
                         {pendingRequestsResult()}
                         {requestsResult()}
                     </ul>

@@ -46,7 +46,7 @@ class RequestsUserPanel extends Component {
         const { relations, pending_requests } = this.props.requests_user;
         const { conversation, messages } = this.props.chat;
         const { loadRequests, requestResult, sendMessage, showMessage, params } = this.props;
-        const addCurrentMessage = (handler, message) => ChatAPI.send(handler, message);
+        const addCurrentMessage = (handle, message) => ChatAPI.send(handle, message);
 
         return (
             <div>

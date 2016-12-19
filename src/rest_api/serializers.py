@@ -440,6 +440,7 @@ class MessageListSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'handle',
+            'handle_type',
             'message',
             'timestamp'
         )

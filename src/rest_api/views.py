@@ -308,8 +308,8 @@ class ConversationUserOrganisationAPIView(views.APIView):
         request_id = self.request.GET.get('request_id') # get the 'request_id' passed as get request
         request_type = self.request.GET.get('request_type') # get the 'request_type' passed as get request
         user_type = self.request.GET.get('user_type')
+        request_obj = set()
         if request_id and request_type:
-            request_obj = set()
             if request_type == 'pending':
                 request_obj = partnership_models.PendingRequest.objects.get(pk=request_id)
             elif request_type == 'relation':

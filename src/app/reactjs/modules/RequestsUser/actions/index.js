@@ -50,22 +50,11 @@ export function loadRequestObject(requestId, type){
     }
 }
 
-export function sendMessage(handler, message, chatsock){
-    return (dispatch, getState) => {
-
-        let send_message = {
-            handle: handler,
-            message: message,
-        }
-        chatsock.send(JSON.stringify(send_message));
-        
-    }
-}
-
 export function showMessage(data){
     return (dispatch, getState) => {
         let show_message = {
             handle: data.handle,
+            handle_type: data.handle_type,
             message: data.message,
             timestamp: data.timestamp
         }

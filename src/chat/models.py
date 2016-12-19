@@ -15,6 +15,7 @@ class Conversation(models.Model):
 class Message(models.Model):
     conversation = models.ForeignKey(Conversation, related_name='messages')
     handle = models.TextField()
+    handle_type = models.TextField()
     message = models.TextField()
     timestamp = models.DateTimeField(default=timezone.now, db_index=True)
 
@@ -23,7 +24,7 @@ class Message(models.Model):
 
     @property
     def formatted_timestamp(self):
-        return self.timestamp.strftime('%b %-d %-I:%M %p')
+        return self.timestamp.strftime('%H:%M | %d %B %Y')
     
     def as_dict(self):
-        return {'id':self.id, 'handle': self.handle, 'message': self.message, 'timestamp': self.formatted_timestamp}
+        return {'id':self.id, 'handle': self.handle, 'handle_type':self.handle_type, 'message': self.message, 'timestamp': self.formatted_timestamp}

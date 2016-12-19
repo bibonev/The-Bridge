@@ -76,7 +76,6 @@ export function loadRequestObject(requestId, type){
             }
 
             let messages = data.messages;
-            console.log(data)
             dispatch(showConversationResult(conversation_info, messages));
         });
     }
@@ -86,6 +85,7 @@ export function showMessage(data){
     return (dispatch, getState) => {
         let show_message = {
             handle: data.handle,
+            handle_type: data.handle_type,
             message: data.message,
             timestamp: data.timestamp
         }

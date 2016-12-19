@@ -30,51 +30,61 @@ export default class MainStudioRepresentation extends React.Component{
         const pending_request = this.pendingObject(this.props.curr_pending_id);
         const conversation = this.props.conversation;
         const messages = this.props.messages;
-        const mainStudio = (object) => {
+
+        const all_messages = messages.map(function(m){
+            let currentClass = '';
+            if(m.handle_type == 'user'){
+                currentClass = 'send-message'
+            }else if(m.handle_type == 'organisation'){
+                currentClass = 'receive-message'
+            }
+            return <div key={m.id} className={currentClass}>
+                        <p>{m.handle}</p> 
+                        <div className="message-display">{m.message}</div>
+                    </div>
+        })
+
+        const chatBox = () => {
             return <div>
-                        <p>Request name: {object.organisation.title}</p>
-                        <p>Message: {object.text} </p>
+                        <div className="all-messages">
+                            {all_messages}
+                        </div>
+                        <div className="message-box">
+                            <Textarea placeholder="Write your message..." onKeyDown={handleKeyPress}></Textarea>
+                        </div>
                     </div>
         }
-        const checkPendingAndRelationExistence = (r_obj, p_obj) => {
-            if(typeof r_obj !== 'undefined' && !jQuery.isEmptyObject(r_obj)){
-                return mainStudio(r_obj);
-            }else if(typeof p_obj !== 'undefined' && !jQuery.isEmptyObject(p_obj)){
-                return mainStudio(p_obj);
+
+        const chat = (c) => {
+            return <div>
+                        <div className="chat-header">
+                            <p>{c.organisation.title}</p>
+                        </div>
+                        {chatBox()}
+                    </div>
+        }
+
+        const conversationDisplay = () => {
+            if((typeof this.props.curr_pending_id !== 'undefined' || typeof this.props.curr_request_id !== 'undefined') && (typeof conversation !== 'undefined' && !jQuery.isEmptyObject(conversation))){
+                return chat(conversation);
             }else{
-                return <div>
-                            <h3>No requests selected</h3>
+                return <div className="nothing-selected">
+                            <span>No requests selected</span>
                         </div> 
             }
         }
-        const requestDisplay = () => {
-            return checkPendingAndRelationExistence(relation, pending_request)
-        }
-        const all_messages = messages.map(m => 
-            <div key={m.id}><span>{m.timestamp} {m.handle} :</span>{m.message}</div>
-        )
-        const chat = () => {
-            if(typeof this.props.curr_request_id !== 'undefined' || typeof this.props.curr_pending_id !== 'undefined'){
-                return <div>
-                    {all_messages}
-                    <div>
-                        <Textarea placeholder="Write your message..." onKeyDown={handleKeyPress}></Textarea>
-                    </div>
-                </div>
-            }
-        }
+
         const handleKeyPress = (e) => {
             if (e.keyCode === 13) {
                 e.preventDefault();
                 var messageText = $(e.target).val();
                 $(e.target).val('');
-                var handler = conversation.user.first_name + " " + conversation.user.last_name
-                this.props.addCurrentMessage(handler, messageText)
+                var handle = conversation.user.first_name + " " + conversation.user.last_name
+                this.props.addCurrentMessage(handle, messageText)
             }
         }
         return <div className="studio-main">
-                    {requestDisplay()}
-                    {chat()}
+                    {conversationDisplay()}
                 </div>
     }
 }
