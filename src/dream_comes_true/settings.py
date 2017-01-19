@@ -52,6 +52,8 @@ INSTALLED_APPS = [
     'imagekit',
     'userprofile',
     'webpack_loader',
+    'channels',
+    'chat'
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -70,7 +72,7 @@ ROOT_URLCONF = 'dream_comes_true.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates', 'allauth_user/templates', 'userprofile/templates', 'customer/templates', 'organisation/templates', 'posts/templates',],
+        'DIRS': ['templates', 'allauth_user/templates', 'userprofile/templates', 'customer/templates', 'organisation/templates', 'posts/templates', 'chat/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -196,6 +198,7 @@ ACCOUNT_FORMS = {
     'login':'allauth_user.forms.LoginFormOverride'
 }
 
+# WEBPACK LOADER configurations
 WEBPACK_LOADER = {
     'DEFAULT': {
         'BUNDLE_DIR_NAME': 'bundles/local/',  # end with slash
@@ -211,4 +214,15 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES':(
         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
     )
+}
+
+# DJANGO CHANNELS configurations
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "asgi_redis.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [os.environ.get('REDIS_URL', 'redis://localhost:6379')],
+        },
+        "ROUTING": "chat.routing.channel_routing",
+    },
 }

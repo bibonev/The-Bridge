@@ -5,6 +5,7 @@ from django.db.models import Q
 from django.http import HttpResponseRedirect
 from partnership.models import Relation, PendingRequest
 from organisation import models as organisation_models
+from chat import models as chat_models
 
 @login_required
 def customer_requests(request):
@@ -54,11 +55,20 @@ def organisation_view(request, pk):
     if request.method == 'POST':
         # check whether the post request is on the request form: 'request_organisation' is the name of the submit button
         if "request_organisation" in request.POST:
+            port = request.META['SERVER_PORT']
             organisation = get_object_or_404(organisation_models.Organisation, pk=request.POST.get('hidden_org_id'))
             request_text = request.POST.get('request_text')
             user = request.user
             PendingRequest.send_request(user, organisation, request_text)
-            return HttpResponseRedirect('http://localhost:8000/organisations/' + str(pk))
+            # get the lates conversation record
+            label_num = 0
+            conversation= chat_models.Conversation.objects.all()
+            if conversation.count() > 0:
+                label_num = conversation.order_by('-id')[0].pk + 1
+            # create unique label based on name of user, title and id of previous conversation object
+            label = str(user.first_name) + str(user.last_name) + str(organisation.title).replace(" ", "") + str(label_num)
+            chat_models.Conversation.objects.create(user=user, organisation=organisation,label=label.lower())
+            return HttpResponseRedirect('http://localhost:' + port + '/organisations/' + str(pk))
 
     return render(request, 'customer/organisation_view.html', {'org':organisation, 'request_state': request_state,'owner':owner})
 

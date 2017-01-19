@@ -6,8 +6,8 @@ export default (props) => {
     const data = props.data.map(post =>
       <div key={post.id} className="posts-dashboard">
       <div>
-        <a href={"//localhost:8000/organisations/" + post.organisation.id} className="post-title">
-          <img src={"//localhost:8000" + post.organisation.front_picture} width="40" height="40" />
+        <a href={`//localhost:${port}/organisations/` + post.organisation.id} className="post-title">
+          <img src={`//localhost:${port}` + post.organisation.front_picture} width="40" height="40" />
           <span className="post-author">{post.organisation.title}</span>
           <span className="post-comment-dateTime">{post.timestamp}</span>
         </a>

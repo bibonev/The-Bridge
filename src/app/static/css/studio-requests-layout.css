@@ -1,8 +1,6 @@
 .studio-info{
     width:250px;
     float:left;
-    max-height: 600px;
-    overflow-y: scroll;
 }
 .organisationChooseBox{
     display:inline-block;
@@ -118,8 +116,16 @@
   border-radius:50%;
   margin-right: 10px;
 }
+.nothing-selected{
+    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 400;
+    font-size: 22px;
+    color:#c4c4c4;
+    text-align: center;
+}
 .empty-requests-list{
     border:1px solid #c4c4c4;
+    border-radius: 8px;
     color:#c4c4c4;
     font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
     font-weight: 400;
@@ -138,17 +144,96 @@
     color:#fff !important;
 }
 .studio-main{
+    position: relative;
     float:left;
-    width:930px;
+    width:900px;
+    border: 1px solid #c4c4c4;
+    border-radius: 8px;
+    background:transparent;
+    margin-left: 30px;
+    padding: 10px 30px;
+}
+.chat-header{
+    width:100%;
+    padding:10px 0;
+    text-align:center;
+    border-bottom: 1px solid #c4c4c4;
+    margin-bottom: 10px;
+}
+.chat-header p{
+    color:#2A2A2A;
+    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 400;
+    font-size: 22px;
+}
+.send-message{
+    float:right;
+    width:51%;
+    text-align: right;
+    margin-bottom: 10px;
+}
+.send-message p, .receive-message p{
+    color: #c4c4c4;
+    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    margin-bottom: 3px;
+}
+.send-message .message-display{
+    display:inline-block;
+    background:#029acf;
+    border:1px solid #029acf;
+    border-radius: 8px;
+    padding: 5px 10px;
+    text-align: left;
+    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    color: #fff;
+}
+.receive-message{
+    float:left;
+    width:51%;
+    text-align: left;
+    margin-bottom: 10px;
+}
+.receive-message .message-display{
+    display:inline-block;
     background:#fff;
+    border:1px solid #fff;
+    border-radius: 8px;
+    padding: 5px 10px;
+    text-align: left;
+    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    color: #029acf;
+}
+.message-box{
+    width: 100%;
+}
+.message-box textarea{
+    width: 100%;
+    background: transparent;
+    padding: 20px 0 10px 0;
+    border: 0;
+    border-top: 1px solid #c4c4c4;
+    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    resize: none;
+    outline: 0;
+    color: #2A2A2A;
 }
 #requests_user{
     padding-top:20px;
 }
-.bookmark-list{
+.requests-list{
     padding:0;
+    max-height: 600px;
+    overflow-y: scroll;
 }
-.bookmark-list li{
+.requests-list li{
     list-style: none;
 }
 .requests-container{

@@ -17,13 +17,14 @@ def my_organisation_edit(request, pk):
     # submit update form
     org_instance = get_object_or_404(models.Organisation, pk=pk, host=request.user)
     if request.method == 'POST':
+        port = request.META['SERVER_PORT']
         # saves instance of the particular organisation object
         organisation_form = forms.OrganisationForm(request.POST, request.FILES, instance=org_instance)
         if organisation_form.is_valid():
             with reversion.create_revision():
                 organisation_form.save()
             Post.create_post_org_change(org_instance)
-            return HttpResponseRedirect('http://localhost:8000/organisations/' + str(pk))
+            return HttpResponseRedirect('http://localhost:' + port + '/organisations/' + str(pk))
     else:
         organisation_form = forms.OrganisationForm(instance=org_instance)
 
@@ -40,6 +41,7 @@ def create_organisation(request):
     form = forms.OrganisationForm()
     # submit creation form
     if request.method == 'POST':
+        port = request.META['SERVER_PORT']
         form = forms.OrganisationForm(request.POST, request.FILES)
         if form.is_valid():
             # before saving the form allocates it to the particular user
@@ -49,7 +51,7 @@ def create_organisation(request):
             # create initial post when an organisation is added
             description = org.title + " has joined on " + str(datetime.now().strftime("%d %B %Y"))
             Post.objects.create(description=description, organisation=org)
-            return HttpResponseRedirect('http://localhost:8000/organisations/' + str(org.pk))
+            return HttpResponseRedirect('http://localhost:' + port + '/organisations/' + str(org.pk))
     
     return render(request, 'organisation/create_organisation.html', {'form':form})
 

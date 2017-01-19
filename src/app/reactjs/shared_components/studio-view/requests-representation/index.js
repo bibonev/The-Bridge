@@ -8,6 +8,7 @@ export default class RequestsRepresentation extends React.Component{
         this.onClickRequestResult = this.onClickRequestResult.bind(this)
     }
     onClickRequestResult(pending_request_id, result){
+        console.log("PR: ",pending_request_id)
         this.props.submitRequestResult(pending_request_id, result);
     }
     render(){
@@ -31,14 +32,14 @@ export default class RequestsRepresentation extends React.Component{
                    url = `/${request.id}/`
                    return <Link to={url} activeClassName="active-request" className="requests-container relation-style-box">
                             <i className="fa fa-users request-status-r relation-status-icon-r" aria-hidden="true"></i>
-                            <img className="request-profile-photo" src={"//localhost:8000" + request.user.front_picture} width="60" height="60" />
+                            <img className="request-profile-photo" src={`//localhost:${port}` + request.user.front_picture} width="60" height="60" />
                             <span className="requests-author-title relation-style bonus-margin-title">{request.user.first_name} {request.user.last_name}</span>
                         </Link>
                 }else{
                    url = `/pending/${request.id}/`
                    return <Link to={url} activeClassName="active-request" className="requests-container pending-style-box">
                             <i className="fa fa-clock-o request-status-r pending-status-icon-r" aria-hidden="true"></i>
-                            <img className="request-profile-photo" src={"//localhost:8000" + request.user.front_picture} width="60" height="60" />
+                            <img className="request-profile-photo" src={`//localhost:${port}` + request.user.front_picture} width="60" height="60" />
                             <div className="pending-title-box">
                                 <span className="pending-title requests-author-title pending-style">{request.user.first_name} {request.user.last_name}</span>
                                 <div className="yes-no-box">
@@ -54,7 +55,7 @@ export default class RequestsRepresentation extends React.Component{
                    url = `/${request.id}/`
                    return <Link to={url} activeClassName="active-request" className="requests-container relation-style-box">
                             <i className="fa fa-users request-status-r relation-status-icon-r" aria-hidden="true"></i>
-                            <img className="request-profile-photo" src={"//localhost:8000" + request.organisation.front_picture} width="60" height="60" />
+                            <img className="request-profile-photo" src={`//localhost:${port}` + request.organisation.front_picture} width="60" height="60" />
                             <div className="ratingMain"><span className="ratingNum">{request.organisation.rating}</span><span className="glyphicon glyphicon-star ratingStar" aria-hidden="true"></span></div>
                             <span className="requests-author-title relation-style">{request.organisation.title}</span>
                     </Link>
@@ -62,7 +63,7 @@ export default class RequestsRepresentation extends React.Component{
                    url = `/pending/${request.id}/`
                    return <Link to={url} activeClassName="active-request" className="requests-container pending-style-box">
                             <i className="fa fa-clock-o request-status-r pending-status-icon-r" aria-hidden="true"></i>
-                            <img className="request-profile-photo" src={"//localhost:8000" + request.organisation.front_picture} width="60" height="60" />
+                            <img className="request-profile-photo" src={`//localhost:${port}` + request.organisation.front_picture} width="60" height="60" />
                             <div className="ratingMain"><span className="ratingNum">{request.organisation.rating}</span><span className="glyphicon glyphicon-star ratingStar" aria-hidden="true"></span></div>
                             <span className="requests-author-title pending-style">{request.organisation.title}</span>
                     </Link>
@@ -91,7 +92,7 @@ export default class RequestsRepresentation extends React.Component{
             }
         return <div className="studio-info">
                     {organisationsList()}
-                    <ul className="bookmark-list">
+                    <ul className="requests-list">
                         {pendingRequestsResult()}
                         {requestsResult()}
                     </ul>

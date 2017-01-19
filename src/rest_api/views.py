@@ -1,16 +1,21 @@
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.models import User
 from django.db.models import Q
+from django.utils.crypto import get_random_string
 from django.http import HttpResponse
-from rest_framework import generics, permissions, filters, views
+from rest_framework import generics, permissions, filters, views, viewsets
 from rest_framework.response import Response
 from organisation import models as organisation_models
 from posts import models as posts_models
 from partnership import models as partnership_models
+from chat import models as chat_models
 from . import serializers
 
 ##########
 # PERMISSIONS are not added when dev
+##########
+##########
+# Add @login_required
 ##########
 
 class UserListAPIView(generics.ListAPIView):
@@ -296,3 +301,37 @@ class RelationCurrUserListAPIView(generics.ListAPIView):
         queryset_list = partnership_models.Relation.get_relations_for_user(user=self.request.user)
         return queryset_list
 
+class ConversationUserOrganisationAPIView(views.APIView):
+    '''Conversation with particular organisation'''
+
+    def get(self, request, *args, **kwargs):
+        request_id = self.request.GET.get('request_id') # get the 'request_id' passed as get request
+        request_type = self.request.GET.get('request_type') # get the 'request_type' passed as get request
+        user_type = self.request.GET.get('user_type')
+        request_obj = set()
+        if request_id and request_type:
+            if request_type == 'pending':
+                request_obj = partnership_models.PendingRequest.objects.get(pk=request_id)
+            elif request_type == 'relation':
+                request_obj = partnership_models.Relation.objects.get(pk=request_id)
+
+        if request_obj:
+            if user_type == 'user':
+                org_obj = request_obj.organisation
+                if org_obj.host != self.request.user:
+                    conversation = chat_models.Conversation.objects.get(user=self.request.user, organisation=org_obj)
+                    serializer = serializers.ConversationListSerializer(conversation)
+                    return Response(serializer.data)
+
+            elif user_type == 'organisation':
+                user_obj = request_obj.user
+                org_obj = request_obj.organisation
+
+                if org_obj.host == self.request.user:
+                    conversation = chat_models.Conversation.objects.get(user=user_obj, organisation=org_obj)
+                    serializer = serializers.ConversationListSerializer(conversation)
+                    return Response(serializer.data)
+                
+
+        return Response({})
+        

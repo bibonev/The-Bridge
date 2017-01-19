@@ -45,7 +45,7 @@ export function updateCurrentAuthorId(author_id){
 
 export function loadOrganisationsCurrentUser(){
     return (dispatch, getState) => {
-        let url = `http://localhost:8000/api/v1/organisations/currentUser/`;
+        let url = `http://localhost:${port}/api/v1/organisations/currentUser/`;
         $.get(url, data => {
             dispatch(showOrganisationsCurrentUser(data));
         });
@@ -54,9 +54,9 @@ export function loadOrganisationsCurrentUser(){
 
 export function loadPosts(org_id) {
     return (dispatch, getState) => {
-        let url = `http://localhost:8000/api/v1/posts/?org_id=${org_id}`;
+        let url = `http://localhost:${port}/api/v1/posts/?org_id=${org_id}`;
         $.get(url, data => {
-            let urlOwnOrg = `http://localhost:8000/api/v1/organisations/is_organisation/${org_id}/`;
+            let urlOwnOrg = `http://localhost:${port}/api/v1/organisations/is_organisation/${org_id}/`;
             $.get(urlOwnOrg, data2 => {
                 dispatch(showPostsResult(data, data2.success));
                 dispatch(loadOrganisationsCurrentUser());
@@ -67,7 +67,7 @@ export function loadPosts(org_id) {
 
 export function loadComments(post_id){
     return (dispatch, getState) => {
-        let url = `http://localhost:8000/api/v1/comments/?post=${post_id}`
+        let url = `http://localhost:${port}/api/v1/comments/?post=${post_id}`
         $.get(url, data => {
             dispatch(showCommentsResult(data, post_id));
         });
@@ -97,7 +97,7 @@ export function addPost(org_id, post){
     }
 
     return (dispatch, getState) => {
-        let url = `http://localhost:8000/api/v1/posts/create/?org_id=${org_id}`
+        let url = `http://localhost:${port}/api/v1/posts/create/?org_id=${org_id}`
         let type = 'POST'
         $.ajax({
             type,
@@ -110,7 +110,7 @@ export function addPost(org_id, post){
             data: post,
             success: (data) => {
                 let post_id = data.id;
-                let url_get = `http://localhost:8000/api/v1/posts/${post_id}`
+                let url_get = `http://localhost:${port}/api/v1/posts/${post_id}`
                 $.get(url_get, data_get => {
                     dispatch(addPostResult(data_get));
                 });
@@ -147,9 +147,9 @@ export function addCommentToPost(post_id, author_id, comment){
     return (dispatch, getState) => {
         let url='';
         if(author_id == -1){
-            url = `http://localhost:8000/api/v1/comments/create/?type=user&post_id=${post_id}`
+            url = `http://localhost:${port}/api/v1/comments/create/?type=user&post_id=${post_id}`
         }else{
-            url = `http://localhost:8000/api/v1/comments/create/?type=organisation&org_id=${author_id}&post_id=${post_id}`
+            url = `http://localhost:${port}/api/v1/comments/create/?type=organisation&org_id=${author_id}&post_id=${post_id}`
         }        
         
         let type = 'POST'
@@ -165,7 +165,7 @@ export function addCommentToPost(post_id, author_id, comment){
             data: comment,
             success: (data) => {
                 let comment_id = data.id;
-                let url_get = `http://localhost:8000/api/v1/comments/${comment_id}`
+                let url_get = `http://localhost:${port}/api/v1/comments/${comment_id}`
                 $.get(url_get, data_get => {
                     dispatch(addCommentResult(data_get, post_id));
                 });

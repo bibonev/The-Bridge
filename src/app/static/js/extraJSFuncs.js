@@ -1,3 +1,5 @@
+var port = location.port; // initialize global variable for the port
+
 $(document).ready(function(){  
     // make the current anchor tag showing active
     if (location.pathname !== '/') {

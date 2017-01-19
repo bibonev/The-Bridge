@@ -14,7 +14,7 @@ export default (props) => {
         }
     }
     const data = props.data.map(org =>
-      <a key={org.id} className="organisation-link" href={"//localhost:8000/organisations/" + org.id}>
+      <a key={org.id} className="organisation-link" href={`//localhost:${port}/organisations/` + org.id}>
         <div className="org-box" style={styleBoxBackground(org.cover_picture)}>
             <div className="gradient-background">
                 <span className="org-box-title">
